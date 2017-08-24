@@ -54,7 +54,7 @@ return array(
 	| or define a method name in your REST controller that handles authorization
 	|
 	*/
-	'auth' => 'basic',
+	'auth' => '',
 
 	/*
 	| array of usernames and passwords for login
@@ -62,7 +62,7 @@ return array(
 	|	array('admin' => '1234')
 	|
 	*/
-	'valid_logins' => ['visionvn' => 'system_vws_vsvn'],
+	'valid_logins' => ['koreaclinic' => 'system_korea_clinic_svn'],
 
 	/*
 	| Ignore HTTP_ACCEPT

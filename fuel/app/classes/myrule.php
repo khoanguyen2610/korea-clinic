@@ -11,8 +11,8 @@ class MyRules {
                         ->where($field, '=', Str::lower($val))
                         ->from($table);
         $result = DBUtil::field_exists($table,array('item_status'))?$query->where('item_status','=','active')->execute()->current():$query->execute()->current();
-        Validation::active()->set_message('unique', __('この種別は既に設定されています。',array(),'この種別は既に設定されています。'));
-  
+        Validation::active()->set_message('unique', __('This record already exists.',array(),'This record already exists.'));
+
         if(isset($id) && !empty($id)){
             $id = str_replace('id_', '', $id);
             if(empty($result)){
@@ -27,7 +27,7 @@ class MyRules {
             return empty($result)?true:false;
         }
     }
-    
+
     public static function _validation_re_password($val, $password) {
         $password = Input::param($password);
         if(empty($password))
@@ -45,8 +45,6 @@ class MyRules {
     }
 
 
-    //user.seq_id.email.' . $arrParam['seq_id']);
- 
     public static function _validation_current_password($val, $options) {
         $encode_password = \Auth::hash_password($val);
         $arrOption = explode('.', $options);
@@ -58,7 +56,7 @@ class MyRules {
                         ->where($pk, '=', $id)
                         ->and_where($field, '=', $encode_password)
                         ->from($table)->execute()->current();
-        
+
         Validation::active()->set_message('current_password', __('Your current password is not correct.', array(), 'Your current password is not correct.'));
         return !empty($result)?true:false;
     }

@@ -10,17 +10,14 @@
  */
 
 class Vision_Rest {
-	protected $_url_user = 'visionvn';
-	protected $_url_pass = 'system_vws_vsvn';
+	protected $_url_user = 'koreaclinic';
+	protected $_url_pass = 'system_korea_clinic_svn';
 	protected $_X_Vision_Username   = 'visionvn';
     protected $_X_Vision_API_Token  = 'system_vsvn';
     protected $_api_url;
 
     public function __construct(){
     	$this->_api_url = API_URL . 'v1/';
-    	// $basic_auth = \Config::get('rest.valid_logins');
-     //    $this->_url_user = !empty($basic_auth)?current(array_keys($basic_auth)):null;
-     //    $this->_url_pass = !empty($basic_auth)?current(array_values($basic_auth)):null;
     }
     /*===================================================
 	 * Send Request To API

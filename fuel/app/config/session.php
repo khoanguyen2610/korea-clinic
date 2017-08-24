@@ -23,10 +23,8 @@
 return array(
     'driver'            => 'cookie',
     'cookie'			=> array(
-							'cookie_name' => 'vsvn_vws_api',	
+							'cookie_name' => 'vsvn_clinic_api',	
 							),
     'expire_on_close'   => false,
     'expiration_time'   => 43200,
 );
-
-

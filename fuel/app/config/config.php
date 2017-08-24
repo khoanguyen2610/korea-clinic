@@ -78,8 +78,8 @@ return array(
 	/**
 	 * Localization & internationalization settings
 	 */
-	'language'           => 'ja', // Default language
-	'language_fallback'  => 'ja', // Fallback language when file isn't available for default language
+	'language'           => 'en', // Default language
+	'language_fallback'  => 'en', // Fallback language when file isn't available for default language
 	'locale'             => 'LC_ALL.utf8', // PHP set_locale() setting, null to not set
 
 	/**
@@ -95,7 +95,7 @@ return array(
 	 */
 	// 'server_gmt_offset'  => 0,
 	// 'default_timezone'   => null,
-	'default_timezone'   => 'Asia/Tokyo',
+	'default_timezone'   => 'Asia/Ho_Chi_Minh',
 
 	/**
 	 * Logging Threshold.  Can be set to any of the following:
@@ -311,11 +311,11 @@ return array(
 		 * If you don't want the lang in a group use null as groupname.
 		 */
 		// 'language'  => array(),
-		
-		
-			
+
+
+
 	),
-		
-		
+
+
 
 );
