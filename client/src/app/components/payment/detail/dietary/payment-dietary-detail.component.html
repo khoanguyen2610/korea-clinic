@@ -1,0 +1,71 @@
+<h2 class="s-title mt20">起案内容</h2>
+<section>
+	<div class="g-row clearfix">
+		<div class="field clearfix w100">
+			<label>【種別】</label>
+			<div class="input-text">
+				<label class="bold">{{ expense_item }}</label>
+			</div>
+		</div>
+		<ng-template [ngIf]="m_request_menu_id == 8">
+			<div class="field clearfix w100">
+				<label>【当社出席者】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.participant_name }}</label>
+				</div>
+			</div>
+		</ng-template>
+		<ng-template [ngIf]="m_request_menu_id == 9">
+			<div class="field clearfix w100">
+				<label>【先方社名】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.other_company_name }}</label>
+				</div>
+			</div>
+			<div class="field clearfix w100">
+				<label>【先方参加者氏名】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.other_company_participant_name }}</label>
+				</div>
+			</div>
+			<div class="field clearfix w100">
+				<label>【当社参加者氏名】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.our_company_participant_name }}</label>
+				</div>
+			</div>
+		</ng-template>
+		<div class="field clearfix w100">
+			<label>【参加人数】</label>
+			<div class="input-text">
+				<label class="bold">{{ item.participant_num | number }}</label>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="space30"></div>
+<h2 class="s-title">購入明細</h2>
+<section class="g-table mb10">
+	<div class="table-responsive">
+		<table id="tbl-data" class="tbl-data table table-standard table-striped table-hover" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">使用日</th>
+					<th class="text-center">飲食店名</th>
+					<th class="text-center">金額</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="purchaseArray.length == 0">
+					<td class="text-center" colspan="3">{{ 'EMPTY_TABLE' | translate }}</td>
+				</tr>
+				<tr *ngFor="let obj of purchaseArray; let i = index;">
+					<td class="text-center">{{ obj.reception_date }}</td>
+					<td>{{ obj.reception_target }}</td>
+					<td class="text-right">{{ currency_symbol }} {{ obj.payments }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+<div class="space30"></div>

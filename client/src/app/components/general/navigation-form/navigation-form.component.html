@@ -1,0 +1,46 @@
+<div style="display: block; min-height: 44px">
+    <div class="g-prev-next clearfix" *ngIf="m_petition_status_id != '1'">
+        <button (click)="onLinkDetailID(arrID['previous'], arrID['petition_type_prev'])" *ngIf="arrID['previous']" class="btn btn-style btn-prev" type="button" style="float: left;"><i class="fa fa-chevron-left" aria-hidden="true"></i> 前へ</button>
+        <button (click)="onLinkDetailID(arrID['next'], arrID['petition_type_next'])" *ngIf="arrID['next']" class="btn btn-style btn-next" type="button" style="float: right;">次へ <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+    </div>
+    <div class="g-proposal-button">
+        <a class="btn-close-menu" href="#" title="">
+            <div class="hamburger hamburger--spin js-hamburger">
+                <div class="hamburger-box">
+                    <div class="hamburger-inner"></div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="g-proposal-g-button text-center" *ngIf="access_area != 'management-list-form-payment'">
+        <button class="btn btn-style btn-chart" [ngClass]="{'btn-style-special': b.type == 'apply'}" type="button" *ngFor="let b of listButton" (click)="onClickButton(b.type)"><i class="fa {{ getIconType(b.type) }}" aria-hidden="true"></i> {{ b.name }}</button>
+    </div>
+</div>
+<modal #modal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            削除します、よろしいでしょうか。
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back" (click)="modal.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onConfirmDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>
+<modal #modalConfirm>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            {{ formType.confirm_msg }}
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back" (click)="modalConfirm.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onConfirmMsg()"><i class="fa fa-check"></i> 確認</button>
+        </section>
+    </modal-body>
+</modal>

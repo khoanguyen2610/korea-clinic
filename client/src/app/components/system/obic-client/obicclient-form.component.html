@@ -1,0 +1,37 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<h2 class="s-title">OBICクライアント一覧画面</h2>
+	<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <section class="g-filter clearfix">
+            <div class="g-row clearfix">
+                <div class="field clearfix w100">
+                    <label for="">取引先コード <span class="note">*</span></label>
+                    <div>
+                    	<input type="text" name="client_code" [(ngModel)]="Item.client_code" #client_code="ngModel" class="form-control" required>
+						<span *ngIf="client_code?.dirty && client_code?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                    </div>
+                </div>
+            	<div class="field clearfix w100">
+			        <label for="">取引先区分 <span class="note">*</span></label>
+			        <div class="g-radio">
+						<label class="radio-inline" *ngFor="let obj of client_type">
+							<input type="radio" name="release_flg" (click)="Item.client_type = obj.value" [checked]="obj.value == Item.client_type"> {{ obj.label }}
+		                	<div class="check"></div>
+						</label>
+					</div>
+			    </div>
+			    <div class="field clearfix w100">
+                    <label for="">取引先コード <span class="note">*</span></label>
+                    <div>
+	                    <input type="text" name="client_name" [(ngModel)]="Item.client_name" #client_name="ngModel" class="form-control" required>
+						<span *ngIf="client_name?.dirty && client_name?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="g-button clearfix text-center">
+        	<button class="btn btn-style btn-save" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> 登録</button>
+	        <a [routerLink]="['/system/obic-client']" class="btn btn-style btn-back"><i class="fa fa-arrow-left"></i> 閉じる</a>
+        </section>
+	</form>
+</div>

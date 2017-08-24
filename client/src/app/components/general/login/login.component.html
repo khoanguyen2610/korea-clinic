@@ -1,0 +1,30 @@
+<section class="auth login flex-cc vh100">
+    <div class="auth-inner">
+        <h1 class="logo"><a [routerLink]="['/login']"><img src="assets/img/logo.png" alt="VWS"></a></h1>
+        <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="validateErrors.msg_error != null">
+            <button type="button" class="close" (click)="validateErrors.msg_error = null"><span aria-hidden="true">&times;</span></button>
+            {{validateErrors.msg_error}}
+        </div>
+        <form class="auth-form login-form" action="" method="">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input type="text" name="user_id" [(ngModel)]="Item.user_id" class="form-control" placeholder="ユーザーID">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                    <input type="password"  name="password" [(ngModel)]="Item.password" class="form-control" placeholder="パスワード">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" (click)="onSubmit()" class="btn btn-login btn-submit">ログイン</button>
+            </div>
+        </form>
+        <div class="text-center mt40 a-forgot">
+            <a href="#" [routerLink]="['/forgot-password']" title="">パスワードを忘れたらこちら</a>
+        </div>
+        <p class="text-center mt20 version"><strong>{{ system_version }}</strong></p>
+    </div>
+</section>

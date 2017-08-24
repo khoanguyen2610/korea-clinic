@@ -1,0 +1,126 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+    <h2 class="s-title">様式管理</h2>
+    <section class="g-filter clearfix">
+        <div class="g-row clearfix">
+            <div class="field clearfix w50">
+                <label for="">申請管理部門</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="departments"
+                        [active]="filter.m_department_id | selectobject: departments"
+                        [allowClear]="true"
+                        (selected)="onNgSelected($event)"
+                        (removed)="onNgRemoved($event)"
+                        (ngModel)="filter.m_department_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="field clearfix w50">
+                <label for="">様式検索欄</label>
+                <div>
+                    <input type="text" name="" value="" placeholder="" class="form-control" [(ngModel)]="filter.name">
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label for="">利用状況</label>
+                <div class="g-radio">
+                    <label class="radio-inline">
+                        <input type="radio" name="status" id="" value="1" [(ngModel)]="filter.enable_flg"> 有効
+                        <div class="check"></div>
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="status" id="" value="0" [(ngModel)]="filter.enable_flg"> 無効
+                        <div class="check"></div>
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="status" id="" value="2" [(ngModel)]="filter.enable_flg"> 下書
+                        <div class="check"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="g-button clearfix text-center">
+        <button class="btn btn-style btn-search" type="button" (click)="onSearch()"><i class="fa fa-search"></i> 検索</button>
+        <button class="btn btn-style btn-clear" type="button" (click)="onReset()"><i class="fa fa-eraser"></i> クリア</button>
+        <a class="btn btn-style btn-back" type="button" [routerLink]="['/']"><i class="fa fa-arrow-left"></i> 戻る</a>
+    </section>
+    <section class="g-table-button text-right">
+        <button class="btn btn-style btn-add" type="button" [routerLink]="['/system/menu-master/create']"><i class="fa fa-plus"></i> 新規</button>
+        <button class="btn btn-style btn-sort" type="button" (click)="onOpenModal()"><i class="fa fa-list-ul"></i> 表示順変更</button>
+    </section>
+    <section class="g-table">
+        <table id="tbl-data" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>メニュー画面</th>
+                    <th>概要</th>
+                    <th>担当部署</th>
+                    <th>部署承認下限役職</th>
+                    <th>利用状況</th>
+                    <th>File添付</th>
+                    <th>編集</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+</div>
+
+
+
+<modal #modal [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">様式編集確認</h4>
+    </modal-header>
+    <modal-body>
+
+        <section class="g-filter clearfix">
+            <div class="g-row clearfix">
+                <div class="field clearfix w50">
+                    <label for="">申請管理部門</label>
+                    <div class="input-select2">
+                        <ng-select placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                            (selected)="onChangeSelectModal($event)"
+                            (deselected)="onChangeSelectModal($event)"
+                            [items]="departments"
+                            [active]="filterModal.m_department_id | selectobject: departments"
+                            [allowClear]="true">
+                        </ng-select>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="g-button clearfix text-center">
+            <button class="btn btn-style btn-save" type="button" (click)="onSaveOrder()"><i class="fa fa-floppy-o"></i> 登録</button>
+            <a class="btn btn-style btn-back" (click)="modal.close()"><i class="fa fa-arrow-left"></i> 戻る</a>
+        </section>
+
+        <section class="g-table">
+            <ul class="list-group-title">
+                <li class="clearfix">
+                    <div style="width: 50px;">No</div>
+                    <div style="width: calc(100% - 50px);">メニュー画面</div>
+                </li>
+            </ul>
+            <ul class="list-group" dnd-sortable-container [sortableData]="dataModal">
+                <li class="list-group-item clearfix" *ngIf="!dataModal || dataModal == 0">
+                    <div class="text-center">{{ 'EMPTY_TABLE' | translate }}</div>
+                </li>
+                <li *ngFor="let item of dataModal; let i = index" class="list-group-item clearfix" dnd-sortable [sortableIndex]="i" style="cursor: move">
+                    <div style="width: 50px;">
+                        {{ i + 1 }}
+                    </div>
+                    <div style="width: calc(100% - 50px);">
+                        <i class="fa fa-arrows"></i>&nbsp;&nbsp;&nbsp;{{ item.name }}
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </modal-body>
+</modal>

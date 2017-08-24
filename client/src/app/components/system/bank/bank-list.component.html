@@ -1,0 +1,77 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+    <h2 class="s-title">銀行情報一覧</h2>
+    <section class="g-filter clearfix">
+        <div class="g-row clearfix">
+            <div class="field clearfix w50">
+                <label for="">銀行コード</label>
+                <div class="clearfix">
+                    <input type="text" name="" class="form-control" [(ngModel)]="filter.code">
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">銀行名</label>
+                <div class="clearfix">
+                    <input type="text" name="" class="form-control" [(ngModel)]="filter.name">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="g-button clearfix text-center">
+        <button class="btn btn-style btn-search" type="button" (click)="onSearch()" id="btn_submit_form"><i class="fa fa-search"></i> 検索</button>
+        <button class="btn btn-style btn-clear" type="button" (click)="onReset()"><i class="fa fa-eraser"></i> クリア</button>
+        <a class="btn btn-style btn-back" [routerLink]="['/home']"><i class="fa fa-arrow-left"></i> 戻る</a>
+    </section>
+    <section class="g-table-button text-right">
+        <a class="btn btn-style btn-add" [routerLink]="['/system/bank/create']"><i class="fa fa-plus"></i> 新規</a>
+    </section>
+    <section class="g-table">
+        <table id="tbl-data" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>銀行コード</th>
+                    <th>銀行名</th>
+                    <th>銀行名ｶﾅ</th>
+                    <th>銀行名(英)</th>
+                    <th class="text-center" colspan="2">処理</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
+    <!-- Section file upload -->
+    <!-- <h2 class="s-title">■銀行マスタCSV取込み</h2>
+    <section class="g-filter clearfix">
+        <div class="g-row clearfix">
+            <div class="field clearfix w50">
+                <label for="">インポートデータ</label>
+                <div>
+                    <div class="uploader">
+                        <input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                        <span *ngIf="!uploader.queue.length" class="filename">ここにファイルをドロップしてください。</span>
+                        <span class="filename" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
+                        <span class="btn-uploader btn btn-default">削除 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="field clearfix w50 text-right">
+                <a class="btn btn-add btn-style" style="margin: 0;" (click)="onUploadCSV()"><i class="fa fa-upload"></i> 登録</a>
+            </div>
+        </div>
+        <div class="space30">
+        </div>
+    </section> -->
+</div>
+<modal #modal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            削除します、よろしいですか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back width120" (click)="modal.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onConfirmDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

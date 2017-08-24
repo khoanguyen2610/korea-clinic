@@ -1,0 +1,65 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="proposal-create">
+    <h2 class="s-title">新規</h2>
+    <form  #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <section class="clearfix">
+            <div class="g-row clearfix">
+                <div class="field clearfix w100">
+                    <label for="">銀行コード</label>
+                    <div class="input-select2">
+                        <ng-select
+                            name="m_bank_id"
+                            [items]="bankOptions"
+                            [active]="Item.m_bank_id | selectobject: bankOptions"
+                            (selected)="onNgSelected($event, 'bank')"
+                            (ngModel)="Item.m_bank_id"
+                            [ngModel]="Item.m_bank_id | selectobject: bankOptions"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                            #m_bank_id
+                            required>
+                        </ng-select>
+                        <span *ngIf="m_bank_id?.dirty && m_bank_id?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">支店コード <span class="note">*</span></label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="code" class="form-control" [(ngModel)]="Item.code" required>
+                            <span *ngIf="code?.dirty && code?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">支店名 <span class="note">*</span></label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="name" class="form-control" [(ngModel)]="Item.name" required>
+                            <span *ngIf="name?.dirty && name?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">支店名ｶﾅ</label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="name_kana" class="form-control" [(ngModel)]="Item.name_kana">
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">支店名(英)</label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="name_e" class="form-control" [(ngModel)]="Item.name_e">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+        <section class="g-button clearfix text-center">
+            <button class="btn btn-style btn-save" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> 追加/更新</button>
+            <a class="btn btn-style btn-back" [routerLink]="['/system/bank-branch']"><i class="fa fa-arrow-left"></i> 閉じる</a>
+        </section>
+    </form>
+</div>

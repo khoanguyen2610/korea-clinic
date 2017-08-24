@@ -1,0 +1,161 @@
+<h2 class="s-title">申請内容</h2>
+<section>
+	<div class="g-row clearfix">
+		<div class="field clearfix w100">
+			<label>精算日</label>
+			<div class="input-text">
+				<label class="bold">{{ item.settlement_date | formatdate }} </label>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>出張種別</label>
+			<div class="input-text">
+				<label class="bold">{{ (item.business_trip_class == 1) ? '国内' : '海外' }} - {{ trip_area_name }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>出張先</label>
+			<div class="input-text">
+				<label class="bold">{{ item.business_trip_destination }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>宿泊先</label>
+			<div class="input-text">
+				<label class="bold">{{ item.accommodation }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>連絡先</label>
+			<div class="input-text">
+				<label class="bold">{{ item.contact_address }}</label>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="field-special clearfix w100">
+			<div class="field">
+				<label>出発日</label>
+				<div class="input-text">
+					<label class="bold">{{ item.departure_date | formatdate }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label [ngStyle]="{'width': '110px'}">【交通機関】</label>
+				<div class="input-text" [ngStyle]="{'width': 'auto'}">
+					<label class="bold" *ngFor="let expense of expenseItemOption | label: item.departure_transportation_id" [ngStyle]="{'width': 'auto'}">{{ expense.label }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label>時刻</label>
+				<div class="input-text">
+					<label class="bold">{{ item.departure_time }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label>便名</label>
+				<div class="input-text">
+					<label class="bold">{{ item.departure_flight }}</label>
+				</div>	
+			</div>
+		</div>
+		<div class="field-special clearfix w100">
+			<div class="field">
+				<label>到着日</label>
+				<div class="input-text">
+					<label class="bold">{{ item.end_date | formatdate }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label [ngStyle]="{'width': '110px'}">【交通機関】</label>
+				<div class="input-text" [ngStyle]="{'width': 'auto'}">
+					<label class="bold" *ngFor="let expense of expenseItemOption | label: item.end_transportation_id" [ngStyle]="{'width': 'auto'}">{{ expense.label }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label>時刻</label>
+				<div class="input-text">
+					<label class="bold">{{ item.end_time }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label>便名</label>
+				<div class="input-text">
+					<label class="bold">{{ item.end_flight }}</label>
+				</div>	
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>備考</label>
+			<div class="input-text">
+				<label class="bold">{{ item.memo }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>報告事項</label>
+			<div class="input-text">
+				<label class="bold">{{ item.report_memo }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>日当</label>
+			<div class="input-text">
+				<label class="bold">{{ currency_symbol }} {{ item.perdiem_daily | number }}</label>
+				&nbsp;x&nbsp;
+				<label class="bold">{{ item.perdiem_days | number }}</label>
+				&nbsp;=&nbsp;
+				<label class="bold">{{ currency_symbol }} {{ item.perdiem_fee | number }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>(修正)日当</label>
+			<div class="field-money">
+				<input type="text" name="cor_perdiem_fee" class="form-control format_number" [(ngModel)]="item.cor_perdiem_fee"  (blur)="onSetFee($event.target.value,'cor_perdiem_fee')" [readonly]="!modify">
+				<span class="i-money">{{ currency_symbol }}</span>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>宿泊</label>
+			<div class="input-text">
+				<label class="bold">{{ currency_symbol }} {{ item.lodging_daily | number }}</label>
+				&nbsp;x&nbsp;
+				<label class="bold">{{ item.lodging_days | number }}</label>
+				&nbsp;=&nbsp;
+				<label class="bold">{{ currency_symbol }} {{ item.lodging_fee | number }}
+				<span *ngIf="item.lodging_receipt_flg == 1">領収書あり</span></label>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>(修正)宿泊</label>
+			<div class="field-money">
+				<input type="text" name="cor_lodging_fee" class="form-control format_number" [(ngModel)]="item.cor_lodging_fee"  (blur)="onSetFee($event.target.value,'cor_lodging_fee')" [readonly]="!modify">
+				<span class="i-money">{{ currency_symbol }}</span>
+			</div>
+		</div>
+		<div class="field-special clearfix w100" *ngFor="let other of otherArray; let i = index;">
+			<div class="field">
+				<label>その他</label>
+				<div class="input-text">
+					<label *ngFor="let expense of withdrawalOption | label: other.m_expense_item_id" class="bold">{{ expense.label }}</label>
+				</div>
+			</div>
+			<div class="field">
+				<div class="input-text">
+					<label class="bold" [ngStyle]="{'width':'auto'}">{{ other.description }}</label>
+				</div>
+			</div>
+			<div class="field">
+				<div class="input-text">
+					<label class="bold">{{ currency_symbol }} {{ other.payments | number }}</label>
+				</div>
+			</div>
+			<div class="field">
+				<label>(修正)その他{{ i+1 }}</label>
+				<div class="field-money">
+					<input type="text" name="cor_payments" class="form-control format_number" [(ngModel)]="other.cor_payments" (blur)="onSetFee($event.target.value,'cor_payments',i)" [readonly]="!modify">
+					<span class="i-money">{{ currency_symbol }}</span>
+				</div>
+			</div>
+        </div>
+	</div>
+</section>
+<div class="space30"></div>

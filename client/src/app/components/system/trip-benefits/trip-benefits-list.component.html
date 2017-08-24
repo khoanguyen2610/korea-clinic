@@ -1,0 +1,72 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="mb20">
+    <h2 class="s-title">出張エリア設定</h2>
+    <section class="g-table-button text-right clearfix">
+        <a class="btn btn-style btn-add" [routerLink]="['/system/trip-area/create']"><i class="fa fa-plus"></i>&nbsp;追加</a>
+    </section>
+    <!-- SECTION TABLE -->
+    <section class="g-table">
+        <table id="tbl-data-1" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="text-center">エリア</th>
+                    <th class="text-center">種別</th>
+                    <th class="text-center" colspan="2">処理</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
+    <!-- END SECTION TABLE -->
+</div>
+<div class="">
+    <h2 class="s-title">日当・手当一覧</h2>
+    <section class="g-table-button text-right clearfix">
+        <a class="btn btn-style btn-add" [routerLink]="['/system/trip-perdiem-allowance/create']"><i class="fa fa-plus"></i>&nbsp;追加</a>
+    </section>
+    <!-- SECTION TABLE -->
+    <section class="g-table">
+        <table id="tbl-data-2" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="text-center">出張エリア</th>
+                    <th class="text-center">役職</th>
+                    <th class="text-center">日当</th>
+                    <th class="text-center">手当</th>
+                    <th class="text-center" colspan="2">処理</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
+    <!-- END SECTION TABLE -->
+</div>
+<div class="space30"></div>
+
+<modal #modal_1>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            削除します、よろしいですか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back width120" (click)="modal_1.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onDeleteTripArea()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>
+
+<modal #modal_2>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            削除します、よろしいですか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back width120" (click)="modal_2.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onDeleteTripPerdiemAllowance()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

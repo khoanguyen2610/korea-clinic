@@ -1,0 +1,309 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="proposal-create">
+	<form #f="ngForm">
+		<section class="space"></section>
+		<!-- Button Area -->
+		<section class="g-proposal-func">
+			<div class="g-container">
+				<div class="g-proposal-button">
+					<a class="btn-close-menu" href="#" title="">
+						<div class="hamburger hamburger--spin js-hamburger">
+						  	<div class="hamburger-box">
+						    	<div class="hamburger-inner"></div>
+						  	</div>
+						</div>
+					</a>
+	            </div>
+				<div class="g-proposal-g-button text-center">
+					<button class="btn btn-style btn-style-special btn-chart" type="button" (click)="onSave(f,'apply')">
+						<i class="fa fa-bar-chart"></i>&nbsp;申請内容確認
+					</button>
+					<button class="btn btn-style btn-clear" type="button" (click)="onClear(f,$event)">
+						<i class="fa fa-eraser"></i>&nbsp;クリア
+					</button>
+					<button class="btn btn-style btn-save" type="button" (click)="onSave(f,'draft')">
+						<i class="fa fa-floppy-o"></i>&nbsp;一時保存
+					</button>
+					<button *ngIf="_params['method'] == 'update'" class="btn btn-style btn-clear" type="button" (click)="modal.open('sm')">
+						<i class="fa fa-trash"></i>&nbsp;削除
+					</button>
+					<a class="btn btn-style btn-back" [routerLink]="['/home']">
+						<i class="fa fa-arrow-left"></i>&nbsp;戻る
+					</a>
+				</div>
+			</div>
+		</section>
+		<!-- End Button Area -->
+		<!-- Radio Button Area -->
+		<section class="g-basic-info clearfix">
+			<div class="g-row clearfix">
+				<div class="field clearfix w100">
+					<label>申請種別</label>
+					<div>
+						<div class="g-radio">
+							<label class="radio-inline label-w150" *ngFor="let rt of request_type">
+								<input type="radio" name="type" (click)="onChangeType(rt.value)" [checked]="rt.value == TRequest.type" [value]="rt.value"> {{ rt.label }}
+								<div class="check"></div>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="field clearfix w100">
+					<label>内容</label>
+					<div>
+						<div class="g-radio">
+							<label class="radio-inline label-w150" *ngFor="let menu of requestMenu" [class.not-allowed]="(TRequest.type==2 && menu.value!=6)">
+								<input type="radio" name="m_request_menu_id" (click)="onChangeMenu(menu.value)" [checked]="menu.value == TRequest.m_request_menu_id" [value]="menu.value" [disabled]="TRequest.type==2"> {{ menu.label }}
+								<div class="check"></div>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Radio Button Area -->
+		<!-- Basic Info Area -->
+		<h2 class="s-title">申請概要</h2>
+		<section class="g-basic-info clearfix">
+			<div class="g-row clearfix">
+				<div class="field clearfix w50">
+					<label>所属部門名称</label>
+					<div class="input-text">
+						<label class="bold">{{ current_user_info.department_name }}</label>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>所属部門コード</label>
+					<div class="input-text">
+						<label class="bold">{{ current_user_info.department_code }}</label>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>申請者社員番号</label>
+					<div class="input-text">
+						<label class="bold">{{ current_user_info.staff_no }}</label>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>申請者社員名前</label>
+					<div class="input-text">
+						<label class="bold">{{ current_user_info.fullname }}</label>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>申請名称</label>
+					<div class="input-text">
+						<label class="bold">{{ menu_label }}</label>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>申請日</label>
+					<div class="input-text">
+						<label class="bold">{{ TRequest.date }}</label>
+					</div>
+				</div>
+				<!-- field quote_t_request_id -->
+				<ng-template [ngIf]="TRequest.m_request_menu_id==4 || TRequest.m_request_menu_id==5">
+					<div class="field clearfix w50">
+						<label>事前出張申請</label>
+						<div class="input-select2">
+							<ng-select
+			                	name="quote_t_request_id"
+			                    [items]="formOption"
+								[allowClear]="false"
+			                    (selected)="onChangeReferenceForm($event)"
+			                    [ngModel]="TRequestTravel.quote_t_request_id | selectobject: formOption"
+			                    placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+			                    #quote_t_request_id
+			                >
+							</ng-select>
+						</div>
+					</div>
+					<div class="field clearfix w50">
+						<button class="btn btn-style btn-no-margin" (click)="onReferenceForm(TRequestTravel.quote_t_request_id)" type="button" [disabled]="!TRequestTravel.quote_t_request_id">引用</button>
+					</div>
+					<div class="field clearfix w50">
+						<label>引用元事前出張ID</label>
+						<div class="input-text">
+							<label class="bold">{{ reference_code }}</label>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</ng-template>
+				<!-- field destination -->
+				<div class="field clearfix w50" *ngIf="TRequest.m_request_menu_id==1 || TRequest.m_request_menu_id==2 || TRequest.m_request_menu_id==3 || TRequest.m_request_menu_id==4 || TRequest.m_request_menu_id==5">
+					<label>目的地 <span class="note">*</span></label>
+					<div [class.has-error]="!destination.value">
+						<input type="text" name="destination" [(ngModel)]="TRequest.destination" #destination="ngModel" class="form-control">
+						<span *ngIf="(is_draft_validated || destination?.dirty) && !destination.value" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					</div>
+				</div>
+				<!-- field m_expense_item_id -->
+				<div class="field clearfix w50" *ngIf="TRequest.m_request_menu_id==6 || TRequest.m_request_menu_id==8 || TRequest.m_request_menu_id==9">
+					<label>種別 <span class="note">*</span></label>
+					<div class="input-select2">
+						<ng-select
+		                    name="m_expense_item_id"
+		                    [items]="expenseItemOption"
+		                    [active]="TRequest.m_expense_item_id | selectobject: expenseItemOption"
+		                    [allowClear]="false"
+		                    (selected)="onChangeExpense($event)"
+		                    (ngModel)="TRequest.m_expense_item_id"
+		                    [ngModel]="TRequest.m_expense_item_id | selectobject: expenseItemOption"
+		                    placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+		                    required>
+		                </ng-select>
+						<span *ngIf="is_draft_validated && !TRequest.m_expense_item_id" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="field clearfix w100">
+					<label>理由 <span class="note">*</span></label>
+					<div [class.has-error]="!(reason.value | trim)">
+						<textarea name="reason" class="form-control input-long" [(ngModel)]="TRequest.reason" #reason="ngModel"></textarea>
+						<span *ngIf="(is_draft_validated || reason?.dirty) && !(reason.value | trim)" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					</div>
+				</div>
+				<div class="field clearfix w50" [class.hide]="TRequest.m_request_menu_id==6">
+					<label>優先度</label>
+					<div>
+						<div class="g-radio">
+						<label class="radio-inline label-w80" *ngFor="let pr of priority_flg">
+								<input type="radio" name="priority_flg" (click)="TRequest.priority_flg = pr.value" [checked]="pr.value == TRequest.priority_flg"> {{ pr.label }}
+								<div class="check"></div>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>決裁経路変更</label>
+					<div>
+						<div class="g-radio">
+							<label class="radio-inline label-w80" *ngFor="let cr of change_route">
+								<input type="radio" name="change_route" (click)="TRequest.change_route = cr.value" [checked]="cr.value == TRequest.change_route"> {{ cr.label }}
+								<div class="check"></div>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="field clearfix w100">
+					<label>添付資料</label>
+					<div>
+                        <div class="uploader-files mb4">
+                            <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
+                                <div class="no-file" *ngIf="!uploader.queue.length">
+                                    <span>ファイルをドラッグ&ドロップ…</span>
+                                    <span></span>
+                                    <!-- drag & drop file example-->
+                                </div>
+                                <ul class="uploader-files-in clearfix">
+                                    <li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
+                                        <div class="item">
+                                            <img src="assets/img/file.png" alt="">
+                                            <p>{{ item?.file?.name }}</p>
+                                            <div class="file-actions clearfix">
+                                                <a title="ダウンロード" *ngIf="item?.file?.is_download" (click)="onDownloadForm(item._file.id, 'form_attachment')" class="file-download"><i class="fa fa-download"></i></a>
+                                                <a title="削除" class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="uploader">
+                            <input type="file" ng2FileSelect class="form-control" [uploader]="uploader" multiple (change)="onValidateFormFileType()"/>
+                            <span class="filename">ファイルをドラッグ&ドロップ…</span>
+                            <span class="btn-uploader btn btn-default">ファイル選択 </span>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</section>
+		<div class="space30"></div>
+		<!-- Pre Travel Input Area -->
+		<!-- m_request_menu_id = 2 -->
+		<payment-pre-travel *ngIf="TRequest.m_request_menu_id==2" [m_position_id]="position_id" [currency_symbol]="currency_symbol" [travel]="TRequestTravel" [triptype]="triptypeOption" [is_draft_validated]="is_draft_validated" [triparea]="tripareaOption"></payment-pre-travel>
+		<!-- m_request_menu_id = 3 -->
+		<payment-pre-travel *ngIf="TRequest.m_request_menu_id==3" [m_position_id]="position_id" [currency_symbol]="currency_symbol" [travel]="TRequestTravel" [triptype]="triptypeOption" [is_draft_validated]="is_draft_validated" [triparea]="tripareaOption"></payment-pre-travel>
+
+		<!-- Travel Input Area -->
+		<!-- m_request_menu_id = 4 -->
+		<payment-travel *ngIf="TRequest.m_request_menu_id==4" [m_position_id]="position_id" [currency_symbol]="currency_symbol" [is_draft_validated]="is_draft_validated" [travel]="TRequestTravel" [triptype]="triptypeOption" [triparea]="tripareaOption" [withdrawal]="withdrawalOption" [other]="otherArray" (amount)="onUpdateTravelingFee($event)" (validation)="onCheckRequiredOther($event)"></payment-travel>
+		<!-- m_request_menu_id = 5 -->
+		<payment-travel *ngIf="TRequest.m_request_menu_id==5" [m_position_id]="position_id" [currency_symbol]="currency_symbol" [is_draft_validated]="is_draft_validated" [travel]="TRequestTravel" [triptype]="triptypeOption" [triparea]="tripareaOption" [withdrawal]="withdrawalOption" [other]="otherArray" (amount)="onUpdateTravelingFee($event)" (validation)="onCheckRequiredOther($event)"></payment-travel>
+
+		<!-- Dietary Local Input Area -->
+		<payment-dietary-local *ngIf="TRequest.m_request_menu_id==8" [is_draft_validated]="is_draft_validated" [dietary]="TRequestDietary">
+		</payment-dietary-local>
+
+		<!-- Dietary Input Area -->
+		<payment-dietary *ngIf="TRequest.m_request_menu_id==9" [is_draft_validated]="is_draft_validated" [dietary]="TRequestDietary">
+		</payment-dietary>
+
+		<!-- Transportation Table Area -->
+		<!-- m_request_menu_id = 1 -->
+		<payment-transport *ngIf="TRequest.m_request_menu_id==1" [currency_symbol]="currency_symbol" [transport]="transportArray" (transport)="setTransportArray($event)" (amount)="onUpdateAmount($event)">
+		</payment-transport>
+		<!-- m_request_menu_id = 4 -->
+		<payment-transport *ngIf="TRequest.m_request_menu_id==4" [currency_symbol]="currency_symbol" [transport]="transportArray" (transport)="setTransportArray($event)" (amount)="onUpdateAmount($event)">
+		</payment-transport>
+		<!-- m_request_menu_id = 5 -->
+		<payment-transport *ngIf="TRequest.m_request_menu_id==5" [currency_symbol]="currency_symbol" [transport]="transportArray" (transport)="setTransportArray($event)" (amount)="onUpdateAmount($event)">
+		</payment-transport>
+
+		<!-- Purchase Table Area -->
+		<payment-purchase *ngIf="TRequest.m_request_menu_id==6" [currency_symbol]="currency_symbol" [type]="TRequest.type" [purchase]="purchaseArray" (purchase)="setPurchaseArray($event)" (amount)="onUpdateAmount($event)">
+		</payment-purchase>
+		<payment-purchase-dietary *ngIf="TRequest.m_request_menu_id==8" [currency_symbol]="currency_symbol" [purchase]="purchaseArray" (purchase)="setPurchaseArray($event)" (amount)="onUpdateAmount($event)"></payment-purchase-dietary>
+		<payment-purchase-dietary *ngIf="TRequest.m_request_menu_id==9" [currency_symbol]="currency_symbol" [purchase]="purchaseArray" (purchase)="setPurchaseArray($event)" (amount)="onUpdateAmount($event)"></payment-purchase-dietary>
+
+		<!-- Amount Input Area -->
+		<h2 *ngIf="!is_pre_travel" class="s-title">申請金額</h2>
+		<section *ngIf="!is_pre_travel" class="g-basic-info clearfix">
+			<div class="g-row clearfix">
+				<div class="field clearfix w50">
+					<label>金額</label>
+					<div class="field-money">
+						<input type="text" class="form-control" name="amount" [ngModel]="TRequest.amount | number" readonly>
+						<span class="i-money">{{ currency_symbol }}</span>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>仮払金額</label>
+					<div class="field-money">
+						<input type="text" class="form-control format_number" name="suspense_payments" [(ngModel)]="TRequest.suspense_payments" placeholder="事前に仮払申請をした場合はここに入力してください。" (blur)="onUpdateSuspense($event.target.value)" id="form_suspense_payments">
+						<span class="i-money">{{ currency_symbol }}</span>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>精算金額</label>
+					<div class="field-money">
+						<input type="text" class="form-control" name="settlement_amount" [ngModel]="TRequest.settlement_amount | number" readonly>
+						<span class="i-money">{{ currency_symbol }}</span>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="space30"></div>
+
+		<!-- Cost Divide Table Area -->
+		<payment-cost *ngIf="!is_pre_travel && TRequest.type!=2" [currency_symbol]="currency_symbol" [m_request_menu_id]="TRequest.m_request_menu_id" [amount]="total" [cost]="registeredCostArray" (cost)="setCostArray($event)">
+		</payment-cost>
+	</form>
+	<!-- End Basic Info Area -->
+</div>
+<!-- Modal Confirm Delete -->
+<modal #modal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            入力途中の内容は破棄されます、よろしいですか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <button class="btn btn-style btn-back" type="button" (click)="onNotConfirm()"><i class="fa fa-times"></i> キャンセル</button>
+            <button class="btn btn-style btn-save" type="button" (click)="onConfirmDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

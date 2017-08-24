@@ -1,0 +1,66 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="proposal-create">
+    <h2 class="s-title">申請概要</h2>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <section class="g-basic-info clearfix">
+            <div class="g-row clearfix">
+                <div class="field clearfix w100">
+                    <label for="">メニュー画面 <span class="note">*</span></label>
+                    <div>
+                        <input type="text" class="form-control input-small" name="code" [(ngModel)]="Item.code" [disabled]="_params.method != 'create'" #code="ngModel" required>
+                        <span *ngIf="code?.dirty && code?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                    </div>
+                </div>
+                <div class="field clearfix w100">
+                    <label for="">メニュー名 <span class="note">*</span></label>
+                    <div>
+                        <input type="text" class="form-control input-small" name="name" [(ngModel)]="Item.name" #name="ngModel" required>
+                        <span *ngIf="name?.dirty && name?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                    </div>
+                </div>
+                <div class="field clearfix w100">
+                    <label for="">概要</label>
+                    <div>
+                        <textarea class="form-control input-medium" name="description" [(ngModel)]="Item.description"></textarea>
+                    </div>
+                </div>
+                <div class="field clearfix w100">
+                    <label for="">組織承認下限役職 <span class="note">*</span></label>
+                    <div>
+                    	<div class="input-small input-select2">
+                            <ng-select
+                                name="limit_m_position_id"
+                                [items]="limitPositionOpts"
+                                [active]="Item.limit_m_position_id | selectobject: limitPositionOpts"
+                                (selected)="onNgSelected($event)"
+                                (removed)="onNgRemoved($event)"
+                                (ngModel)="Item.limit_m_position_id"
+                                [ngModel]="Item.limit_m_position_id | selectobject: limitPositionOpts"
+                                [allowClear]="true"
+                                placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                                #limit_m_position_id
+                                required>
+                            </ng-select>
+				        </div>
+                        <span *ngIf="limit_m_position_id?.dirty && limit_m_position_id?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                    </div>
+                </div>
+                <div class="field clearfix w100">
+                    <label for="">利用状況</label>
+                    <div class="g-radio">
+                        <label class="radio-inline" *ngFor="let obj of objStatus">
+                            <input type="radio" name="status" (click)="Item.enable_flg = obj.value" [checked]="obj.value == Item.enable_flg"> {{ obj.label }}
+                            <div class="check"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Button Process Area -->
+        <section class="g-button clearfix text-center">
+            <button class="btn btn-style btn-search" type="submit" [disabled]="!f.valid"><i class="fa fa-save"></i> 登録</button>
+            <a [routerLink]="['/system/menu-payment']" class="btn btn-style btn-back"><i class="fa fa-arrow-left"></i> 閉じる</a>
+        </section>
+        <!-- Button Process Area -->
+    </form>
+</div>

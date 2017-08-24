@@ -1,0 +1,107 @@
+<h2 class="s-title mt20">コメント</h2>
+<section class="g-comments clearfix">
+    <p class="mb15 mt10">返答コメント選択</p>
+    <div class="discuss-wrapper">
+        <div class="discuss" *ngIf="!dataComment.length">
+            <div class="text-center" style="width: 100%">{{ 'EMPTY_TABLE' | translate }}</div>
+            <div class="space30"></div>
+        </div>
+        <div class="discuss" *ngIf="dataComment.length">
+            <div *ngFor="let comment of dataComment">
+                <div class="item-reply">
+                    <div class="item-name">
+                        <span class="name">{{ comment.fullname }}</span> - <span class="date">{{ convertDateTime(comment.date_time) }}</span>
+                    </div>
+                    <div class="text">
+                        <p class="text-inner" *ngIf="comment.item_status == 'client_delete'">(削除)</p>
+                        <p class="text-inner" *ngIf="comment.item_status != 'client_delete'" [innerHTML]="comment.content | htmlentities | nl2br"></p>
+                    </div>
+                    <div class="more" *ngIf="comment.item_status != 'client_delete'">
+                        <a (click)="onReplyMessage(comment)" class="answer-comment">返信</a>&nbsp;&nbsp;&nbsp;
+                        <a *ngIf="current_user_info.id == comment.m_user_id" (click)="onOpenModalConfirm(comment)" class="delete-comment">削除</a>
+                    </div>
+                    <div class="item-form comment-form mb20" *ngIf="comment.is_reply">
+                        <form action="">
+                            <div class="">
+                                <textarea name="child_content{{ comment.id }}" [(ngModel)]="comment.child_content" class="form-control" placeholder="内容を記入してください。..."></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-style btn-close-msg" type="button" (click)="comment.is_reply = !comment.is_reply"><i class="fa fa-close"></i> 閉じる</button>
+                                <button class="btn btn-style btn-send-msg" type="button" (click)="onReply(comment, 2)" [disabled]="!comment.child_content"><i class="fa fa-paper-plane"></i> コメント追加</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div *ngIf="comment.parent">
+                    <div class="list-reply" *ngFor="let com of comment.children">
+                        <div class="item-reply">
+                            <div class="item-name">
+                                <span class="name">{{ com.fullname }}</span> - <span class="date">{{convertDateTime(com.date_time)}}</span>
+                            </div>
+                            <div class="text">
+                                <p class="text-inner" *ngIf="com.item_status == 'client_delete'">(削除)</p>
+                                <p class="text-inner" *ngIf="com.item_status != 'client_delete'" [innerHTML]="com.content | htmlentities | nl2br"></p>
+                            </div>
+                            <div class="more" *ngIf="com.item_status != 'client_delete'">
+                                <a (click)="onReplyMessage(com)" class="answer-comment">返信</a>&nbsp;&nbsp;&nbsp;
+                                <a *ngIf="current_user_info.id == com.m_user_id" (click)="onOpenModalConfirm(com)" class="delete-comment">削除</a>
+                            </div>
+                            <div class="discuss-form comment-form mb20" *ngIf="com.is_reply">
+                                <form action="">
+                                    <div class="">
+                                        <textarea name="child_content{{ com.id }}" [(ngModel)]="com.child_content" class="form-control" placeholder="内容を記入してください。..."></textarea>
+                                    </div>
+                                    <div class="text-right">
+                                        <button class="btn btn-style btn-close-msg" type="button" (click)="com.is_reply = !com.is_reply"><i class="fa fa-close"></i> 閉じる</button>
+                                        <button class="btn btn-style btn-send-msg" type="button" (click)="onReply(com, 3)" [disabled]="!com.child_content"><i class="fa fa-paper-plane"></i> コメント追加</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div *ngIf="comment.parent && com.parent">
+                            <div class="list-reply" *ngFor="let c of com.children">
+                                <div class="item-reply">
+                                    <div class="item-name">
+                                        <span class="name">{{ c.fullname }}</span> - <span class="date">{{convertDateTime(c.date_time) }}</span>
+                                    </div>
+                                    <div class="text">
+                                        <p class="text-inner" *ngIf="c.item_status == 'client_delete'">(削除)</p>
+                                        <p class="text-inner" *ngIf="c.item_status != 'client_delete'" [innerHTML]="c.content | htmlentities | nl2br"></p>
+                                    </div>
+                                    <div class="more" *ngIf="c.item_status != 'client_delete'">
+                                        <!-- <a (click)="onReplyMessage(c)" class="answer-comment">返信</a>&nbsp;&nbsp;&nbsp; -->
+                                        <a *ngIf="current_user_info.id == c.m_user_id" (click)="onOpenModalConfirm(c)" class="delete-comment">削除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="discuss-form comment-form mb20">
+        <form action="">
+            <div class="">
+                <textarea name="child_content" [(ngModel)]="dataItem.child_content" class="form-control" placeholder="内容を記入してください。..."></textarea>
+            </div>
+            <div class="text-right">
+                <button class="btn btn-style btn-send-msg" type="button" (click)="onReply(dataItem, '0')" [disabled]="!dataItem.child_content"><i class="fa fa-paper-plane"></i> コメント追加</button>
+            </div>
+        </form>
+    </div>
+</section>
+<modal #modalConfirm>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            コメントを削除します、よろしいでしょうか。 
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back width120" (click)="modalConfirm.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

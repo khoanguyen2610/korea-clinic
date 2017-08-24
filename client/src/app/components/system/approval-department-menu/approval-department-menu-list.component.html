@@ -1,0 +1,397 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<h2 class="s-title">決裁経路管理（カスタム）</h2>
+	<section class="g-filter clearfix">
+        <div class="g-row clearfix">
+            <div class="field clearfix w100">
+                <label for="">管理部署</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="divisionMenuOptions"
+                        [active]="Item.menu_division_id | selectobject: divisionMenuOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterDivisionChange($event)"
+                        (removed)="onSelectFilterDivisionChange($event,'deselected')"
+                        (ngModel)="Item.menu_division_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label for="">様式</label>
+                <div class="input-medium input-select2">
+                    <ng-select
+                        [items]="menuOptions"
+                        [active]="Item.m_menu_id | selectobject: menuOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterMenuChange($event)"
+                        (removed)="onSelectFilterMenuChange($event, 'deselected')"
+                        (ngModel)="Item.m_menu_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label for="">会社名</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="companyOptions"
+                        [active]="Item.m_company_id | selectobject: companyOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'company')"
+                        (removed)="onSelectFilterChange($event, 'company', 'deselected')"
+                        (ngModel)="Item.m_company_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="field clearfix w50">
+                <label for="">事業本部</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="businessOptions"
+                        [active]="Item.business_id | selectobject: businessOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'business')"
+                        (removed)="onSelectFilterChange($event, 'business', 'deselected')"
+                        (ngModel)="Item.business_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">事業部</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="divisionOptions"
+                        [active]="Item.division_id | selectobject: divisionOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'division')"
+                        (removed)="onSelectFilterChange($event, 'division', 'deselected')"
+                        (ngModel)="Item.division_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">部門</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="departmentOptions"
+                        [active]="Item.department_id | selectobject: departmentOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'department')"
+                        (removed)="onSelectFilterChange($event, 'department', 'deselected')"
+                        (ngModel)="Item.department_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">経路コード</label>
+                <div class="clearfix">
+                    <div class="input-group" style="margin-top: 5px;">
+                        <span class="bold">{{ Item.sub_code }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">適用期間</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="enableStartDateOptions"
+                        [active]="Item.filter_enable_start_date | selectobject: enableStartDateOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterDateChange($event)"
+                        (removed)="onSelectFilterDateChange($event,'deselected')"
+                        (ngModel)="Item.filter_enable_start_date"
+                        [ngModel]="Item.filter_enable_start_date | selectobject: enableStartDateOptions"
+                        [disabled]="!Item.filter_enable_start_date"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="field clearfix w50">
+                <p class="special-text">※新規作成の場合は空欄にしてください。</p>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="field clearfix w50">
+                <label for="">適用開始日 <span class="note">*</span></label>
+                <div class="clearfix">
+                    <div class="input-group">
+                        <input type="text" name="enable_start_date" class="form-control daterange-single" [ngClass]="{'ng-invalid': error_same_date}"
+                            [(ngModel)]="Item.enable_start_date"
+                            #enable_start_date
+                            (blur)="onValidateEnableStartDate(enable_start_date.value)"
+                            required>
+                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+
+                    </div>
+                    <span *ngIf="!enable_start_date.value" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                    <span *ngIf="error_same_date" class="error">{{ 'VALIDATE.same_date' | translate }}</span>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">適用終了日</label>
+                <div class="clearfix">
+                    <div class="input-group">
+                        <input type="text" name="enable_end_date" class="form-control"
+                            [(ngModel)]="Item.enable_end_date"
+                            [readonly]="true">
+                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="g-button clearfix text-center">
+        <button class="btn btn-style btn-search" type="button1" (click)="onSearch()"><i class="fa fa-search" id="btn_submit_form"></i> 検索</button>
+        <button class="btn btn-style btn-clear" type="button" (click)="onReset()"><i class="fa fa-eraser"></i> クリア</button>
+        <a class="btn btn-style btn-back" [routerLink]="['/home']"><i class="fa fa-arrow-left"></i> 戻る</a>
+    </section>
+    <section class="g-table-button text-right">
+        <button class="btn btn-style btn-add" (click)="onOpenConcurrent()" [disabled]="!enable_start_date.value || !Item.business_id || !Item.m_menu_id"><i class="fa fa-plus"></i> 追加</button>
+        <button class="btn btn-style btn-save" (click)="onSave()" [disabled]="!enable_start_date.value || !Item.business_id || !Item.m_menu_id || error_same_date"> 
+            <i class="fa fa-save"></i> 保存 
+        </button>
+        <button class="btn btn-style btn-download" style="width: 240px" (click)="modal_export.open('sm')"><i class="fa fa-download"></i> 決裁経路（カスタム）一覧出力</button>
+    </section>
+	<section class="g-table">
+        <div class="table-responsive">
+            <ul class="list-group-title">
+                <li class="clearfix">
+                    <div class="text-center" style="width: 5%;">No</div>
+                    <div class="text-center" style="width: 15%;">権限</div>
+                    <div class="text-center" style="width: 20%;">社員名</div>
+                    <div class="text-center" style="width: 10%;">役職</div>
+                    <div class="text-center" style="width: 15%;">事業本部</div>
+                    <div class="text-center" style="width: 15%;">事業部</div>
+                    <div class="text-center" style="width: 10%;">部門</div>
+                    <div class="text-center" style="width: 10%;">編集</div>
+                </li>
+            </ul>
+            <ul class="list-group" dnd-sortable-container [sortableData]="dataList" style="margin-bottom: 0px;">
+                <li class="list-group-item clearfix" *ngIf="!dataList || dataList == 0">
+                    <div class="text-center" style="width: 100%">{{ 'EMPTY_TABLE' | translate }}</div>
+                </li>
+                <li *ngFor="let item of dataList; let i = index" class="list-group-item clearfix" dnd-sortable [sortableIndex]="i" style="cursor: move">
+                    <div class="text-center" style="width: 5%;">
+                        {{ i + 1 }}
+                    </div>
+                    <div style="width: 15%;">
+                        <select name="m_authority_id" class="form-control"
+                        [(ngModel)]="dataList[i].m_authority_id" >
+                            <option *ngFor="let option of authorityOptions" value="{{ option.id }}">{{ option.text }}</option>
+                        </select>
+                    </div>
+                    <div style="width: 20%;">
+                        <i class="fa fa-arrows"></i>&nbsp;&nbsp;&nbsp;{{ item.fullname }}
+                    </div>
+                    <div style="width: 10%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.business_name }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.division_name }}
+                    </div>
+                    <div style="width: 10%;">
+                        {{ item.department_name }}
+                    </div>
+                    <div class="text-center" style="width: 5%;">
+                        <a class="edit-record"  id="btn_edit" title="編集" (click)="onOpenConcurrent(item)"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    <div class="text-center" style="width: 5%;">
+                        <a class="del-record"  id="btn_delete" title="削除" (click)="onOpenModalConfirm(i, item.fullname)"><i class="fa fa-trash"></i></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="space30"></div>
+</div>
+
+<modal #modal (onDismiss)="onModalClose()" [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">項目選択</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            <div class="g-row clearfix">
+                <div class="field clearfix w100">
+                    <label for="">会社名</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="modalCompanyOptions"
+                            [active]="processConcurrent.m_company_id | selectobject: modalCompanyOptions"
+                            [allowClear]="true"
+                            (selected)="onSelectDepartmentChangeModal($event, 'company')"
+                            (removed)="onSelectDepartmentChangeModal($event, 'company', 'deselected')"
+                            (ngModel)="processConcurrent.m_company_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">事業本部</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="modalBusinessOptions"
+                            [active]="processConcurrent.business_id | selectobject: modalBusinessOptions"
+                            [allowClear]="true"
+                            (selected)="onSelectDepartmentChangeModal($event, 'business')"
+                            (removed)="onSelectDepartmentChangeModal($event, 'business', 'deselected')"
+                            (ngModel)="processConcurrent.business_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">事業部</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="modalDivisionOptions"
+                            [active]="processConcurrent.division_id | selectobject: modalDivisionOptions"
+                            [allowClear]="true"
+                            (selected)="onSelectDepartmentChangeModal($event, 'division')"
+                            (removed)="onSelectDepartmentChangeModal($event, 'division', 'deselected')"
+                            (ngModel)="processConcurrent.division_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">部門</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="modalDepartmentOptions"
+                            [active]="processConcurrent.m_department_id | selectobject: modalDepartmentOptions"
+                            [allowClear]="true"
+                            (selected)="onSelectDepartmentChangeModal($event, 'department')"
+                            (removed)="onSelectDepartmentChangeModal($event, 'department', 'deselected')"
+                            (ngModel)="processConcurrent.m_department_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">役職</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="positionOptions"
+                            [active]="processConcurrent.m_position_id | selectobject: positionOptions"
+                            [allowClear]="true"
+                            (selected)="onNgSelected($event)"
+                            (removed)="onNgRemoved($event)"
+                            (ngModel)="processConcurrent.m_position_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">名前</label>
+                    <div class="input-group">
+                        <input type="text" name="fullname" class="form-control" 
+                            [(ngModel)]="processConcurrent.fullname">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="g-button clearfix text-center">
+            <button class="btn btn-style btn-save" type="button" (click)="onSearchConcurrent()" id="btn_submit_form"><i class="fa fa-search"></i> 検索</button>
+            <a class="btn btn-style btn-back" (click)="onModalClose()"><i class="fa fa-arrow-left"></i> 閉じる</a>
+        </section>
+
+        <section class="g-table">
+            <table id="tbl-data-approval-department-menu" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>社員名</th>
+                        <th>役職</th>
+                        <th>事業本部</th>
+                        <th>事業部名</th>
+                        <th>部門名</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+    </modal-body>
+</modal>
+
+<modal #modalConfirm>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+           {{ remove_item.fullname }}を削除します、よろしいでしょうか。
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back width120" (click)="modalConfirm.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onRemoveDataList()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>
+
+
+<modal #modal_export [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">一覧出力期間指定</h4>
+    </modal-header>
+    <modal-body>
+        <form #formExport="ngForm">
+            <section class="g-filter clearfix">
+                <div class="g-row clearfix">
+                    <div class="field clearfix w100">
+                        <label for="">指定期間 <span class="note">*</span></label>
+                        <div class="clearfix">
+                            <div class="input-group">
+                                <input type="text" name="export_date" class="form-control daterange-single"
+                                [ngModel]="export_date | formatdate"
+                                (ngModelChange)="export_date = $event"
+                                #export_date_input
+                                (blur)="export_date = export_date_input.value"
+                                required>
+                                <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                <span *ngIf="export_date?.dirty && export_date?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="g-button clearfix text-center">
+                <button class="btn btn-style btn-save" type="button" [disabled]="!formExport.valid"  (click)="onDownload(formExport)"><i class="fa fa-file-excel-o"></i> 一覧出力</button>
+                <a class="btn btn-style btn-back" (click)="modal_export.close()" ><i class="fa fa-arrow-left"></i> 戻る</a>
+            </section>
+        </form>
+    </modal-body>
+</modal>
+
+<modal #modalConfirmSaving>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            現在の決裁経路の適用終了日を新規の決済経路の適用開始日の一日前に設定します。<br>
+            よろしいですか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back width120" (click)="modalConfirmSaving.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onConfirmSaving()"><i class="fa fa-check"></i> 確認</button>
+        </section>
+    </modal-body>
+</modal>

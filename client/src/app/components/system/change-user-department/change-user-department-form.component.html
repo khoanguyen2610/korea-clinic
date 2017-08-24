@@ -1,0 +1,296 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<ul class="tab-title clearfix">
+		<li><a class="active" [routerLink]="['/system/change-user-department']">部署異動更新画面</a></li>
+		<li><a [routerLink]="['/system/import-user-department']">ユーザー情報更新画面</a></li>
+	</ul>
+	<!-- <h2 class="s-title">部署異動更新画面</h2> -->
+	<form autocomplete="off">
+		<!-- SECTION FILTER -->
+		<section class="g-filter clearfix" style="margin: 0px -5px;">
+			<div class="g-change-user-department clearfix">
+				<div class="g-left clearfix">
+					<div class="field clearfix w100 text-center">
+						<strong class="panel-title">旧部署</strong>
+					</div>
+					<!-- Business -->
+					<div class="field clearfix w100">
+						<label>事業本部</label>
+						<div class="input-select2">
+							<ng-select
+								[items]="businessOptions['old']"
+								[active]="filter.business_id | selectobject: businessOptions['old']"
+								[allowClear]="true"
+								(selected)="onSelectDepartmentChange($event, 'business','selected', 'old')"
+								(removed)="onSelectDepartmentChange($event, 'business', 'deselected', 'old')"
+								(ngModel)="filter.business_id"
+								placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+							</ng-select>
+						</div>
+					</div>
+					<!-- Division -->
+					<div class="field clearfix w100">
+						<label>事業部</label>
+						<div class="input-select2">
+			                <ng-select
+		                        [items]="divisionOptions['old']"
+		                        [active]="filter.division_id | selectobject: divisionOptions['old']"
+		                        [allowClear]="true"
+		                        (selected)="onSelectDepartmentChange($event, 'division','selected', 'old')"
+		                        (removed)="onSelectDepartmentChange($event, 'division', 'deselected', 'old')"
+		                        (ngModel)="filter.division_id"
+		                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+		                    </ng-select>
+			            </div>
+					</div>
+					<!-- Department -->
+					<div class="field clearfix w100">
+						<label>部門 <span class="note">*</span></label>
+						<div class="input-select2">
+			                <ng-select
+			                	name="current_department_id"
+		                        [items]="departmentOptions['old']"
+		                        [active]="filter.department_id | selectobject: departmentOptions['old']"
+		                        [allowClear]="true"
+		                        (selected)="onSelectDepartmentChange($event, 'department','selected', 'old')"
+		                        (removed)="onSelectDepartmentChange($event, 'department', 'deselected', 'old')"
+		                        (ngModel)="filter.department_id"
+								[ngModel]="filter.department_id | selectobject: departmentOptions['old']"
+		                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+		                        required>
+		                    </ng-select>
+			            </div>
+			        </div>
+
+			        <div class="field clearfix w100">
+						<label for="">部署異動予定日 <span class="note">*</span></label>
+						<div>
+							<div class="input-group">
+								<input type="text" name="enable_date" [ngModel]="filter.enable_date | formatdate" (ngModelChange)="filter.enable_date = $event" #enable_date (blur)="filter.enable_date = enable_date.value" class="form-control daterange-single" required>
+								<span class="input-group-addon"><i class="icon-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="g-center  clearfix">
+					<i class="fa fa-chevron-right"></i>
+				</div>
+
+				<div class="g-right clearfix">
+					<div class="field clearfix w100 text-center">
+						<strong class="panel-title">新部署</strong>
+					</div>
+					<!-- Business -->
+					<div class="field clearfix w100">
+						<label>事業本部</label>
+						<div class="input-select2">
+							<ng-select
+								[items]="businessOptions['new']"
+								[active]="replace.business_id | selectobject: businessOptions['new']"
+								[allowClear]="true"
+								(selected)="onSelectDepartmentChange($event, 'business','selected', 'new')"
+								(removed)="onSelectDepartmentChange($event, 'business', 'deselected', 'new')"
+								(ngModel)="replace.business_id"
+								placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+							</ng-select>
+						</div>
+					</div>
+					<!-- Division -->
+					<div class="field clearfix w100">
+						<label>事業部</label>
+						<div class="input-select2">
+							<ng-select
+								[items]="divisionOptions['new']"
+								[active]="replace.division_id | selectobject: divisionOptions['new']"
+								[allowClear]="true"
+								(selected)="onSelectDepartmentChange($event, 'division','selected', 'new')"
+								(removed)="onSelectDepartmentChange($event, 'division', 'deselected', 'new')"
+								(ngModel)="replace.division_id"
+								placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+							</ng-select>
+						</div>
+					</div>
+					<!-- Department -->
+					<div class="field clearfix w100">
+						<label>部門 <span class="note">*</span></label>
+						<div class="input-select2">
+							<ng-select
+								name="new_department_id"
+								[items]="departmentOptions['new']"
+								[active]="replace.department_id | selectobject: departmentOptions['new']"
+								[allowClear]="true"
+								(selected)="onSelectDepartmentChange($event, 'department','selected', 'new')"
+								(removed)="onSelectDepartmentChange($event, 'department', 'deselected', 'new')"
+								(ngModel)="replace.department_id"
+								[ngModel]="replace.department_id | selectobject: departmentOptions['new']"
+								placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+								required>
+							</ng-select>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- END SECTION FILTER -->
+
+		 <!-- SECTION BUTTON -->
+		<section class="g-button clearfix text-center">
+			<button class="btn btn-style btn-search" type="button" [disabled]="!(filter.department_id && filter.enable_date )" (click)="onSearch()" id="btn_submit_form"><i class="fa fa-search"></i> 検索</button>
+			<button class="btn btn-style btn-save" type="button" [disabled]="onValidate()" (click)="modal.open('sm')"><i class="fa fa-floppy-o"></i> 登録</button>
+			<button class="btn btn-style btn-clear" type="button" (click)="onClear()"><i class="fa fa-eraser"></i> クリア</button>
+			<a class="btn btn-style btn-back" [routerLink]="['/home']"><i class="fa fa-arrow-left"></i> 戻る</a>
+		</section>
+		<!-- END SECTION BUTTON -->
+	</form>
+
+	<!-- SECTION TABLE -->
+	<section class="g-table">
+		<table id="tbl-data" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">社員No</th>
+					<th class="text-center">ユーザID</th>
+					<th class="text-center">社員名</th>
+					<th class="text-center">役職</th>
+					<th class="text-center">事業本部</th>
+					<th class="text-center">事業部</th>
+					<th class="text-center">部門</th>
+					<th class="text-center">適用開始日</th>
+					<th class="text-center">適用終了日</th>
+					<th class="text-center">処理</th>
+				</tr>
+			</thead>
+		</table>
+	</section>
+	<!-- END SECTION TABLE -->
+</div>
+
+<modal #modal>
+	<modal-header [show-close]="true">
+		<h4>確認メッセージ</h4>
+	</modal-header>
+	<modal-body>
+		<section class="g-filter clearfix">
+			部署異動を行います、よろしいでしょうか？
+		</section>
+		<section class="g-button clearfix text-center">
+			<a class="btn btn-style btn-back" (click)="modal.close()"><i class="fa fa-times"></i> キャンセル</a>
+			<button class="btn btn-style btn-save" type="button" (click)="onSave()"><i class="fa fa-save"></i> 確認</button>
+		</section>
+	</modal-body>
+</modal>
+
+<modal #modalinfo>
+	<modal-header [show-close]="true">
+		<h4>ユーザー情報</h4>
+	</modal-header>
+	<modal-body>
+		<section class="g-filter clearfix">
+			<h2 class="s-title">■ 基本情報</h2>
+			<div class="g-row clearfix">
+				<div class="field clearfix w50">
+					<label>社員NO</label>
+					<div class="input-text">
+						<label class="bold">{{ user_info.staff_no }}</label>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>メールアドレス</label>
+					<div  class="input-text">
+						<label class="bold">{{ user_info.email }}</label>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="field clearfix w50">
+					<label>社員名</label>
+					<div  class="input-text">
+						<label class="bold">{{ user_info.fullname }}</label>
+					</div>
+				</div>
+
+				<div class="field clearfix w50">
+					<label>社員名(カナ)</label>
+					<div  class="input-text">
+						<label class="bold">{{ user_info.fullname_kana }}</label>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="field clearfix w50">
+					<label>ユーザID</label>
+					<div class="input-text">
+						<label class="bold">{{ user_info.user_id }}</label>
+					</div>
+				</div>
+
+				<div class="field clearfix w50">
+					<label>通貨</label>
+                    <div class="input-text">
+                        <label class="bold">{{ user_info.currency_name }}</label>
+	                </div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="field clearfix w50">
+                    <label for="">入社年月日</label>
+                    <div class="input-text">
+                        <label class="bold">{{ user_info.entry_date | formatdate }}</label>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label>退職年月日</label>
+                    <div class="input-text">
+                    	<label class="bold">{{ user_info.retirement_date | formatdate }}</label>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+			</div>
+		</section>
+		<div class="space30"></div>
+		<!-- SECTION TABLE -->
+		<section class="g-table">
+			<h2 class="s-title">所属部署情報</h2>
+			<div class="table-responsive">
+				<table id="tbl-data" class="tbl-data table table-standard table-striped table-hover" cellspacing="0">
+					<thead>
+						<tr>
+							<th>社員NO</th>
+							<th>社員名</th>
+							<th>会社名</th>
+							<th>事業本部</th>
+							<th>事業部</th>
+							<th class="text-center">部門</th>
+							<th class="text-center">役職</th>
+							<th class="text-center">適用開始日</th>
+							<th class="text-center">適用終了日</th>
+							<th class="text-center">兼任</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngIf="!user_info.user_department || user_info.user_department.length == 0">
+							<td class="text-center" colspan="10">{{ 'EMPTY_TABLE' | translate }}</td>
+						</tr>
+						<tr *ngFor="let obj of user_info.user_department; let i = index">
+							<td>{{ obj.staff_no }}</td>
+							<td>{{ obj.fullname }}</td>
+							<td>{{ obj.company_name }}</td>
+							<td>{{ obj.business_name }}</td>
+							<td>{{ obj.division_name }}</td>
+							<td>{{ obj.department_name }}</td>
+							<td>{{ obj.position_name }}</td>
+							<td class="text-center">{{ obj.enable_start_date | formatdate }}</td>
+							<td class="text-center">{{ obj.enable_end_date | formatdate }}</td>
+							<td class="text-center"><i *ngIf="obj.concurrent_post_flag == 1" class="fa fa-check-square-o"></i></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+		<section class="g-button clearfix text-center">
+			<button class="btn btn-style btn-back" type="button" (click)="modalinfo.close()"><i class="fa fa-times"></i> キャンセル</button>
+		</section>
+	</modal-body>
+</modal>

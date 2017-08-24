@@ -1,0 +1,26 @@
+<app-breadcrumb></app-breadcrumb>
+<section class="g-button clearfix text-right">
+    <a class="btn btn-style btn-back" [routerLink]="['/home']"><i class="fa fa-arrow-left"></i> 戻る</a>
+</section>
+<div class="log-page pt20" *ngIf="no_data==false">
+    <div class="content-his">
+        <div class="border-his clearfix">
+            <div class="his-item" *ngFor="let notify of notifies">
+                <div class="year" *ngIf="notify._date">{{notify.date}}</div>
+                <img class="point" src="assets/img/point-his.png" alt="">
+                <img class="ar" src="assets/img/ar-his.png" alt="">
+                <div class="text">
+                    <div class="year-mb">{{notify.date}}</div>
+                    <h3 class="log-title">■ <b class="bold">【{{notice_type[notify.type]}}】</b> {{notify.title}}</h3>
+                    <div class="log-content mt15" [innerHTML]="notify.content"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="his-more text-center" *ngIf="checkLength()">※過去のお知らせは<a (click)="onLoadData()">こちら</a></h4>
+    <div class="space30"></div>
+</div>
+<div class="data-is-empty mt15 text-center" *ngIf="no_data">
+    {{ 'EMPTY_TABLE' | translate }}
+</div>

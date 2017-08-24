@@ -1,0 +1,34 @@
+<h2 class="s-title">申請内容</h2>
+<section class="g-dynamic-info clearfix">
+	<div class="g-row clearfix">
+		<div class="field clearfix w100">
+			<label>先方社名 <span class="note">*</span></label>
+			<div [class.has-error]="!other_company_name.value">
+				<input type="text" name="other_company_name" class="form-control" [(ngModel)]="Item.other_company_name" #other_company_name="ngModel">
+				<span *ngIf="(is_draft_validated || other_company_name?.dirty) && !other_company_name.value" class="error">{{ 'VALIDATE.required' | translate }}</span>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>先方参加者氏名 <span class="note">*</span></label>
+			<div [class.has-error]="!other_company_participant_name.value">
+				<input type="text" name="other_company_participant_name" [(ngModel)]="Item.other_company_participant_name" #other_company_participant_name="ngModel" class="form-control">
+				<span *ngIf="(is_draft_validated || other_company_participant_name?.dirty) && !other_company_participant_name.value" class="error">{{ 'VALIDATE.required' | translate }}</span>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>当社参加者氏名 <span class="note">*</span></label>
+			<div [class.has-error]="!our_company_participant_name.value">
+				<input type="text" name="our_company_participant_name" [(ngModel)]="Item.our_company_participant_name" #our_company_participant_name="ngModel" class="form-control">
+				<span *ngIf="(is_draft_validated || our_company_participant_name?.dirty) && !our_company_participant_name.value" class="error">{{ 'VALIDATE.required' | translate }}</span>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>参加人数合計 <span class="note">*</span></label>
+			<div [class.has-error]="!participant_num.value">
+				<input type="text" name="participant_num" class="form-control format_number" [(ngModel)]="Item.participant_num" (keyup)="Item.participant_num = $event.target.value" #participant_num="ngModel">
+				<span *ngIf="(is_draft_validated || participant_num?.dirty) && !participant_num.value" class="error">{{ 'VALIDATE.required' | translate }}</span>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="space30"></div>

@@ -1,0 +1,192 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<h2 class="s-title">警告閾値設定</h2>
+	<section class="g-table-button text-right">
+		<button class="btn btn-style btn-add" type="button" (click)="onOpenFormNotice()"><i class="fa fa-plus"></i>&nbsp;追加</button>
+	</section>
+	<section class="g-table clearfix">
+		<table id="tbl-notice_fee" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">メニュー名</th>
+					<th class="text-center">警告閾値金額</th>
+					<th class="text-center" colspan="2">編集</th>
+				</tr>
+			</thead>
+		</table>
+	</section>
+
+	<h2 class="s-title">税率設定</h2>
+	<section class="g-table-button text-right">
+		<button class="btn btn-style btn-add" type="button" (click)="onOpenFormTax()"><i class="fa fa-plus"></i>&nbsp;追加</button>
+	</section>
+	<section class="g-table clearfix">
+		<table id="tbl-tax" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">税率</th>
+					<th class="text-center">施行開始日</th>
+					<th class="text-center">施行終了日</th>
+					<th class="text-center" colspan="2">編集</th>
+				</tr>
+			</thead>
+		</table>
+	</section>
+
+	<h2 class="s-title">通貨設定</h2>
+	<section class="g-table-button text-right">
+		<button class="btn btn-style btn-add" type="button" (click)="onOpenFormCurrency()"><i class="fa fa-plus"></i>&nbsp;追加</button>
+	</section>
+	<section class="g-table clearfix">
+		<table id="tbl-currency" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">通貨名</th>
+					<th class="text-center">通貨名(英)</th>
+					<th class="text-center">単位∟</th>
+					<th class="text-center" colspan="2">編集</th>
+				</tr>
+			</thead>
+		</table>
+	</section>				
+</div>
+<!-- modal notice -->
+<modal #modalnotice (onDismiss)="onCloseForm(fnotice,modalnotice)" [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">警告閾値設定画面</h4>
+    </modal-header>
+    <modal-body>
+    	<form #fnotice="ngForm" (ngSubmit)="onSubmitNotice(fnotice)" autocomplete="off">
+			<section class="g-filter clearfix">
+				<div class="g-row clearfix">
+					<div class="field clearfix w100">
+						<label for="">精算種別 <span class="note">*</span></label>
+						<div>
+				            <ng-select
+	                            name="m_request_menu_id"
+	                            [items]="requestMenuOption"
+	                            [active]="MNotice.m_request_menu_id | selectobject: requestMenuOption"
+	                            (selected)="onNgSelected($event, 'request_menu')"
+	                            (ngModel)="MNotice.m_request_menu_id"
+	                            [ngModel]="MNotice.m_request_menu_id | selectobject: requestMenuOption"
+	                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+	                            #m_request_menu_id
+	                            required>
+	                        </ng-select>
+							<span *ngIf="validateErrors.m_request_menu_id != null" class="error">{{ validateErrors.m_request_menu_id }}</span>
+					    </div>
+					</div>
+					<div class="field clearfix w100">
+						<label for="">閾値金額 <span class="note">*</span></label>
+						<div>
+							<input type="text" name="amount" [(ngModel)]="MNotice.amount" class="form-control format_number" (keyup)="MNotice.amount = $event.target.value" #amount="ngModel" id="form_amount" required>
+							<span *ngIf="(amount?.dirty || amount?.touched) && amount?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+						</div>
+					</div>
+	            </div>
+	        </section>
+	        <section class="g-button clearfix text-center">
+	        	<button class="btn btn-style btn-save" [disabled]="!fnotice.valid" type="submit"><i class="fa fa-save"></i> 確認</button>
+	        	<button class="btn btn-style btn-back" type="button" (click)="onCloseForm(fnotice,modalnotice)"><i class="fa fa-arrow-left"></i> 閉じる</button>
+	        </section>
+        </form>
+    </modal-body>
+</modal>
+<!-- modal tax -->
+<modal #modaltax (onDismiss)="onCloseForm(ftax,modaltax)" [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">税率設定</h4>
+    </modal-header>
+    <modal-body>
+    	<form #ftax="ngForm" (ngSubmit)="onSubmitTax(ftax)">
+	        <section class="g-filter clearfix">
+	            <div class="g-row clearfix">
+	            	<div class="field clearfix w100">
+	            		<label for="">税率 <span class="note">*</span></label>
+	            		<div>
+	                    	<input type="text" name="value" [(ngModel)]="MTax.value" class="form-control format_number" (keyup)="MTax.value = $event.target.value" #value="ngModel" required>
+	                    	<span *ngIf="(value?.dirty || value?.touched) && value?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					    </div>
+	            	</div>
+	            	<div class="field clearfix w50">
+	            		<label for="">施行開始日 <span class="note">*</span></label>
+	            		<div>
+	            			<div class="input-group">
+		            			<input type="text" name="start_date" [ngModel]="MTax.enable_start_date | formatdate" (ngModelChange)="MTax.enable_start_date = $event" #start_date (blur)="MTax.enable_start_date = start_date.value" class="form-control daterange-single" required>
+								<span class="input-group-addon"><i class="icon-calendar"></i></span>
+							</div>
+							<span *ngIf="start_date?.dirty && start_date?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	            		</div>
+	            	</div>
+	            	<div class="field clearfix w50">
+	            		<label for="">施行終了日</label>
+	            		<div>
+	            			<div class="input-group">
+		            			<input type="text" name="end_date" [ngModel]="MTax.enable_end_date | formatdate" (ngModelChange)="onChange($event)" #end_date (blur)="onChange(end_date.value)" class="form-control daterange-single">
+								<span class="input-group-addon"><i class="icon-calendar"></i></span>
+	            			</div>
+	            		</div>
+	            	</div>
+	            </div>
+	        </section>
+	        <section class="g-button clearfix text-center">
+	        	<button class="btn btn-style btn-save" [disabled]="!ftax.valid" type="submit"><i class="fa fa-save"></i> 確認</button>
+	        	<button class="btn btn-style btn-back" type="button" (click)="onCloseForm(ftax,modaltax)"><i class="fa fa-arrow-left"></i> 閉じる</button>
+	        </section>
+        </form>
+    </modal-body>
+</modal>
+<!-- modal currency  -->
+<modal #modalcurrency (onDismiss)="onCloseForm(fcurrency,modalcurrency)" [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">通貨設定</h4>
+    </modal-header>
+    <modal-body>
+    	<form #fcurrency="ngForm" (ngSubmit)="onSubmitCurrency(fcurrency)">
+    		<section class="g-filter clearfix">
+    			<div class="g-row clearfix">
+	    			<div class="field clearfix w100">
+	            		<label for="">通貨名 <span class="note">*</span></label>
+	            		<div>
+	                    	<input type="text" name="name" [(ngModel)]="MCurrency.name" class="form-control" #name="ngModel" required>
+	                    	<span *ngIf="name?.dirty && name?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					    </div>
+	            	</div>
+	            	<div class="field clearfix w100">
+	            		<label for="">通貨名(英) <span class="note">*</span></label>
+	            		<div>
+	                    	<input type="text" name="name_e" [(ngModel)]="MCurrency.name_e" class="form-control" #name_e="ngModel" required>
+	                    	<span *ngIf="name_e?.dirty && name_e?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					    </div>
+	            	</div>
+	            	<div class="field clearfix w100">
+	            		<label for="">単位記号 <span class="note">*</span></label>
+	            		<div>
+	                    	<input type="text" name="symbol" [(ngModel)]="MCurrency.symbol" class="form-control" #symbol="ngModel" required>
+	                    	<span *ngIf="symbol?.dirty && symbol?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					    </div>
+	            	</div>
+	            </div>
+    		</section>
+    		<section class="g-button clearfix text-center">
+	        	<button class="btn btn-style btn-save" [disabled]="!fcurrency.valid" type="submit"><i class="fa fa-save"></i> 確認</button>
+	        	<button class="btn btn-style btn-back" type="button" (click)="onCloseForm(fcurrency,modalcurrency)"><i class="fa fa-arrow-left"></i> 閉じる</button>
+	        </section>
+    	</form>
+    </modal-body>
+</modal>
+<!-- modal confirm delete -->
+<modal #modaldelete>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            削除します、よろしいですか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back" (click)="modaldelete.close()"><i class="fa fa-times"></i> キャンセル</a>
+        	<button class="btn btn-style btn-save" type="button" (click)="onConfirmDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

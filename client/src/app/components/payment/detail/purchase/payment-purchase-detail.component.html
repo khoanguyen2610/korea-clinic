@@ -1,0 +1,27 @@
+<h2 class="s-title">購入明細</h2>
+<section class="g-table mb10">
+	<div class="table-responsive">
+		<table id="tbl-data" class="tbl-data table table-standard table-striped table-hover" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">購入日</th>
+					<th class="text-center">購入先</th>
+					<th class="text-center">購入品名</th>
+					<th class="text-center">金額</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="purchaseArray.length == 0">
+					<td class="text-center" colspan="6">{{ 'EMPTY_TABLE' | translate }}</td>
+				</tr>
+				<tr *ngFor="let obj of purchaseArray; let i = index;">
+					<td class="text-center">{{ obj.reception_date }}</td>
+					<td>{{ obj.reception_target }}</td>
+					<td>{{ obj.target_item }}</td>
+					<td class="text-right">{{ currency_symbol }} {{ obj.payments }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+<div class="space30"></div>

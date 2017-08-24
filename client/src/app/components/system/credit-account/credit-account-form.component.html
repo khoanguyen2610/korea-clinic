@@ -1,0 +1,90 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="proposal-create">
+    <h2 class="s-title">貸方勘定項目設定</h2>
+    <form  #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <section class="clearfix">
+            <div class="g-row clearfix">
+                <div class="field clearfix w50">
+                    <label for="">仕訳モード <span class="note">*</span></label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="karikata_name" [(ngModel)]="Item.karikata_name" #karikata_name="ngModel" class="form-control" required>
+                            <span *ngIf="karikata_name?.dirty && karikata_name?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w50">
+                    <label for="">貸方総勘定科目コード <span class="note">*</span></label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="karikata_sokanjokamoku_cd" [(ngModel)]="Item.karikata_sokanjokamoku_cd" #karikata_sokanjokamoku_cd="ngModel" class="form-control" required>
+                            <span *ngIf="karikata_sokanjokamoku_cd?.dirty && karikata_sokanjokamoku_cd?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">貸方補助科目コード <span class="note">*</span></label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="karikata_hojokamoku_cd" [(ngModel)]="Item.karikata_hojokamoku_cd" #karikata_hojokamoku_cd="ngModel" class="form-control" required>
+                            <span *ngIf="karikata_hojokamoku_cd?.dirty && karikata_hojokamoku_cd?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">貸方補助内訳科目コード</label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="karikata_hojouchiwakekamoku_cd" [(ngModel)]="Item.karikata_hojouchiwakekamoku_cd" #karikata_hojouchiwakekamoku_cd="ngModel" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">貸方取引先コード</label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="karikata_torihikisaki_cd" [(ngModel)]="Item.karikata_torihikisaki_cd" #karikata_torihikisaki_cd="ngModel" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">貸方税区分</label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="karikata_zei_kubun" [(ngModel)]="Item.karikata_zei_kubun" #karikata_zei_kubun="ngModel" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">貸方税込区分</label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="karikata_zeikomi_kubun" [(ngModel)]="Item.karikata_zeikomi_kubun" #karikata_zeikomi_kubun="ngModel" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">貸方分析コード1</label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="karikata_bunseki_cd1" [(ngModel)]="Item.karikata_bunseki_cd1" #karikata_bunseki_cd1="ngModel" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">備考</label>
+                      <div>
+                        <div class="input-filed">
+                            <input type="text" name="memo" [(ngModel)]="Item.memo" #memo="ngModel" class="form-control">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+        <section class="g-button clearfix text-center">
+            <button class="btn btn-style btn-save" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> 追加/更新</button>
+            <a class="btn btn-style btn-back" [routerLink]="['/system/credit-account']"><i class="fa fa-arrow-left"></i> 閉じる</a>
+        </section>
+    </form>
+</div>

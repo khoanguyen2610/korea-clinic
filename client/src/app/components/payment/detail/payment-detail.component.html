@@ -1,0 +1,362 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="proposal-detail">
+    <section class="g-proposal-func">
+        <div class="g-container">
+           <app-navigation-form [access_area]="access_area" [petition_id]="petition_id" [petition_type]="petition_type" [approval_status_id]="approval_status_id" [m_petition_status_id]="m_petition_status_id" [creator_id]="creator_id"></app-navigation-form>
+        </div>
+    </section>
+    <h2 class="s-title">申請概要</h2>
+    <section class="g-basic-info clearfix">
+        <div class="g-row clearfix">
+            <div class="field clearfix w100">
+                <label for="">起案番号</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ Item.code }}</label>
+                </div>
+            </div>
+             <div class="field clearfix w50">
+                <label>所属部門名称</label>
+                <div class="input-text">
+                    <label class="bold">{{ user_create_form.department_name }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label>所属部門コード</label>
+                <div class="input-text">
+                    <label class="bold">{{ user_create_form.department_code }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label>社員番号</label>
+                <div class="input-text">
+                    <label class="bold">{{ user_create_form.staff_no }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label>申請者</label>
+                <div class="input-text">
+                    <label class="bold">{{ user_create_form.fullname }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label>申請名称</label>
+                <div class="input-text">
+                    <label class="bold">{{ Item.request_menu_name }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label>申請日</label>
+                <div class="input-text">
+                    <label class="bold">{{ Item.date | formatdate }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w100" *ngIf="Item.t_request_traveling_expenses && Item.t_request_traveling_expenses.quote_t_request_code">
+                <label>引用元事前出張ID</label>
+                <div class="input-text">
+                    <label class="bold">{{ Item.t_request_traveling_expenses.quote_t_request_code }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label>件名</label>
+                <div class="input-text">
+                    <label class="bold">{{ Item.name }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w100" *ngIf="display_destination">
+                <label>目的地</label>
+                <div class="input-text">
+                    <label for="" class="bold" [innerHTML]="Item.destination | htmlentities | nl2br"></label>
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label>理由</label>
+                <div class="input-text">
+                    <label for="" class="bold" [innerHTML]="Item.reason | htmlentities | nl2br"></label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label>優先度</label>
+                <div class="input-text">
+                    <label class="bold">{{ Item.priority_flg }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">決裁経路変更</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ Item.change_route }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label for="">状況</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ (Item.m_petition_status_id == 10 || Item.m_petition_status_id == 11)?'最終承認':Item.m_petition_status_name }}</label>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="space30"></div>
+    <!-- Comment Area -->
+    <app-comment [item]="dataItem" [comment]="dataComment" (replied)="getReplied($event)"></app-comment>
+    <!-- End Comment Area -->
+    <!-- Form Detail -->
+    <payment-pre-travel-detail *ngIf="Item.m_request_menu_id == 2 || Item.m_request_menu_id == 3" [item]="t_request_traveling_expenses" [currency_symbol]="Item.currency_symbol"></payment-pre-travel-detail>
+
+    <payment-travel-detail *ngIf="Item.m_request_menu_id == 4 || Item.m_request_menu_id == 5" [item]="t_request_traveling_expenses" [currency_symbol]="Item.currency_symbol"></payment-travel-detail>
+
+    <payment-transport-detail *ngIf="Item.m_request_menu_id == 1 || Item.m_request_menu_id == 4 || Item.m_request_menu_id == 5" [transport]="transportArray" [currency_symbol]="Item.currency_symbol"></payment-transport-detail>
+
+    <payment-purchase-detail *ngIf="Item.m_request_menu_id == 6" [purchase]="purchaseArray" [currency_symbol]="Item.currency_symbol"></payment-purchase-detail>
+
+    <payment-dietary-detail *ngIf="Item.m_request_menu_id == 8 || Item.m_request_menu_id == 9" [item]="t_request_dietary" [purchase]="purchaseArray" [m_request_menu_id]="Item.m_request_menu_id" [currency_symbol]="Item.currency_symbol"></payment-dietary-detail>
+    <!-- End Form Detail -->
+
+    <!-- Form Amount -->
+    <ng-template [ngIf]="Item.m_request_menu_id != 2 && Item.m_request_menu_id != 3">
+        <h2 class="s-title">申請金額</h2>
+        <section>
+            <div class="g-row clearfix">
+                <div class="field clearfix w50">
+                    <label>【金額】</label>
+                    <div class="input-text">
+                        <label class="bold">{{ Item.currency_symbol }} {{ Item.amount | number }}</label>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label>【仮払金額】</label>
+                    <div class="input-text">
+                        <label class="bold">{{ Item.currency_symbol }} {{ Item.suspense_payments | number }}</label>
+                    </div>
+                </div>
+                <div class="field clearfix w100">
+                    <label>【精算金額】</label>
+                    <div class="input-text">
+                        <label class="bold">{{ Item.currency_symbol }} {{ Item.settlement_amount | number }}</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="space30"></div>
+    </ng-template>
+    <!-- End Form Amount -->
+
+    <!-- Divide Cost -->
+    <payment-cost-detail *ngIf="display_cost" [cost]="costArray" [currency_symbol]="Item.currency_symbol"></payment-cost-detail>
+    <!-- End Divide Cost -->
+
+	<!-- Section file upload -->
+    <section class="g-dynamic-info clearfix" *ngIf="uploader.queue.length || (Item.m_petition_status_id == '2' && Item.m_user_id == current_user_info.id)">
+        <div class="g-row clearfix">
+            <div class="clearfix">
+                <h2 class="g-title" style="float: left; padding-top: 10px; margin-bottom: 10px;">【添付資料注意事項】</h2>
+                <button *ngIf="Item.m_petition_status_id == '2' && Item.m_user_id == current_user_info.id" (click)="onUploadDialog()" class="btn btn-style btn-back" style="float: right; width: 130px; margin: 0px" type="button"><i class="fa fa-upload"></i> 添付資料追加</button>
+            </div>
+        </div>
+        <div class="g-row clearfix">
+            <div class="field clearfix w100">
+                <label for="">添付資料</label>
+                <div *ngIf="uploader.queue.length">
+                    <div class="uploader-files mb4">
+                        <div class="my-drop-zone">
+                            <ul class="uploader-files-in clearfix">
+                                <li class="file-item text-center" *ngFor="let item of uploader.queue; let i = index">
+                                    <div class="item">
+                                        <img src="assets/img/file.png" alt="">
+                                        <p>{{ item?.file?.name }}</p>
+                                        <div class="file-actions clearfix">
+                                            <a title="ダウンロード" *ngIf="item?.file?.is_download" (click)="onDownloadForm(item._file.id, 'form_attachment')" class="file-download"><i class="fa fa-download"></i></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Section file upload -->
+    <div class="space30"></div>
+    <!-- Approval List -->
+    <h2 class="s-title">本申請の決裁経路</h2>
+    <section class="g-table" *ngIf="!is_approval">
+        <div class="table-responsive">
+            <ul class="list-group-title">
+                <li class="clearfix">
+                    <div class="text-center" style="width: 5%;">No</div>
+                    <div class="text-center" style="width: 20%;">権限</div>
+                    <div class="text-center" style="width: 15%;">社員名</div>
+                    <div class="text-center" style="width: 15%;">役職</div>
+                    <div class="text-center" style="width: 45%;">所属</div>
+                </li>
+            </ul>
+            <ul *ngIf="dataList.length" class="list-group" style="margin-bottom: 0px;">
+                <li class="list-group-item clearfix" *ngIf="!dataList || dataList.length == 0">
+                    <div class="text-center" style="width: 100%">{{ 'EMPTY_TABLE' | translate }}</div>
+                </li>
+                <li *ngFor="let item of dataList; let i = index" class="list-group-item clearfix">
+                    <div class="text-center" style="width: 5%;">
+                        {{ i + 1 }}
+                    </div>
+                    <div style="width: 20%;">
+                        <span> {{ item.authority_name }} </span>
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.fullname }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div style="width: 45%;">
+                        {{ item.business_name }} - {{ item.division_name }} - {{ item.department_name }}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="g-table" *ngIf="is_approval">
+        <div class="table-responsive">
+            <ul class="list-group-title">
+                <li class="clearfix">
+                    <div class="text-center mobile_hidden" style="width: 5%;">No</div>
+                    <div class="text-center mobile_width_25 mobile_no_boder_left" style="width: 10%;">結果</div>
+                    <div class="text-center mobile_width_25" style="width: 10%;">権限</div>
+                    <div class="text-center mobile_width_25" style="width: 15%;">社員名</div>
+                    <div class="text-center mobile_hidden" style="width: 15%;">役職</div>
+                    <div class="text-center mobile_hidden" style="width: 25%;">所属</div>
+                    <div class="text-center mobile_hidden" style="width: 8%;">後閲</div>
+                    <div class="text-center mobile_width_25" style="width: 12%;">処理日時</div>
+                </li>
+            </ul>
+            <ul *ngIf="dataList.length" class="list-group" style="margin-bottom: 0px;">
+                <li class="list-group-item clearfix" *ngIf="!dataList || dataList.length == 0">
+                    <div class="text-center" style="width: 100%">{{ 'EMPTY_TABLE' | translate }}</div>
+                </li>
+                <li *ngFor="let item of dataList; let i = index" class="list-group-item clearfix">
+                    <div class="text-center mobile_hidden" style="width: 5%;">
+                        {{ i + 1 }}
+                    </div>
+                    <div class="mobile_width_25 mobile_no_boder_left" style="width: 10%;">
+                        {{ item.m_approval_status_name }}
+                    </div>
+                    <div class="mobile_width_25" style="width: 10%;">
+                        <span> {{ item.authority_name }} </span>
+                    </div>
+                    <div class="mobile_width_25" style="width: 15%;">
+                        {{ item.fullname }}
+                    </div>
+                    <div class="mobile_hidden" style="width: 15%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div class="mobile_hidden" style="width: 25%;">
+                        {{ item.business_name }} - {{ item.division_name }} - {{ item.department_name }}
+                    </div>
+                    <div class="mobile_hidden" style="width: 8%; text-align: center;">
+                        <button (click)="onWaitingConfirmDialog(item.m_user_id)" *ngIf="item.m_authority_id == '2' && item.m_approval_status_id == '1' && selected_index_user_id >= i && (dataList[selected_index_user_id].m_authority_id == '2' || dataList[selected_index_user_id].m_authority_id == '3')" type="button" class="btn btn-style" style="width: 50px;">後閲</button>
+                        <span *ngIf="item.m_authority_id == '2' && item.m_approval_status_id == '7'" style="display: inline-block; width: 25px; height: 25px; color: red; line-height: 25px; border: 1px solid red; text-align: center;">後</span>
+                    </div>
+                    <div class="text-center mobile_width_25" style="width: 12%;">
+                        {{ item.approval_datetime }}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="space30"></div>
+    <!-- End Approval List -->
+    <!-- Reference -->
+    <ng-template [ngIf]="dataPetition.length">
+        <h2 class="s-title">過去参照案件</h2>
+        <section class="g-table">
+            <div class="table-responsive">
+                <ul class="list-group-title">
+                    <li class="clearfix">
+                        <div class="text-center" style="width: 5%;">No</div>
+                        <div class="text-center" style="width: 35%;">起案番号</div>
+                        <div class="text-center" style="width: 60%;">権限</div>
+                    </li>
+                </ul>
+                <ul class="list-group" style="margin-bottom: 0px;">
+                    <li *ngFor="let item of dataPetition; let i = index" class="list-group-item clearfix">
+                        <div class="text-center" style="width: 5%;">
+                            {{ i + 1 }}
+                        </div>
+                        <div style="width: 35%;" class="text-center">
+                            <a [routerLink]="['/payment/detail', item.id]" [queryParams]="{previous_page: queryParams?.previous_page?queryParams?.previous_page:''}">{{ item.code }}</a>
+                        </div>
+                        <div style="width: 60%;">
+                            <span> {{ item.name }} </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <div class="space30"></div>
+    </ng-template>
+</div>
+
+<modal #modalWaitingConfirm>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            後閲します、よろしいでしょうか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back" (click)="modalWaitingConfirm.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onChangeApprovalUser()"><i class="fa fa-check"></i> 確認</button>
+        </section>
+    </modal-body>
+</modal>
+
+<modal #modalUpload (onDismiss)="onCloseUploadDialog()" [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">資料添付</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-dynamic-info clearfix">
+            <div class="g-row clearfix">
+                <div class="field clearfix w100">
+                    <label for="">添付資料</label>
+                    <div>
+                        <div class="uploader-files mb4">
+                            <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
+                                <div class="no-file" *ngIf="!uploader.queue.length">
+                                    <span>ファイルをドラッグ&ドロップ…</span>
+                                    <span></span>
+                                    <!-- drag & drop file example-->
+                                </div>
+                                <ul class="uploader-files-in clearfix">
+                                    <li class="file-item text-center" *ngFor="let item of uploader.queue; let i = index">
+                                        <div class="item">
+                                            <img src="assets/img/file.png" alt="">
+                                            <p>{{ item?.file?.name }}</p>
+                                            <div class="file-actions clearfix">
+                                                <a title="ダウンロード" *ngIf="item?.file?.is_download" (click)="onDownloadForm(item._file.id, 'form_attachment')" class="file-download"><i class="fa fa-download"></i></a>
+                                                <a *ngIf="item?.file?.area_upload != 'primary'" title="削除" class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="uploader">
+                            <input type="file" ng2FileSelect class="form-control" [uploader]="uploader" multiple (change)="onValidateFormFileType()" />
+                            <span class="filename">ファイルをドラッグ&ドロップ…</span>
+                            <span class="btn-uploader btn btn-default">ファイル選択 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="space30">
+            </div>
+        </section>
+
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back" (click)="onCloseUploadDialog()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onUploadProposalDetail()"><i class="fa fa-check"></i> 確認</button>
+        </section>
+
+    </modal-body>
+</modal>

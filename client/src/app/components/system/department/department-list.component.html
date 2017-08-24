@@ -1,0 +1,118 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<h2 class="s-title">部門管理一覧</h2>
+	<section class="g-filter clearfix">
+        <div class="g-row clearfix">
+            <div class="field clearfix w50">
+                <label for="">会社名</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="companyOptions"
+                        [active]="filter.m_company_id | selectobject: companyOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'company')"
+                        (removed)="onSelectFilterChange($event, 'company', 'deselected')"
+                        (ngModel)="filter.m_company_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="field clearfix w50">
+                <label for="">事業本部</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="businessOptions"
+                        [active]="filter.business_id | selectobject: businessOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'business')"
+                        (removed)="onSelectFilterChange($event, 'business', 'deselected')"
+                        (ngModel)="filter.business_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">事業部</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="divisionOptions"
+                        [active]="filter.division_id | selectobject: divisionOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'division')"
+                        (removed)="onSelectFilterChange($event, 'division', 'deselected')"
+                        (ngModel)="filter.division_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label for="">部門</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="departmentOptions"
+                        [active]="filter.department_id | selectobject: departmentOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'department')"
+                        (removed)="onSelectFilterChange($event, 'department', 'deselected')"
+                        (ngModel)="filter.department_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">適用開始日</label>
+                <div class="clearfix">
+                    <div class="input-group">
+                        <!--  [(ngModel)]="filter.from_date" #fromDate (blur)="filter.from_date = fromDate.value" -->
+                        <input type="text" name="enable_start_date" class="form-control daterange-single" 
+                            [(ngModel)]="filter.enable_start_date"  
+                            #enable_start_date 
+                            (blur)="filter.enable_start_date = enable_start_date.value">
+                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">適用終了日</label>
+                <div class="clearfix">
+                    <div class="input-group">
+                        <!--  [(ngModel)]="filter.from_date" #fromDate (blur)="filter.from_date = fromDate.value" -->
+                        <input type="text" name="enable_end_date" class="form-control daterange-single"
+                            [(ngModel)]="filter.enable_end_date"
+                            #enable_end_date 
+                            (blur)="filter.enable_end_date = enable_end_date.value">
+                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="g-button clearfix text-center">
+        <button class="btn btn-style btn-search" type="button1" (click)="onSearch()" id="btn_submit_form"><i class="fa fa-search"></i> 検索</button>
+        <button class="btn btn-style btn-clear" type="button" (click)="onReset()"><i class="fa fa-eraser"></i> クリア</button>
+        <a class="btn btn-style btn-back" [routerLink]="['/home']"><i class="fa fa-arrow-left"></i> 戻る</a>
+    </section>
+    <section class="g-table-button text-right">
+        <a class="btn btn-style btn-add" [routerLink]="['/system/department/create']"><i class="fa fa-plus"></i> 新規</a>
+    </section>
+	<section class="g-table">
+		<table id="tbl-data" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th>事業本部コード</th>
+					<th>事業本部名</th>
+					<th>事業部コード</th>
+					<th>事業部</th>
+					<th>部門コード</th>
+					<th>部門</th>
+                    <th>経路コード</th>
+					<th>使用有無</th>
+					<th>適用開始日</th>
+					<th>適用終了日</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</section>
+</div>

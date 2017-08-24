@@ -1,0 +1,86 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<h2 class="s-title">通知一覧</h2>
+	<form autocomplete="off">
+		<!-- SECTION FILTER -->
+		<section class="g-filter clearfix">
+			<div class="g-row clearfix">
+				<div class="field clearfix w100">
+					<label>通知日</label>
+					<div class="g-date-from-to input-medium clearfix">
+						<div class="input-group">
+							<input type="text" name="form_date" class="form-control daterange-single" [(ngModel)]="filter.from_date" #fromDate (blur)="filter.from_date = fromDate.value">
+							<span class="input-group-addon"><i class="icon-calendar"></i></span>
+						</div>
+						<div class="icon-date text-center">~</div>
+						<div class="input-group">
+							<input type="text" name="to_date" class="form-control daterange-single" [(ngModel)]="filter.to_date" #toDate (blur)="filter.to_date = toDate.value">
+							<span class="input-group-addon"><i class="icon-calendar"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="field clearfix w100">
+					<label>公開有無</label>
+					<div class="g-radio">
+						<label class="radio-inline" *ngFor="let obj of release_flg">
+							<input type="radio" name="release_flg" (click)="filter.release_flg = obj.value" [checked]="obj.value == filter.release_flg"> {{ obj.label }}
+                        	<div class="check"></div>
+						</label>
+					</div>
+				</div>
+				<div class="field clearfix w100">
+					<label>通知種別</label>
+					<div class="g-radio">
+						<label class="radio-inline" *ngFor="let obj of notice_type">
+							<input type="radio" name="type" (click)="filter.type = obj.value" [checked]="obj.value == filter.type"> {{ obj.label }}
+                        	<div class="check"></div>
+						</label>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- END SECTION FILTER -->
+
+		<!-- SECTION BUTTON -->
+		<section class="g-button clearfix text-center">
+			<button class="btn btn-style btn-search" type="button" (click)="onSearch()" id="btn_submit_form"><i class="fa fa-search"></i> 検索</button>
+			<button class="btn btn-style btn-clear" type="button" (click)="onReset()"><i class="fa fa-eraser"></i> クリア</button>
+			<a class="btn btn-style btn-back" [routerLink]="['/home']"><i class="fa fa-arrow-left"></i> 戻る</a>
+		</section>
+		<!-- END SECTION BUTTON -->
+	</form>
+	<section class="g-table-button text-right">
+		<a class="btn btn-style btn-add" [routerLink]="['/system/notify/create']"><i class="fa fa-plus"></i>&nbsp;追加</a>
+	</section>
+	<!-- SECTION TABLE -->
+	<section class="g-table">
+		<table id="tbl-data" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">通知日</th>
+					<th class="text-center">種別</th>
+					<th class="text-center">タイトル</th>
+					<th class="text-center" width="45%">概要</th>
+					<th class="text-center">公開有無</th>
+					<th class="text-center" colspan="2">編集</th>
+				</tr>
+			</thead>
+		</table>
+	</section>
+	<!-- END SECTION TABLE -->
+</div>
+
+<modal #modal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            削除します、よろしいですか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back" (click)="modal.close()">キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onConfirmDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

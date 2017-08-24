@@ -1,0 +1,430 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<h2 class="s-title">ユーザー情報</h2>
+	<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+		<section class="g-basic-info clearfix">
+			<div class="g-row clearfix">
+				<p class="form-sub-title mb5 mt5 ml5">■ 基本情報</p>
+
+				<div class="field clearfix w50">
+					<label for="">社員NO <span class="note">*</span></label>
+					<div>
+						<input [disabled]="(!current_user_info?.permission_system && !current_user_info?.permission_hr) || _params.method == 'update'" type="text" name="staff_no" [(ngModel)]="Item.staff_no" #staff_no="ngModel" class="form-control" required>
+						<span *ngIf="staff_no?.dirty && staff_no?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+						<span *ngIf="validateErrors.staff_no | json" class="error">{{validateErrors.staff_no | json}}</span>
+					</div>
+				</div>
+
+				<div class="field clearfix w50">
+					<label for="">メールアドレス</label>
+					<div>
+						<input [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr" type="text" name="email" [(ngModel)]="Item.email" #email="ngModel" class="form-control"
+						pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+						<span *ngIf="email?.dirty && email?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+						<span *ngIf="email?.dirty && email?.errors?.pattern" class="error">{{ 'VALIDATE.invalid_email' | translate }}</span>
+						<span *ngIf="validateErrors.email | json" class="error">{{validateErrors.email | json}}</span>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+
+				<div class="field clearfix w50">
+					<label for="">社員名 <span class="note">*</span></label>
+					<div>
+						<input [disabled]="(!current_user_info?.permission_system && !current_user_info?.permission_hr) || _params.method == 'update'" type="text" name="fullname" [(ngModel)]="Item.fullname" #fullname="ngModel" class="form-control" required>
+						<span *ngIf="fullname?.dirty && fullname?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					</div>
+				</div>
+
+				<div class="field clearfix w50">
+					<label for="">社員名(カナ) <span class="note">*</span></label>
+					<div>
+						<input [disabled]="(!current_user_info?.permission_system && !current_user_info?.permission_hr) || _params.method == 'update'" type="text" name="fullname_kana" [(ngModel)]="Item.fullname_kana" #fullname_kana="ngModel" class="form-control" required>
+						<span *ngIf="fullname_kana?.dirty && fullname_kana?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="field clearfix w50">
+					<label for="">ユーザID <span class="note">*</span></label>
+					<div>
+						<input [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr" type="text" name="user_id" [(ngModel)]="Item.user_id" #user_id="ngModel" class="form-control" required>
+						<span *ngIf="user_id?.dirty && user_id?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+						<span *ngIf="validateErrors.user_id | json" class="error">{{validateErrors.user_id | json}}</span>
+					</div>
+				</div>
+
+				<div class="field clearfix w50">
+					<label for="">通貨 <span class="note">*</span></label>
+                    <div class="input-select2">
+                    	<ng-select
+                            name="m_currency_id"
+                            [items]="currencyOptions"
+                            [active]="Item.m_currency_id | selectobject: currencyOptions"
+                            (selected)="onNgSelected($event, 'currency')"
+                            (removed)="onNgRemoved($event, 'currency')"
+                            (ngModel)="Item.m_currency_id"
+                            [ngModel]="Item.m_currency_id | selectobject: currencyOptions"
+                            [allowClear]="true"
+	                        [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                            #m_currency_id
+                            required>
+                        </ng-select>
+                        <span *ngIf="m_currency_id?.dirty && m_currency_id?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	                </div>
+				</div>
+				<div class="clearfix"></div>
+
+                <div class="field clearfix w50">
+                    <label for="">入社年月日 <span class="note">*</span></label>
+                    <div class="clearfix">
+                        <div class="input-group">
+                            <input [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr" type="text" name="entry_date" class="form-control daterange-single"
+                                [ngModel]="Item.entry_date | formatdate" (ngModelChange)="Item.entry_date = $event"
+                                #entry_date="ngModel" (blur)="onChangeStartDate($event)"
+                                required>
+                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                        </div>
+                        <span *ngIf="entry_date.errors?.maxDate" class="error">{{ 'VALIDATE.invalid_date' | translate }}</span>
+                    </div>
+                </div>
+                <div class="field clearfix w50">
+                    <label for="">退職年月日</label>
+                    <div class="clearfix">
+                        <div class="input-group">
+                            <input [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr" type="text" name="retirement_date" class="form-control daterange-single"
+                                [ngModel]="Item.retirement_date | formatdate" (ngModelChange)="Item.retirement_date = $event"
+                                #retirement_date="ngModel" (blur)="onChangeEndDate($event)">
+                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                        </div>
+                        <span *ngIf="retirement_date.errors?.minDate" class="error">{{ 'VALIDATE.invalid_date' | translate }}</span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <p class="form-sub-title mb5 mt5 ml5">■ 銀行情報</p>
+
+                <div class="field clearfix w50">
+                    <label for="">銀行選択</label>
+                    <div class="input-select2">
+                    	<ng-select
+                            name="m_bank_id"
+                            [items]="bankOptions"
+                            [active]="Item.m_bank_id | selectobject: bankOptions"
+                            (selected)="onNgSelected($event, 'bank')"
+                            (removed)="onNgRemoved($event, 'bank')"
+                            (ngModel)="Item.m_bank_id"
+                            [ngModel]="Item.m_bank_id | selectobject: bankOptions"
+                            [allowClear]="true"
+                            [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                            #m_bank_id>
+                        </ng-select>
+	                </div>
+                </div>
+
+                <div class="field clearfix w50">
+                    <label for="">銀行支店</label>
+                    <div class="input-select2">
+                    	<ng-select
+                            name="m_bank_branch_id"
+                            [items]="bankBranchOptions"
+                            [active]="Item.m_bank_branch_id | selectobject: bankBranchOptions"
+                            (selected)="onNgSelected($event, 'bank_branch')"
+                            (removed)="onNgRemoved($event, 'bank_branch')"
+                            (ngModel)="Item.m_bank_branch_id"
+                            [ngModel]="Item.m_bank_branch_id | selectobject: bankBranchOptions"
+                            [allowClear]="true"
+                            [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                            #m_bank_branch_id>
+                        </ng-select>
+	                </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="field clearfix w50">
+                    <label for="">口座番号</label>
+                    <div>
+						<input [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr" type="text" name="bank_account_no" [(ngModel)]="Item.bank_account_no" #bank_account_no="ngModel" class="form-control">
+					</div>
+                </div>
+
+                <div class="field clearfix w50">
+                    <label for="">口座種類</label>
+                    <div class="input-select2">
+                    	<ng-select
+                            name="bank_account_type_code"
+                            [items]="bank_type_code"
+                            [active]="Item.bank_account_type_code | selectobject: bank_type_code"
+                            (selected)="onNgSelected($event, 'bank_type_code')"
+                            (removed)="onNgRemoved($event, 'bank_type_code')"
+                            (ngModel)="Item.bank_account_type_code"
+                            [ngModel]="Item.bank_account_type_code | selectobject: bank_type_code"
+                            [allowClear]="true"
+                            [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                            #bank_account_type_code>
+                        </ng-select>
+	                </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="field clearfix w100">
+                    <label for="">名義人</label>
+                    <div>
+						<input [disabled]="!current_user_info?.permission_system && !current_user_info?.permission_hr" type="text" name="bank_account_holder" [(ngModel)]="Item.bank_account_holder" #bank_account_holder="ngModel" class="form-control">
+					</div>
+                </div>
+			</div>
+		</section>
+		<!-- Button Process Area -->
+	    <section class="g-button clearfix text-center">
+	        <button class="btn btn-style btn-save" [disabled]="!f.valid" type="submit" *ngIf="current_user_info?.permission_system || current_user_info?.permission_hr"><i class="fa fa-save"></i> 登録</button>
+	        <a [routerLink]="['/system/user']" class="btn btn-style btn-back"><i class="fa fa-arrow-left"></i> 閉じる</a>
+	    </section>
+	    <!-- Button Process Area -->
+	</form>
+	<h2 class="s-title">所属部署情報</h2>
+
+	<section class="g-table-button text-right" *ngIf="current_user_info?.permission_system || current_user_info?.permission_hr">
+		<a class="btn btn-style btn-add" (click)="onOpenConcurrent(null, 'create')"><i class="fa fa-plus"></i>&nbsp;追加</a>
+	</section>
+	<!-- SECTION TABLE -->
+	<section class="g-table">
+		<div class="table-responsive">
+			<table id="tbl-data" class="tbl-data table table-standard table-striped table-hover" cellspacing="0">
+				<thead>
+					<tr>
+						<th>社員NO</th>
+						<th>社員名</th>
+						<th>社員名(カナ)</th>
+						<th>会社名</th>
+						<th>事業本部</th>
+						<th>事業部</th>
+						<th class="text-center">部門</th>
+						<th class="text-center">役職</th>
+						<th class="text-center">適用開始日</th>
+						<th class="text-center">適用終了日</th>
+						<th class="text-center">兼任</th>
+						<th class="text-center" colspan="2" *ngIf="current_user_info?.permission_system || current_user_info?.permission_hr">処理</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngIf="!Item.user_department || Item.user_department.length == 0">
+						<td class="text-center" colspan="12">{{ 'EMPTY_TABLE' | translate }}</td>
+					</tr>
+					<tr *ngFor="let obj of Item.user_department; let i = index">
+						<td>{{ obj.staff_no }}</td>
+						<td>{{ obj.fullname }}</td>
+						<td>{{ obj.fullname_kana }}</td>
+						<td>{{ obj.company_name }}</td>
+						<td>{{ obj.business_name }}</td>
+						<td>{{ obj.division_name }}</td>
+						<td>{{ obj.department_name }}</td>
+						<td>{{ obj.position_name }}</td>
+						<td class="text-center">{{ obj.enable_start_date | formatdate }}</td>
+						<td class="text-center">{{ obj.enable_end_date | formatdate }}</td>
+						<td class="text-center"><i *ngIf="obj.concurrent_post_flag == 1" class="fa fa-check-square-o"></i></td>
+						<td class="text-center" *ngIf="current_user_info?.permission_system || current_user_info?.permission_hr"><a class="edit-record" title="編集" (click)="onOpenConcurrent(obj, 'update')"><i class="fa fa-pencil"></i></a></td>
+						<td class="text-center" *ngIf="current_user_info?.permission_system || current_user_info?.permission_hr"><a class="del-record" title="削除" (click)="onModalConfirmOpen(i)"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</div>
+<div class="space30"></div>
+
+<modal #modal (onDismiss)="onModalClose()" [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">項目選択</h4>
+    </modal-header>
+    <modal-body>
+    	<form #formModal="ngForm">
+	        <section class="g-filter clearfix">
+	            <div class="g-row clearfix">
+
+			        <div class="field w50">
+			            <label for="">社員NO <span class="note">*</span></label>
+		                <div>
+	                        <input type="text" name="staff_no" class="form-control"
+	                            [(ngModel)]="processConcurrent.staff_no"
+	                            #staff_no required>
+		                </div>
+			        </div>
+			        <div class="clearfix"></div>
+			        <div class="field w50">
+			            <label for="">社員名 <span class="note">*</span></label>
+		                <div>
+	                        <input type="text" name="fullname" class="form-control"
+	                            [(ngModel)]="processConcurrent.fullname"
+	                            #fullname required>
+		                </div>
+			        </div>
+			        <div class="field w50">
+			            <label for="">社員名(カナ) <span class="note">*</span></label>
+		                <div>
+	                        <input type="text" name="fullname_kana" class="form-control"
+	                            [(ngModel)]="processConcurrent.fullname_kana"
+	                            #fullname_kana required>
+		                </div>
+			        </div>
+			        <div class="clearfix"></div>
+
+	                <div class="field clearfix w50">
+			            <label for="">会社名</label>
+			            <div class="input-select2">
+			            	<ng-select
+		                        [items]="companyOptions"
+		                        [active]="processConcurrent.m_company_id | selectobject: companyOptions"
+		                        [allowClear]="true"
+		                        (selected)="onSelectDepartmentChange($event, 'company')"
+		                        (removed)="onSelectDepartmentChange($event, 'company', 'deselected')"
+		                        (ngModel)="processConcurrent.m_company_id"
+		                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+		                    </ng-select>
+			            </div>
+			        </div>
+			        <div class="clearfix"></div>
+			        <div class="field clearfix w50">
+			            <label for="">事業本部</label>
+			            <div class="input-select2">
+			            	<ng-select
+		                        [items]="businessOptions"
+		                        [active]="processConcurrent.business_id | selectobject: businessOptions"
+		                        [allowClear]="true"
+		                        (selected)="onSelectDepartmentChange($event, 'business')"
+		                        (removed)="onSelectDepartmentChange($event, 'business', 'deselected')"
+		                        (ngModel)="processConcurrent.business_id"
+		                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+		                    </ng-select>
+			            </div>
+			        </div>
+			        <div class="clearfix"></div>
+			        <div class="field clearfix w50">
+			            <label for="">事業部</label>
+			            <div class="input-select2">
+			                <ng-select
+		                        [items]="divisionOptions"
+		                        [active]="processConcurrent.division_id | selectobject: divisionOptions"
+		                        [allowClear]="true"
+		                        (selected)="onSelectDepartmentChange($event, 'division')"
+		                        (removed)="onSelectDepartmentChange($event, 'division', 'deselected')"
+		                        (ngModel)="processConcurrent.division_id"
+		                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+		                    </ng-select>
+			            </div>
+			        </div>
+			        <div class="clearfix"></div>
+			        <div class="field clearfix w50">
+			            <label for="">部門 <span class="note">*</span></label>
+			            <div class="input-select2">
+			                <ng-select
+			                	name="m_department_id"
+		                        [items]="departmentOptions"
+		                        [active]="processConcurrent.m_department_id | selectobject: departmentOptions"
+		                        [allowClear]="true"
+		                        (selected)="onSelectDepartmentChange($event, 'm_department')"
+		                        (removed)="onSelectDepartmentChange($event, 'm_department', 'deselected')"
+		                        (ngModel)="processConcurrent.m_department_id"
+		                        [ngModel]="processConcurrent.m_department_id | selectobject: departmentOptions"
+		                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+		                        required>
+		                    </ng-select>
+			                <span *ngIf="m_department_id?.dirty && m_department_id?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+			            </div>
+			        </div>
+			        <div class="clearfix"></div>
+			        <div class="field clearfix w50">
+			            <label for="">役職 <span class="note">*</span></label>
+			            <div class="input-select2">
+			                <ng-select
+			                	name="m_position_id"
+		                        [items]="positionOptions"
+		                        [active]="processConcurrent.m_position_id | selectobject: positionOptions"
+		                        [allowClear]="true"
+		                        (selected)="onNgSelected($event, 'posistion')"
+		                        (removed)="onNgRemoved($event, 'posistion')"
+		                        (ngModel)="processConcurrent.m_position_id"
+		                        [ngModel]="processConcurrent.m_position_id | selectobject: positionOptions"
+		                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+		                        required>
+		                    </ng-select>
+			                <span *ngIf="m_position_id?.dirty && m_position_id?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+			            </div>
+			        </div>
+			        <div class="field clearfix w50">
+			            <label for="">兼任</label>
+			            <div class="g-radio">
+	                        <label class="checkbox-inline">
+	                        	<!-- (click)="Item.level = 1" [checked]="1 == Item.level" [disabled]="_params.method == 'update'" -->
+	                            <input type="checkbox"
+	                            		name="concurrent_post_flag"
+	                            		value="true"
+	                            		#concurrent_post_flag
+	                            		(change)="processConcurrent.concurrent_post_flag = concurrent_post_flag.checked"
+	                            		[checked]="processConcurrent.concurrent_post_flag == true">
+	                            <div class="check"></div>
+	                        </label>
+	                    </div>
+			        </div>
+			        <div class="clearfix"></div>
+
+			        <div class="field clearfix w50">
+			            <label for="">適用開始日 <span class="note">*</span></label>
+		                <div class="clearfix">
+		                    <div class="input-group">
+		                        <input type="text" name="enable_start_date" class="form-control daterange-single"
+		                            [ngModel]="processConcurrent.enable_start_date | formatdate"
+		                            (ngModelChange)="processConcurrent.enable_start_date = $event"
+		                            #enable_start_date
+		                            (blur)="processConcurrent.enable_start_date = enable_start_date.value"
+		                        required>
+		                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+		                        <span *ngIf="enable_start_date?.dirty && enable_start_date?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+		                    </div>
+		                </div>
+			        </div>
+
+			        <div class="field clearfix w50">
+			            <label for="">適用終了日</label>
+		                <div class="clearfix">
+		                    <div class="input-group">
+		                        <input type="text" name="enable_end_date" class="form-control daterange-single"
+		                        	[disabled]="processConcurrent.concurrent_post_flag != true"
+		                            [ngModel]="processConcurrent.enable_end_date | formatdate"
+		                            (ngModelChange)="processConcurrent.enable_end_date = $event"
+		                            #enable_end_date
+		                            (blur)="processConcurrent.enable_end_date = enable_end_date.value">
+		                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+		                    </div>
+		                </div>
+			        </div>
+
+
+	            </div>
+	        </section>
+	        <section class="g-button clearfix text-center">
+	            <button class="btn btn-style btn-save" type="button" [disabled]="!formModal.valid" (click)="onSaveConcurrent()"><i class="fa fa-floppy-o"></i> 登録</button>
+	            <a class="btn btn-style btn-back" (click)="onModalClose()"><i class="fa fa-arrow-left"></i> 戻る</a>
+	        </section>
+	    </form>
+    </modal-body>
+</modal>
+
+<modal #confirm_modal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            項目を削除します、よろしいでしょうか。
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back" (click)="confirm_modal.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onConfirmDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

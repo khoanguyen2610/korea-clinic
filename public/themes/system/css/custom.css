@@ -1,0 +1,42 @@
+.content-history .full {display: none;}
+.content-history.read-full .full{
+	display: block;
+}
+.content-history.read-full .limit{
+	display: none;
+
+}
+
+.timeline::before, .timeline::after{
+	background-color: #ccc;
+    border-radius: 50%;
+    content: "";
+    height: 4px;
+    left: 50%;
+    margin-left: -2px;
+    position: absolute;
+    top: 0;
+    width: 4px;
+    z-index: -1;
+}
+.timeline.page-container{
+	z-index: 0;
+}
+
+/* Portal System */
+.dropzone .dz-preview .dz-details, .dropzone-previews .dz-preview .dz-details {
+    width: 480px;
+    height: 240px;
+}
+.dropzone .dz-preview .dz-details img, .dropzone-previews .dz-preview .dz-details img {
+    width: 480px;
+    height: 240px;
+}
+#dropzone_single {
+    text-align: center;
+}
+.list-img-thumb{
+    width: 60px;
+}
+
+.sel-lang {width: auto !important; display: inline-block !important; margin-right: 10px; position: relative; top: 5px; height: 40px; }

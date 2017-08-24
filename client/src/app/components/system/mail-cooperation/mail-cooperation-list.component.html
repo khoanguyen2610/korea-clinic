@@ -1,0 +1,45 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<h2 class="s-title">メール連携設定一覧</h2>
+	
+    <section class="g-table-button text-right">
+        <button class="btn btn-style btn-add" [routerLink]="['/system/mail-cooperation/create']"><i class="fa fa-plus"></i> 追加</button>
+
+    </section>
+	<section class="g-table">
+        <table id="tbl-data" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="text-center">社員No</th>
+                    <th class="text-center">社員名</th>
+                    <th class="text-center">会社名</th>
+                    <th class="text-center">事業本部</th>
+                    <th class="text-center">事業部</th>
+                    <th class="text-center">部門</th>
+                    <th class="text-center">役職</th>
+                    <th class="text-center">メニュー画面</th>
+                    <th class="text-center">判定</th>
+                    <th class="text-center">メール送信先アドレス</th>
+                    <th class="text-center" colspan="2">編集</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+    <div class="space30"></div>
+</div>
+
+<modal #modalConfirm>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            {{delete_fullname}}を削除します、よろしいでしょうか。
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back width120" (click)="modalConfirm.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

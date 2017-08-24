@@ -1,0 +1,45 @@
+<script src="assets/plugins/jquery-3.1.1/jquery-3.1.1.min.js"></script>
+<script>
+    var now = new Date().getTime();
+    var current_user_info = localStorage.getItem("vsvn_vws.current_user_info");
+    var user_session_start = localStorage.getItem('vsvn_vws.user_session_start');
+    var current_href = window.location.href;
+    var current_domain = window.location.origin;
+    var callback_uri = getParameterByName('callback_uri');
+    current_href = current_href.replace(current_domain, '');
+    
+    callback_uri = addhttp(callback_uri)
+
+    if(current_user_info && now - user_session_start <=  8*60*60*1000){ //8 hours
+        current_user_info = JSON.parse(current_user_info);
+        let res_param = {'vws_auth_id' : current_user_info.id,
+                        'auth_request' : callback_uri, 
+                        'oauth' : 1,
+                        't' : Date.now()
+                        }
+        window.location = callback_uri + '?' + $.param(res_param);    
+    }else{
+        window.location.href = current_domain + '/login?oauth=1&callback_uri=' + encodeURIComponent(callback_uri);
+    }
+
+    //get query param
+    function getParameterByName(name, url) {
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    //detect and add http
+    function addhttp(url) {
+        if (!/^(f|ht)tps?:\/\//i.test(url)) {
+          url = "http://" + url;
+        }
+       return url;
+    }
+</script>

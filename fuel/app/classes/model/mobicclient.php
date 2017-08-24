@@ -1,0 +1,51 @@
+<?php
+/**
+ * @Author: k_nguyen
+ * @Date:   2016-11-14 11:27:20
+ * @Last Modified by:   k_nguyen
+ * @Last Modified time: 2016-11-25 16:16:41
+ */
+class Model_MObicClient extends \Orm\Model {
+	protected static $_table_name = 'm_obic_client';
+	protected static $_primary_key = ['id'];
+    
+    protected static $_observers = array(
+        'Orm\\Observer_System' => array(
+                'events' => array('before_insert', 'before_save'),
+                'mysql_timestamp' => true,
+                'overwrite' => true)
+    );
+
+    public static function softDelete($pk, $attributes, $conditions = array()) {
+        $attributes = array_merge(array(
+                'deleted_date' => date('Y-m-d H:i:s'),
+                'deleted_user_id' => \Auth::get('id')
+        ), $attributes);
+        $Item = self::find($pk);
+        if($Item){
+            return $Item->set($attributes)->save();
+        }
+        return false;
+    }
+
+
+	/*============================================
+     * List Datatable
+     *============================================*/
+    public static function listData($arrParam = null, $options = null){
+        if($options['task'] == 'list-dbtable'){
+            $columns = [
+                            ['db' => 'SM.client_code', 'dt' => 0],
+                            ['db' => 'SM.client_type', 'dt' => 1],
+                            ['db' => 'SM.client_name', 'dt' => 2]
+                        ];
+            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*'];
+
+            $query = DB::select_array($colums)
+                         ->from([static::$_table_name, 'SM'])
+                         ->where('SM.item_status', '!=', 'delete');
+            $result = Vision_Db::datatable_query($query, $columns, $arrParam, $options);
+        }        
+        return $result;
+    }
+}

@@ -1,0 +1,34 @@
+<h2 class="s-title">部門負担※部門負担が発生した場合のみ</h2>
+<section class="g-table">
+	<div class="table-responsive">
+		<table id="tbl-data" class="tbl-data table table-standard table-striped table-hover" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">負担金額</th>
+					<th class="text-center">負担部門</th>
+					<th class="text-center">摘要</th>
+					<th class="text-center">(修正)負担金額</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="costArray.length == 0">
+					<td class="text-center" colspan="4">{{ 'EMPTY_TABLE' | translate }}</td>
+				</tr>
+				<tr *ngFor="let obj of costArray; let i = index;">
+					<td class="text-right">{{ currency_symbol }} {{ obj.divide_cost | number }}</td>
+					<td>{{ obj.department_name }}</td>
+					<td>{{ obj.description }}</td>
+					<td>
+						<div class="clearfix">
+							<div class="field-money">
+								<input type="text" name="cor_divide_cost" class="form-control format_number" [(ngModel)]="obj.cor_divide_cost" (blur)="onSetFee(obj,$event.target.value)" [readonly]="!modify">
+								<span class="i-money">{{ currency_symbol }}</span>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+<div class="space30"></div>

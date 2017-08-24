@@ -1,0 +1,1 @@
+<script> var language_translate = {"Reset your password is successfull. Please check your email!":"Reset your password is successfull. Please check your email JP!"}</script>

@@ -1,0 +1,12 @@
+{	
+	"lengthMenu":     "<span>Xem</span>_MENU_ mục",
+	"search":         "<span>Tìm:</span> _INPUT_",
+	"paginate": { "first": "Đầu", "last": "Cuối", "next": "&rarr;", "previous": "&larr;" },
+	"sProcessing":   "Đang xử lý...",
+	"sZeroRecords":  "Không tìm thấy dòng nào phù hợp",
+	"sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+	"sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
+	"sInfoFiltered": "(được lọc từ _MAX_ mục)",
+	"sInfoPostFix":  "",
+	"sUrl":          ""
+}

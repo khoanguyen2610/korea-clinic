@@ -1,0 +1,150 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="proposal-create">
+	<h2 class="s-title">メール連携設定</h2>
+	<form  #f="ngForm">
+    <section class="clearfix">
+	    <div class="g-row clearfix">
+	    	<div class="field clearfix w50">
+                <label for="">会社名</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="companyOptions"
+                        [active]="Item.m_company_id | selectobject: companyOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'company')"
+                        (removed)="onSelectFilterChange($event, 'company', 'deselected')"
+                        (ngModel)="Item.m_company_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="field clearfix w50">
+                <label for="">事業本部</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="businessOptions"
+                        [active]="Item.business_id | selectobject: businessOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'business')"
+                        (removed)="onSelectFilterChange($event, 'business', 'deselected')"
+                        (ngModel)="Item.business_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">事業部</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="divisionOptions"
+                        [active]="Item.division_id | selectobject: divisionOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'division')"
+                        (removed)="onSelectFilterChange($event, 'division', 'deselected')"
+                        (ngModel)="Item.division_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">部門</label>
+                <div class="input-select2">
+                    <ng-select
+                        [items]="departmentOptions"
+                        [active]="Item.department_id | selectobject: departmentOptions"
+                        [allowClear]="true"
+                        (selected)="onSelectFilterChange($event, 'department')"
+                        (removed)="onSelectFilterChange($event, 'department', 'deselected')"
+                        (ngModel)="Item.department_id"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">役職</label>
+                <div class="input-select2">
+                    <ng-select
+                        name="position_id"
+                        [items]="positionOptions"
+                        [active]="Item.position_id | selectobject: positionOptions"
+                        [allowClear]="true"
+                        (selected)="onNgSelected($event, 'posistion')"
+                        (removed)="onNgRemoved($event, 'posistion')"
+                        (ngModel)="Item.position_id"
+                        [ngModel]="Item.position_id | selectobject: positionOptions"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="field clearfix w50">
+                <label for="">名前 <span class="note">*</span></label>
+                <div class="input-select2">
+                    <ng-select
+                        name="m_user_id"
+                        [items]="userOptions"
+                        [active]="Item.m_user_id | selectobject: userOptions"
+                        (selected)="onNgSelected($event, 'user')"
+                        (ngModel)="Item.m_user_id"
+                        [ngModel]="Item.m_user_id | selectobject: userOptions"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                        required>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">メニュー画面 <span class="note">*</span></label>
+                <div class="input-medium input-select2">
+                    <ng-select
+                        name="menu_petition_id"
+                        [items]="menuOptions"
+                        [active]="Item.menu_petition_id | selectobject: menuOptions"
+                        (selected)="onNgSelected($event, 'menu')"
+                        (ngModel)="Item.menu_petition_id"
+                        [ngModel]="Item.menu_petition_id | selectobject: menuOptions"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                        required>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="field clearfix w50">
+                <label for="">判定 <span class="note">*</span></label>
+                <div class="input-select2">
+                    <ng-select
+                        name="m_approval_status_id"
+                        [items]="approvalStatusOptions"
+                        [active]="Item.m_approval_status_id | selectobject: approvalStatusOptions"
+                        (selected)="onNgSelected($event, 'approval_status')"
+                        (ngModel)="Item.m_approval_status_id"
+                        [ngModel]="Item.m_approval_status_id | selectobject: approvalStatusOptions"
+                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+                        required>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">メール送信先アドレス <span class="note">*</span></label>
+                <div class="clearfix">
+                    <div>
+
+                        <input type="text" name="to_email" [(ngModel)]="Item.to_email" #to_email="ngModel" class="form-control"
+					pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+					
+                        
+                    </div>
+                    <span *ngIf="to_email?.dirty && to_email?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+					<span *ngIf="to_email?.dirty && to_email?.errors?.pattern" class="error">{{ 'VALIDATE.invalid_email' | translate }}</span>
+                </div>
+            </div>
+	        
+	     </div>
+    </section>
+    <section class="g-button clearfix text-center">
+      	<button class="btn btn-style btn-save" [disabled]="!f.valid" (click)="onSave(f)"><i class="fa fa-save"></i> 追加/更新</button>
+     	<a class="btn btn-style btn-back" [routerLink]="['/system/mail-cooperation']"><i class="fa fa-arrow-left"></i> 閉じる</a>
+    </section>
+	</form>
+</div>

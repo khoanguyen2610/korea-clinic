@@ -1,0 +1,12 @@
+{	
+	"lengthMenu":     "_MENU_ <span>件表示</span>",
+	"search":         "<span>検索:</span> _INPUT_",
+	"paginate": { "first": "先頭", "last": "最終", "next": "&rarr;", "previous": "&larr;" },
+	"sProcessing":   "処理中...",
+	"sZeroRecords":  "データはありません。",
+	"sInfo":         " _TOTAL_ 件中 _START_ から _END_ まで表示",
+	"sInfoEmpty":    " 0 件中 0 から 0 まで表示",
+	"sInfoFiltered": "（全 _MAX_ 件より抽出）",
+	"sInfoPostFix":  "",
+	"sUrl":          ""
+}

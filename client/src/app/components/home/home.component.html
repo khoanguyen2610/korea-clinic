@@ -1,0 +1,147 @@
+<style type="text/css">
+    #tbl-data thead, #tbl-data tbody{
+        display: none;
+    }
+    .dataTable thead, .dataTable tbody{
+        display: table-row-group !important;
+    }
+</style>
+<div class="log text-center mt10" *ngIf="newest_notify">
+    <h2>【{{notify.date | formatdate}}】<b class="bold">【{{notice_type[notify.type]}}】</b> {{notify.title}} <a [routerLink]="['/notify-history']">(詳細)</a></h2>
+</div>
+<div class="main-page">
+    <section class="section section-1">
+        <div class="section-heading">
+            <h2 class="section-title">申請状況</h2>
+            <div class="heading-others" *ngIf="total_form_data > 0">
+                <a class="btn btn-more" [routerLink]="['/list-form']"><i class="fa fa-angle-double-right" aria-hidden="true"></i> もっと見る</a>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="box-loading" *ngIf="form_form_loading">
+                <div class="cssload"><span></span></div>
+            </div>
+            <table id="tbl-data" class="tbl-data responsive stripe cell-border" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="mobile_hidden">種別</th>
+                        <th>件名</th>
+                        <th class="mobile_hidden">作成日</th>
+                        <th class="mobile_hidden">最新状況</th>
+                        <th class="mobile_hidden">起案番号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of form_data">
+                        <td class="mobile_hidden">{{ item.menu_name }}</td>
+                        <td>
+                            <a
+                                [routerLink]="(item.petition_type == 1)?(item.m_petition_status_id == 1 ? ['/proposal/form/update', item.id] : ['/proposal/detail', item.id]):(item.m_petition_status_id == 1 ? ['/payment/form/update', item.id] : ['/payment/detail', item.id])"
+                            >{{ item.name }}
+                            </a>
+                        </td>
+                        <td class="text-center mobile_hidden">{{ item.date | formatdate}}</td>
+                        <td class="mobile_hidden">{{ (item.m_petition_status_id == 10 || item.m_petition_status_id == 11)?'最終承認':item.petition_status_name }}</td>
+                        <td class="text-center mobile_hidden">{{ item.code }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="section-footer text-right" *ngIf="total_form_data > 0">
+            <a class="total" [routerLink]="['/list-form']">計　<strong>{{ total_form_data }}</strong>　件</a>
+        </div>
+    </section>
+    <section class="section section-2 clearfix">
+        <div class="row">
+            <div class="col-md-6 mb30">
+                <div class="section-heading">
+                    <h2 class="section-title">決済承認依頼</h2>
+                    <div class="heading-others">
+                        <a class="btn btn-more" [routerLink]="['/management/list-form']" [queryParams]="more_query_param_form_count">
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> もっと見る
+                        </a>
+                    </div>
+                </div>
+                <div class="section-body">
+                    <div class="table-section">
+                        <table id="" class="table table-striped table-hover">
+                            <tbody>
+                                <tr *ngFor="let item of form_count_data">
+                                    <td>
+                                        <a [routerLink]="['/management/list-form']" [queryParams]="item.query_params">
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i> {{ item.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                       <a [routerLink]="['/management/list-form']" [queryParams]="item.query_params">
+                                            {{ item.total }} 件
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="form_count_data.length == 0 && !form_count_loading">
+                                    <td colspan="2" class="text-center">{{ 'EMPTY_TABLE' | translate }}</td>
+                                </tr>
+                                <tr *ngIf="form_count_loading">
+                                    <td colspan="2">
+                                        <div class="box-loading">
+                                            <div class="cssload"><span></span></div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb30">
+                <div class="section-heading">
+                    <h2 class="section-title">決済各種通知</h2>
+                    <div class="heading-others">
+                        <a class="btn btn-more" [routerLink]="['/management/list-form']" [queryParams]="more_query_param_form_status">
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> もっと見る
+                        </a>
+                    </div>
+                </div>
+                <div class="section-body">
+                    <div class="table-section">
+                        <table id="" class="table table-striped table-hover">
+                            <tbody>
+                                <tr *ngFor="let item of form_status_data">
+                                    <td>
+                                        <a [routerLink]="[item.route]" [queryParams]="item.query_params">
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i> {{ item.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                       <a [routerLink]="[item.route]" [queryParams]="item.query_params">
+                                            {{ item.total }} 件
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="form_status_data.length == 0 && !form_status_loading">
+                                    <td colspan="2" class="text-center">{{ 'EMPTY_TABLE' | translate }}</td>
+                                </tr>
+                                <tr *ngIf="form_status_loading">
+                                    <td colspan="2">
+                                        <div class="box-loading">
+                                            <div class="cssload"><span></span></div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="login-meeting-room" *ngIf="_Configuration.meetingroom_active">
+    <a href="{{meetingroom_login_api}}" target="_blank" title="">
+        <span>会議室システムログイン</span>
+        <img src="assets/img/logo-meeting-room.png" alt="">
+    </a>
+</div>

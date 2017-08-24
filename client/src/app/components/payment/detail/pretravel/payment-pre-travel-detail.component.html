@@ -1,0 +1,94 @@
+<h2 class="s-title">申請内容</h2>
+<section>
+	<div class="g-row clearfix">
+		<div class="field clearfix w100">
+			<label>【出張種別】</label>
+			<div class="input-text">
+				<label class="bold">{{ (item.business_trip_class == 1) ? '国内' : '海外' }} - {{ trip_area_name }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>【出張先】</label>
+			<div class="input-text">
+				<label class="bold">{{ item.business_trip_destination }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>【宿泊先】</label>
+			<div class="input-text">
+				<label class="bold">{{ item.accommodation }}</label>
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>【連絡先】</label>
+			<div class="input-text">
+				<label class="bold">{{ item.contact_address }}</label>
+			</div>
+		</div>
+		<div class="field-special clearfix w100">
+			<div class="field">
+				<label>【出発日】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.departure_date | formatdate }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label [ngStyle]="{'width': '110px'}">【交通機関】</label>
+				<div class="input-text" [ngStyle]="{'width': 'auto'}">
+					<label class="bold" *ngFor="let expense of expenseItemOption | label: item.departure_transportation_id" [ngStyle]="{'width': 'auto'}">{{ expense.label }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label>【時刻】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.departure_time }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label>【便名】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.departure_flight }}</label>
+				</div>	
+			</div>
+		</div>
+		<div class="field-special clearfix w100">
+			<div class="field">
+				<label>【到着日】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.end_date | formatdate }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label [ngStyle]="{'width': '110px'}">【交通機関】</label>
+				<div class="input-text" [ngStyle]="{'width': 'auto'}">
+					<label class="bold" *ngFor="let expense of expenseItemOption | label: item.end_transportation_id" [ngStyle]="{'width': 'auto'}">{{ expense.label }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label>【時刻】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.end_time }}</label>
+				</div>	
+			</div>
+			<div class="field">
+				<label>【便名】</label>
+				<div class="input-text">
+					<label class="bold">{{ item.end_flight }}</label>
+				</div>	
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>【備考】</label>
+			<div class="input-text">
+				<label class="bold" [innerHTML]="item.memo | htmlentities | nl2br"></label>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>【概算金額】</label>
+			<div class="input-text">
+				<label class="bold">{{ currency_symbol }} {{ (item.approximate_amount || 0) | number }}</label>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="space30"></div>

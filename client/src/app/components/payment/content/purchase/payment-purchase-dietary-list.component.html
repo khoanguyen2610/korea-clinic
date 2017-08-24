@@ -1,0 +1,91 @@
+<h2 class="s-title">飲食明細</h2>
+<section class="g-table-button text-right">
+	<button class="btn btn-style btn-add" type="button" (click)="onOpenFormPurchase(null,'create')"><i class="fa fa-plus"></i>&nbsp;追加</button>
+</section>
+<section class="g-table mb10">
+	<div class="table-responsive">
+		<table id="tbl-data" class="tbl-data table table-standard table-striped table-hover" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">使用日</th>
+					<th class="text-center">飲食店名</th>
+					<th class="text-center">税込金額</th>
+					<th class="text-center" colspan="2">編集</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="purchaseArray.length == 0">
+					<td class="text-center" colspan="5">{{ 'EMPTY_TABLE' | translate }}</td>
+				</tr>
+				<tr *ngFor="let obj of purchaseArray; let i = index;">
+					<td class="text-center">{{ obj.reception_date }}</td>
+					<td>{{ obj.reception_target }}</td>
+					<td class="text-right">{{ currency_symbol }} {{ obj.payments }}</td>
+					<td class="text-center"><a class="edit-record" title="編集" (click)="onOpenFormPurchase(i, 'update')"><i class="fa fa-pencil"></i></a></td>
+					<td class="text-center"><a class="del-record" title="削除" (click)="onOpenConfirm(i)"><i class="fa fa-trash"></i></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+<div class="space30"></div>
+
+<!-- Modal Purchase -->
+<modal #modal (onDismiss)="onCloseForm(f)" [backdrop]="'static'">
+	<modal-header [show-close]="true">
+		<h4 class="modal-title">飲食明細</h4>
+	</modal-header>
+	<modal-body>
+		<form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
+			<section class="g-filter clearfix">
+	            <div class="g-row clearfix">
+	            	<div class="field clearfix w50">
+	            		<label>使用日 <span class="note">*</span></label>
+	            		<div>
+	            			<div class="input-group">
+		            			<input type="text" name="reception_date" [ngModel]="Item.reception_date | formatdate" (ngModelChange)="Item.reception_date = $event" #reception_date (blur)="Item.reception_date = reception_date.value" class="form-control daterange-single" required>
+		            			<span class="input-group-addon"><i class="icon-calendar"></i></span>
+		            		</div>
+		            		<span *ngIf="reception_date?.dirty && reception_date?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	            		</div>
+	            	</div>
+	            	<div class="clearfix"></div>
+	            	<div class="field clearfix w100">
+	            		<label>飲食店名 <span class="note">*</span></label>
+	            		<div>
+	            			<input type="text" name="reception_target" [(ngModel)]="Item.reception_target" #reception_target="ngModel" class="form-control" required>
+	            			<span *ngIf="reception_target?.dirty && reception_target?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	            		</div>
+	            	</div>
+	            	<div class="field clearfix w100">
+	            		<label>税込金額 <span class="note">*</span></label>
+	            		<div class="field-money">
+	            			<input type="text" name="payments" [(ngModel)]="Item.payments" (keyup)="Item.payments = $event.target.value" #payments="ngModel" class="form-control format_number" required>
+	            			<span class="i-money">{{ currency_symbol }}</span>
+	            			<span *ngIf="payments?.dirty && payments?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	            		</div>
+	            	</div>
+	            </div>
+			</section>
+	        <section class="g-button clearfix text-center">
+	        	<button class="btn btn-style btn-save" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> 確認</button>
+	        	<button class="btn btn-style btn-back" type="button" (click)="onCloseForm(f)"><i class="fa fa-arrow-left"></i> 閉じる</button>
+	        </section>
+		</form>
+	</modal-body>
+</modal>
+
+<modal #modaldelete>
+	<modal-header [show-close]="true">
+		<h4>確認メッセージ</h4>
+	</modal-header>
+	<modal-body>
+        <section class="g-filter clearfix">
+            削除します、よろしいですか？
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back" (click)="modaldelete.close()"><i class="fa fa-times"></i> キャンセル</a>
+        	<button class="btn btn-style btn-save" type="button" (click)="onConfirmDelete()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

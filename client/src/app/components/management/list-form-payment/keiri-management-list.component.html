@@ -1,0 +1,221 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+	<h2 class="s-title">精算申請検索条件</h2>
+	<form autocomplete="off">
+		<!-- SECTION FILTER -->
+		<section class="g-filter clearfix">
+			<div class="g-row clearfix">
+				<div class="field clearfix w100">
+					<label>内容</label>
+					<div class="input-select2">
+						<ng-select
+							[items]="menuOptions"
+							[active]="filter.m_menu_id | selectobject: menuOptions"
+							[allowClear]="true"
+							(selected)="onNgSelected($event)"
+							(removed)="onNgRemoved($event)"
+							(ngModel)="filter.m_menu_id"
+							placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+						</ng-select>
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>申請No</label>
+					<div class="clearfix">
+						<input type="text" name="code" class="form-control" [(ngModel)]="filter.code">
+					</div>
+				</div>
+				<div class="field clearfix w50">
+					<label>申請日</label>
+					<div class="g-date-from-to clearfix">
+				        <div class="input-group">
+				            <input type="text" name="date_from" class="form-control daterange-single"
+		                        [(ngModel)]="filter.date_from"
+		                        #date_from
+		                        (blur)="filter.date_from = date_from.value">
+		                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+				        </div>
+				        <div class="icon-date text-center">~</div>
+				        <div class="input-group">
+				            <input type="text" name="date_to" class="form-control daterange-single"
+		                        [(ngModel)]="filter.date_to"
+		                        #date_to
+		                        (blur)="filter.date_to = date_to.value">
+		                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+				        </div>
+				    </div>
+				</div>
+				<div class="field clearfix w100">
+					<label>到着状況</label>
+					<div class="g-radio">
+						<label class="radio-inline label-w180" *ngFor="let item of receipt_arrival_options">
+							<input type="radio" name="receipt_arrival" value="true" (click)="filter.receipt_arrival = item.value" [checked]="item.value == filter.receipt_arrival"> {{ item.label }}
+		                    <div class="check"></div>
+		                </label>
+					</div>
+				</div>
+				<div class="field clearfix w100">
+					<label>領収書有無</label>
+					<div class="g-radio">
+						<label class="radio-inline label-w180" *ngFor="let item of receipt_flg_options">
+							<input type="radio" name="receipt_flg" value="true" (click)="filter.receipt_flg = item.value" [checked]="item.value == filter.receipt_flg"> {{ item.label }}
+		                    <div class="check"></div>
+		                </label>
+					</div>
+				</div>
+		        <div class="field clearfix w100">
+		            <label for="">状況</label>
+		            <div class="g-radio">
+		                <label class="checkbox-inline label-w180" *ngFor="let item of petition_status_options">
+							<input type="checkbox"  
+		                		name="m_petition_status_id"
+		                		value="true" 
+		                		#m_petition_status_id
+							    [checked]="statusCheck[item.value] == true"
+							    (change)="statusCheck[item.value] = m_petition_status_id.checked"> {{ item.label }}
+		                    <div class="check"></div>
+		                </label>
+		            </div>
+		        </div>
+		        <div class="field clearfix w50">
+		        	<label>件名</label>
+		        	<div class="clearfix">
+						<input type="text" name="name" class="form-control" [(ngModel)]="filter.name">
+		        	</div>
+		        </div>
+		        <div class="field clearfix w50">
+		        	<label>金額</label>
+		        	<div class="g-date-from-to clearfix">
+				        <div class="input-group">
+							<input type="text" name="amount_from" class="form-control" [(ngModel)]="filter.amount_from" [ngStyle]="{'border-radius': '4px'}">
+				        </div>
+						<div class="icon-date text-center">~</div>
+				        <div class="input-group">
+				        	<input type="text" name="amount_to" class="form-control" [(ngModel)]="filter.amount_to" [ngStyle]="{'border-radius': '4px'}">
+				        </div>
+		        	</div>
+		        </div>
+		        <div class="field clearfix w50">
+		    		<label>会社名</label>
+		    		<div class="input-select2">
+						<ng-select
+							[items]="companyOptions"
+							[active]="filter.m_company_id | selectobject: companyOptions"
+							[allowClear]="true"
+							(selected)="onSelectDepartmentChange($event, 'company')"
+							(removed)="onSelectDepartmentChange($event, 'company', 'deselected')"
+							(ngModel)="filter.m_company_id"
+							placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+						</ng-select>
+				    </div>
+		    	</div>
+		    	<div class="field clearfix w50">
+					<label>事業本部</label>
+					<div class="input-select2">
+		                <ng-select
+	                        [items]="businessOptions"
+	                        [active]="filter.business_id | selectobject: businessOptions"
+	                        [allowClear]="true"
+	                        (selected)="onSelectDepartmentChange($event, 'business')"
+	                        (removed)="onSelectDepartmentChange($event, 'business', 'deselected')"
+	                        (ngModel)="filter.business_id"
+	                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+	                    </ng-select>
+		            </div>
+				</div>
+				<div class="field clearfix w50">
+					<label>事業部</label>
+					<div class="input-select2">
+		                <ng-select
+	                        [items]="divisionOptions"
+	                        [active]="filter.division_id | selectobject: divisionOptions"
+	                        [allowClear]="true"
+	                        (selected)="onSelectDepartmentChange($event, 'division')"
+	                        (removed)="onSelectDepartmentChange($event, 'division', 'deselected')"
+	                        (ngModel)="filter.division_id"
+	                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+	                    </ng-select>
+		            </div>
+				</div>
+				<div class="field clearfix w50">
+					<label>部門</label>
+					<div class="input-select2">
+		                <ng-select
+	                        [items]="departmentOptions"
+	                        [active]="filter.m_department_id | selectobject: departmentOptions"
+	                        [allowClear]="true"
+	                        (selected)="onSelectDepartmentChange($event, 'm_department')"
+	                        (removed)="onSelectDepartmentChange($event, 'm_department', 'deselected')"
+	                        (ngModel)="filter.m_department_id"
+	                        placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+	                    </ng-select>
+		            </div>
+		        </div>
+		        <div class="field clearfix w50">
+		            <label for="">申請者</label>
+		            <div class="clearfix">
+		                <input type="text" name="fullname" class="form-control" [(ngModel)]="filter.fullname" >
+		            </div>
+		        </div>
+		        <div class="field clearfix w50">
+		            <label for="">社員番号</label>
+		            <div class="clearfix">
+		                <input type="text" name="staff_no" class="form-control" [(ngModel)]="filter.staff_no" >
+		            </div>
+		        </div>
+		    </div>
+		</section>
+		<!-- END SECTION FILTER -->
+
+        <!-- SECTION BUTTON -->
+		<section class="g-button clearfix text-center">
+			<button class="btn btn-style btn-search" type="button" (click)="onSearch()" id="btn_submit_form"><i class="fa fa-search"></i> 検索</button>
+			<button class="btn btn-style btn-clear" type="button" (click)="onReset()"><i class="fa fa-eraser"></i> クリア</button>
+			<a class="btn btn-style btn-back" [routerLink]="['/home']"><i class="fa fa-arrow-left"></i> 戻る</a>
+		</section>
+		<!-- END SECTION BUTTON -->
+	</form>
+
+	
+	<section class="g-button clearfix text-right">
+		<button class="btn btn-style btn-chart" type="button" (click)="onPrintPdf()"><i class="fa fa-file-pdf-o"></i> 一括印刷</button>
+		<button class="btn btn-style btn-chart" type="button" (click)="onExportExcel()"><i class="fa fa-file-excel-o"></i> 一覧出力</button>
+	</section>
+	<!-- SECTION TABLE -->
+	<section class="g-table">
+		<table id="tbl-data" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">
+						<div class="g-radio">
+	                        <label class="checkbox-inline">
+								<input type="checkbox" name="ckb-all" id="checkAll">
+								<div class="check"></div>
+	                        </label>
+	                    </div>
+	             	</th>
+	             	<th class="text-center" width="60px">申請日</th>
+					<th class="text-center" width="60">申請番号</th>
+					<th class="text-center">種別</th>
+					<th class="text-center">件名</th>
+					<th class="text-center">金額</th>
+					<th class="text-center">到着状況</th>
+					<th class="text-center">領収書</th>
+					<th class="text-center">申請者</th>
+					<th class="text-center">状況</th>
+					<th class="text-center">修正後金額</th>
+					<th class="text-center">最終処理者</th>
+					<th class="text-center">OBIC出力日</th>
+					<th class="text-center">FB出力日</th>
+					<th class="text-center">FB出力保留</th>
+	            </tr>
+	        </thead>
+		</table>
+	</section>
+	<!-- End Datatable -->
+	<section class="g-button clearfix text-right">
+		<button class="btn btn-style btn-chart" type="button" (click)="onPrintPdf()"><i class="fa fa-file-pdf-o"></i> 一括印刷</button>
+		<button class="btn btn-style btn-chart" type="button" (click)="onExportExcel()"><i class="fa fa-file-excel-o"></i> 一覧出力</button>
+	</section>
+</div>
+<div class="space30"></div>

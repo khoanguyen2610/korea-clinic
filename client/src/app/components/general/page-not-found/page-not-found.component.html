@@ -1,0 +1,10 @@
+<app-breadcrumb></app-breadcrumb> 
+<div class="other-page">
+    <div class="page-404 text-center mt30">
+        <h1 class="">404!</h1>
+        <h2 class="page-error-title">探しているページが見つかりません！</h2>
+        <span>無効なリンクをクリックしました、もしくは誤りのアドレスを入力しました。</span>
+        <br>
+        <a class="default ui-link" (click)="backPrevious()">前のページに戻る</a><a class="default ui-link" [routerLink]="['/home']">ホームページに戻る</a>
+    </div>
+</div>

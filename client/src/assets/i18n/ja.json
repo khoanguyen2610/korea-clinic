@@ -1,0 +1,25 @@
+{
+  "VALIDATE": {
+    "required": "この項目は必須入力です。",
+    "same_date": "この適用開始日は既に存在しています。",
+    "invalid_date": "開始日は終了日より大きいです。",
+    "min_length": "この項目は、:param:1 文字以上で入力して下さい。",
+    "max_length": "この項目は、:param:1 文字以下で入力して下さい。",
+    "exact_length": "この項目は、:param:1 文字で入力して下さい。",
+    "match_value": "この項目は、使用できない文字が含まれています。使用可能な文字 [:param:1] ",
+    "match_pattern": "この項目は、:param:2で入力して下さい。",
+    "match_field": "この項目は、:param:1 と異なっています。",
+    "valid_email": "この項目は メールの形式で入力して下さい。",
+    "valid_emails": "この項目に、有効でないメールアドレスが含まれています。",
+    "valid_url": "この項目は、有効なURLではありません。",
+    "valid_ip": "この項目は、有効なIPアドレスではありません。",
+    "numeric_min": "この項目には、:param:1 より大きい数値を入力して下さい。",
+    "numeric_max": "この項目には、:param:1 より小さい数値を入力して下さい。",
+    "valid_string": "この項目は:param:2で入力してください。",
+    "invalid_email": "メールアドレスの形式は正しくないです。",
+    "invalid_equal_password": "新しいパスワード(確認用) は一致しません。"
+  },
+  "SELECT_PLACEHOLDER": "ご選択ください。",
+  "SELECT_NO_RESULT": "データ無し。",
+  "EMPTY_TABLE": "データはありません。"
+}

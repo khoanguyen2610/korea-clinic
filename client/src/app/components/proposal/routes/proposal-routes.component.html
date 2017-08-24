@@ -1,0 +1,454 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="menu-master">
+    <div class="space"></div>
+    <section class="g-proposal-func">
+        <div class="g-container">
+            <div class="g-proposal-button">
+                <a class="btn-close-menu" href="#" title="">
+                    <div class="hamburger hamburger--spin js-hamburger">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="g-proposal-g-button text-center">
+                <button class="btn btn-style btn-save" (click)="onSave()" [disabled]="!dataList.length || !Item.m_menu_id">
+                    <i class="fa fa-save"></i> 決定
+                </button>
+                <button (click)="onBack(Item.id)" class="btn btn-style btn-back" type="button"><i class="fa fa-arrow-left"></i> 戻る</button>
+            </div>
+        </div>
+    </section>
+    <h2 class="s-title">申請概要</h2>
+    <section class="g-basic-info clearfix">
+        <div class="g-row clearfix">
+            <div class="field clearfix w100">
+                <label for="">起案番号</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ Item.code }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">所属部門名称</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ user_create_form.department_name }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">所属部門コード</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ user_create_form.department_code }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">社員番号</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ user_create_form.staff_no }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">申請者</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ user_create_form.fullname }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">申請名称</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ Item.menu_name }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">申請日</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ Item.date | formatdate }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label for="">件名</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ Item.name }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">優先度</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ Item.priority_flg }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w50">
+                <label for="">決裁経路変更</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ Item.change_route }}</label>
+                </div>
+            </div>
+            <div class="field clearfix w100">
+                <label for="">状況</label>
+                <div class="input-text">
+                    <label for="" class="bold">{{ (Item.m_petition_status_id == 10 || Item.m_petition_status_id == 11)?'最終承認':Item.m_petition_status_name }}</label>
+                </div>
+            </div>
+
+        </div>
+    </section>
+   <div class="space30"></div>
+   	<h2 class="s-title">本申請の決裁経路</h2>
+    <section class="g-table-button text-right">
+        <button class="btn btn-style btn-add" (click)="onOpenConcurrent()" [disabled]="!Item.m_menu_id"><i class="fa fa-plus"></i> 追加</button>
+
+    </section>
+    <div class="table-responsive">
+        <section class="g-table">
+
+            <ul class="list-group-title">
+                <li class="clearfix">
+                    <div class="text-center" style="width: 5%;">No</div>
+                    <div class="text-center" style="width: 10%;">決裁経路区分</div>
+                    <div class="text-center" style="width: 20%;">権限</div>
+                    <div class="text-center" style="width: 15%;">社員名</div>
+                    <div class="text-center" style="width: 15%;">役職</div>
+                    <div class="text-center" style="width: 25%;">所属</div>
+                    <div class="text-center" style="width: 10%;">部門</div>
+                </li>
+            </ul>
+
+            <ul *ngIf="dataList[1].length"  class="list-group"  dnd-sortable-container [dropZones]="['1']" [sortableData]="dataList[1]" style="margin-b ottom: 0px;">
+
+                <li  *ngFor="let item of dataList[1]; let i = index" class="list-group-item clearfix" dnd-sortable [sortableIndex]="i" [dragEnabled]="false">
+                    <div class="text-center" style="width: 5%;">
+                        {{ i + 1 }}
+                    </div>
+                    <div style="width: 10%;">
+                        {{ item.segment }}
+                    </div>
+                    <div style="width: 20%;">
+                        <select *ngIf="item.resource_data != 'system'" name="m_authority_id" class="form-control" [(ngModel)]="item.m_authority_id">
+                            <option *ngFor="let option of authorityOptions" value="{{ option.id }}">{{ option.text }}</option>
+                        </select>
+                        <span *ngIf="item.resource_data == 'system'"> {{ item.authority_name }} </span>
+                    </div>
+                    <div style="width: 15%;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.fullname }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div style="width: 25%;">
+                        {{ item.business_name }} - {{ item.division_name }}
+                    </div>
+
+                    <div class="text-center" style="width: 5%;">
+                        <a *ngIf="item.resource_data != 'system'" class="edit-record" id="btn_edit" title="編集" (click)="onOpenConcurrent(i, item)"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    <div class="text-center" style="width: 5%;">
+                        <a *ngIf="item.resource_data != 'system'" class="del-record" id="btn_delete" title="削除" (click)="onOpenModalConfirm(1, i, item.fullname)"><i class="fa fa-trash"></i></a>
+                    </div>
+                </li>
+
+            </ul>
+
+           <ul *ngIf="dataList[21].length"  class="list-group"  dnd-sortable-container [dropZones]="['21']" [sortableData]="dataList[21]" style="margin-bottom: 0px;" >
+
+                <li  *ngFor="let item of dataList[21]; let i = index" class="list-group-item clearfix" dnd-sortable [sortableIndex]="i" [dragEnabled]="false">
+                    <div class="text-center" style="width: 5%;">
+                        {{ i + 1 + dataList[1].length }}
+                    </div>
+                    <div style="width: 10%;">
+                        {{ item.segment }}
+                    </div>
+                    <div style="width: 20%;">
+                        <select *ngIf="item.resource_data != 'system'" name="m_authority_id" class="form-control" [(ngModel)]="item.m_authority_id" (ngModelChange)="onChangeAuthority(2, item, i)" [disabled]="item.m_approval_status_id">
+                            <option *ngFor="let option of authorityOptions" value="{{ option.id }}">{{ option.text }}</option>
+                        </select>
+                        <span *ngIf="item.resource_data == 'system'"> {{ item.authority_name }} </span>
+                    </div>
+                    <div style="width: 15%;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.fullname }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div style="width: 25%;">
+                        {{ item.business_name }} - {{ item.division_name }}
+                    </div>
+
+                    <div class="text-center" style="width: 5%;" >
+                        <a *ngIf="item.resource_data != 'system' && !item.m_approval_status_id" class="edit-record" id="btn_edit" title="編集" (click)="onOpenConcurrent(i, item)"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    <div class="text-center" style="width: 5%;" >
+                        <a *ngIf="item.resource_data != 'system' && !item.m_approval_status_id" class="del-record" id="btn_delete" title="削除" (click)="onOpenModalConfirm(2, i, item.fullname)"><i class="fa fa-trash"></i></a>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul *ngIf="dataList[22].length"  class="list-group"  dnd-sortable-container [dropZones]="['22']" [sortableData]="dataList[22]" style="margin-bottom: 0px;" >
+
+                <li  *ngFor="let item of dataList[22]; let i = index" class="list-group-item clearfix" dnd-sortable [sortableIndex]="i" style="cursor: move">
+                    <div class="text-center" style="width: 5%;">
+                        {{ i + 1 + dataList[1].length + dataList[21].length }}
+                    </div>
+                    <div style="width: 10%;">
+                        {{ item.segment }}
+                    </div>
+                    <div style="width: 20%;">
+                        <select *ngIf="item.resource_data != 'system'" name="m_authority_id" class="form-control" [(ngModel)]="item.m_authority_id" (ngModelChange)="onChangeAuthority(2, item, i)">
+                            <option *ngFor="let option of authorityOptions" value="{{ option.id }}">{{ option.text }}</option>
+                        </select>
+                        <span *ngIf="item.resource_data == 'system'"> {{ item.authority_name }} </span>
+                    </div>
+                    <div style="width: 15%;">
+                        <i class="fa fa-arrows"></i>&nbsp;&nbsp;&nbsp;{{ item.fullname }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div style="width: 25%;">
+                        {{ item.business_name }} - {{ item.division_name }}
+                    </div>
+
+                    <div class="text-center" style="width: 5%;">
+                        <a *ngIf="item.resource_data != 'system'" class="edit-record" id="btn_edit" title="編集" (click)="onOpenConcurrent(i, item)"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    <div class="text-center" style="width: 5%;">
+                        <a *ngIf="item.resource_data != 'system'" class="del-record" id="btn_delete" title="削除" (click)="onOpenModalConfirm(2, i, item.fullname)"><i class="fa fa-trash"></i></a>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul *ngIf="dataList[3].length"  class="list-group"  dnd-sortable-container [dropZones]="['3']" [sortableData]="dataList[3]" style="margin-bottom: 0px;">
+
+                <li  *ngFor="let item of dataList[3]; let i = index" class="list-group-item clearfix" dnd-sortable [sortableIndex]="i" [dragEnabled]="false">
+                    <div class="text-center" style="width: 5%;">
+                        {{ i + 1 + dataList[1].length + dataList[21].length + dataList[22].length }}
+                    </div>
+                    <div style="width: 10%;">
+                        {{ item.segment }}
+                    </div>
+                    <div style="width: 20%;">
+                        <select *ngIf="item.resource_data != 'system'" name="m_authority_id" class="form-control" [(ngModel)]="item.m_authority_id">
+                            <option *ngFor="let option of authorityOptions" value="{{ option.id }}">{{ option.text }}</option>
+                        </select>
+                        <span *ngIf="item.resource_data == 'system'"> {{ item.authority_name }} </span>
+                    </div>
+                    <div style="width: 15%;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.fullname }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div style="width: 25%;">
+                        {{ item.business_name }} - {{ item.division_name }}
+                    </div>
+
+                    <div class="text-center" style="width: 5%;">
+                        <a *ngIf="item.resource_data != 'system'" class="edit-record" id="btn_edit" title="編集" (click)="onOpenConcurrent(i, item)"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    <div class="text-center" style="width: 5%;">
+                        <a *ngIf="item.resource_data != 'system'" class="del-record" id="btn_delete" title="削除" (click)="onOpenModalConfirm(3, i, item.fullname)"><i class="fa fa-trash"></i></a>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul *ngIf="dataList[41].length"  class="list-group"  dnd-sortable-container [dropZones]="['41']" [sortableData]="dataList[41]" style="margin-bottom: 0px;"  [dragEnabled]="false">
+
+                <li  *ngFor="let item of dataList[41]; let i = index" class="list-group-item clearfix" dnd-sortable [sortableIndex]="i" [dragEnabled]="false">
+                    <div class="text-center" style="width: 5%;">
+                        {{ i + 1 + dataList[1].length + dataList[21].length + dataList[22].length + dataList[3].length}}
+                    </div>
+                    <div style="width: 10%;">
+                        {{ item.segment }}
+                    </div>
+                    <div style="width: 20%;">
+                        <select *ngIf="item.resource_data != 'system'" name="m_authority_id" class="form-control" [(ngModel)]="item.m_authority_id" (ngModelChange)="onChangeAuthority(4, item, i)" [disabled]="item.m_approval_status_id">
+                            <option *ngFor="let option of authorityOptions" value="{{ option.id }}">{{ option.text }}</option>
+                        </select>
+
+                        <span *ngIf="item.resource_data == 'system'"> {{ item.authority_name }} </span>
+                    </div>
+                    <div style="width: 15%;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.fullname }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div style="width: 25%;">
+                        {{ item.business_name }} - {{ item.division_name }}
+                    </div>
+
+                    <div class="text-center" style="width: 5%;" >
+                        <a *ngIf="item.resource_data != 'system' && !item.m_approval_status_id" class="edit-record" id="btn_edit" title="編集" (click)="onOpenConcurrent(i, item)"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    <div class="text-center" style="width: 5%;" >
+                        <a *ngIf="item.resource_data != 'system' && !item.m_approval_status_id" class="del-record" id="btn_delete" title="削除" (click)="onOpenModalConfirm(4, i, item.fullname)"><i class="fa fa-trash"></i></a>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul *ngIf="dataList[42].length"  class="list-group"  dnd-sortable-container [dropZones]="['42']" [sortableData]="dataList[42]" style="margin-bottom: 0px;"  >
+
+                <li  *ngFor="let item of dataList[42]; let i = index" class="list-group-item clearfix" dnd-sortable [sortableIndex]="i" style="cursor: move" >
+                    <div class="text-center" style="width: 5%;">
+                        {{ i + 1 + dataList[1].length + dataList[21].length + dataList[22].length + dataList[3].length  + dataList[41].length}}
+                    </div>
+                    <div style="width: 10%;">
+                        {{ item.segment }}
+                    </div>
+                    <div style="width: 20%;">
+                        <select *ngIf="item.resource_data != 'system'" name="m_authority_id" class="form-control" [(ngModel)]="item.m_authority_id" (ngModelChange)="onChangeAuthority(4, item, i)">
+                            <option *ngFor="let option of authorityOptions" value="{{ option.id }}">{{ option.text }}</option>
+                        </select>
+
+                        <span *ngIf="item.resource_data == 'system'"> {{ item.authority_name }} </span>
+                    </div>
+                    <div style="width: 15%;">
+                        <i class="fa fa-arrows"></i>&nbsp;&nbsp;&nbsp;{{ item.fullname }}
+                    </div>
+                    <div style="width: 15%;">
+                        {{ item.position_name }}
+                    </div>
+                    <div style="width: 25%;">
+                        {{ item.business_name }} - {{ item.division_name }}
+                    </div>
+
+                    <div class="text-center" style="width: 5%;">
+                        <a *ngIf="item.resource_data != 'system'" class="edit-record" id="btn_edit" title="編集" (click)="onOpenConcurrent(i, item)"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    <div class="text-center" style="width: 5%;">
+                        <a *ngIf="item.resource_data != 'system'" class="del-record" id="btn_delete" title="削除" (click)="onOpenModalConfirm(4, i, item.fullname)"><i class="fa fa-trash"></i></a>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+    </div>
+    <div class="space30"></div>
+</div>
+<modal #modal (onDismiss)="onModalClose()" [backdrop]="'static'">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">項目選択</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            <div class="g-row clearfix">
+                <div class="field clearfix w100">
+                    <label for="">会社名</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="modalCompanyOptions"
+                            [active]="processConcurrent.m_company_id | selectobject: modalCompanyOptions"
+                            [allowClear]="true"
+                            (selected)="onSelectDepartmentChangeModal($event, 'company')"
+                            (removed)="onSelectDepartmentChangeModal($event, 'company', 'deselected')"
+                            (ngModel)="processConcurrent.m_company_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">事業本部</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="modalBusinessOptions"
+                            [active]="processConcurrent.business_id | selectobject: modalBusinessOptions"
+                            [allowClear]="true"
+                            (selected)="onSelectDepartmentChangeModal($event, 'business')"
+                            (removed)="onSelectDepartmentChangeModal($event, 'business', 'deselected')"
+                            (ngModel)="processConcurrent.business_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">事業部</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="modalDivisionOptions"
+                            [active]="processConcurrent.division_id | selectobject: modalDivisionOptions"
+                            [allowClear]="true"
+                            (selected)="onSelectDepartmentChangeModal($event, 'division')"
+                            (removed)="onSelectDepartmentChangeModal($event, 'division', 'deselected')"
+                            (ngModel)="processConcurrent.division_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">部門</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="modalDepartmentOptions"
+                            [active]="processConcurrent.m_department_id | selectobject: modalDepartmentOptions"
+                            [allowClear]="true"
+                            (selected)="onSelectDepartmentChangeModal($event, 'department')"
+                            (removed)="onSelectDepartmentChangeModal($event, 'department', 'deselected')"
+                            (ngModel)="processConcurrent.m_department_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">役職</label>
+                    <div class="input-select2">
+                        <ng-select
+                            [items]="positionOptions"
+                            [active]="processConcurrent.m_position_id | selectobject: positionOptions"
+                            [allowClear]="true"
+                            (selected)="onNgSelected($event)"
+                            (removed)="onNgRemoved($event)"
+                            (ngModel)="processConcurrent.m_position_id"
+                            placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="field clearfix w100">
+                    <label for="">名前</label>
+                    <div class="input-group">
+                        <input type="text" name="fullname" class="form-control" [(ngModel)]="processConcurrent.fullname">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="g-button clearfix text-center">
+            <button class="btn btn-style btn-save" type="button" (click)="onSearchConcurrent()" id="btn_submit_form"><i class="fa fa-search"></i> 検索</button>
+            <a class="btn btn-style btn-back" (click)="onModalClose()"><i class="fa fa-arrow-left"></i> 閉じる</a>
+        </section>
+        <section class="g-table">
+            <table id="tbl-data-proposal-detail" class="tbl-data responsive cell-border" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>社員名</th>
+                        <th>役職</th>
+                        <th>事業本部</th>
+                        <th>事業部名</th>
+                        <th>部門名</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </modal-body>
+</modal>
+<modal #modalConfirm>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">確認メッセージ</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            {{ remove_item.fullname }}を削除します、よろしいでしょうか。
+        </section>
+        <section class="g-button clearfix text-center">
+            <a class="btn btn-style btn-back width120" (click)="modalConfirm.close()"><i class="fa fa-times"></i> キャンセル</a>
+            <button class="btn btn-style btn-save" type="button" (click)="onRemoveDataList()"><i class="fa fa-trash"></i> 削除</button>
+        </section>
+    </modal-body>
+</modal>

@@ -1,0 +1,347 @@
+<h2 class="s-title">申請内容</h2>
+<section class="g-basic-info clearfix">
+	<div class="g-row clearfix">
+		<div class="field clearfix w100">
+			<label>精算日</label>
+			<div>
+				<div class="input-filed">
+					<input type="text" name="settlement_date" [ngModel]="Item.settlement_date | formatdate" class="form-control input-small" readonly>
+				</div>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>出張先</label>
+			<div>
+				<input type="text" name="business_trip_destination" [(ngModel)]="Item.business_trip_destination" class="form-control">
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>宿泊先</label>
+			<div>
+				<input type="text" name="accommodation" [(ngModel)]="Item.accommodation" class="form-control">
+			</div>
+		</div>
+		<div class="field clearfix w50">
+			<label>連絡先</label>
+			<div>
+				<input type="text" name="contact_address" [(ngModel)]="Item.contact_address" class="form-control">
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>出張エリア <span class="note">*</span></label>
+			<div class="input-select2">
+				<div class="select-box select-box-1 hidden-xs-up"> <!-- Hide element -->
+					<ng-select
+						name="business_trip_class"
+	                    [items]="triptypeOption"
+						[active]="Item.business_trip_class | selectobject: triptypeOption"
+						[allowClear]="false"
+						(ngModel)="Item.business_trip_class"
+						[ngModel]="Item.business_trip_class | selectobject: triptypeOption"
+						placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+						required>
+	                </ng-select>
+                </div>
+				<div class="select-box select-box-2" style="margin-left: 0px" [style.width]="width">
+					<ng-select
+	                    name="m_trip_area_id"
+	                    [items]="tripareaOption"
+	                    [active]="Item.m_trip_area_id | selectobject: tripareaOption"
+	                    [allowClear]="false"
+	                    (selected)="onSetFee($event)"
+	                    (ngModel)="Item.m_trip_area_id"
+	                    [ngModel]="Item.m_trip_area_id | selectobject: tripareaOption"
+	                    placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+	                    #m_trip_area_id
+	                    required>
+                	</ng-select>
+                	<span *ngIf="is_draft_validated && !Item.m_trip_area_id" class="error">{{ 'VALIDATE.required' | translate }}</span>
+				</div>
+				<div *ngIf="Item.business_trip_class == 2" style="float: left; height: 34px; line-height: 34px; margin-left: 10px;">
+					<a (click)="modal.open('sm')">海外エリアリスト</a>
+				</div>
+			</div>
+		</div>
+		<div class="field-special clearfix w100">
+			<div class="field">
+				<label>出発日 <span class="note">*</span></label>
+				<div>
+					<div class="input-group" [class.has-error]="!departure_date.value">
+						<input type="text" name="departure_date" [ngModel]="Item.departure_date | formatdate" (ngModelChange)="Item.departure_date = $event" #departure_date (blur)="Item.departure_date = departure_date.value" class="form-control daterange-single">
+						<span class="input-group-addon"><i class="icon-calendar"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="field">
+				<label>交通機関 <span class="note">*</span></label>
+				<div class="input-select2">
+					<ng-select
+	                    name="departure_transportation_id"
+	                    [items]="expenseItemOption"
+						[active]="Item.departure_transportation_id | selectobject: expenseItemOption"
+	                    [allowClear]="false"
+	                    (selected)="onChangeTransport($event, 'departure_transportation_id')"
+	                    (ngModel)="Item.departure_transportation_id"
+						[ngModel]="Item.departure_transportation_id | selectobject: expenseItemOption"
+	                    placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+	                    required>
+	                </ng-select>
+				</div>
+			</div>
+			<div class="field">
+				<label>時刻 <span class="note">*</span></label>
+				<div [class.has-error]="!departure_time.value">
+					<input type="text" name="departure_time" [ngModel]="Item.departure_time" #departure_time="ngModel" (blur)="Item.departure_time = $event.target.value" class="form-control timepicker">
+				</div>
+			</div>
+			<div class="field">
+				<label>便名</label>
+				<div>
+					<input type="text" name="departure_flight" [(ngModel)]="Item.departure_flight" class="form-control">
+				</div>
+			</div>
+		</div>
+		<div class="field-special clearfix w100">
+			<div class="field">
+				<label>到着日 <span class="note">*</span></label>
+				<div>
+					<div class="input-group" [class.has-error]="!end_date.value">
+						<input type="text" name="end_date" [ngModel]="Item.end_date | formatdate" (ngModelChange)="onSetSettlementDate($event)" #end_date (blur)="onSetSettlementDate(end_date.value)" class="form-control daterange-single">
+						<span class="input-group-addon"><i class="icon-calendar"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="field">
+				<label>交通機関 <span class="note">*</span></label>
+				<div class="input-select2">
+					<ng-select
+	                    name="end_transportation_id"
+	                    [items]="expenseItemOption"
+	                    [active]="Item.end_transportation_id | selectobject: expenseItemOption"
+	                    [allowClear]="false"
+	                    (selected)="onChangeTransport($event, 'end_transportation_id')"
+	                    (ngModel)="Item.end_transportation_id"
+	                    [ngModel]="Item.end_transportation_id | selectobject: expenseItemOption"
+	                    placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+	                    required>
+	                </ng-select>
+				</div>
+			</div>
+			<div class="field">
+				<label>時刻 <span class="note">*</span></label>
+				<div [class.has-error]="!end_time.value">
+					<input type="text" name="end_time" [ngModel]="Item.end_time" #end_time="ngModel" (blur)="Item.end_time = $event.target.value" class="form-control timepicker">
+				</div>
+			</div>
+			<div class="field">
+				<label>便名</label>
+				<div>
+					<input type="text" name="end_flight" [(ngModel)]="Item.end_flight" class="form-control">
+				</div>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>備考</label>
+			<div>
+				<textarea name="memo" class="form-control input-long" [(ngModel)]="Item.memo"></textarea>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>報告事項</label>
+			<div>
+				<textarea name="report_memo" class="form-control input-long" [(ngModel)]="Item.report_memo"></textarea>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>日当</label>
+			<div class="field-scroll clearfix">
+				<div class="tbl-responsive" style="overflow-x: auto; overflow-y: hidden;">
+					<table class="min-width: 700px;">
+						<tr>
+							<td class="width120 field-money">
+								<input type="text" name="perdiem_daily" [ngModel]="Item.perdiem_daily | number" class="form-control" readonly>
+								<span class="i-money">{{ currency_symbol }}</span>
+							</td>
+							<td class="text-center width40">
+								<div class="pt8">x</div>
+							</td>
+							<td class="width150">
+								<input type="text" name="perdiem_days" [(ngModel)]="Item.perdiem_days" (blur)="Item.perdiem_days = $event.target.value; onChangeTravelDays($event.target.value)" class="form-control format_number_decimal">
+							</td>
+							<td class="text-center width40">
+								<div class="pt8">=</div>
+							</td>
+							<td class="width200 field-money">
+								<input type="text" name="perdiem_fee" [ngModel]="Item.perdiem_fee | number" class="form-control" readonly>
+								<span class="i-money">{{ currency_symbol }}</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>宿泊</label>
+			<div class="field-scroll clearfix">
+				<div class="tbl-responsive" style="overflow-x: auto;">
+					<table class="min-width: 700px;">
+						<tr>
+							<td class="width120 field-money">
+								<input type="text" name="lodging_daily" [ngModel]="Item.lodging_daily | number" (blur)="onChangeLodging($event.target.value)" #lodging_daily="ngModel" class="form-control format_number">
+								<span class="i-money">{{ currency_symbol }}</span>
+							</td>
+							<td class="text-center width40">
+								<div class="pt8">x</div>
+							</td>
+							<td class="width150">
+								<input type="text" name="lodging_days" [(ngModel)]="Item.lodging_days" (blur)="Item.lodging_days = $event.target.value; onChangeTravelDays($event.target.value)" class="form-control format_number_decimal">
+							</td>
+							<td class="text-center width40">
+								<div class="pt8">=</div>
+							</td>
+							<td class="width200 field-money">
+								<input type="text" name="lodging_fee" [ngModel]="Item.lodging_fee | number" class="     form-control" readonly>
+								<span class="i-money">{{ currency_symbol }}</span>
+							</td>
+							<td class="pl10">
+								<label class="checkbox-inline" style="padding-bottom: 0;">
+									<input type="checkbox" name="lodging_receipt_flg" [(ngModel)]="Item.lodging_receipt_flg" (change)="Item.lodging_receipt_flg = $event.target.checked">※領収書有はチェック
+									<div class="check" style="top: 0;"></div>
+								</label>
+								<br>
+                          		<span style="font-size: 12px;">※規定金額を超過した場合は、上長の事前承認を得て領収書を添付</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="field clearfix w100">
+			<label>その他</label>
+			<div class="field-scroll clearfix">
+                <div class="tbl-responsive">
+                	<table class="tbl-other w100" style="min-width: 700px">
+                		<tr>
+                			<td class="w20 input-select2">
+                				<ng-select
+				                    name="01_m_expense_item_id"
+				                    [items]="withdrawalOption"
+				                    [active]="Item01.m_expense_item_id | selectobject: withdrawalOption"
+				                    [allowClear]="false"
+									(selected)="Item01.m_expense_item_id = $event.id; onChangeExpenseOther()"
+									(ngModel)="Item01.m_expense_item_id"
+									[ngModel]="Item01.m_expense_item_id | selectobject: withdrawalOption"
+				                    placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+									[required]="required01"
+				                >
+				                </ng-select>
+                			</td>
+                			<td class="w40 pl10">
+                				<input type="text" name="01_description" [(ngModel)]="Item01.description" class="form-control" placeholder="用途を記入" (blur)="onChangeExpenseOther()">
+                			</td>
+                			<td class="w40 pl10 field-money has-padding">
+                				<input type="text" name="01_payments" [ngModel]="Item01.payments" class="form-control format_number" (blur)="Item01.payments = $event.target.value; onChangeOtherFee($event.target.value)" placeholder="金額を入力">
+                				<span class="i-money">{{ currency_symbol }}</span>
+                			</td>
+                		</tr>
+                		<tr *ngIf="required01">
+							<td colspan="3">
+								<span class="error">{{ 'VALIDATE.required' | translate }}</span>
+							</td>
+						</tr>
+                		<tr>
+                			<td class="w20 input-select2">
+                				<ng-select
+				                    name="02_m_expense_item_id"
+				                    [items]="withdrawalOption"
+				                    [active]="Item02.m_expense_item_id | selectobject: withdrawalOption"
+				                    [allowClear]="false"
+				                    (selected)="Item02.m_expense_item_id = $event.id; onChangeExpenseOther()"
+				                    (ngModel)="Item02.m_expense_item_id"
+				                    [ngModel]="Item02.m_expense_item_id | selectobject: withdrawalOption"
+				                    placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+				                    [required]="required02"
+				                >
+				                </ng-select>
+                			</td>
+                			<td class="w40 pl10">
+                				<input type="text" name="02_description" [(ngModel)]="Item02.description" class="form-control" placeholder="用途を記入" (blur)="onChangeExpenseOther()">
+                			</td>
+                			<td class="w40 pl10 field-money has-padding">
+                				<input type="text" name="02_payments" [ngModel]="Item02.payments" class="form-control format_number" (blur)="Item02.payments = $event.target.value; onChangeOtherFee($event.target.value)" placeholder="金額を入力">
+                				<span class="i-money">{{ currency_symbol }}</span>
+                			</td>
+                		</tr>
+                		<tr *ngIf="required02">
+							<td colspan="3">
+								<span class="error">{{ 'VALIDATE.required' | translate }}</span>
+							</td>
+						</tr>
+                		<tr>
+                			<td class="w20 input-select2">
+                				<ng-select
+									name="03_m_expense_item_id"
+									[items]="withdrawalOption"
+									[active]="Item03.m_expense_item_id | selectobject: withdrawalOption"
+									[allowClear]="false"
+				                    (selected)="Item03.m_expense_item_id = $event.id; onChangeExpenseOther()"
+				                    (ngModel)="Item03.m_expense_item_id"
+									[ngModel]="Item03.m_expense_item_id | selectobject: withdrawalOption"
+				                    placeholder="{{ 'SELECT_PLACEHOLDER' | translate }}"
+				                    [required]="required03"
+				                >
+				                </ng-select>
+                			</td>
+                			<td class="w40 pl10">
+                				<input type="text" name="03_description" [(ngModel)]="Item03.description" class="form-control" placeholder="用途を記入" (blur)="onChangeExpenseOther()">
+                			</td>
+                			<td class="w40 pl10 field-money has-padding">
+                				<input type="text" name="03_payments" [ngModel]="Item03.payments" class="form-control format_number" (blur)="Item03.payments = $event.target.value;
+                				onChangeOtherFee($event.target.value)" placeholder="金額を入力">
+                				<span class="i-money">{{ currency_symbol }}</span>
+                			</td>
+                		</tr>
+						<tr *ngIf="required03">
+							<td colspan="3">
+								<span class="error">{{ 'VALIDATE.required' | translate }}</span>
+							</td>
+						</tr>
+                	</table>
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+<div class="space30"></div>
+
+<modal #modal>
+	<modal-header [show-close]="true">
+		<h4 class="modal-title">海外エリアリスト</h4>
+	</modal-header>
+	<modal-body>
+		<section class="g-filter clearfix">
+			<div class="field clearfix w100">
+				<strong>海外エリアＡ</strong>
+				<br/>
+				<p>イギリス、フランス、アメリカ、スウェーデン、ノルウェー、スイス、デンマーク</p>
+				<p>フィンランド、カナダ、オーストラリア、シンガポール、イタリア、スペイン、</p>
+				<p>ドイツ、アラブ首長国連邦、ブラジル、ロシア</p>
+			</div>
+			<div class="field clearfix w100">
+				<strong>海外エリアB</strong>
+				<br/>
+				<p>韓国、中国、台湾、対象国A以外のEU諸国、南米諸国、アフリカ諸国</p>
+			</div>
+			<div class="field clearfix w100">
+				<strong>海外エリアC</strong>
+				<br/>
+				<p>対象国A、B以外の国</p>
+			</div>
+		</section>
+		<section class="g-button clearfix text-center">
+			<button class="btn btn-style btn-back" type="button" (click)="modal.close()" [ngStyle]="{'width':'auto'}">
+				<i class="fa fa-times"></i> キャンセル
+			</button>
+		</section>
+	</modal-body>
+</modal>
