@@ -28,4 +28,44 @@ class Model_Appointment extends \Orm\Model {
         return false;
     }
 
+	/*============================================
+     * List Datatable
+     *============================================*/
+    public static function listData($params = null, $options = null){
+        if($options['task'] == 'list-dbtable'){
+            $columns = [
+                            ['db' => 'SM.service_id', 'dt' => 0],
+                            ['db' => 'SM.fullname', 'dt' => 1],
+                            ['db' => 'SM.phone', 'dt' => 2],
+                            ['db' => 'SM.date', 'dt' => 3],
+                            ['db' => 'SM.time', 'dt' => 4]
+                        ];
+            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('S.title as service_title')];
+
+            $query = DB::select_array($colums)
+                         ->from([static::$_table_name, 'SM'])
+						 ->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
+                         ->where('SM.item_status', '!=', 'delete');
+
+            $result = Vision_Db::datatable_query($query, $columns, $params, $options);
+        }
+        return $result;
+    }
+
+	/*============================================
+     * Get detail informat based on primary key
+     *============================================*/
+	public static function getDetail($pk, $params = null, $option = null){
+		$select = ['SM.*', DB::expr('S.title as service_title')];
+
+		$query = \DB::select_array($select)
+			            ->from([self::$_table_name, 'SM'])
+						->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
+			            ->where('SM.id', '=', $pk)
+			            ->and_where('SM.item_status', '=', 'active');
+
+        $result = $query->as_object()->execute()->current();
+		return $result;
+	}
+
 }

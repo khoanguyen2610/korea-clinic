@@ -28,4 +28,46 @@ class Model_News extends \Orm\Model {
         return false;
     }
 
+	/*============================================
+     * List Datatable
+     *============================================*/
+    public static function listData($params = null, $options = null){
+        if($options['task'] == 'list-dbtable'){
+            $columns = [
+                            ['db' => 'SM.image', 'dt' => 0],
+                            ['db' => 'SM.news_category_id', 'dt' => 1],
+                            ['db' => 'SM.language_code', 'dt' => 2],
+                            ['db' => 'SM.title', 'dt' => 3],
+                            ['db' => 'SM.description', 'dt' => 4],
+                            ['db' => 'SM.date', 'dt' => 5]
+                        ];
+            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('NC.title as news_category_title')];
+
+            $query = DB::select_array($colums)
+                         ->from([static::$_table_name, 'SM'])
+						 ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+						 ->join(['news_category', 'NC'], 'left')->on('SM.news_category_id', '=', 'NC.id')
+                         ->where('SM.item_status', '!=', 'delete');
+
+            $result = Vision_Db::datatable_query($query, $columns, $params, $options);
+        }
+        return $result;
+    }
+
+	/*============================================
+     * Get detail informat based on primary key
+     *============================================*/
+	public static function getDetail($pk, $params = null, $option = null){
+		$select = ['SM.*', DB::expr('VL.name as language_name'), DB::expr('NC.title as news_category_title')];
+
+		$query = \DB::select_array($select)
+			            ->from([self::$_table_name, 'SM'])
+						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+						->join(['news_category', 'NC'], 'left')->on('SM.news_category_id', '=', 'NC.id')
+			            ->where('SM.id', '=', $pk)
+			            ->and_where('SM.item_status', '=', 'active');
+
+        $result = $query->as_object()->execute()->current();
+		return $result;
+	}
 }

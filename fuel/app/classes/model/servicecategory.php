@@ -28,4 +28,43 @@ class Model_ServiceCategory extends \Orm\Model {
         return false;
     }
 
+	/*============================================
+     * Get all record
+     *============================================*/
+	public static function getAll($params = null, $option = null){
+		$select = ['SM.*', DB::expr('VL.name as language_name')];
+
+		$query = \DB::select_array($select)
+			            ->from([self::$_table_name, 'SM'])
+						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+			            ->and_where('SM.item_status', '=', 'active');
+
+        $result = $query->as_object()->execute()->as_array();
+
+		//Recursive data
+		if(isset($params['recursive']) && $params['recursive']){
+			$recursive = new \Vision_Recursive();
+			$recursive->recursiveData($result, 0, $resResult, 1);
+            $result = $resResult;
+		}
+
+		return $result;
+	}
+
+
+	/*============================================
+     * Get detail informat based on primary key
+     *============================================*/
+	public static function getDetail($pk, $params = null, $option = null){
+		$select = ['SM.*', DB::expr('VL.name as language_name')];
+
+		$query = \DB::select_array($select)
+			            ->from([self::$_table_name, 'SM'])
+						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+			            ->where('SM.id', '=', $pk)
+			            ->and_where('SM.item_status', '=', 'active');
+
+        $result = $query->as_object()->execute()->current();
+		return $result;
+	}
 }

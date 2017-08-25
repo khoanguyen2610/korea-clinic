@@ -143,4 +143,10 @@ class Vision_Common {
 	    return $str;
 	}
 
+	/*=============================================
+	 * create random string
+	 *=============================================*/
+	public static function randomItemKey($params = null) {
+	    return strtotime('now') . rand(1, 99999);
+	}
 }

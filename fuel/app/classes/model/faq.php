@@ -28,4 +28,41 @@ class Model_Faq extends \Orm\Model {
         return false;
     }
 
+	/*============================================
+     * List Datatable
+     *============================================*/
+    public static function listData($params = null, $options = null){
+        if($options['task'] == 'list-dbtable'){
+            $columns = [
+                            ['db' => 'SM.title', 'dt' => 0],
+                            ['db' => 'SM.description', 'dt' => 1],
+                            ['db' => 'SM.language_code', 'dt' => 2]
+                        ];
+            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name')];
+
+            $query = DB::select_array($colums)
+                         ->from([static::$_table_name, 'SM'])
+						 ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+                         ->where('SM.item_status', '!=', 'delete');
+
+            $result = Vision_Db::datatable_query($query, $columns, $params, $options);
+        }
+        return $result;
+    }
+
+	/*============================================
+     * Get detail informat based on primary key
+     *============================================*/
+	public static function getDetail($pk, $params = null, $option = null){
+		$select = ['SM.*', DB::expr('VL.name as language_name')];
+
+		$query = \DB::select_array($select)
+			            ->from([self::$_table_name, 'SM'])
+						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+			            ->where('SM.id', '=', $pk)
+			            ->and_where('SM.item_status', '=', 'active');
+
+        $result = $query->as_object()->execute()->current();
+		return $result;
+	}
 }

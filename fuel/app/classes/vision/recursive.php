@@ -1,6 +1,39 @@
 <?php
 class Vision_Recursive {
-	
+
+	public function recursiveData($source,$parent = 0, &$newData, $level = 1){
+        if(count($source)>0){
+            foreach ($source as $key => $value){
+				// if($value['parents'] == $parents){
+				// 	$str = '- - ';
+				// 	if($value['level'] == 1){
+				// 		$value['name'] = '+ ' . $value['name'];
+				// 	}else{
+				// 		$value['name'] = '   ' . @str_repeat($str, $value['level']) . ' ' . $value['name'];
+				// 	}
+				//
+				// 	$arrData[] = $value;
+				//
+				// 	$newParents = $value['id'];
+				// 	unset($sourceArr[$key]);
+				// 	$this->recursiveData($sourceArr,$newParents, $arrData);
+				// }
+
+                if($value->parent == $parent){
+                    $str = '-';
+                    if($value->level == $level){
+                        $value->title = '+ ' . $value->title;
+                    }else{
+                        $value->title = '  ' . @str_repeat($str, $value->level) . ' ' . $value->title;
+                    }
+                    $newData[] = $value;
+                    unset($source[$key]);
+                    $this->recursiveData($source, $value->id, $newData);
+                }
+            }
+        }
+    }
+
     //Get all data comment
 	public function buildComment(array $elements, $parentId = 0) {
 		$comments = array();
