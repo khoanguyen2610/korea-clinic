@@ -26,8 +26,8 @@ class Model_System_VsvnGroup extends \Orm\Model {
 
 	public static function softDelete($pk, $attributes, $conditions = array()) {
 		$attributes = array_merge(array(
-				'deleted_date' => date('Y-m-d H:i:s'),
-				'deleted_user_id' => \Auth::get('id')
+				'deleted_at' => date('Y-m-d H:i:s'),
+				'deleted_id' => \Auth::get('id')
 		), $attributes);
 		$Item = self::find($pk);
 		if($Item){
@@ -35,7 +35,7 @@ class Model_System_VsvnGroup extends \Orm\Model {
 		}
 		return false;
 	}
-	
+
 	public static function listItem($arrParam = null, $options = null) {
 		if ($options ['task'] == 'list-dbtable') {
 			$aColumns = [static::$_table_name . '.name',
@@ -47,7 +47,7 @@ class Model_System_VsvnGroup extends \Orm\Model {
 						DB::expr (static::$_table_name . '.id AS DT_RowId'),
 						static::$_table_name . '.*'];
 			$query = DB::select_array ( $colums )->from ( static::$_table_name )->where ( static::$_table_name . '.status', '!=', 'delete' );
-			
+
 			/**
 			 * custom sort by count member*
 			 */

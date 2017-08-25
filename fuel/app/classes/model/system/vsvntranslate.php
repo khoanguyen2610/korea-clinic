@@ -23,8 +23,8 @@ class Model_System_VsvnTranslate extends Orm\Model {
 
     public static function softDelete($pk, $attributes, $conditions = array()) {
         $attributes = array_merge(array(
-                'deleted_date' => date('Y-m-d H:i:s'),
-                'deleted_user_id' => \Auth::get('id')
+                'deleted_at' => date('Y-m-d H:i:s'),
+                'deleted_id' => \Auth::get('id')
         ), $attributes);
         $Item = self::find($pk);
         if($Item){
@@ -41,9 +41,9 @@ class Model_System_VsvnTranslate extends Orm\Model {
                          ->from(static::$_table_name)
                          ->join(TABLE_PREFIX . 'vsvn_language', 'left')->on(TABLE_PREFIX . 'vsvn_language.code', '=' , static::$_table_name . '.language_code')
                          ->where(static::$_table_name . '.status', '!=', 'delete');
-            
+
             $result = Vision_Db::datatable_query($query, $aColumns, $arrParam, $options);
-        }        
+        }
         return $result;
     }
-}	
+}

@@ -1,14 +1,14 @@
 <?php
 /**
  * @Author: k_nguyen
- * @Date:   2016-11-14 14:06:10
+ * @Date:   2016-11-14 14:04:29
  * @Last Modified by:   k_nguyen
- * @Last Modified time: 2016-11-25 16:29:21
+ * @Last Modified time: 2017-04-03 10:58:47
  */
-class Model_TPurchaseReceptionSpec extends \Orm\Model {
-	protected static $_table_name = 't_purchase_reception_spec';
+class Model_Service extends \Orm\Model {
+	protected static $_table_name = 'service';
 	protected static $_primary_key = ['id'];
-    
+
     protected static $_observers = array(
         'Orm\\Observer_System' => array(
                 'events' => array('before_insert', 'before_save'),
@@ -18,8 +18,8 @@ class Model_TPurchaseReceptionSpec extends \Orm\Model {
 
     public static function softDelete($pk, $attributes, $conditions = array()) {
         $attributes = array_merge(array(
-                'deleted_date' => date('Y-m-d H:i:s'),
-                'deleted_user_id' => \Auth::get('id')
+                'deleted_at' => date('Y-m-d H:i:s'),
+                'deleted_id' => \Auth::get('id')
         ), $attributes);
         $Item = self::find($pk);
         if($Item){

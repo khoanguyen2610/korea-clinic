@@ -26,8 +26,8 @@ class Model_System_VsvnRole extends Orm\Model {
 
     public static function softDelete($pk, $attributes, $conditions = array()) {
         $attributes = array_merge(array(
-                'deleted_date' => date('Y-m-d H:i:s'),
-                'deleted_user_id' => 15
+                'deleted_at' => date('Y-m-d H:i:s'),
+                'deleted_id' => 15
         ), $attributes);
         $Item = self::find($pk);
         if($Item){
@@ -43,9 +43,9 @@ class Model_System_VsvnRole extends Orm\Model {
             $query = DB::select_array($colums)
                          ->from(static::$_table_name)
 						 ->where(static::$_table_name . '.status', '!=', 'delete');
-            
+
             $result = Vision_Db::datatable_query($query, $aColumns, $arrParam, $options);
-        }        
+        }
         return $result;
     }
 }
