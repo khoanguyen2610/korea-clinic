@@ -14,7 +14,7 @@ export class FormatDate implements PipeTransform {
 	   	if(isNaN(parsedDate) || parseString.length <= 6){
 	   		return value;
 	   	}else{
-	   		return  moment(parsedDate).format(this._Configuration.formatDateTS);
+	   		return  moment(parsedDate).format(this._Configuration.formatDate);
 	   	}
   	}
 }

@@ -4,11 +4,10 @@ import { Http } from '@angular/http';
 import { HttpInterceptorService } from 'ng-http-interceptor';
 import { ToasterConfig } from 'angular2-toaster/angular2-toaster';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
-import { Configuration } from './shared/configuration';
+import { Configuration, Theme } from './shared';
 import { TranslateService } from 'ng2-translate';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from './services';
-import { BreadcrumbComponent } from './components/general';
+import { AuthService, ScriptService } from './services';
 import { ToastrConfig } from 'ngx-toastr';
 
 declare var $: any;
@@ -20,8 +19,10 @@ declare var applyCleaveJs: any;
 	templateUrl: './app.component.html',
 	providers: [AuthService]
 })
+
 export class AppComponent  {
 	curRouting?: string;
+	checkModuleAdmin: boolean = false;
 	hasHeader = true;
 	current_user_info = {};
 	activeRoute = false;
@@ -33,11 +34,17 @@ export class AppComponent  {
 		private _Configuration: Configuration,
 		private _TranslateService: TranslateService,
 		private _AuthService: AuthService,
+		private _ScriptService: ScriptService,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
 		private _SlimLoadingBarService: SlimLoadingBarService,
 		private _ToastrConfig: ToastrConfig
 	) {
+
+
+		// _ScriptService.load('filepicker').then(data => {
+        //     console.log('script loaded ', data);
+        // }).catch(error => console.log(error));
 
 		//==== District 51
 		var current_href = window.location.href;
@@ -49,15 +56,15 @@ export class AppComponent  {
 			this._SlimLoadingBarService.start();
 		}
 
-		this._Router.events.subscribe((val) => {
-			if (current_href.match(/^\/login.*/i) || current_href.match(/^\/logout.*/i) || current_href.match(/^\/forgot\-password.*/i)) {
-			    this.activeRoute = true;
-			    this.onCheckUserSession(current_href, true);
-			}
-			if(this.current_user_info){
-				this.activeRoute = true;
-			}
-		});
+		// this._Router.events.subscribe((val) => {
+		// 	if (current_href.match(/^\/login.*/i) || current_href.match(/^\/logout.*/i) || current_href.match(/^\/forgot\-password.*/i)) {
+		// 	    this.activeRoute = true;
+		// 	    this.onCheckUserSession(current_href, true);
+		// 	}
+		// 	if(this.current_user_info){
+		// 		this.activeRoute = true;
+		// 	}
+		// });
 
 		/*==========================================
 		 * Config ToastrConfig
@@ -132,14 +139,13 @@ export class AppComponent  {
 		});
 
 
-		this.onSetGobalScript();
 		_TranslateService.setDefaultLang(_Configuration.defaultLang);
 		_TranslateService.use(_Configuration.defaultLang);
 
-		setInterval(() => {
-			let routing = this._Router.url;
-			this.onCheckUserSession(routing);
-		}, 3000)
+		// setInterval(() => {
+		// 	let routing = this._Router.url;
+		// 	this.onCheckUserSession(routing);
+		// }, 3000)
 	}
 
 	public toasterconfig : ToasterConfig =
@@ -155,121 +161,24 @@ export class AppComponent  {
     	let routing = this._Router.url;
 		if(this.curRouting != routing){
 			this.curRouting = routing;
-			this.hasHeader = true;
-	    	if (routing.match(/^\/login.*/i) || routing.match(/^\/logout.*/i) || routing.match(/^\/forgot\-password.*/i)) {
-			    this.hasHeader = false;
-			}
-			this.onCheckUserSession(routing, true);
-			var repeat:number = 0;
-	        var loadInterval = setInterval(() => {
-									this.onSetGobalScript();
-									repeat++;
-									if(repeat >= 5){
-										clearInterval(loadInterval);
-									}
-								}, 500);
+			if(routing.match(/^\/admin/i)) this.checkModuleAdmin = true;
 
-			this._TranslateService.setDefaultLang(this._Configuration.defaultLang);
-			this._TranslateService.use(this._Configuration.defaultLang);
+			// this.hasHeader = true;
+	    	// if (routing.match(/^\/login.*/i) || routing.match(/^\/logout.*/i) || routing.match(/^\/forgot\-password.*/i)) {
+			//     this.hasHeader = false;
+			// }
+			// this.onCheckUserSession(routing, true);
+			//
+			//
+			// this._TranslateService.setDefaultLang(this._Configuration.defaultLang);
+			// this._TranslateService.use(this._Configuration.defaultLang);
 		}
     }
-
-    onCheckUserSession(routing, refill = null){
-    	if (!routing.match(/^\/login.*/i) && !routing.match(/^\/logout.*/i) && !routing.match(/^\/forgot\-password.*/i) && !routing.match(/^\/$/i)) {
-    		this._AuthService.checkUserSession(routing, refill);
-		}
-    }
-
-    onSetGobalScript(){
-    	let _Configuration = this._Configuration;
-    	$.fn.dataTable.ext.errMode = 'none';
-    	$.extend($.fn.dataTable.defaults, {
-	    	autoWidth: true,
-			processing: true,
-			serverSide: true,
-	    	dom: '<"datatable-header clearfix"fl><"datatable-scroll table-responsive clearfix"tr><"datatable-footer clearfix"ip>',
-	    	// dom: '<"top"ip<"clearfix">><"datatable-header clearfix"><"datatable-scroll table-responsive clearfix"tr><"datatable-footer clearfix">',
-	    	language: {
-	      		paginate: {
-	        		'first': 'First',
-	        		'last': 'Last',
-	        		'next': '&rarr;',
-	        		'previous': '&larr;'
-	      		},
-        		processing: '<div class="box-loading"><div class="cssload"><span></span></div></div>',
-				lengthMenu: "_MENU_ <span>件表示</span>",
-				search: "<span>検索:</span> _INPUT_",
-				sEmptyTable: "データはありません。",
-				sInfo: " _TOTAL_ 件中 _START_ から _END_ まで表示",
-				sInfoEmpty: " 0 件中 0 から 0 まで表示",
-				sInfoFiltered: "（全 _MAX_ 件より抽出）",
-				sInfoPostFix: "",
-				sUrl: "",
-	    	}
-	  	});
-
-	  	$('.daterange-single').datetimepicker({
-    		locale: 'ja',
-    		format: _Configuration.formatDate,
-    	});
-
-	  	setTimeout(()=>{
-
-	  		//cleave number format
-	  		applyCleaveJs();
-
-		  	//click icon calendar
-	    	$('i.icon-calendar').click(function(){
-				$(this).parents('.input-group').find('.daterange-single').focus();
-			});
-			//Button enter
-			$('input[type=text], textarea').unbind('keyup');
-	    	/*$('textarea').keydown(function(e){
-	    		var key;
-				var isShift;
-				if (window.event) {
-					key = window.event.keyCode;
-					isShift = !!window.event.shiftKey; // typecast to boolean
-				} else {
-					key = e.which;
-					isShift = !!e.shiftKey;
-				}
-
-				if (!isShift) {
-					switch (key) {
-						case 13:
-							e.preventDefault();
-							break;
-					}
-				}
-	    	})*/
-	    	$('input[type=text]').keyup(function(e){
-	    		// For case Shift + Enter to across the record
-	    		var key = e.keyCode;
-				/*var key;
-				var isShift;
-				if (window.event) {
-					key = window.event.keyCode;
-					isShift = !!window.event.shiftKey; // typecast to boolean
-				} else {
-					key = e.which;
-					isShift = !!e.shiftKey;
-				}
-
-				if (!isShift) {*/
-				switch (key) {
-					case 13:
-						let btn_submit = $(this).parents('form').find('#btn_submit_form');
-						if (e.keyCode == 13 && !btn_submit.is(':disabled')) {
-							btn_submit.trigger('click');
-						}
-						break;
-				}
-				/*}
-				e.preventDefault();*/
-
-			});
-	    }, 500)
-    }
+	//
+    // onCheckUserSession(routing, refill = null){
+    // 	if (!routing.match(/^\/login.*/i) && !routing.match(/^\/logout.*/i) && !routing.match(/^\/forgot\-password.*/i) && !routing.match(/^\/$/i)) {
+    // 		this._AuthService.checkUserSession(routing, refill);
+	// 	}
+    // }
 
 }

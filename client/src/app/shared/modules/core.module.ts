@@ -27,9 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { Configuration, HttpClient } from '../';
 import { AuthPermissionGuard, ChangeRouteGuard } from '../../guards';
-import { AuthService } from '../../services';
-//===================== Import Component =======================
-import { HeaderComponent, FooterComponent, BreadcrumbComponent } from '../../components/general';
+import { AuthService, ScriptService } from '../../services';
 
 //===================== Import PIPE =======================
 import { KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim } from '../../pipes';
@@ -38,9 +36,16 @@ import { KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, N
 import { HelperDirective, EqualValidator, SmallerValidator } from '../../directives/';
 
 
+
+
+import { AdminThemeComponent } from '../../modules/admin/components';
+import { PublicThemeComponent } from '../../modules/public/components';
+
+
 @NgModule({
     declarations: [
-        HeaderComponent, FooterComponent, BreadcrumbComponent,
+        //======================= Import Component =======================
+        AdminThemeComponent, PublicThemeComponent,
         //======================= Import Pipe =======================
         KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim,
         // FileSelectDirective, FileDropDirective,
@@ -64,14 +69,14 @@ import { HelperDirective, EqualValidator, SmallerValidator } from '../../directi
         FileUploadModule,
         SlimLoadingBarModule.forRoot(),
         LocalStorageModule.withConfig({
-            prefix: 'vsvn_vws',
+            prefix: 'ss_clinic',
             storageType: 'localStorage'
         })
 
     ],
     exports: [
         CommonModule,
-        HeaderComponent, FooterComponent, BreadcrumbComponent,
+        AdminThemeComponent, PublicThemeComponent,
         KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim,
         // FileSelectDirective, FileDropDirective,
         EqualValidator, SmallerValidator, HelperDirective,
@@ -94,6 +99,7 @@ import { HelperDirective, EqualValidator, SmallerValidator } from '../../directi
                 Configuration,
                 HttpClient,
                 AuthService,
+                ScriptService,
                 HttpInterceptorService,
                 ChangeRouteGuard,
                 AuthPermissionGuard

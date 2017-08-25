@@ -18,20 +18,15 @@ import { CoreModule } from "./shared/modules/core.module";
 
 //===================== Import Component =======================
 import { AppComponent } from './app.component';
-import { LoginComponent, LogoutComponent, ForgotPasswordComponent, PageNotFoundComponent } from './components/general';
+
+
 
 export function createTranslateLoader(_Http: Http) {
     return new TranslateStaticLoader(_Http, './assets/i18n', '.json');
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        PageNotFoundComponent,
-        LoginComponent,
-        LogoutComponent,
-        ForgotPasswordComponent
-    ],
+    declarations: [ AppComponent ],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
@@ -49,14 +44,14 @@ export function createTranslateLoader(_Http: Http) {
 })
 export class AppModule {
     constructor(private _Router: Router, private _ActivatedRoute: ActivatedRoute, private _AuthService: AuthService){
-        let current_user_info = this._AuthService.getCurrent();
-        if(!current_user_info){
-            var current_href = window.location.href;
-            let current_domain = window.location.origin;
-            current_href = current_href.replace(current_domain, '');
-            if (current_href.match(/^\/login.*/i) == null && current_href.match(/^\/logout.*/i) == null && current_href.match(/^\/forgot\-password.*/i) == null) {
-                window.location.href = current_domain + '/login?callback_uri=' + encodeURIComponent(current_href);
-            }
-        }
+        // let current_user_info = this._AuthService.getCurrent();
+        // if(!current_user_info){
+        //     var current_href = window.location.href;
+        //     let current_domain = window.location.origin;
+        //     current_href = current_href.replace(current_domain, '');
+        //     if (current_href.match(/^\/login.*/i) == null && current_href.match(/^\/logout.*/i) == null && current_href.match(/^\/forgot\-password.*/i) == null) {
+        //         window.location.href = current_domain + '/login?callback_uri=' + encodeURIComponent(current_href);
+        //     }
+        // }
     }
 }

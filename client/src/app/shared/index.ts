@@ -1,3 +1,3 @@
 export * from './configuration';
-export * from './default-array';
+export * from './theme';
 export * from './http-client';

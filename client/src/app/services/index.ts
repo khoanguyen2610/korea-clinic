@@ -36,6 +36,4 @@ export * from './tproposal.service';
 export * from './tapprovalstatus.service';
 export * from './tloghistory.service';
 export * from './tformattachment.service';
-export * from './external-system/meetingroom.service';
-
-
+export * from './core/script.service';

@@ -13,7 +13,7 @@ export class FormatDateTime implements PipeTransform {
 	   	if(isNaN(parsedDate)){
 	   		return "";
 	   	}else{
-			return moment(parsedDate).format(this._Configuration.formatDateTimeTS);
+			return moment(parsedDate).format(this._Configuration.formatDateTime);
 	   	}
   	}
 }
