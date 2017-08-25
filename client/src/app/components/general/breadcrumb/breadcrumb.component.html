@@ -1,6 +1,0 @@
-<ul class="breadcrumb" *ngIf="breadcrumb.length > 0">
-    <li *ngFor="let obj of breadcrumb">
-        <a *ngIf="obj.url" [routerLink]="[obj.url]" [queryParams]="obj?.query_param">{{ obj.name }}</a>
-        <span *ngIf="!obj.url">{{ obj.name }}</span>
-    </li>
-</ul>
