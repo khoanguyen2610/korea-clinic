@@ -119,6 +119,7 @@ h6 {
 
 .scheme_original a {
     color: #ad9279;
+    display: block;
 }
 
 .scheme_light a {
@@ -1655,8 +1656,7 @@ textarea {
 }
 
 .top_panel_middle .logo {
-    margin-top: 2.5em;
-    margin-bottom: 2em;
+
 }
 
 .logo .logo_text {

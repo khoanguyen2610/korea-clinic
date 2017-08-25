@@ -1792,8 +1792,8 @@
 	.top_panel_title_inner {
 		padding: 4em 0;
 	}
-	.top_panel_title.title_present.breadcrumbs_present .post_navi, 
-	.top_panel_title.title_present.breadcrumbs_present .page_title, 
+	.top_panel_title.title_present.breadcrumbs_present .post_navi,
+	.top_panel_title.title_present.breadcrumbs_present .page_title,
 	.top_panel_title.title_present.breadcrumbs_present .breadcrumbs {
 		max-width: 100%;
 		float: none;
@@ -1884,7 +1884,7 @@
 	.home3 .sc_column_item_inner	{
 		background-color: transparent !important;
 	}
-	.copyright_style_socials .sc_socials, 
+	.copyright_style_socials .sc_socials,
 	.copyright_style_menu .menu_footer_nav {
 		float: none;
 	}
@@ -1893,7 +1893,7 @@
 	}
 }
 
-	
+
 @media (max-width: 782px) {
     .admin-bar .pushy .close-pushy::before {
         top: 3em;
@@ -3028,13 +3028,13 @@
         min-width: 100%;
         box-sizing: border-box;
     }
-	.esg-grid .eg-roosevelt-massage-element-0 { 
-		font-size: 15px; 
-		line-height: 20px; 
+	.esg-grid .eg-roosevelt-massage-element-0 {
+		font-size: 15px;
+		line-height: 20px;
 	}
 	.sc_button + .sc_button {
 		margin-top: 10px;
-	} 
+	}
 	.sc_call_to_action_style_1 .columns_wrap {
 		margin-right: -20px;
 	}
@@ -3048,12 +3048,12 @@
         text-align: left;
     }
     .header_mobile .logo {
-        padding-top: 24px;
+        padding-top: 0px;
         padding-bottom: 5px;
     }
     .header_mobile .logo_main {
-        height: 46px;
-        padding: 3px 0;
+        height: 60px;
+        padding: 0px;
     }
     .header_mobile .menu_main_cart {
         right: 10px;

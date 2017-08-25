@@ -2098,20 +2098,17 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
     padding: 0.5em 1.75em;
 }
 .top_panel_wrap .logo {
-    margin: 0.7em 0;
     overflow: hidden;
 }
 .top_panel_wrap .logo_main {
-    max-height: 100px;
+    max-height: 120px;
     width: auto;
 }
 .logo a {
     display: inline-block;
 }
 .logo img {
-    float: left;
-    margin: 0 0.7857em 0.7857em 0;
-    width: auto;
+
 }
 .logo_text,
 .logo_slogan {
@@ -2127,11 +2124,13 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 }
 .top_panel_wrap .logo_fixed {
     display: none;
-    max-height: 42px;
+    max-height: 80px;
     width: auto;
+    margin-top: -8px;
 }
 .top_panel_fixed .top_panel_wrap .logo {
-    margin: 0.7em 0!important;
+    /*margin: 0.7em 0!important;*/
+    margin-top: -5px;
 }
 .top_panel_fixed .top_panel_wrap .logo_fixed {
     display: block;
@@ -6554,4 +6553,3 @@ body .body_wrap table.booked-calendar tr.days th,
 .mejs-container * {
     font-family: Helvetica, Arial, sans-serif !important;
 }
-
