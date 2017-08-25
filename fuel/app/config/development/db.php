@@ -5,9 +5,9 @@
 return array(
     'default' => array(
         'connection'  => array(
-            'dsn'        => 'mysql:host=localhost;dbname=korea_clinic',
-            'username'   => 'root',
-            'password'   => '',
+            'dsn'        => 'mysql:host=103.68.68.151;dbname=khoanguyen_clinic',
+            'username'   => 'khoanguyen_cl',
+            'password'   => 'bEUNVWOr16',
         ),
     ),
 );

@@ -2,10 +2,10 @@
 namespace Api_v1;
 use \Controller\Exception;
 
-class Controller_Appointment extends \Controller_API {
+class Controller_Staff extends \Controller_API {
 	public function before() {
         parent::before();
-        $this->main_table = 'appointment';
+        $this->main_table = 'staff';
         $columns = \DB::list_columns($this->main_table);
         $this->table_field = array_keys($columns);
 
@@ -15,11 +15,11 @@ class Controller_Appointment extends \Controller_API {
      * Author: Nguyen Anh Khoa
      * Function get data for datatable
      * Method GET
-     * Table m_bank
+     * Table staff
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function get_list_data(){
-        $result     = \Model_Appointment::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
+        $result     = \Model_Staff::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
         $items      = $result['data'];
 
         $response = ["sEcho" => intval(@$this->_arrParam['sEcho']),
@@ -34,7 +34,7 @@ class Controller_Appointment extends \Controller_API {
      * Author: Nguyen Anh Khoa
      * Function get detail form information
      * Method GET
-     * Table appointment
+     * Table staff
      * Single data
      * Input $pk - primary key
      * Response data: status[success|error], total[total_record], data[single|array]
@@ -55,7 +55,7 @@ class Controller_Appointment extends \Controller_API {
             return $this->response($response);
         }
 
-        $data = \Model_Appointment::getDetail($pk);
+        $data = \Model_Staff::getDetail($pk);
 
         /*==================================================
          * Response Data
@@ -71,7 +71,7 @@ class Controller_Appointment extends \Controller_API {
      * Author: Nguyen Anh Khoa
      * Function insert record into table
      * Method POST
-     * Table appointment
+     * Table staff
      * fullname, phone, date have to require|unique
      * Response data: status[success|error], message[Created OK|Validation]
      *=============================================================*/
@@ -82,9 +82,7 @@ class Controller_Appointment extends \Controller_API {
         $validation = \Validation::forge();
         $validation->add_callable('MyRules');
         $validation->add_field('fullname',__('Fullname', [], 'Fullname'),'required');
-        $validation->add_field('phone',__('Phone', [], 'Phone'),'required');
-        $validation->add_field('date',__('Date', [], 'Date'),'required');
-        $validation->add_field('service_id',__('Service', [], 'Service'),'required');
+        $validation->add_field('language_code',__('Language', [], 'Language'),'required');
 
 
         if($validation->run()){
@@ -93,24 +91,17 @@ class Controller_Appointment extends \Controller_API {
             	if(!in_array($key, $this->table_field)) continue;
                 $value = (!is_null($value) && $value != '')?trim($value):null;
 
-                switch ($key) {
-                    case 'date':
-                        $value = (!is_null($value) && $value != '')?date('Y-m-d', strtotime($value)):null;
-                        break;
-                    case 'time':
-                        $value = (!is_null($value) && $value != '')?date('H:i:s', strtotime($value)):null;
-                        break;
-                }
-
                 $arrData[$key] = $value;
             }
-
-
 
             //======================== Default Data =================
 			try{
 				\DB::start_transaction();
-	            $obj = empty($pk)?\Model_Appointment::forge():\Model_Appointment::find($pk);
+	            $obj = empty($pk)?\Model_Staff::forge():\Model_Staff::find($pk);
+
+				//Generate random item key
+				empty($pk) && $arrData['item_key'] = \Vision_Common::randomItemKey();
+
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();
 
@@ -157,14 +148,14 @@ class Controller_Appointment extends \Controller_API {
      * Function delete a record
      * Update status record to 'delete'
      * Method DELETE
-     * Table appointment
+     * Table staff
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function delete_index($pk = null){
         if(!empty($pk)){
 			try{
 				\DB::start_transaction();
-	            $result = \Model_Appointment::softDelete($pk, array('item_status' => 'delete'));
+	            $result = \Model_Staff::softDelete($pk, array('item_status' => 'delete'));
 				\DB::commit_transaction();
 			} catch (\Exception $e) {
 		      	\DB::rollback_transaction();
