@@ -5088,7 +5088,7 @@ body.sidebar_hide .sc_recent_news_style_news-announce .post_size_small {
     width: 100%;
 }
 .sc_testimonials_style_testimonials-2 .sc_testimonial_author:after {
-    content: 'â€œ';
+    content: '“';
     font-size: 5.5em;
     line-height: 0.45em;
     display: block;

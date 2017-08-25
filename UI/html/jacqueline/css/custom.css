@@ -1094,6 +1094,12 @@ body table.booked-calendar .booked-appt-list .timeslot .timeslot-people button {
 	margin-top:3.4em;
 	margin-bottom:2.75em;
 }
+.sc_title_small {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 4px;
+    font-size: 2em !important;
+}
 
 .services2 .sc_services_type_icons,
 .services1 .sc_call_to_action,

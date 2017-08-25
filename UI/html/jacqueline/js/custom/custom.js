@@ -97,7 +97,7 @@ jQuery(document).ready(function() {
 function initRevSlider() {
 	"use strict";
 	var ajaxRevslider = function(obj) {
-		
+
 		var content = "";
 		data = {};
 		data.action = 'revslider_ajax_call_front';
@@ -146,7 +146,7 @@ function initRevSlider() {
 			}
 		}
 	}, 30);
-	
+
 	var htmlDiv = document.getElementById("rs-plugin-settings-inline-css");
 	var htmlDivCss = ".tp-caption.black,.black{color:#000;text-shadow:none}";
 	if (htmlDiv) {
@@ -156,9 +156,9 @@ function initRevSlider() {
 		htmlDiv.innerHTML = "<style>" + htmlDivCss + "</style>";
 		document.getElementsByTagName("head")[0].appendChild(htmlDiv.childNodes[0]);
 	}
-	
-	
-	
+
+
+
 	var setREVStartSize = function() {
 		try {
 			var e = new Object,
@@ -259,7 +259,7 @@ function initRevSlider() {
 				}
 			});
 		}
-	}); 
+	});
 	var htmlDivCss = unescape(".hermes.tp-bullets%20%7B%0A%7D%0A%0A.hermes%20.tp-bullet%20%7B%0A%20%20%20%20overflow%3Ahidden%3B%0A%20%20%20%20border-radius%3A50%25%3B%0A%20%20%20%20width%3A16px%3B%0A%20%20%20%20height%3A16px%3B%0A%20%20%20%20background-color%3A%20rgba%280%2C%200%2C%200%2C%200%29%3B%0A%20%20%20%20box-shadow%3A%20inset%200%200%200%202px%20rgb%28255%2C%20255%2C%20255%29%3B%0A%20%20%20%20-webkit-transition%3A%20background%200.3s%20ease%3B%0A%20%20%20%20transition%3A%20background%200.3s%20ease%3B%0A%20%20%20%20position%3Aabsolute%3B%0A%7D%0A%0A.hermes%20.tp-bullet%3Ahover%20%7B%0A%09%20%20background-color%3A%20rgba%280%2C0%2C0%2C0.21%29%3B%0A%7D%0A.hermes%20.tp-bullet%3Aafter%20%7B%0A%20%20content%3A%20%27%20%27%3B%0A%20%20position%3A%20absolute%3B%0A%20%20bottom%3A%200%3B%0A%20%20height%3A%200%3B%0A%20%20left%3A%200%3B%0A%20%20width%3A%20100%25%3B%0A%20%20background-color%3A%20rgb%28255%2C%20255%2C%20255%29%3B%0A%20%20box-shadow%3A%200%200%201px%20rgb%28255%2C%20255%2C%20255%29%3B%0A%20%20-webkit-transition%3A%20height%200.3s%20ease%3B%0A%20%20transition%3A%20height%200.3s%20ease%3B%0A%7D%0A.hermes%20.tp-bullet.selected%3Aafter%20%7B%0A%20%20height%3A100%25%3B%0A%7D%0A%0A");
 	var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
 	if (htmlDiv) {
@@ -269,9 +269,9 @@ function initRevSlider() {
 		htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
 		document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
 	}
-	
-	
-	
+
+
+
 	var setREVStartSize = function() {
 		try {
 			var e = new Object,
@@ -381,7 +381,7 @@ function initRevSlider() {
 			});
 		}
 	});
-	
+
 	var htmlDivCss = unescape(".hermes.tp-bullets%20%7B%0A%7D%0A%0A.hermes%20.tp-bullet%20%7B%0A%20%20%20%20overflow%3Ahidden%3B%0A%20%20%20%20border-radius%3A50%25%3B%0A%20%20%20%20width%3A16px%3B%0A%20%20%20%20height%3A16px%3B%0A%20%20%20%20background-color%3A%20rgba%280%2C%200%2C%200%2C%200%29%3B%0A%20%20%20%20box-shadow%3A%20inset%200%200%200%202px%20rgb%28255%2C%20255%2C%20255%29%3B%0A%20%20%20%20-webkit-transition%3A%20background%200.3s%20ease%3B%0A%20%20%20%20transition%3A%20background%200.3s%20ease%3B%0A%20%20%20%20position%3Aabsolute%3B%0A%7D%0A%0A.hermes%20.tp-bullet%3Ahover%20%7B%0A%09%20%20background-color%3A%20rgba%280%2C0%2C0%2C0.21%29%3B%0A%7D%0A.hermes%20.tp-bullet%3Aafter%20%7B%0A%20%20content%3A%20%27%20%27%3B%0A%20%20position%3A%20absolute%3B%0A%20%20bottom%3A%200%3B%0A%20%20height%3A%200%3B%0A%20%20left%3A%200%3B%0A%20%20width%3A%20100%25%3B%0A%20%20background-color%3A%20rgb%28255%2C%20255%2C%20255%29%3B%0A%20%20box-shadow%3A%200%200%201px%20rgb%28255%2C%20255%2C%20255%29%3B%0A%20%20-webkit-transition%3A%20height%200.3s%20ease%3B%0A%20%20transition%3A%20height%200.3s%20ease%3B%0A%7D%0A.hermes%20.tp-bullet.selected%3Aafter%20%7B%0A%20%20height%3A100%25%3B%0A%7D%0A%0A");
 	var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
 	if (htmlDiv) {
@@ -391,8 +391,8 @@ function initRevSlider() {
 		htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
 		document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
 	}
-	
-	
+
+
 	var setREVStartSize = function() {
 		try {
 			var e = new Object,
@@ -475,7 +475,7 @@ function initRevSlider() {
 			});
 		}
 	});
-	
+
 };
 
 
@@ -485,7 +485,7 @@ var lamount, aratio ;
 function initEssGrid() {
 	"use strict";
 	function eggbfc(winw, resultoption) {
-		var 
+		var
 			lasttop = winw,
 			lastbottom = 0,
 			smallest = 9999,
@@ -665,8 +665,8 @@ function initEssGrid() {
 
 		} catch (e) {}
 
-		
-	
+
+
 		if ("even" == "even") {
 			var coh = 0,
 				container = jQuery("#esg-grid-2-1");
@@ -785,8 +785,8 @@ function initEssGrid() {
 			} catch (e) {}
 		});
 	});
-	
-	
+
+
 	function eggbfc(winw, resultoption) {
 		var lasttop = winw,
 			lastbottom = 0,
@@ -926,7 +926,7 @@ function initEssGrid() {
 		});
 
 	});
-	
+
 	function eggbfc(winw, resultoption) {
 		var lasttop = winw,
 			lastbottom = 0,
@@ -1110,8 +1110,8 @@ function initEssGrid() {
 		} catch (e) {}
 
 	});
-	
-	
+
+
 	function eggbfc(winw, resultoption) {
 		var lasttop = winw,
 			lastbottom = 0,
@@ -1293,8 +1293,8 @@ function initEssGrid() {
 		} catch (e) {}
 
 	});
-	
-	
+
+
 	function eggbfc(winw, resultoption) {
     var lasttop = winw,
         lastbottom = 0,
@@ -1477,24 +1477,24 @@ jQuery(document).ready(function() {
     } catch (e) {}
 
 });
-	
+
 };
 
 function itemsmenu(){
-	
+
 	if (JACQUELINE_STORAGE['menuitems'] === undefined) JACQUELINE_STORAGE['menuitems'] = [];
 	JACQUELINE_STORAGE['menuitems']['sc_menuitems_874'] = '475,482,483,484,480,479,478,457';
-	
+
 	if (JACQUELINE_STORAGE['menuitems'] === undefined) JACQUELINE_STORAGE['menuitems'] = [];
 	JACQUELINE_STORAGE['menuitems']['sc_menuitems_276809688'] = '482,484,457';
-	
+
 	if (JACQUELINE_STORAGE['menuitems'] === undefined) JACQUELINE_STORAGE['menuitems'] = [];
 	JACQUELINE_STORAGE['menuitems']['sc_menuitems_1468493844'] = '475,483,478,457';
-	
+
 	if (JACQUELINE_STORAGE['menuitems'] === undefined) JACQUELINE_STORAGE['menuitems'] = [];
 	JACQUELINE_STORAGE['menuitems']['sc_menuitems_1484465773'] = '475,483,480,479';
-	
+
 	if (JACQUELINE_STORAGE['menuitems'] === undefined) JACQUELINE_STORAGE['menuitems'] = [];
 	JACQUELINE_STORAGE['menuitems']['sc_menuitems_683513523'] = '482,480,479,457';
-	
+
 };
