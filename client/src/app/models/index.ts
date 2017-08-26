@@ -24,3 +24,4 @@ export * from './tpurchasereceptionspec';
 export * from './trequestdietary';
 export * from './trequesttravelingexpenses';
 export * from './trequesttravelingexpensesother';
+export * from './equipment';

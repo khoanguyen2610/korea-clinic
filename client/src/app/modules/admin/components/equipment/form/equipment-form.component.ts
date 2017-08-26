@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Rx';
 
 import { Configuration } from '../../../../../shared';
 import { AuthService, EquipmentService } from '../../../../../services';
+import { Equipment } from '../../../../../models';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
@@ -21,6 +22,7 @@ export class EquipmentFormComponent implements OnInit {
 	private subscription: Subscription;
 	private subscriptionEvents: Subscription;
 
+	Item = new Equipment();
 	_params: any;
 	curRouting?: string;
 
@@ -45,35 +47,36 @@ export class EquipmentFormComponent implements OnInit {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
 		);
-
-		this.subscriptionEvents = this._Router.events.subscribe((val) => {
-			let routing = this._Router.url;
-			if (this.curRouting != routing) {
-				this.curRouting = routing;
-				this.loadPage();
-			}
-		});
 	}
 
 	ngOnInit(){
-
-	}
-
-
-	loadPage(){
 		switch(this._params.method){
 			case 'create':
 				console.log('create');
 				break;
-			case 'copy':
 			case 'update':
 				if(this._params.id != null){
-
+					this._EquipmentService.getByID(this._params.id).subscribe(res => {
+						if (res.status == 'success') {
+							if(res.data == null){
+								this._Router.navigate(['/admin/equipment/list']);
+							}else{
+								this.Item = res.data;
+							}
+						}else{
+							this._Router.navigate(['/admin/equipment/list']);
+						}
+					});
 				}else{
 					this._Router.navigate(['/']);
 				}
 				break;
 		}
+	}
+
+
+	loadPage(){
+
 	}
 
 

@@ -53,6 +53,17 @@ export class EquipmentService {
         .catch(this.handleError);
     }
 
+	public delete(id:number){
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.delete(this._Configuration.apiUrl + this.serviceUrl + 'index/' + id, {
+			headers: headers,
+			withCredentials: true
+		})
+		.map(res => res.json())
+		.catch(this.handleError);
+	}
+
     private handleError(error: Response) {
         return Observable.throw(error.json().error || 'Server error');
     }

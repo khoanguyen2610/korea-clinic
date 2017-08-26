@@ -1,8 +1,16 @@
 <form #f="ngForm">
-<label></label>
-<input type="text" name="title" [(ngModel)]="Item.title">
-<label></label>
-<textarea name="description" [(ngModel)]="Item.description"></textarea>
-<label></label>
-<textarea name="content" [(ngModel)]="Item.content"></textarea>
+<div class="form-body">
+	<div class="form-group">
+	<label></label>
+	<input type="text" name="title" [(ngModel)]="Item.title" class="form-control">
+	</div>
+	<div class="form-group">
+	<label></label>
+	<textarea name="description" [(ngModel)]="Item.description" class="form-control"></textarea>
+	</div>
+	<div class="form-group">
+	<label></label>
+	<textarea name="content" [(ngModel)]="Item.content" class="form-control"></textarea>
+	</div>
+</div>
 </form>
