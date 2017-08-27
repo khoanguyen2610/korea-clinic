@@ -85,4 +85,9 @@ export class EquipmentListComponent implements OnInit {
 		})
 	}
 
+	ngOnDestroy(){
+		this.subscription.unsubscribe();
+		this.modal.ngOnDestroy();
+	}
+
 }

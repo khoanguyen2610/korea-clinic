@@ -74,10 +74,21 @@ export class EquipmentFormComponent implements OnInit {
 		}
 	}
 
+	onSubmit(form: NgForm){
+		if(form.valid){
+			let formData: FormData = new FormData();
+			formData.append('title', this.Item['title']);
+			formData.append('content', this.Item['content']);
+			formData.append('description', this.Item['description']);
 
-	loadPage(){
+			this._EquipmentService.getObserver().subscribe(progress => {
+				this.uploadProgress = progress;
 
+			});
+		}
 	}
 
-
+	ngOnDestroy(){
+		this.subscription.unsubscribe();
+	}
 }
