@@ -2,7 +2,7 @@
 <div class="form-body">
 	<div class="form-group">
 	<label></label>
-	<input type="text" name="title" [(ngModel)]="Item.title" class="form-control">
+	<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
 	</div>
 	<div class="form-group">
 	<label></label>
@@ -13,4 +13,5 @@
 	<textarea name="content" [(ngModel)]="Item.content" class="form-control"></textarea>
 	</div>
 </div>
+<button class="btn btn-style btn-save" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> 登録</button>
 </form>
