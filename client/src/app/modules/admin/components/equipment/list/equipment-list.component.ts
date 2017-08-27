@@ -6,7 +6,7 @@ import { Configuration } from '../../../../../shared';
 import { AuthService, EquipmentService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-
+declare var $: any;
 
 @Component({
 	selector: 'app-equipment-list',
@@ -45,25 +45,25 @@ export class EquipmentListComponent implements OnInit {
 		let self = this,
 			_list_data_URL = this.url_list_data,
 			Configuration = this._Configuration;
-		this.DTList = $('#tbl-data').DataTable({
-			autoWidth: false,
-			pageLength: Configuration.DtbPageLength,
-			lengthMenu: Configuration.DtbLengthMenu,
-			lengthChange: true,
-			searching: false,
-			dom: '<"datatable-header clearfix"fli><"datatable-scroll table-responsive clearfix"tr><"datatable-footer clearfix"ip>',
-			order: [],
-			ajax: {
-				'url': _list_data_URL,
-				'type': 'GET',
-				'beforeSend': function (request) {
-					request.setRequestHeader('Authorization','Basic ' + self._Configuration.apiAuth);
-				},
-				xhrFields: {
-					withCredentials: true
-				}
-			},
-		});
+		// this.DTList = $('#tbl-data').DataTable({
+		// 	autoWidth: false,
+		// 	pageLength: Configuration.DtbPageLength,
+		// 	lengthMenu: Configuration.DtbLengthMenu,
+		// 	lengthChange: true,
+		// 	searching: false,
+		// 	dom: '<"datatable-header clearfix"fli><"datatable-scroll table-responsive clearfix"tr><"datatable-footer clearfix"ip>',
+		// 	order: [],
+		// 	ajax: {
+		// 		'url': _list_data_URL,
+		// 		'type': 'GET',
+		// 		'beforeSend': function (request) {
+		// 			request.setRequestHeader('Authorization','Basic ' + self._Configuration.apiAuth);
+		// 		},
+		// 		xhrFields: {
+		// 			withCredentials: true
+		// 		}
+		// 	},
+		// });
 	}
 
 	onRoutingUpdate(id: number){
