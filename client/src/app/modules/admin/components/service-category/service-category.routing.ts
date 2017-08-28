@@ -13,4 +13,4 @@ const APP_ROUTES: Routes = [
 	},
 	{ path: 'list', component: ServiceCategoryListComponent },
 ];
-export const ChildRouting = RouterModule.forChild(APP_ROUTES);
+export const Routing = RouterModule.forChild(APP_ROUTES);
