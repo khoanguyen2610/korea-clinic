@@ -7,6 +7,7 @@ import { AuthService, EquipmentService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
+declare var $: any;
 
 @Component({
 	selector: 'app-equipment-list',
@@ -63,6 +64,7 @@ export class EquipmentListComponent implements OnInit {
 					withCredentials: true
 				}
 			},
+
 		});
 	}
 
@@ -85,9 +87,9 @@ export class EquipmentListComponent implements OnInit {
 		})
 	}
 
+
 	ngOnDestroy(){
 		this.subscription.unsubscribe();
 		this.modal.ngOnDestroy();
 	}
-
 }

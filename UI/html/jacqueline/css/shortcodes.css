@@ -4214,13 +4214,16 @@ body.sidebar_hide .sc_recent_news_style_news-announce .post_size_small {
     margin-right: -100px;
 }
 .sc_slider_controls_wrap a:before {
-    font-family: 'fontello';
+    font-family: 'fontello_ico';
 }
 .sc_slider_controls_wrap .sc_slider_next:before {
     content: '\e904';
 }
 .sc_slider_controls_wrap .sc_slider_prev:before {
     content: '\e905';
+}
+.sc_slider_home {
+    margin-top: -40px;
 }
 .sc_slider_swiper:hover .sc_slider_controls_wrap a,
 .sc_slider_swiper+.sc_slider_controls_wrap a {

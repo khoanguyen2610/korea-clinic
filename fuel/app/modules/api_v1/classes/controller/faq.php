@@ -39,23 +39,11 @@ class Controller_faq extends \Controller_API {
      * Input $pk - primary key
      * Response data: status[success|error], total[total_record], data[single|array]
      *=============================================================*/
-    public function get_detail($pk){
+    public function get_detail($pk = null){
         $pk = intval($pk);
         $param = \Input::param();
-        $user_info = \Auth::get();
 
-
-        if(empty($pk)){
-            /*==================================================
-             * Response Data
-             *==================================================*/
-            $response = ['status' => 'error',
-                        'code' => Exception::E_PK_MISS,
-                        'message' => Exception::getMessage(Exception::E_PK_MISS)];
-            return $this->response($response);
-        }
-
-        $data = \Model_Faq::getDetail($pk);
+        $data = \Model_Faq::getDetail($pk, $param);
 
         /*==================================================
          * Response Data

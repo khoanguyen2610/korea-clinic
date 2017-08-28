@@ -22,6 +22,15 @@
     <link rel='stylesheet' href='css/core.messages.css' type='text/css' media='all' />
     <link rel='stylesheet' href='css/plugins.css' type='text/css' media='all' />
     <link rel='stylesheet' href='css/custom.css' type='text/css' media='all' />
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1997839190484571";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 </head>
 
 <body class="home classicblog archive body_filled theme_skin_less article_style_stretch layout_excerpt scheme_original top_panel_show top_panel_above sidebar_show sidebar_right sidebar_outer_hide preloader wpb-js-composer sc_responsive">
@@ -81,7 +90,6 @@
                                             <li class="menu-item current-menu-item"><a href="about-us.html">White Clinic</a></li>
                                             <li class="menu-item"><a href="list-staffs.html">Đội ngũ bác sĩ</a></li>
                                     <li class="menu-item"><a href="list-equipments.html">Trang Thiết Bị</a></li>
-                                    <li class="menu-item"><a href="faq.html">Câu hỏi thường gặp</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-has-children"><a href="list-services.html">Dịch vụ</a>
@@ -106,6 +114,7 @@
                                                     <li class="menu-item"><a href="single-post.html">Nha Khoa Tổng Quát</a></li>
                                                 </ul>
                                             </li>
+                                            <li class="menu-item"><a href="faq.html">Câu hỏi thường gặp</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-has-children"><a href="list-news.html">Tin Tức</a>
@@ -114,6 +123,7 @@
                                             <li class="menu-item"><a href="list-news.html">Sự Kiện</a></li>
                                         </ul>
                                     </li>
+                                    <li class="menu-item"><a href="before-after.html">Trước & Sau</a></li>
                                     <li class="menu-item"><a href="contact.html">Liên Hệ</a></li>
                                 </ul>
                             </nav>
@@ -156,7 +166,6 @@
                                     <li class="menu-item current-menu-item"><a href="about-us.html">White Clinic</a></li>
                                     <li class="menu-item"><a href="list-staffs.html">Đội ngũ bác sĩ</a></li>
                                     <li class="menu-item"><a href="list-equipments.html">Trang Thiết Bị</a></li>
-                                    <li class="menu-item"><a href="faq.html">Câu hỏi thường gặp</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item menu-item-has-children"><a href="list-services.html">Dịch vụ</a>
@@ -181,6 +190,7 @@
                                             <li class="menu-item"><a href="single-post.html">Nha Khoa Tổng Quát</a></li>
                                         </ul>
                                     </li>
+                                    <li class="menu-item"><a href="faq.html">Câu hỏi thường gặp</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item menu-item-has-children"><a href="list-news.html">Tin Tức</a>
@@ -189,7 +199,8 @@
                                     <li class="menu-item"><a href="list-news.html">Sự Kiện</a></li>
                                 </ul>
                             </li>
-                            <li class="menu-item"><a href="contact.html">Liên Hệ</a></li>
+                            <li class="menu-item"><a href="before-after.html">Trước & Sau</a></li>
+                                    <li class="menu-item"><a href="contact.html">Liên Hệ</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -261,11 +272,11 @@
                                 <span class="post_icon icon-book-open"></span>
                                 Massage Therapy for Managing Workplace Stress
                             </h1>
-                            <div class="post_info">
+                            <!-- <div class="post_info">
                                 <span class="post_info_item post_info_posted">
                                     <a href="single-post.html" class="post_info_date date updated" content="2016-03-29 11:54:22">March 29, 2016</a>
                                 </span>
-                            </div>
+                            </div> -->
                             <p>
                                 Lorem ipsum dolor sit amet, vis rebum altera ex, fierent mediocrem duo at. Cu vix aperiri gloriatur, no quidam quodsi numquam has.
                                 His alia docendi accumsan at, est ne nisl soluta graeco. Eos ex detraxit patrioque dissentiunt, ad vel verterem facilisis sententiae, mei et veri aperiri explicari.
@@ -288,6 +299,11 @@
                         </div>
                     </article>
 
+                    <div class="fb-comments" data-href="http://clinic.laptrinhaz.com/single-post.html" data-width="100%" data-numposts="5"></div>
+
+                </div>
+                <div class="sc_empty_space em_height_4">
+                    <span class="sc_empty_space_inner"></span>
                 </div>
                 <div class="sidebar widget_area scheme_original" role="complementary">
                     <div class="sidebar_inner widget_area_inner">
@@ -321,92 +337,99 @@
                                 </div>
                             </div>
                         </aside>
-                        <aside class="widget widget_categories">
-                            <h5 class="widget_title">Categories</h5>
-                            <ul>
-                                <li class="cat-item"><a href="#">Blogger</a>
-                                </li>
-                                <li class="cat-item current-cat"><a href="#">Classic</a>
-                                </li>
-                                <li class="cat-item"><a href="#">Gallery</a>
-                                    <ul class='children'>
-                                        <li class="cat-item"><a href="#">Deep tissue</a>
-                                        </li>
-                                        <li class="cat-item"><a href="#">Massage therapy</a>
-                                        </li>
-                                        <li class="cat-item"><a href="#">Sports massage</a>
-                                        </li>
-                                        <li class="cat-item"><a href="#">Swedish massage</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="cat-item"><a href="#">Manual &amp; excercise therapy</a>
-                                </li>
-                                <li class="cat-item"><a href="#">Masonry 2 columns</a>
-                                </li>
-                                <li class="cat-item"><a href="#">Masonry 3 columns</a>
-                                </li>
-                                <li class="cat-item"><a href="#">Massage for rest &amp; relaxation</a>
-                                </li>
-                                <li class="cat-item"><a href="#">News</a>
-                                </li>
-                                <li class="cat-item"><a href="#">Physical therapy</a>
-                                </li>
-                                <li class="cat-item"><a href="#">Portfolio 2 columns</a>
-                                </li>
-                                <li class="cat-item"><a href="#">Portfolio 3 columns</a>
-                                </li>
-                                <li class="cat-item"><a href="#">Post Formats</a>
-                                </li>
-                            </ul>
-                        </aside>
-                        <aside class="widget widget_recent_posts">
-                            <h5 class="widget_title">Recent Posts</h5>
-                            <article class="post_item no_thumb first">
-                                <div class="post_content">
-                                    <h6 class="post_title">
-                                        <a href="single-post.html">Chiropractic</a>
-                                    </h6>
-                                    <div class="post_info">
-                                        <span class="post_info_item post_info_posted">
-                                            <a href="single-post.html" class="post_info_date">March 31, 2016</a>
-                                        </span>
 
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="post_item no_thumb">
-                                <div class="post_content">
-                                    <h6 class="post_title">
-                                        <a href="single-post.html">Massage Therapy</a>
-                                    </h6>
-                                    <div class="post_info">
-                                        <span class="post_info_item post_info_posted">
-                                            <a href="single-post.html" class="post_info_date">March 31, 2016</a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="post_item no_thumb">
-                                <div class="post_content">
-                                    <h6 class="post_title">
-                                        <a href="single-post.html">Physiotherapy</a>
-                                    </h6>
-                                    <div class="post_info">
-                                        <span class="post_info_item post_info_posted">
-                                            <a href="single-post.html" class="post_info_date">March 31, 2016</a>
-                                        </span>
-                                        <span class="post_info_item ">by
-                                            <a href="single-post.html" class="post_info_author">Kate Green</a>
-                                        </span>
-                                        <span class="post_info_item post_info_counters">
-                                            <a href="single-post.html" class="post_counters_item ">
-                                                <span class="post_counters_number"></span>
-                                            </a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
+                        <aside class="widget widget_categories">
+                            <h5 class="widget_title">Danh Mục</h5>
+                            <div class="sc_accordion" data-active="0">
+                                                                <div class="sc_accordion_item odd first">
+                                                                    <h5 class="sc_accordion_title">
+                                                                        <span class="sc_accordion_icon sc_accordion_icon_closed icon-plus"></span>
+                                                                        <span class="sc_accordion_icon sc_accordion_icon_opened icon-minus"></span>
+                                                                        Thẩm Mỹ Da
+                                                                    </h5>
+                                                                    <div class="sc_accordion_content">
+                                                                        <div class="text_column content_element ">
+                                                                            <div class="wrapper">
+                                                                                <ul>
+                                                                                    <li class="cat-item"><a href="#">Blogger</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item current-cat"><a href="#">Classic</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Manual &amp; excercise therapy</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Masonry 2 columns</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Masonry 3 columns</a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="sc_accordion_item">
+                                                                    <h5 class="sc_accordion_title">
+                                                                        <span class="sc_accordion_icon sc_accordion_icon_closed icon-plus"></span>
+                                                                        <span class="sc_accordion_icon sc_accordion_icon_opened icon-minus"></span>
+                                                                        Nha Khoa Thẩm Mỹ
+                                                                    </h5>
+                                                                    <div class="sc_accordion_content">
+                                                                        <div class="text_column content_element ">
+                                                                            <div class="wrapper">
+                                                                                <ul>
+                                                                                    <li class="cat-item"><a href="#">Blogger</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item current-cat"><a href="#">Classic</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Manual &amp; excercise therapy</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Masonry 2 columns</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Masonry 3 columns</a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="sc_accordion_item_1458833650145_8" class="sc_accordion_item">
+                                                                    <h5 class="sc_accordion_title">
+                                                                        <span class="sc_accordion_icon sc_accordion_icon_closed icon-plus"></span>
+                                                                        <span class="sc_accordion_icon sc_accordion_icon_opened icon-minus"></span>
+                                                                        Phẫu Thuật Thẩm Mỹ
+                                                                    </h5>
+                                                                    <div class="sc_accordion_content">
+                                                                        <div class="text_column content_element">
+                                                                            <div class="wrapper">
+                                                                                <ul>
+                                                                                    <li class="cat-item"><a href="#">Blogger</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item current-cat"><a href="#">Classic</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Manual &amp; excercise therapy</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Masonry 2 columns</a>
+                                                                                    </li>
+                                                                                    <li class="cat-item"><a href="#">Masonry 3 columns</a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="sc_accordion_item">
+                                                                    <h5 class="sc_accordion_title">
+                                                                        <span class="sc_accordion_icon"></span>
+                                                                        Hình Ảnh Trước & Sau
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="sc_accordion_item">
+                                                                    <h5 class="sc_accordion_title">
+                                                                        <a href="faq.html"><span class="sc_accordion_icon "></span>
+                                                                        Câu Hỏi Thường Gặp</a>
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+
                         </aside>
 
                     </div>
@@ -586,7 +609,7 @@
     </div>
 </div>
 
-<script type='text/javascript' src='js/vendor/jquery/jquery.js'></script>
+<!-- <script type='text/javascript' src='js/vendor/jquery/jquery.js'></script>
 <script type='text/javascript' src='js/vendor/jquery/jquery-migrate.min.js'></script>
 <script type='text/javascript' src='js/vendor/modernizr.min.js'></script>
 <script type='text/javascript' src='js/custom/custom.js'></script>
@@ -598,7 +621,33 @@
 <script type='text/javascript' src='js/vendor/social-share.js'></script>
 <script type='text/javascript' src='js/custom/theme.shortcodes.js'></script>
 <script type='text/javascript' src='js/custom/core.messages.js'></script>
+<script type='text/javascript' src='js/vendor/grid.layout/grid.layout.min.js'></script> -->
+
+<script type='text/javascript' src='js/vendor/jquery/jquery.js'></script>
+<script type='text/javascript' src='js/vendor/jquery/jquery-migrate.min.js'></script>
+<script type='text/javascript' src='js/vendor/woo/add-to-cart.min.js'></script>
+<script type='text/javascript' src='js/vendor/woo/woocommerce-add-to-cart.js'></script>
+<script type='text/javascript' src='js/vendor/modernizr.min.js'></script>
+<script type='text/javascript' src='js/custom/custom.js'></script>
+<script type='text/javascript' src='js/vendor/superfish.js'></script>
+<script type='text/javascript' src='js/vendor/jquery.slidemenu.js'></script>
+<script type='text/javascript' src='js/custom/core.utils.js'></script>
+<script type='text/javascript' src='js/custom/core.init.js'></script>
+<script type='text/javascript' src='js/custom/theme.init.js'></script>
+<script type='text/javascript' src='js/vendor/mediaelement/mediaelement-and-player.min.js'></script>
+<script type='text/javascript' src='js/vendor/social-share.js'></script>
+<script type='text/javascript' src='js/custom/theme.shortcodes.js'></script>
+<script type='text/javascript' src='js/custom/core.messages.js'></script>
 <script type='text/javascript' src='js/vendor/grid.layout/grid.layout.min.js'></script>
+<script type='text/javascript' src='js/vendor/swiper/swiper.js'></script>
+<script type='text/javascript' src='js/vendor/jquery/core.min.js'></script>
+<script type='text/javascript' src='js/vendor/jquery/widget.min.js'></script>
+<script type='text/javascript' src='js/vendor/jquery/tabs.min.js'></script>
+<script type='text/javascript' src='js/vendor/jquery/effect.min.js'></script>
+<script type='text/javascript' src='js/vendor/jquery/effect-fade.min.js'></script>
+<script type='text/javascript' src='js/vendor/jquery/accordion.min.js'></script>
+<script type='text/javascript' src='http://maps.google.com/maps/api/js?key='></script>
+<script type='text/javascript' src='js/vendor/core.googlemap.js'></script>
 </body>
 
 </html>

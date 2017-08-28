@@ -52,7 +52,7 @@ export class EquipmentFormComponent implements OnInit {
 	ngOnInit(){
 		switch(this._params.method){
 			case 'create':
-				console.log('create');
+
 				break;
 			case 'update':
 				if(this._params.id != null){

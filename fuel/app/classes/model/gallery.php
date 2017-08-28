@@ -51,13 +51,27 @@ class Model_Gallery extends \Orm\Model {
 	/*============================================
      * Get detail informat based on primary key
      *============================================*/
-	public static function getDetail($pk, $params = null, $option = null){
+	public static function getDetail($pk = null, $params = null, $option = null){
 		$select = ['SM.*'];
 
 		$query = \DB::select_array($select)
 			            ->from([self::$_table_name, 'SM'])
-			            ->where('SM.id', '=', $pk)
-			            ->and_where('SM.item_status', '=', 'active');
+			            ->where('SM.item_status', '=', 'active')
+						->as_object();
+
+		//Query by params
+		if(!empty($pk)) $query->where('SM.id', '=', $pk);
+		if(isset($params['id']) && !empty($params['id'])) $query->where('SM.id', '=', $params['id']);
+
+		if(isset($params['item_key']) && !empty($params['item_key'])) $query->where('SM.item_key', '=', $params['item_key']);
+		if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+
+
+
+		//Return one record or muilti
+		if(isset($params['response_quantity']) && $params['response_quantity'] == 'all') $result = $query->execute();
+		if((isset($params['response_quantity']) && $params['response_quantity'] == 'single') || !isset($params['response_quantity']) || empty($params['response_quantity'])) $result = $query->execute()->current();
+
 
         $result = $query->as_object()->execute()->current();
 		return $result;
