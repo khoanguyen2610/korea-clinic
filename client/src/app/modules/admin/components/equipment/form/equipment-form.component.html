@@ -1,17 +1,39 @@
-<form #f="ngForm">
-<div class="form-body">
-	<div class="form-group">
-	<label></label>
-	<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
+<div class="portlet light bordered">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-dark sbold uppercase">Form</span>
+		</div>
 	</div>
-	<div class="form-group">
-	<label></label>
-	<textarea name="description" [(ngModel)]="Item.description" class="form-control"></textarea>
-	</div>
-	<div class="form-group">
-	<label></label>
-	<textarea name="content" [(ngModel)]="Item.content" class="form-control"></textarea>
+	<div class="portlet-body form">
+		<form #f="ngForm" class="form-horizontal">
+			<div class="form-body">
+				<div class="form-group">
+					<label class="control-label col-md-3"><span class="required">*</span></label>
+					<div class="col-md-9">
+						<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3"></label>
+					<div class="col-md-9">
+						<textarea name="description" [(ngModel)]="Item.description" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3"></label>
+					<div class="col-md-9">
+						<textarea name="content" [(ngModel)]="Item.content" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions">
+				<div class="row">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> Save</button>
+						<button class="btn default"><i class="fa fa-refresh"></i> Default</button>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
-<button class="btn btn-style btn-save" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> 登録</button>
-</form>
