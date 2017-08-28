@@ -3355,7 +3355,7 @@ textarea {
 }
 
 .scheme_original .hover_icon:after {
-    background-color: rgba(173, 146, 121, 0.50);
+    background-color: rgba(208, 204, 204, 0.5);
 }
 
 .scheme_light .hover_icon:after {
