@@ -4,8 +4,7 @@ import { Routing } from './equipment.routing';
 
 import { CoreModule } from "../../../../shared/modules/core.module";
 
-import { EquipmentFormComponent, EquipmentListComponent
-     	} from './';
+import { EquipmentFormComponent, EquipmentListComponent } from './';
 
 @NgModule({
     declarations: [
