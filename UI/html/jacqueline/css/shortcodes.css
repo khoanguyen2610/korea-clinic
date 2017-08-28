@@ -5448,7 +5448,7 @@ body.sidebar_hide .sc_recent_news_style_news-announce .post_size_small {
     background-size: cover;
 }
 .sc_row.inverse_colors *:not(.sc_button_style_filled) {
-    color: #ad9279!important;
+    color: #fff;
 }
 .sc_row.inverse_colors .sc_button_style_filled * {
     color: inherit!important;

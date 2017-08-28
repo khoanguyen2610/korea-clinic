@@ -132,7 +132,7 @@ class Controller_NewsCategory extends \Controller_API {
                         'code' => !empty($pk)?Exception::E_UPDATE_SUCCESS:Exception::E_CREATE_SUCCESS,
                         'message' => Exception::getMessage(!empty($pk)?Exception::E_UPDATE_SUCCESS:Exception::E_CREATE_SUCCESS),
                         'record_id' => $obj->id,
-                        'date' => $obj];
+                        'data' => $obj];
         }else{
             /*==================================================
              * Response Data

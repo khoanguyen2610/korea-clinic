@@ -210,7 +210,7 @@ body table.booked-calendar .booked-appt-list .timeslot .timeslot-people button {
     background-color: #f8f4ed!important;
 }
 .sc_custom_1459330954110 {
-    background-color: #533f34!important;
+    background-color: #9FA69F!important;
 }
 .sc_custom_1459773167157 {
     background-color: #f8f4ed!important;
@@ -617,8 +617,8 @@ body table.booked-calendar .booked-appt-list .timeslot .timeslot-people button {
 	margin-bottom:0px;
 	font-size:18px;
 	color:#ffffff!important;
-	background-color:#533f34!important;
-	border-color:#533f34!important;
+	background-color:#636b63!important;
+	border-color:#636b63!important;
 }
 .home .columns_nofluid .sc_align_center {
 	margin-bottom:1.8em;
@@ -1128,3 +1128,7 @@ body table.booked-calendar .booked-appt-list .timeslot .timeslot-people button {
 .top_panel_image_header h1 {
 	font-family: "fontello", cursive;
 }
+
+.cu_text_c, .sc_item_descr, article.post_item {
+	color: #323232;
+};
