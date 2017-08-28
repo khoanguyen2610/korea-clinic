@@ -2101,7 +2101,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
     overflow: hidden;
 }
 .top_panel_wrap .logo_main {
-    max-height: 120px;
+    max-height: 155px;
     width: auto;
 }
 .logo a {
@@ -2160,7 +2160,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
     z-index: 1;
     top: 0;
     left: 0;
-    width: 25%;
+    width: 35%;
 }
 .top_panel_style_5 .top_panel_wrap_inner {
     text-align: center;
