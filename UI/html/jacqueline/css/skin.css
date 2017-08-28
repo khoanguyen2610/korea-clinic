@@ -7,7 +7,7 @@ body {
 }
 
 .scheme_original .body_wrap {
-    color: #757575;
+    color: #cdcdcd;
 }
 
 .scheme_light .body_wrap {
@@ -8802,7 +8802,8 @@ button,
 .scheme_original input[type="button"],
 .scheme_original button,
 .scheme_original .sc_button.sc_button_style_filled {
-    background-color: #ad9279;
+    /*background-color: #ad9279;*/
+    background-color: #9FA69F;
 }
 
 .scheme_light input[type="submit"],
@@ -8826,7 +8827,8 @@ button,
 .scheme_original input[type="button"],
 .scheme_original button,
 .scheme_original .sc_button.sc_button_style_filled {
-    border-color: #ad9279;
+    /*border-color: #ad9279;*/
+    border-color: #9FA69F;
 }
 
 .scheme_light input[type="submit"],
@@ -11731,7 +11733,7 @@ button,
 }
 
 .scheme_original .sc_services_style_services-1 .columns_wrap>[class*="column-"]:nth-child(2n) .sc_services_item .sc_services_item_readmore {
-    background-color: #ad9279;
+    background-color: #9FA69F;
 }
 
 .scheme_light .sc_services_style_services-1 .columns_wrap>[class*="column-"]:nth-child(2n) .sc_services_item .sc_services_item_readmore {
@@ -11743,7 +11745,7 @@ button,
 }
 
 .scheme_original .sc_services_style_services-1 .columns_wrap>[class*="column-"]:nth-child(2n) .sc_services_item .sc_services_item_readmore {
-    border-color: #ad9279;
+    border-color: #9FA69F;
 }
 
 .scheme_light .sc_services_style_services-1 .columns_wrap>[class*="column-"]:nth-child(2n) .sc_services_item .sc_services_item_readmore {
