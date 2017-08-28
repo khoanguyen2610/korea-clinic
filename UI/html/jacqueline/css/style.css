@@ -1668,6 +1668,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
     background-color: #212121;
 }
 .top_panel_fixed .top_panel_top,
+.top_panel_fixed .top_localtion_info_top,
 .top_panel_fixed .top_panel_style_1 .top_panel_middle,
 .top_panel_fixed .top_panel_style_2 .top_panel_middle {
     display: none;
@@ -2103,6 +2104,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 .top_panel_wrap .logo_main {
     max-height: 155px;
     width: auto;
+    margin-top: -19px;
 }
 .logo a {
     display: inline-block;
@@ -2124,9 +2126,9 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 }
 .top_panel_wrap .logo_fixed {
     display: none;
-    max-height: 80px;
+    max-height: 90px;
     width: auto;
-    margin-top: -8px;
+    margin-top: -10px;
 }
 .top_panel_fixed .top_panel_wrap .logo {
     /*margin: 0.7em 0!important;*/
@@ -2136,8 +2138,8 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
     display: block;
 }
 .top_panel_fixed .top_panel_middle .menu_main_wrap {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
 }
 .top_panel_style_3 .content_wrap,
 .top_panel_style_4 .content_wrap,
@@ -2296,6 +2298,7 @@ li.opened>a>.open_child_menu:before {
 .top_panel_middle .menu_main_nav_area {
     display: inline-block;
     text-align: left;
+    vertical-align: middle;
 }
 .top_panel_style_5 .top_panel_middle .menu_main_nav_area {
     display: block;
