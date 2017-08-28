@@ -77,10 +77,11 @@ export class EquipmentService {
 		});
 	}
 
-    public getByID(id: number) {
+    public getByID(id: number, params = null) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
         return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'detail/' + id, {
+        	search: params,
             headers: headers,
             withCredentials: true
         })

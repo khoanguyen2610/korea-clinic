@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
+import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
@@ -63,7 +63,8 @@ export class EquipmentFormComponent implements OnInit {
 				break;
 			case 'update':
 				if(this._params.id != null){
-					this._EquipmentService.getByID(this._params.id).subscribe(res => {
+					let params: URLSearchParams = new URLSearchParams();
+					this._EquipmentService.getByID(this._params.id, params).subscribe(res => {
 						if (res.status == 'success') {
 							if(res.data == null){
 								this._Router.navigate(['/admin/equipment/list']);
@@ -79,13 +80,6 @@ export class EquipmentFormComponent implements OnInit {
 				}
 				break;
 		}
-	}
-
-	onReset(){
-		this.Item = new Equipment();
-		this.Item.language_code = 'en';
-		// reset file upload
-		this.uploader = new FileUploader({});
 	}
 
 	onSubmit(form: NgForm){
@@ -117,7 +111,6 @@ export class EquipmentFormComponent implements OnInit {
 
 						}else{
 							form.reset();
-							this.onReset();
 						}
 						console.log(res.data);
 					}
