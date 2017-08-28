@@ -1129,6 +1129,6 @@ body table.booked-calendar .booked-appt-list .timeslot .timeslot-people button {
 	font-family: "fontello", cursive;
 }
 
-.cu_text_c, .sc_item_descr {
+.cu_text_c, .sc_item_descr, article.post_item {
 	color: #323232;
 };
