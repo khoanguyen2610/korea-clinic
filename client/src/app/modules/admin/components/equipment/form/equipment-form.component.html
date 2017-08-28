@@ -1,16 +1,58 @@
-<form #f="ngForm">
-<div class="form-body">
-	<div class="form-group">
-	<label></label>
-	<input type="text" name="title" [(ngModel)]="Item.title" class="form-control">
+<div class="portlet light bordered">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-dark sbold uppercase">Form</span>
+		</div>
 	</div>
-	<div class="form-group">
-	<label></label>
-	<textarea name="description" [(ngModel)]="Item.description" class="form-control"></textarea>
-	</div>
-	<div class="form-group">
-	<label></label>
-	<textarea name="content" [(ngModel)]="Item.content" class="form-control"></textarea>
+	<div class="portlet-body form">
+		<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
+			<div class="form-body">
+				<div class="form-group">
+					<label class="control-label col-md-3">Title <span class="required">*</span></label>
+					<div class="col-md-9">
+						<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">Language <span class="required">*</span></label>
+					<div class="col-md-9">
+						<div class="mt-radio-list">
+							<label class="radio-inline" *ngFor="let obj of lang_options">
+								<input type="radio" name="language_code" (click)="Item.language_code = obj.value" [checked]="obj.value == Item.language_code"> {{ obj.label }}
+								<span></span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">Description</label>
+					<div class="col-md-9">
+						<textarea name="description" [(ngModel)]="Item.description" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">Content</label>
+					<div class="col-md-9">
+						<textarea name="content" [(ngModel)]="Item.content" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">Image</label>
+					<div class="col-md-9">
+						<div class="uploader">
+							<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions">
+				<div class="row">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> Save</button>
+						<a class="btn default" [routerLink]="['/admin/equipment/list']"><i class="fa fa-back"></i> Back</a>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
-</form>

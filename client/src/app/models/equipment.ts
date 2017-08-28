@@ -1,7 +1,9 @@
 export class Equipment {
 	public id: number;
-	public lang_code: string;
+	public language_code: string;
+	public item_key: string;
 	public title: string;
-	public content: string;
 	public description: string;
+	public content: string;
+	public image: string;
 }
