@@ -4,12 +4,13 @@ import { Routing } from './equipment.routing';
 
 import { CoreModule } from "../../../../shared/modules/core.module";
 
-import { EquipmentFormComponent, EquipmentListComponent } from './';
+import { EquipmentFormComponent, EquipmentFormContentComponent, EquipmentListComponent } from './';
 
 @NgModule({
     declarations: [
-       EquipmentFormComponent, EquipmentListComponent
+       EquipmentFormComponent, EquipmentFormContentComponent, EquipmentListComponent
     ],
-    imports: [ CoreModule, Routing ]
+    imports: [ CoreModule, Routing ],
+    entryComponents: [ EquipmentFormContentComponent ]
 })
 export class EquipmentModule {}
