@@ -5,5 +5,5 @@ export class Equipment {
 	public title: string;
 	public description: string;
 	public content: string;
-	public image: string;
+	public image: any;
 }

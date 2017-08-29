@@ -5,54 +5,33 @@
 		</div>
 	</div>
 	<div class="portlet-body form">
-		<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
-			<div class="form-body">
-				<div class="form-group">
-					<label class="control-label col-md-3">Title <span class="required">*</span></label>
-					<div class="col-md-9">
-						<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
-					</div>
+		<div class="tabable-line boxless margin-bottom-20">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#tab_1" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true"> Tiếng Việt </a>
+				</li>
+				<li class="">
+					<a href="#tab_2" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false"> English </a>
+				</li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
+				<div class="tab-pane active" id="tab_1">
+					<app-equipment-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="vi" (file)="onSetImage($event)"></app-equipment-form-content>
 				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3">Language <span class="required">*</span></label>
-					<div class="col-md-9">
-						<div class="mt-radio-list">
-							<label class="radio-inline" *ngFor="let obj of lang_options">
-								<input type="radio" name="language_code" (click)="Item.language_code = obj.value" [checked]="obj.value == Item.language_code"> {{ obj.label }}
-								<span></span>
-							</label>
+				<div class="tab-pane" id="tab_2">
+					<app-equipment-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="vi" (file)="onSetImage($event)"></app-equipment-form-content>
+				</div>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> Save</button>
+							<a class="btn default" [routerLink]="['/admin/equipment/list']"><i class="fa fa-arrow-left"></i> Back</a>
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3">Description</label>
-					<div class="col-md-9">
-						<textarea name="description" [(ngModel)]="Item.description" class="form-control"></textarea>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3">Content</label>
-					<div class="col-md-9">
-						<textarea name="content" [(ngModel)]="Item.content" class="form-control"></textarea>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3">Image</label>
-					<div class="col-md-9">
-						<div class="uploader">
-							<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="form-actions">
-				<div class="row">
-					<div class="col-md-offset-3 col-md-9">
-						<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> Save</button>
-						<a class="btn default" [routerLink]="['/admin/equipment/list']"><i class="fa fa-back"></i> Back</a>
-					</div>
-				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
