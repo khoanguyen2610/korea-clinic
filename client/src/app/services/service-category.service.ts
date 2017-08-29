@@ -11,7 +11,7 @@ export class ServiceCategoryService {
     _list_data_URL: string;
 
     constructor( private _Configuration: Configuration, private _Http: Http) {
-        this._list_data_URL = _Configuration.apiUrl + this.serviceUrl + 'list_data';
+        this._list_data_URL = _Configuration.apiUrl + this.serviceUrl + 'list_all?language_code=vi';
     }
 
     createAuthorizationHeader(headers: Headers) {
@@ -34,7 +34,7 @@ export class ServiceCategoryService {
     public getListData(params) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'list_data', {
+        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'list_all', {
             search: params,
             headers: headers,
             withCredentials: true

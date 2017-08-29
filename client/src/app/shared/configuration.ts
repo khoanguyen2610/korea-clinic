@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Configuration {
 	//======================== API Config Variable ===============================
-	public server: string = "http://192.168.153.27/korea-clinic/public/";
+	public server: string = "http://clinic.laptrinhaz.com/api/public/";
 	// public server: string = "http://vws-api.vision-vietnam.com/public/";
 	public apiUrl: string = this.server + "api/v1/";
 	public apiAuthUsername: string = "visionvn";
