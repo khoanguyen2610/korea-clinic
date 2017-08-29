@@ -38,14 +38,10 @@ import { HelperDirective, EqualValidator, SmallerValidator } from '../../directi
 
 
 
-import { AdminThemeComponent } from '../../modules/admin/components';
-import { PublicThemeComponent } from '../../modules/public/components';
 
 
 @NgModule({
     declarations: [
-        //======================= Import Component =======================
-        AdminThemeComponent, PublicThemeComponent,
         //======================= Import Pipe =======================
         KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim,
         // FileSelectDirective, FileDropDirective,
@@ -76,7 +72,6 @@ import { PublicThemeComponent } from '../../modules/public/components';
     ],
     exports: [
         CommonModule,
-        AdminThemeComponent, PublicThemeComponent,
         KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim,
         // FileSelectDirective, FileDropDirective,
         EqualValidator, SmallerValidator, HelperDirective,
