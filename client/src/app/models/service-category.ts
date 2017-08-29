@@ -1,6 +1,6 @@
 export class ServiceCategory {
 	public id: number;
-	public lang_code: string;
+	public language_code: string;
 	public title: string;
 	public description: string;
 	public parent: number;
