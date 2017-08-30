@@ -15,7 +15,7 @@ declare let $:any;
 })
 
 export class ServiceCategoryListComponent implements OnInit {
-	// private subscription: Subscription;
+	private subscription: Subscription;
 	// private subscriptionEvents: Subscription;
 	private DTList;
 	@ViewChild('modal') modal: ModalComponent;
@@ -33,6 +33,10 @@ export class ServiceCategoryListComponent implements OnInit {
 		private _Router: Router,
 
 	) {
+		this.subscription = _ActivatedRoute.queryParams.subscribe((params:any) => {
+
+		});
+
 		this.url_list_data = this._ServiceCategoryService._list_data_URL + '?language_code=vi&recursive=true';
 	}
 
@@ -102,42 +106,42 @@ export class ServiceCategoryListComponent implements OnInit {
 		}).draw();
 
 
-		$('#tbl-data tbody').on('click', '#btn_edit', function() {
-
-			let id: number = $(this).parents('tr').attr('id');
-			self.onRoutingUpdate(id);
+		$('#tbl-data tbody').on( 'click', '#btn_edit', function () {
+			let tr = $(this).parents('tr');
+			let obj = self.DTList.row(tr).data();
+			self.onRoutingUpdate(obj.id, obj.item_key);
 			return false;
 		});
 
-		$('#tbl-data tbody').on('click', '#btn_delete', function() {
+		$('#tbl-data tbody').on( 'click', '#btn_delete', function () {
 			let id: number = $(this).parents('tr').attr('id');
 			self.onOpenConfirm(id);
 			return false;
 		});
 	}
 
-	onRoutingUpdate(id: number) {
-		this._Router.navigate(['/admin/service-category/form/update/', id]);
+	onRoutingUpdate(id: number, item_key: string){
+		this._Router.navigate(['/admin/service-category/form/update/' + id], {queryParams: { item_key: item_key }} );
 	}
 
-	onOpenConfirm(id: number) {
+	onOpenConfirm(id: number){
 		this.delete_id = id;
 		this.modal.open();
 	}
 
-	onConfirmDelete() {
+	onConfirmDelete(){
 		this.modal.close();
 		this._ServiceCategoryService.delete(this.delete_id).subscribe(res => {
-			if (res.status == 'success') {
+			if(res.status == 'success'){
 				this._ToastrService.success('Deleted!');
 				this.DTList.ajax.url(this._ServiceCategoryService._list_data_URL).load();
 			}
 		})
 	}
 
-	ngOnDestroy() {
-		// this.subscription.unsubscribe();
-		// this.modal.ngOnDestroy();
+	ngOnDestroy(){
+		this.subscription.unsubscribe();
+		this.modal.ngOnDestroy();
 	}
 
 }

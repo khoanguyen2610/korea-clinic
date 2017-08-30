@@ -8,6 +8,15 @@
 
 	</div>
 	<div class="form-group">
+		<label class="control-label col-md-1">Parent Category</label>
+		<div class="col-md-11">
+			<select class="form-control" [(ngModel)]="Item.parent">
+	            <option *ngFor="let option of serviceCategoryOptions" [value]="option.id">{{ option.text }}</option>
+            </select>
+		</div>
+	        
+    </div>      								                                       
+	<div class="form-group">
 		<label class="control-label col-md-1">Description</label>
 		<div class="col-md-11">
 			<ckeditor name="description"

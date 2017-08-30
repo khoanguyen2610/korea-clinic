@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Rx';
 import { Configuration } from '../../../../../../shared';
 
 import { ServiceCategory } from '../../../../../../models';
+import { ServiceCategoryService } from './../../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 
 declare let $: any;
@@ -23,8 +24,10 @@ export class ServiceCategoryFormContentComponent implements OnInit {
 	@Output('file') fileOutput = new EventEmitter();
 
 	_params: any;
+	serviceCategoryOptions: Array<any> = [];
 
 	constructor(
+		private _ServiceCategoryService: ServiceCategoryService,
 		private _Configuration: Configuration,
 		private _ToastrService: ToastrService,
 		private _ActivatedRoute: ActivatedRoute,
@@ -38,7 +41,39 @@ export class ServiceCategoryFormContentComponent implements OnInit {
 	}
 
 	ngOnInit(){
-		console.log(this.language_code);
+		this.getListCategory();
+	}
+
+	getListCategory() {
+		let paramData: URLSearchParams = new URLSearchParams();
+		// Prepare params
+		paramData.set('language_code', this.language_code);
+		paramData.set('recursive', 'true');
+
+
+		this._ServiceCategoryService.getListData(paramData).subscribe(res => {
+			if (res.status == 'success') {
+
+				var items = res.data;
+				var options = [];
+				items.forEach(item => {
+						let option = {id: item['id'], text: item['title']};
+						options.push(option);
+				});
+				this.serviceCategoryOptions = options;
+
+				if (this._params.method == 'create') {
+					let lang = this.language_code;
+					var Item = new ServiceCategory();
+					this.Item['language_code'] = lang;
+					this.Item['parent'] = this.serviceCategoryOptions[0].id;
+
+				}
+console.log(this.serviceCategoryOptions[0].id)
+				console.log(this.Item)
+			}
+
+		});
 	}
 
 
