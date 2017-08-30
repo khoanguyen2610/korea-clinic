@@ -9,7 +9,7 @@ import { URLSearchParams } from '@angular/http';
 // declare let moment: any;
 
 @Component({
-	selector: 'app-admin-footer',
+	selector: 'app-public-general-footer',
 	templateUrl: './footer.component.html',
 })
 
@@ -22,7 +22,7 @@ export class FooterComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Admin Footer');
+		console.log('public Footer');
 	}
 
 

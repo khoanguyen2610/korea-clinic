@@ -3,11 +3,15 @@ import { Routing } from './public.routing';
 import { CoreModule } from "../../../shared/modules/core.module";
 
 
-import { PublicComponent, HomeComponent, SlideComponent, ServiceComponent, EmployeeComponent } from './';
-import { HeaderComponent, HeaderMobileComponent } from './general';
+import { PublicComponent, HomeComponent, SlideComponent, ServiceComponent, EmployeeComponent, EquipmentComponent, PartnerComponent,
+		NewsComponent, GalleryComponent, AboutUsComponent, ContactComponent
+		} from './';
+import { HeaderComponent, HeaderMobileComponent, FormContactComponent, ChatComponent, FooterComponent } from './general';
 
 @NgModule({
-    declarations: [PublicComponent, HomeComponent, SlideComponent, ServiceComponent, EmployeeComponent, HeaderComponent, HeaderMobileComponent],
+    declarations: [PublicComponent, HomeComponent, SlideComponent, ServiceComponent, EmployeeComponent, EquipmentComponent, PartnerComponent,
+    				NewsComponent, GalleryComponent, AboutUsComponent, ContactComponent,
+    				HeaderComponent, HeaderMobileComponent, FormContactComponent, ChatComponent, FooterComponent],
     imports: [ CoreModule, Routing ]
 })
 export class PublicModule {}

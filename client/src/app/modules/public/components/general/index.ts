@@ -1,5 +1,5 @@
-// export * from './main-nav/main-nav.component';
 export * from './header/header.component';
 export * from './header-mobile/header-mobile.component';
-// export * from './footer/footer.component';
-// export * from './breadcrumb/breadcrumb.component';
+export * from './contact/form-contact.component';
+export * from './chat/chat.component';
+export * from './footer/footer.component';

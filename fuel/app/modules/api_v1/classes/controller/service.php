@@ -90,7 +90,7 @@ class Controller_Service extends \Controller_API {
 	            $obj = empty($pk)?\Model_Service::forge():\Model_Service::find($pk);
 
 				//Generate random item key
-				empty($pk) && $arrData['item_key'] = \Vision_Common::randomItemKey();
+				empty($pk) && !isset($arrData['item_key']) && $arrData['item_key'] = \Vision_Common::randomItemKey();
 
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();

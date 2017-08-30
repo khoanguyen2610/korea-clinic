@@ -9,7 +9,7 @@ import { URLSearchParams } from '@angular/http';
 // declare let moment: any;
 
 @Component({
-	selector: 'app-public-header',
+	selector: 'app-public-general-header',
 	templateUrl: './header.component.html',
 })
 

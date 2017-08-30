@@ -9,11 +9,11 @@ declare let $: any;
 declare let moment: any;
 
 @Component({
-	selector: 'app-public-home-employee',
-	templateUrl: './employee.component.html',
+	selector: 'app-public-general-chat',
+	templateUrl: './chat.component.html',
 })
 
-export class EmployeeComponent implements OnInit {
+export class ChatComponent implements OnInit {
 
 	constructor(
 
@@ -22,7 +22,7 @@ export class EmployeeComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Public Homepage');
+		console.log('Chat Homepage');
 	}
 
 

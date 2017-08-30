@@ -1,79 +1,112 @@
 <header class="top_panel_wrap top_panel_style_3 scheme_original">
-  <div class="top_panel_wrap_inner top_panel_inner_style_3 top_panel_position_above">
-    <div class="top_panel_middle">
-      <div class="content_wrap">
-        <div class="contact_logo">
-          <div class="logo">
-            <a href="index.html">
-                                    <img src="images/Logo.png" class="logo_main" alt="" >
-                                    <img src="images/Logo.png" class="logo_fixed" alt="" width="238" height="56">
-                                </a>
-          </div>
-        </div>
-        <div class="top_localtion_info_top content_wrap clearfix">
-          <div class="top_panel_top_socials">
-            <span class="label">93 Võ Văn Tần, Quận 3, TP.HCM | 028 3933 9393</span>
-          </div>
-        </div>
-        <div class="menu_main_wrap">
-          <nav class="menu_main_nav_area">
-            <ul class="menu_main_nav">
-              <li class="menu-item current-menu-ancestor current-menu-parent menu-item-has-children"><a>Giới thiệu</a>
-                <ul class="sub-menu">
-                  <li class="menu-item current-menu-item"><a href="about-us.html">White Clinic</a></li>
-                  <li class="menu-item"><a href="list-staffs.html">Đội ngũ bác sĩ</a></li>
-                  <li class="menu-item"><a href="list-equipments.html">Trang Thiết Bị</a></li>
-                </ul>
-              </li>
-              <li class="menu-item menu-item-has-children"><a href="list-services.html">Dịch vụ</a>
-                <ul class="sub-menu">
-                  <li class="menu-item menu-item-has-children"><a href="list-services.html#skin">Da Liễu</a>
-                    <ul class="sub-menu">
-                      <li class="menu-item"><a href="single-post.html">Trắng Da</a></li>
-                      <li class="menu-item"><a href="single-post.html">Trị Nám - Tàn Nhang</a></li>
-                      <li class="menu-item"><a href="single-post.html">Trị Mụn</a></li>
-                      <li class="menu-item"><a href="single-post.html">Trị Sẹo</a></li>
-                      <li class="menu-item"><a href="single-post.html">Trẻ Hóa Da</a></li>
-                      <li class="menu-item"><a href="single-post.html">Chăm Sóc Da</a></li>
-                    </ul>
-                  </li>
-                  <li class="menu-item menu-item-has-children"><a href="list-services.html">Nha Khoa</a>
-                    <ul class="sub-menu">
-                      <li class="menu-item"><a href="single-post.html">Implant</a></li>
-                      <li class="menu-item"><a href="single-post.html">Thẩm Mỹ Phục Hình Răng</a></li>
-                      <li class="menu-item"><a href="single-post.html">Niềng Răng</a></li>
-                      <li class="menu-item"><a href="single-post.html">Phẫu Thuật</a></li>
-                      <li class="menu-item"><a href="single-post.html">Nha Khoa Trẻ Em</a></li>
-                      <li class="menu-item"><a href="single-post.html">Nha Khoa Tổng Quát</a></li>
-                    </ul>
-                  </li>
-                  <li class="menu-item"><a href="faq.html">Câu hỏi thường gặp</a></li>
-                </ul>
-              </li>
-              <li class="menu-item menu-item-has-children"><a href="list-news.html">Tin Tức</a>
-                <ul class="sub-menu">
-                  <li class="menu-item"><a href="list-news.html">Khuyến mãi</a></li>
-                  <li class="menu-item"><a href="list-news.html">Sự Kiện</a></li>
-                </ul>
-              </li>
-              <li class="menu-item"><a href="before-after.html">Trước & Sau</a></li>
-              <li class="menu-item"><a href="contact.html">Liên Hệ</a></li>
-            </ul>
-          </nav>
-          <div class="search_wrap search_style_regular search_state_closed search_ajax">
-            <!-- <div class="search_form_wrap">
-                                    <form role="search" method="get" class="search_form" action="#">
-                                        <button type="submit" class="search_submit icon-search-1" title="Open search"></button>
-                                        <input type="text" class="search_field" placeholder="Search" value="" name="s" />
-                                    </form>
-                                </div> -->
-            <div class="search_results widget_area scheme_original">
-              <a class="search_results_close icon-cancel"></a>
-              <div class="search_results_content"></div>
+    <div class="top_panel_wrap_inner top_panel_inner_style_3 top_panel_position_above">
+        <div class="top_panel_middle">
+            <div class="content_wrap">
+                <div class="contact_logo">
+                    <div class="logo">
+                        <a [routerLink]="['/']">
+                            <img alt="" class="logo_main" src="./assets/public/images/Logo.png">
+                            <img alt="" class="logo_fixed" height="56" src="./assets/public/images/Logo.png" width="238">
+                        </a>
+                    </div>
+                </div>
+                <div class="top_localtion_info_top content_wrap clearfix">
+                    <div class="top_panel_top_socials">
+                        <span class="label">93 Võ Văn Tần, Quận 3, TP.HCM | 028 3933 9393</span>
+                    </div>
+                </div>
+                <div class="menu_main_wrap">
+                    <nav class="menu_main_nav_area">
+                        <ul class="menu_main_nav">
+                            <li class="menu-item current-menu-ancestor current-menu-parent menu-item-has-children">
+                                <a>Giới thiệu</a>
+                                <ul class="sub-menu">
+                                    <li class="menu-item current-menu-item">
+                                        <a [routerLink]="['/about-us']" [routerLinkActive]="['active']">White Clinic</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a [routerLink]="['/staff']" [routerLinkActive]="['active']">Đội ngũ bác sĩ</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a [routerLink]="['/equipment']" [routerLinkActive]="['active']">Trang Thiết Bị</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item menu-item-has-children">
+                                <a [routerLink]="['/service']" [routerLinkActive]="['active']">Dịch vụ</a>
+                                <ul class="sub-menu">
+                                    <li class="menu-item menu-item-has-children">
+                                        <a href="list-services.html#skin">Da Liễu</a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Trắng Da</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Trị Nám - Tàn Nhang</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Trị Mụn</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Trị Sẹo</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Trẻ Hóa Da</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Chăm Sóc Da</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a href="list-services.html">Nha Khoa</a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Implant</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Thẩm Mỹ Phục Hình Răng</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Niềng Răng</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Phẫu Thuật</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Nha Khoa Trẻ Em</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="single-post.html">Nha Khoa Tổng Quát</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a [routerLink]="['/faq']" [routerLinkActive]="['active']">Câu hỏi thường gặp</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item menu-item-has-children">
+                                <a [routerLink]="['/news']" [routerLinkActive]="['active']">Tin Tức</a>
+                                <ul class="sub-menu">
+                                    <li class="menu-item">
+                                        <a [routerLink]="['/news']" [routerLinkActive]="['active']">Khuyến mãi</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a [routerLink]="['/news']" [routerLinkActive]="['active']">Sự Kiện</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a [routerLink]="['/service/before-after']" [routerLinkActive]="['active']">Trước & Sau</a>
+                            </li>
+                            <li class="menu-item">
+                                <a [routerLink]="['/contact']" [routerLinkActive]="['active']">Liên Hệ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>

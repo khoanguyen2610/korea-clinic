@@ -1,0 +1,1 @@
+export * from './list/faq-list.component';

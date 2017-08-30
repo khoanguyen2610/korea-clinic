@@ -98,7 +98,7 @@ class Controller_News extends \Controller_API {
 	            $obj = empty($pk)?\Model_News::forge():\Model_News::find($pk);
 
 				//Generate random item key
-				empty($pk) && $arrData['item_key'] = \Vision_Common::randomItemKey();
+				empty($pk) && !isset($arrData['item_key']) && $arrData['item_key'] = \Vision_Common::randomItemKey();
 
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();

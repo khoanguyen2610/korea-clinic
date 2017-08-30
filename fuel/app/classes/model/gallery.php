@@ -3,7 +3,7 @@
  * @Author: k_nguyen
  * @Date:   2016-11-14 14:04:29
  * @Last Modified by:   k_nguyen
- * @Last Modified time: 2017-04-03 10:58:47
+ * @Last Modified time: 2017-08-30 11:58:58
  */
 class Model_Gallery extends \Orm\Model {
 	protected static $_table_name = 'gallery';
@@ -72,8 +72,6 @@ class Model_Gallery extends \Orm\Model {
 		if(isset($params['response_quantity']) && $params['response_quantity'] == 'all') $result = $query->execute();
 		if((isset($params['response_quantity']) && $params['response_quantity'] == 'single') || !isset($params['response_quantity']) || empty($params['response_quantity'])) $result = $query->execute()->current();
 
-
-        $result = $query->as_object()->execute()->current();
 		return $result;
 	}
 

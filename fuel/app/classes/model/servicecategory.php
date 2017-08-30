@@ -3,7 +3,7 @@
  * @Author: k_nguyen
  * @Date:   2016-11-14 14:04:29
  * @Last Modified by:   k_nguyen
- * @Last Modified time: 2017-04-03 10:58:47
+ * @Last Modified time: 2017-08-30 13:59:36
  */
 class Model_ServiceCategory extends \Orm\Model {
 	protected static $_table_name = 'service_category';
@@ -32,7 +32,7 @@ class Model_ServiceCategory extends \Orm\Model {
      * Get all record
      *============================================*/
 	public static function getAll($params = null, $option = null){
-		$select = ['SM.*', DB::expr('VL.name as language_name')];
+		$select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name')];
 
 		$query = \DB::select_array($select)
 			            ->from([self::$_table_name, 'SM'])
