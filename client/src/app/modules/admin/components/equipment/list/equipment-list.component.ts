@@ -91,8 +91,9 @@ export class EquipmentListComponent implements OnInit {
 		});
 
 		$('#tbl-data tbody').on( 'click', '#btn_edit', function () {
-			let id: number = $(this).parents('tr').attr('id');
-			self.onRoutingUpdate(id);
+			let tr = $(this).parents('tr');
+			let obj = self.DTList.row(tr).data();
+			self.onRoutingUpdate(obj.id, obj.item_key);
 			return false;
 		});
 
@@ -103,8 +104,8 @@ export class EquipmentListComponent implements OnInit {
 		});
 	}
 
-	onRoutingUpdate(id: number){
-		this._Router.navigate(['/admin/equipment/form/update/', id]);
+	onRoutingUpdate(id: number, item_key: string){
+		this._Router.navigate(['/admin/equipment/form/update/' + id], {queryParams: { item_key: item_key }} );
 	}
 
 	onOpenConfirm(id: number){

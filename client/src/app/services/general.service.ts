@@ -91,6 +91,17 @@ export class GeneralService {
         .catch(this.handleError);
     }
 
+    public getItemKey(){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'generate_data', {
+            headers: headers,
+            withCredentials: true
+        })
+        .map(res => res.json())
+        .catch(this.handleError);
+    }
+
     private handleError(error: Response) {
         return Observable.throw(error.json().error || 'Server error');
     }
