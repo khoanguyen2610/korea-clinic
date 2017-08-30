@@ -33,56 +33,109 @@ export class ServiceCategoryListComponent implements OnInit {
 		private _Router: Router,
 
 	) {
-		this.url_list_data = this._ServiceCategoryService._list_data_URL
+		this.url_list_data = this._ServiceCategoryService._list_data_URL + '?language_code=vi&recursive=true';
 	}
 
 	ngOnInit(){
 
 	}
 
-	ngAfterViewInit(){
+	ngAfterViewInit() {
 		//load datatables
 		let self = this,
 			_list_data_URL = this.url_list_data,
 			Configuration = this._Configuration;
-		this.DTList = $('#tbl-data').DataTable({
+		var datatable = this.DTList = $('#tbl-data').DataTable({
 			autoWidth: false,
 			pageLength: Configuration.DtbPageLength,
 			lengthMenu: Configuration.DtbLengthMenu,
 			lengthChange: true,
 			searching: false,
 			dom: '<"datatable-header clearfix"fli><"datatable-scroll table-responsive clearfix"tr><"datatable-footer clearfix"ip>',
-			order: [],
+			// order: [[1, 'asc']],
 			ajax: {
 				'url': _list_data_URL,
 				'type': 'GET',
-				'beforeSend': function (request) {
-					request.setRequestHeader('Authorization','Basic ' + self._Configuration.apiAuth);
+				'beforeSend': function(request) {
+					request.setRequestHeader('Authorization', 'Basic ' + self._Configuration.apiAuth);
 				},
 				xhrFields: {
 					withCredentials: true
 				}
 			},
+			columns: [
+				{ 'data': null },
+				{ 'data': 'title' },
+				{ 'data': 'language_name' },
+				{ 'data': null },
+			],
+			columnDefs: [
+				{
+					searchable: false,
+					orderable: false,
+					targets: [0]
+				},
+				{
+					className: 'text-left',
+					targets: [1]
+				},
+				{
+					render: function(data, type, full) {
+						var html = '<a class="btn btn-xs purple edit-record" href="#" id="btn_edit"><i class="fa fa-pencil"></i></a>'
+							+ '&nbsp;'
+							+ '<a class="btn btn-xs red del-record" href="#" id="btn_delete" ><i class="fa fa-trash"></i></a>';
+						return html;
+					},
+					data: null,
+					bSortable: false,
+					className: 'text-center',
+					targets: [3]
+				},
+			]
+		});
+
+		datatable.on('order.dt search.dt', function() {
+			datatable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function(cell, i) {
+				cell.innerHTML = i + 1;
+			});
+		}).draw();
+
+
+		$('#tbl-data tbody').on('click', '#btn_edit', function() {
+			let id: number = $(this).parents('tr').attr('id');
+			self.onRoutingUpdate(id);
+			return false;
+		});
+
+		$('#tbl-data tbody').on('click', '#btn_delete', function() {
+			let id: number = $(this).parents('tr').attr('id');
+			self.onOpenConfirm(id);
+			return false;
 		});
 	}
 
-	onRoutingUpdate(id: number){
+	onRoutingUpdate(id: number) {
 		this._Router.navigate(['/admin/service-category/form/update/', id]);
 	}
 
-	onOpenConfirm(id: number){
+	onOpenConfirm(id: number) {
 		this.delete_id = id;
-		this.modal.open('sm');
+		this.modal.open();
 	}
 
-	onConfirmDelete(){
+	onConfirmDelete() {
 		this.modal.close();
 		this._ServiceCategoryService.delete(this.delete_id).subscribe(res => {
-			if(res.status == 'success'){
-				this._ToastrService.success('データを削除しました。');
+			if (res.status == 'success') {
+				this._ToastrService.success('Deleted!');
 				this.DTList.ajax.url(this._ServiceCategoryService._list_data_URL).load();
 			}
 		})
+	}
+
+	ngOnDestroy() {
+		this.subscription.unsubscribe();
+		this.modal.ngOnDestroy();
 	}
 
 }

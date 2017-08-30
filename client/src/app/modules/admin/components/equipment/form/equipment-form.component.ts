@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-
-import { Configuration } from '../../../../../shared';
-import { AuthService, EquipmentService } from '../../../../../services';
+import { EquipmentFormContentComponent } from './content/equipment-form-content.component';
 import { Equipment } from '../../../../../models';
+import { AuthService, EquipmentService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
@@ -20,75 +17,86 @@ declare let $: any;
 
 export class EquipmentFormComponent implements OnInit {
 	private subscription: Subscription;
-	private subscriptionEvents: Subscription;
-
-	Item = new Equipment();
 	_params: any;
-	curRouting?: string;
 
+	language_code: string;
+	Item_vi = new Equipment();
+	Item_en = new Equipment();
+	Items: Array<any> = [];
 	uploadProgress: any;
-	files_type = [];
-	files_upload = 0;
-	public uploader: FileUploader = new FileUploader({});
-	public hasBaseDropZoneOver: boolean = false;
-	public hasAnotherDropZoneOver: boolean = false;
-
-	public lang_options = [
-		{'value':'en','label':'English'},
-		{'value':'vi','label':'Vietnam'},
-	];
 
 	constructor(
 		private _AuthService: AuthService,
-		private _Configuration: Configuration,
 		private _EquipmentService: EquipmentService,
-
-		private _ToastrService: ToastrService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
-
+		private _ToastrService: ToastrService,
+		private _ElementRef: ElementRef,
 	) {
 		//=============== Get Params On Url ===============
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
 		);
 
-		this.files_type = this._Configuration.upload_file_extension;
+		this.Item_vi.language_code = 'vi';
+		this.Item_en.language_code = 'en';
+		this.Items = [this.Item_vi, this.Item_en];
 	}
 
 	ngOnInit(){
-		switch(this._params.method){
-			case 'create':
-				this.Item.language_code = 'en';
-				break;
-			case 'update':
-				if(this._params.id != null){
-					let params: URLSearchParams = new URLSearchParams();
-					this._EquipmentService.getByID(this._params.id, params).subscribe(res => {
-						if (res.status == 'success') {
-							if(res.data == null){
-								this._Router.navigate(['/admin/equipment/list']);
-							}else{
-								this.Item = res.data;
-							}
-						}else{
+		this.language_code = 'vi';
+		if(this._params.method == 'update'){
+			if(this._params.id != null){
+				let params: URLSearchParams = new URLSearchParams();
+				params.set('response_quantity','all');
+				params.set('language_code','vi');
+				console.log(params);
+				this._EquipmentService.getByID(this._params.id, params).subscribe(res => {
+					if (res.status == 'success') {
+						if(res.data == null){
 							this._Router.navigate(['/admin/equipment/list']);
+						}else{
+							this.language_code = res.data.language_code;
+							// var repeat:number = 0;
+							// var loadInterval = setInterval(() => {
+							// 	// console.log(res.data);
+							// 	repeat++;
+							// 	if(repeat == 5){
+							// 		clearInterval(loadInterval);
+							// 	}
+							// }, 500);
 						}
-					});
-				}else{
-					this._Router.navigate(['/']);
-				}
-				break;
+					}else{
+						this._Router.navigate(['/admin/equipment/list']);
+					}
+				});
+			}else{
+				this._Router.navigate(['/']);
+			}
 		}
 	}
 
+	ngAfterViewInit(){
+		let self = this;
+		this._ElementRef.nativeElement.querySelectorAll('.link-tab').forEach(function(elm){
+			elm.addEventListener('click', function(event){
+				self.language_code = event.toElement.dataset.lang;
+			});
+		});
+	}
+
 	onSubmit(form: NgForm){
-		if(form.valid){
+		if(!this.validateRequiredField()){
+			return;
+		}
+
+		this.Items.forEach(Item => {
 			let formData: FormData = new FormData();
 
-			if (this.uploader.queue.length) {
-				for (let key in this.uploader.queue) {
-					var upload = this.uploader.queue[key]._file;
+			let uploader = Item['image'];
+			if (uploader && uploader.queue.length) {
+				for (let key in uploader.queue) {
+					var upload = uploader.queue[key]._file;
 					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
 					var objUpload = new Blob([upload]);
 
@@ -96,92 +104,57 @@ export class EquipmentFormComponent implements OnInit {
 				}
 			}
 
-			formData.append('language_code', this.Item['language_code']);
-			formData.append('title', this.Item['title']);
-			formData.append('content', this.Item['content']);
-			formData.append('description', this.Item['description']);
+			formData.append('language_code', Item['language_code']);
+			formData.append('title', Item['title']);
+			formData.append('content', Item['content']);
+			formData.append('description', Item['description']);
 
 			this._EquipmentService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;
 			});
 			try {
-				this._EquipmentService.upload(formData, this.Item.id).then((res) => {
+				this._EquipmentService.upload(formData, Item['id']).then((res) => {
 					if (res.status == 'success') {
-						if(this._params.method == 'update'){
-
-						}else{
-							form.reset();
+						if(this._params.method == 'create'){
+							let lang = Item['language_code'];
+							Item = new Equipment();
+							Item['language_code'] = lang;
 						}
-						console.log(res.data);
+						this._ToastrService.success('Saved!');
 					}
 
 				});
 			} catch (error) {
 				document.write(error)
 			}
+		});
+
+	}
+
+	onSetImage(obj){
+		switch(this.language_code){
+			case 'vi':
+				this.Item_vi.image = obj;
+				break;
+			case 'en':
+				this.Item_en.image = obj;
+				break;
 		}
 	}
 
-		/*====================================
-	 * Validate Form File Type
-	 *====================================*/
-	onValidateFormFileType() {
-		this.uploader['error_limit_files'] = false;
-		setTimeout(() => {
-			let after_upload_files = +this.uploader.queue.length; // after drag upload files
-			if (after_upload_files <= this._Configuration.limit_files) {
-				if (after_upload_files != this.files_upload) {
-					let uploader = [];
-					for (let key in this.uploader.queue) {
-						var checked = false;
-						var ext = this.uploader.queue[key]._file.name.split('.').pop();
-						ext = ext.toLowerCase();
+	validateRequiredField(){
+		let valid = true;
 
-						for (let k in this.files_type) {
-
-							if (ext.indexOf(this.files_type[k]) > -1) {
-								checked = true;
-								break;
-							}
-						}
-
-						if (!checked) {
-							var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
-							this._ToastrService.error(msgInvalidFileType);
-							checked = false;
-						}
-
-						if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
-							var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
-							this._ToastrService.error(msgSizeTooLarge);
-							checked = false;
-						}
-
-						if (!checked) {
-							// this.uploader.queue.splice(+key, 1);
-							this.uploader.queue[key].isError = true;
-						} else {
-							this.uploader.queue[key]._file['is_keeping'] = true;
-							uploader.push(this.uploader.queue[key]);
-						}
-
-
-					}
-					this.uploader.queue = uploader;
-					this.files_upload = this.uploader.queue.length;
-				}
+		this.Items.forEach(Item => {
+			if(!Item['title']){
+				valid = false;
 			}
+			if(!Item['language_code']){
+				valid = false;
+			}
+		});
 
-		}, 500);
-	}
-
-	public fileOverBase(e: any): void {
-		this.hasBaseDropZoneOver = e;
-	}
-
-	public fileOverAnother(e: any): void {
-		this.onValidateFormFileType();
-		this.hasAnotherDropZoneOver = e;
+		return valid;
 	}
 
 	ngOnDestroy(){
