@@ -100,6 +100,17 @@ export class EquipmentService {
 		.catch(this.handleError);
 	}
 
+	public deleteItemKey(item_key: string){
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.delete(this._Configuration.apiUrl + this.serviceUrl + 'item_key/' + item_key, {
+			headers: headers,
+			withCredentials: true
+		})
+		.map(res => res.json())
+		.catch(this.handleError);
+	}
+
 	private handleError(error: Response) {
 		return Observable.throw(error.json().error || 'Server error');
 	}

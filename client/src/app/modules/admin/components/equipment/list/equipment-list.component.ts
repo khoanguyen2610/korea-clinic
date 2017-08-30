@@ -21,7 +21,7 @@ export class EquipmentListComponent implements OnInit {
 	private DTList;
 	@ViewChild('modal') modal: ModalComponent;
 
-	delete_id: number;
+	delete_item_key: string;
 	url_list_data: String;
 
 	constructor(
@@ -98,8 +98,9 @@ export class EquipmentListComponent implements OnInit {
 		});
 
 		$('#tbl-data tbody').on( 'click', '#btn_delete', function () {
-			let id: number = $(this).parents('tr').attr('id');
-			self.onOpenConfirm(id);
+			let tr = $(this).parents('tr');
+			let obj = self.DTList.row(tr).data();
+			self.onOpenConfirm(obj.item_key);
 			return false;
 		});
 	}
@@ -108,14 +109,14 @@ export class EquipmentListComponent implements OnInit {
 		this._Router.navigate(['/admin/equipment/form/update/' + id], {queryParams: { item_key: item_key }} );
 	}
 
-	onOpenConfirm(id: number){
-		this.delete_id = id;
+	onOpenConfirm(item_key: string){
+		this.delete_item_key = item_key;
 		this.modal.open();
 	}
 
 	onConfirmDelete(){
 		this.modal.close();
-		this._EquipmentService.delete(this.delete_id).subscribe(res => {
+		this._EquipmentService.deleteItemKey(this.delete_item_key).subscribe(res => {
 			if(res.status == 'success'){
 				this._ToastrService.success('Deleted!');
 				this.DTList.ajax.url(this._EquipmentService._list_data_URL).load();
