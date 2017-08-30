@@ -194,4 +194,64 @@ class Controller_NewsCategory extends \Controller_API {
         return $this->response($response);
     }
 
+
+
+    /*=============================================================
+     * Author: Nguyen Anh Khoa
+     * Function delete a record based on item_key
+     * Update status record to 'delete'
+     * Method DELETE
+     * Table news_category
+     * Response data: status[success|error], message[notification]
+     *=============================================================*/
+    public function delete_item_key($item_key = null){
+        $Ids = $result = [];
+        if(!empty($item_key)){
+            try{
+                \DB::start_transaction();
+
+                $items = \Model_NewsCategory::find('all', ['select' => ['id'], 'where' => ['item_key' => $item_key]]);
+
+                if(!empty($items)){
+                    foreach ($items as $val) {
+                        $Ids[] = $val->id;
+                        $result = \Model_NewsCategory::softDelete($val->id, array('item_status' => 'delete'));
+                    }
+                }
+                \DB::commit_transaction();
+            } catch (\Exception $e) {
+                \DB::rollback_transaction();
+                /*==================================================
+                 * Response Data
+                 *==================================================*/
+                $response = ['status' => 'error',
+                            'code' => Exception::E_UNEXPECTED_ERR,
+                            'message' => Exception::getMessage(Exception::E_UNEXPECTED_ERR),
+                            'error' => $e->getMessage()];
+                return $this->response($response);
+            }
+
+            $status = 'success';
+            $response_code = Exception::E_DELETE_SUCCESS;
+            $response_message = Exception::getMessage(Exception::E_DELETE_SUCCESS);
+            if(!$result){
+                $status = 'error';
+                $response_code = Exception::E_NO_RECORD;
+                $response_message = Exception::getMessage(Exception::E_NO_RECORD);
+            }
+        }else{
+            $status = 'error';
+            $response_code = Exception::E_PK_MISS;
+            $response_message = Exception::getMessage(Exception::E_PK_MISS);
+        }
+        /*==================================================
+         * Response Data
+         *==================================================*/
+        $response = ['status' => $status,
+                    'code' => $response_code,
+                    'message' => $response_message,
+                    'record_id' => $Ids];
+        return $this->response($response);
+    }
+
 }

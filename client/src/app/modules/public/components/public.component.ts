@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 declare var $: any;
@@ -11,6 +11,11 @@ declare var $: any;
 export class PublicComponent  {
 	constructor() {
 		console.log('public componemtdsa');
+
+	}
+
+
+	ngAfterViewInit(){
 
 	}
 
