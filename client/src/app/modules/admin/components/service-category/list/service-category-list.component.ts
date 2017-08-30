@@ -15,8 +15,8 @@ declare let $:any;
 })
 
 export class ServiceCategoryListComponent implements OnInit {
-	private subscription: Subscription;
-	private subscriptionEvents: Subscription;
+	// private subscription: Subscription;
+	// private subscriptionEvents: Subscription;
 	private DTList;
 	@ViewChild('modal') modal: ModalComponent;
 
@@ -66,7 +66,6 @@ export class ServiceCategoryListComponent implements OnInit {
 			columns: [
 				{ 'data': null },
 				{ 'data': 'title' },
-				{ 'data': 'language_name' },
 				{ 'data': null },
 			],
 			columnDefs: [
@@ -77,19 +76,21 @@ export class ServiceCategoryListComponent implements OnInit {
 				},
 				{
 					className: 'text-left',
+					orderable: false,
 					targets: [1]
 				},
 				{
 					render: function(data, type, full) {
-						var html = '<a class="btn btn-xs purple edit-record" href="#" id="btn_edit"><i class="fa fa-pencil"></i></a>'
+						var html = '<a class="btn btn-xs purple edit-record" id="btn_edit"><i class="fa fa-pencil"></i></a>'
 							+ '&nbsp;'
-							+ '<a class="btn btn-xs red del-record" href="#" id="btn_delete" ><i class="fa fa-trash"></i></a>';
+							+ '<a class="btn btn-xs red del-record" id="btn_delete" ><i class="fa fa-trash"></i></a>';
 						return html;
 					},
 					data: null,
 					bSortable: false,
+					orderable: false,
 					className: 'text-center',
-					targets: [3]
+					targets: [2]
 				},
 			]
 		});
@@ -102,6 +103,7 @@ export class ServiceCategoryListComponent implements OnInit {
 
 
 		$('#tbl-data tbody').on('click', '#btn_edit', function() {
+
 			let id: number = $(this).parents('tr').attr('id');
 			self.onRoutingUpdate(id);
 			return false;
@@ -134,8 +136,8 @@ export class ServiceCategoryListComponent implements OnInit {
 	}
 
 	ngOnDestroy() {
-		this.subscription.unsubscribe();
-		this.modal.ngOnDestroy();
+		// this.subscription.unsubscribe();
+		// this.modal.ngOnDestroy();
 	}
 
 }

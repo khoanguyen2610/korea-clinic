@@ -8,26 +8,26 @@
 		<div class="tabable-line boxless margin-bottom-20">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#tab_1" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true"> Tiếng Việt </a>
+					<a id="vi" href="#tab_1" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true"> Tiếng Việt </a>
 				</li>
 				<li class="">
-					<a href="#tab_2" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false"> English </a>
+					<a id="en" href="#tab_2" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false"> English </a>
 				</li>
 			</ul>
 		</div>
 		<div class="tab-content">
 			<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 				<div class="tab-pane active" id="tab_1">
-					<app-equipment-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="vi" (file)="onSetImage($event)"></app-equipment-form-content>
+					<app-service-category-form-content *ngIf="language_code == 'vi'" [Item]="Items[0]" [language_code]="language_code"></app-service-category-form-content>
 				</div>
 				<div class="tab-pane" id="tab_2">
-					<app-equipment-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="vi" (file)="onSetImage($event)"></app-equipment-form-content>
+					<app-service-category-form-content *ngIf="language_code == 'en'" [Item]="Items[1]" [language_code]="language_code"></app-service-category-form-content>
 				</div>
 				<div class="form-actions">
 					<div class="row">
-						<div class="col-md-offset-3 col-md-9">
+						<div class="col-md-offset-5 col-md-7">
 							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> Save</button>
-							<a class="btn default" [routerLink]="['/admin/equipment/list']"><i class="fa fa-arrow-left"></i> Back</a>
+							<a class="btn default" [routerLink]="['/admin/service-category/list']"><i class="fa fa-arrow-left"></i> Back</a>
 						</div>
 					</div>
 				</div>

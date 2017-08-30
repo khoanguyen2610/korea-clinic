@@ -22,7 +22,7 @@ export class ServiceCategoryService {
     public getByID(id: number, params?: URLSearchParams) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'index/' + id, {
+        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'detail/' + id, {
             search: params,
             headers: headers,
             withCredentials: true
