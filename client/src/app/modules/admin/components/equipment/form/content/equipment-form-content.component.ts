@@ -19,7 +19,6 @@ declare let $: any;
 
 export class EquipmentFormContentComponent implements OnInit {
 	private subscription: Subscription;
-	@Input() language_code: string;
 	@Input() Item = new Equipment();
 	@Output('file') fileOutput = new EventEmitter();
 
@@ -45,7 +44,7 @@ export class EquipmentFormContentComponent implements OnInit {
 	}
 
 	ngOnInit(){
-		console.log(this.language_code);
+
 	}
 
 	/*====================================

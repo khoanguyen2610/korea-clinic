@@ -45,6 +45,27 @@
 	<div class="form-group">
 		<label class="control-label col-md-3">Image</label>
 		<div class="col-md-9">
+			<div class="uploader-files mb4">
+            	<div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
+                    <div class="no-file" *ngIf="!uploader.queue.length">
+                        <span>ファイルをドラッグ&ドロップ…</span>
+                        <span></span>
+                        <!-- drag & drop file example-->
+                    </div>
+                    <ul class="uploader-files-in clearfix">
+                        <li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
+                            <div class="item">
+                                <img src="assets/img/file.png" alt="">
+                                <p>{{ item?.file?.name }}</p>
+                                <div class="file-actions clearfix">
+                                    <a title="ダウンロード" *ngIf="item?.file?.is_download" (click)="onDownloadForm(item._file.id, 'form_attachment')" class="file-download"><i class="fa fa-download"></i></a>
+                                    <a title="削除" class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 			<div class="uploader">
 				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
 			</div>

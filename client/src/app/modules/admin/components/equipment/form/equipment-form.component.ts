@@ -1,10 +1,11 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { EquipmentFormContentComponent } from './content/equipment-form-content.component';
 import { Equipment } from '../../../../../models';
-import { AuthService, EquipmentService } from '../../../../../services';
+import { AuthService, EquipmentService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 
 declare let $: any;
@@ -12,14 +13,17 @@ declare let $: any;
 @Component({
 	selector: 'app-equipment-form',
 	templateUrl: './equipment-form.component.html',
-	providers: [ EquipmentService ]
+	providers: [ EquipmentService, GeneralService ]
 })
 
 export class EquipmentFormComponent implements OnInit {
 	private subscription: Subscription;
-	_params: any;
+	private querySubscription: Subscription;
 
+	_params: any;
+	queryParams: any;
 	language_code: string;
+	item_key: string;
 	Item_vi = new Equipment();
 	Item_en = new Equipment();
 	Items: Array<any> = [];
@@ -28,6 +32,7 @@ export class EquipmentFormComponent implements OnInit {
 	constructor(
 		private _AuthService: AuthService,
 		private _EquipmentService: EquipmentService,
+		private _GeneralService: GeneralService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 		private _ToastrService: ToastrService,
@@ -38,9 +43,20 @@ export class EquipmentFormComponent implements OnInit {
 			(param: any) => this._params = param
 		);
 
+		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
+			(param: any) => {
+				this.queryParams = param;
+			}
+		);
+
 		this.Item_vi.language_code = 'vi';
 		this.Item_en.language_code = 'en';
-		this.Items = [this.Item_vi, this.Item_en];
+
+		_GeneralService.getItemKey().subscribe(res => {
+			if(res.status == 'success'){
+				this.item_key = res.data.item_key;
+			}
+		});
 	}
 
 	ngOnInit(){
@@ -48,23 +64,26 @@ export class EquipmentFormComponent implements OnInit {
 		if(this._params.method == 'update'){
 			if(this._params.id != null){
 				let params: URLSearchParams = new URLSearchParams();
+				params.set('item_key',this.queryParams.item_key);
 				params.set('response_quantity','all');
-				params.set('language_code','vi');
-				console.log(params);
-				this._EquipmentService.getByID(this._params.id, params).subscribe(res => {
+				this._EquipmentService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
 							this._Router.navigate(['/admin/equipment/list']);
 						}else{
-							this.language_code = res.data.language_code;
-							// var repeat:number = 0;
-							// var loadInterval = setInterval(() => {
-							// 	// console.log(res.data);
-							// 	repeat++;
-							// 	if(repeat == 5){
-							// 		clearInterval(loadInterval);
-							// 	}
-							// }, 500);
+							let items = res.data;
+							setTimeout(() => {
+								items.forEach(item => {
+									switch(item['language_code']){
+										case 'vi':
+											this.Item_vi = item;
+											break;
+										case 'en':
+											this.Item_en = item;
+											break;
+									}
+								});
+							}, 500);
 						}
 					}else{
 						this._Router.navigate(['/admin/equipment/list']);
@@ -104,6 +123,11 @@ export class EquipmentFormComponent implements OnInit {
 				}
 			}
 
+			if(this._params.method == 'create'){
+				console.log(this.item_key);
+				formData.append('item_key', this.item_key);
+			}
+
 			formData.append('language_code', Item['language_code']);
 			formData.append('title', Item['title']);
 			formData.append('content', Item['content']);
@@ -119,6 +143,7 @@ export class EquipmentFormComponent implements OnInit {
 							let lang = Item['language_code'];
 							Item = new Equipment();
 							Item['language_code'] = lang;
+
 						}
 						this._ToastrService.success('Saved!');
 					}
@@ -127,6 +152,7 @@ export class EquipmentFormComponent implements OnInit {
 			} catch (error) {
 				document.write(error)
 			}
+
 		});
 
 	}
@@ -144,6 +170,7 @@ export class EquipmentFormComponent implements OnInit {
 
 	validateRequiredField(){
 		let valid = true;
+		this.Items = [this.Item_vi, this.Item_en];
 
 		this.Items.forEach(Item => {
 			if(!Item['title']){
@@ -159,5 +186,6 @@ export class EquipmentFormComponent implements OnInit {
 
 	ngOnDestroy(){
 		this.subscription.unsubscribe();
+		this.querySubscription.unsubscribe();
 	}
 }
