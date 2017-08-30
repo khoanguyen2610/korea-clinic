@@ -19,7 +19,6 @@ declare let $: any;
 
 export class EquipmentFormContentComponent implements OnInit {
 	private subscription: Subscription;
-	@Input() language_code: string;
 	@Input() Item = new Equipment();
 	@Output('file') fileOutput = new EventEmitter();
 
@@ -45,7 +44,27 @@ export class EquipmentFormContentComponent implements OnInit {
 	}
 
 	ngOnInit(){
-		console.log(this.language_code);
+		if(this.Item.image){
+			this.uploader = new FileUploader({});
+			if(this.Item.image instanceof Object){
+				this.uploader = this.Item.image;
+			}else{
+				var filename = this.Item.image;
+				var file_type = filename.split('.');
+				let item: any = { file: { name: filename, type: file_type[1], is_download: true }, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
+				this.uploader.queue.push(item);
+			}
+		}
+	}
+
+	/*==============================================
+	 * Remove file on stack
+	 *==============================================*/
+	onRemoveFile(index, file_id) {
+		if (this.uploader.queue.length) {
+			this.uploader.queue.splice(index, 1);
+			this.fileOutput.emit(this.uploader);
+		}
 	}
 
 	/*====================================
