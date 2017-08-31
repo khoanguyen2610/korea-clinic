@@ -130,6 +130,7 @@ export class ServiceFormComponent implements OnInit {
 
 			formData.append('language_code', Item['language_code']);
 			formData.append('title', Item['title']);
+			formData.append('service_category_id', Item['service_category_id']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 

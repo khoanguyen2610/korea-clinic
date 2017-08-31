@@ -9,7 +9,7 @@
 	<div class="form-group">
 		<label class="control-label col-md-1">{{ 'ADMIN.category' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
-			<select class="form-control" [(ngModel)]="Item.service_category_id">
+			<select class="form-control" name="service_category_id" [(ngModel)]="Item.service_category_id">
 				<option *ngFor="let option of category_options" [value]="option.id">{{ option.text }}</option>
 			</select>
 		</div>
