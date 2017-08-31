@@ -1,3 +1,3 @@
 export * from './equipment';
-export * from './service-category';
+export * from './servicecategory';
 // export * from './news-category';

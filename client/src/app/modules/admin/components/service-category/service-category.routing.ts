@@ -7,8 +7,8 @@ const APP_ROUTES: Routes = [
 	//=================== Payment Router======================
 	{ path: 'form/:method',
 		children: [
-			{path: '',component: ServiceCategoryFormComponent, canActivate: [AuthPermissionGuard, ChangeRouteGuard]},
-			{path: ':id',component: ServiceCategoryFormComponent, canActivate: [AuthPermissionGuard, ChangeRouteGuard]},
+			{path: '',component: ServiceCategoryFormComponent},
+			{path: ':id',component: ServiceCategoryFormComponent},
 		]
 	},
 	{ path: 'list', component: ServiceCategoryListComponent },
