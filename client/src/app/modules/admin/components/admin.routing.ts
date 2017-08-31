@@ -12,7 +12,8 @@ const APP_ROUTES: Routes = [
 			{ path: 'appointment', component: AppointmentComponent },
 			{ path: 'equipment', loadChildren: 'app/modules/admin/components/equipment/equipment.module#EquipmentModule' },
 			{ path: 'service', loadChildren: 'app/modules/admin/components/service/service.module#ServiceModule' },
-			{ path: 'service-category', loadChildren: 'app/modules/admin/components/service-category/service-category.module#ServiceCategoryModule' }
+			{ path: 'service-category', loadChildren: 'app/modules/admin/components/service-category/service-category.module#ServiceCategoryModule' },
+			{ path: 'news-category', loadChildren: 'app/modules/admin/components/news-category/news-category.module#NewsCategoryModule' }
 		]
 	}
 ];
