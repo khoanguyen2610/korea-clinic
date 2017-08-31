@@ -26,8 +26,8 @@
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-md-offset-5 col-md-7">
-							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> Save</button>
-							<a class="btn default" [routerLink]="['/admin/equipment/list']"><i class="fa fa-arrow-left"></i> Back</a>
+							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> {{ 'ADMIN.save' | translate }}</button>
+							<a class="btn default" [routerLink]="['/admin/equipment/list']"><i class="fa fa-arrow-left"></i> {{ 'ADMIN.back' | translate }}</a>
 						</div>
 					</div>
 				</div>
