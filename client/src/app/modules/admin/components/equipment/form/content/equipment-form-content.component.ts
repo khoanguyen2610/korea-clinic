@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter, ElementRef } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -44,17 +45,24 @@ export class EquipmentFormContentComponent implements OnInit {
 		this.files_type = this._Configuration.upload_file_extension;
 	}
 
-	ngOnInit(){
+	ngOnInit(){ }
+
+	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
 		if(this.Item.image){
-			this.uploader = new FileUploader({});
-			if(this.Item.image instanceof Object){
-				this.uploader = this.Item.image;
-			}else{
-				var filename = this.Item.image;
-				var file_type = filename.split('.');
-				let item: any = { file: { name: filename, type: file_type[1], is_download: true }, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
-				this.uploader.queue.push(item);
-			}
+			this.onGetImage();
+		}
+	}
+
+	onGetImage(){
+		this.uploader = new FileUploader({});
+		if(this.Item.image instanceof Object){
+			this.uploader = this.Item.image;
+		}else{
+			let image = JSON.parse(this.Item.image);
+			let filename = image.filename;
+			let file_type = filename.split('.');
+			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
+			this.uploader.queue.push(item);
 		}
 	}
 

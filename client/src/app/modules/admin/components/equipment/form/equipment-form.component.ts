@@ -113,7 +113,7 @@ export class EquipmentFormComponent implements OnInit {
 			let formData: FormData = new FormData();
 
 			let uploader = Item['image'];
-			if (uploader && uploader.queue.length) {
+			if (uploader instanceof Object && uploader.queue.length) {
 				for (let key in uploader.queue) {
 					var upload = uploader.queue[key]._file;
 					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
@@ -145,7 +145,7 @@ export class EquipmentFormComponent implements OnInit {
 							Item['language_code'] = lang;
 
 						}
-						this._ToastrService.success('Saved!');
+						this._ToastrService.success('Record has been saved successfully');
 					}
 
 				});

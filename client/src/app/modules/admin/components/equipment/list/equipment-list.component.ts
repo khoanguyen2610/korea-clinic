@@ -38,7 +38,7 @@ export class EquipmentListComponent implements OnInit {
 
 		});
 
-		this.url_list_data = this._EquipmentService._list_data_URL;
+		this.url_list_data = this._EquipmentService._list_data_URL + '?language_code=vi';
 	}
 
 	ngOnInit(){
@@ -50,7 +50,7 @@ export class EquipmentListComponent implements OnInit {
 		let self = this,
 			_list_data_URL = this.url_list_data,
 			Configuration = this._Configuration;
-		this.DTList = $('#tbl-data').DataTable({
+		let datatable = this.DTList = $('#tbl-data').DataTable({
 			autoWidth: false,
 			pageLength: Configuration.DtbPageLength,
 			lengthMenu: Configuration.DtbLengthMenu,
@@ -69,12 +69,30 @@ export class EquipmentListComponent implements OnInit {
 				}
 			},
 			columns: [
-				{ 'data':'title' },
-				{ 'data':'content' },
-				{ 'data':'language_name' },
-				{ 'data': null },
+				{ 'data' : null },
+				{ 'data' : 'image_url' },
+				{ 'data' : 'title' },
+				{ 'data' : null },
 			],
 			columnDefs: [
+				{
+					searchable: false,
+					bSortable: false,
+					targets: [0]
+				},
+				{
+					render: function (data, type, full) {
+						console.log(data);
+						var html = '<img src="assets/admin/global/img/file.png" height="80">';
+						if(data){
+							html = '<img src="' + data + '" height="80">';
+						}
+						return html;
+					},
+					bSortable: false,
+					className: 'text-center',
+					targets: [1]
+				},
 				{
 					render: function (data, type, full) {
 						var html = '<a class="btn btn-xs purple edit-record" href="#" id="btn_edit"><i class="fa fa-pencil"></i></a>'
@@ -89,6 +107,12 @@ export class EquipmentListComponent implements OnInit {
 				},
 			]
 		});
+
+		datatable.on('order.dt search.dt', function() {
+			datatable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function(cell, i) {
+				cell.innerHTML = i + 1;
+			});
+		}).draw();
 
 		$('#tbl-data tbody').on( 'click', '#btn_edit', function () {
 			let tr = $(this).parents('tr');
