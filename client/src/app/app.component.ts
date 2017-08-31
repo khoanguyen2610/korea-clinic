@@ -70,11 +70,12 @@ export class AppComponent  {
 		 * Config ToastrConfig
 		 *==========================================*/
 		this._ToastrConfig.positionClass = "toast-bottom-right";
-		this._ToastrConfig.timeOut = 5000;
+		this._ToastrConfig.timeOut = 1000000;
 		this._ToastrConfig.maxOpened = 7;
 		this._ToastrConfig.progressBar = true;
 		this._ToastrConfig.closeButton = true;
 		this._ToastrConfig.preventDuplicates = true;
+
 
 
 		let self = this;

@@ -153,7 +153,9 @@ console.log(this.Items);
 			if(!Item['title']){
 				valid = false;
 				console.log(Item['language_code']);
-				$('#' + Item['language_code']).click();
+				$('a[href="#tab_' + Item['language_code'] + '"]').click();
+				$('div[id^="tab_"]').removeClass('active');
+				$('div#tab_' + Item['language_code']).addClass('active');
 				return;
 			}
 		});
