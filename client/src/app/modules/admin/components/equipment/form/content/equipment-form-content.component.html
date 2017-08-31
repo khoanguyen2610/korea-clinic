@@ -57,21 +57,24 @@
 					<ul class="uploader-files-in clearfix">
 						<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
 							<div class="item">
-								<img src="assets/admin/global/img/file.png">
+								<img [src]="item?.src"  alt="" width="200" height="auto">
 								<p>{{ item?.file?.name }}</p>
 								<div class="file-actions clearfix">
 								    <a title="削除" class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
 								</div>
 							</div>
+
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="uploader">
-				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
+				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onImageChange($event)"/>
 				<span class="filename">Drag and drop files…</span>
 				<span class="btn btn-uploader">Choose File</span>
 			</div>
+
+			<!-- <img src="" imgPreview [image]="item?.file" class="media-object" /> -->
 		</div>
 	</div>
 </div>

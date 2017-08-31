@@ -133,7 +133,7 @@ export class ServiceCategoryListComponent implements OnInit {
 		this.modal.close();
 		this._ServiceCategoryService.delete(this.delete_id).subscribe(res => {
 			if(res.status == 'success'){
-				this._ToastrService.success('Deleted!');
+				this._ToastrService.success('Record has been deleted successfully.');
 				this.DTList.ajax.url(this._ServiceCategoryService._list_data_URL).load();
 			}
 		})

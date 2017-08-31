@@ -77,10 +77,8 @@ export class ServiceCategoryFormComponent implements OnInit {
 							this._Router.navigate(['/admin/service-category/list']);
 						} else {
 
+							// Binding data for 2 langs
 							var Items = res.data;
-
-							console.log(this.Items)
-
 							for(let i in this.Items) {
 								if(Items[i]) {
 									this.Items[i] = Items[i];
@@ -99,9 +97,9 @@ export class ServiceCategoryFormComponent implements OnInit {
 
 	ngAfterViewInit(){
 		let self = this;
+		// Listen event click tab to change lang
 		this._ElementRef.nativeElement.querySelectorAll('.link-tab').forEach(function(elm){
 			elm.addEventListener('click', function(event){
-				console.log(event.toElement.dataset.lang);
 				self.language_code = event.toElement.dataset.lang;
 			});
 		});
@@ -110,7 +108,6 @@ export class ServiceCategoryFormComponent implements OnInit {
 	onSubmit(form: NgForm){
 
 		if (this.validateRequiredField()) { // Check form is valid
-console.log(this.Items);
 			this.Items.forEach(Item => {
 				let paramData: URLSearchParams = new URLSearchParams();
 				// Prepare params
@@ -134,7 +131,7 @@ console.log(this.Items);
 							Item['language_code'] = lang;
 
 						}
-						this._ToastrService.success('Saved!');
+						this._ToastrService.success('Record has been saved successfully.');
 					}
 
 				});
@@ -152,7 +149,6 @@ console.log(this.Items);
 		this.Items.forEach(Item => {
 			if(!Item['title']){
 				valid = false;
-				console.log(Item['language_code']);
 				$('a[href="#tab_' + Item['language_code'] + '"]').click();
 				$('div[id^="tab_"]').removeClass('active');
 				$('div#tab_' + Item['language_code']).addClass('active');

@@ -1,23 +1,23 @@
 <div class="form-body">
 	<div class="form-group" [class.has-error]="!title.value">
-		<label class="control-label col-md-1">Title <span class="required">*</span></label>
+		<label class="control-label col-md-1">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
 			<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
-			<span *ngIf="title?.dirty && title?.errors?.required" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
+			<span *ngIf="title?.dirty && !title.value" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 
 	</div>
 	<div class="form-group">
-		<label class="control-label col-md-1">Parent Category</label>
+		<label class="control-label col-md-1">{{ 'ADMIN.parent_category' | translate }} </label>
 		<div class="col-md-11">
 			<select class="form-control" [(ngModel)]="Item.parent">
 	            <option *ngFor="let option of serviceCategoryOptions" [value]="option.id">{{ option.text }}</option>
             </select>
 		</div>
-	        
-    </div>      								                                       
+
+    </div>
 	<div class="form-group">
-		<label class="control-label col-md-1">Description</label>
+		<label class="control-label col-md-1">{{ 'ADMIN.description' | translate }}</label>
 		<div class="col-md-11">
 			<ckeditor name="description"
 				[(ngModel)]="Item.description"

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -19,6 +19,7 @@ declare let $: any;
 
 export class EquipmentFormContentComponent implements OnInit {
 	private subscription: Subscription;
+	element: ElementRef;
 	@Input() Item = new Equipment();
 	@Output('file') fileOutput = new EventEmitter();
 
@@ -119,6 +120,25 @@ export class EquipmentFormContentComponent implements OnInit {
 			}
 
 		}, 500);
+	}
+
+	onImageChange(event) {
+		var reader = new FileReader();
+		var image = $('#myImage');
+
+		var src_image = '';
+		reader.onload = function(e: any) {
+			src_image = e.target.result;
+			image.src = src_image;
+
+		};
+		var self = this;
+		setTimeout(() => {
+			self.uploader.queue[0]['src'] = src_image;
+			console.log(self.uploader.queue)
+		}, 100);
+
+		reader.readAsDataURL(event.target.files[0]);
 	}
 
 	public fileOverBase(e: any): void {

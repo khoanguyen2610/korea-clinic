@@ -1,17 +1,18 @@
 <div class="portlet light bordered">
 	<div class="portlet-title">
-		<div class="caption">
-			<span class="caption-subject font-dark sbold uppercase">Form</span>
-		</div>
-	</div>
+        <div class="caption">
+          <i class=" icon-layers font-red"></i>
+          <span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.form' | translate }}</span>
+        </div>
+  	</div>
 	<div class="portlet-body form">
 		<div class="tabable-line boxless margin-bottom-20">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#tab_vi" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true"> Tiếng Việt </a>
+					<a href="#tab_vi" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true">{{ 'ADMIN.vi' | translate }} </a>
 				</li>
 				<li class="">
-					<a href="#tab_en" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false"> English </a>
+					<a href="#tab_en" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false">{{ 'ADMIN.en' | translate }} </a>
 				</li>
 			</ul>
 		</div>
@@ -27,8 +28,8 @@
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-md-offset-5 col-md-7">
-							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> Save</button>
-							<a class="btn default" [routerLink]="['/admin/service-category/list']"><i class="fa fa-arrow-left"></i> Back</a>
+							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i>{{ 'ADMIN.save' | translate }}</button>
+							<a class="btn default" [routerLink]="['/admin/service-category/list']"><i class="fa fa-arrow-left"></i>{{ 'ADMIN.back' | translate }}</a>
 						</div>
 					</div>
 				</div>
