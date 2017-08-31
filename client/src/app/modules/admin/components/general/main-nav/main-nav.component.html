@@ -39,24 +39,30 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="nav-item start open" [routerLinkActive]="['active']">
-                <a [routerLink]="['/admin/dashboard']"  class="nav-link">
-                    <i class="icon-home"></i>
-                    <span class="title">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item  " [routerLinkActive]="['active']">
-                <a [routerLink]="['/admin/equipment/list']" class="nav-link">
-                    <i class="icon-briefcase"></i>
-                    <span class="title">Equipment</span>
-                </a>
-            </li>
-            <li class="nav-item  " [routerLinkActive]="['active']">
-                <a [routerLink]="['/admin/service-category/list']" class="nav-link">
-                    <i class="icon-puzzle"></i>
-                    <span class="title">Service Category</span>
-                </a>
-            </li>
+			<li class="nav-item start open" [routerLinkActive]="['active']">
+			    <a [routerLink]="['/admin/dashboard']"  class="nav-link">
+			        <i class="icon-home"></i>
+			        <span class="title">Dashboard</span>
+			    </a>
+			</li>
+			<li class="nav-item  " [routerLinkActive]="['active']">
+			    <a [routerLink]="['/admin/equipment/list']" class="nav-link">
+			        <i class="icon-briefcase"></i>
+			        <span class="title">Equipment</span>
+			    </a>
+			</li>
+			<li class="nav-item  " [routerLinkActive]="['active']">
+			    <a [routerLink]="['/admin/service/list']" class="nav-link">
+			        <i class="icon-puzzle"></i>
+			        <span class="title">Service</span>
+			    </a>
+			</li>
+			<li class="nav-item  " [routerLinkActive]="['active']">
+				<a [routerLink]="['/admin/service-category/list']" class="nav-link">
+					<i class="icon-puzzle"></i>
+					<span class="title">Service Category</span>
+				</a>
+			</li>
             <li class="heading">
                 <h3 class="uppercase">Features</h3>
             </li>

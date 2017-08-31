@@ -1,0 +1,85 @@
+<div class="form-body">
+	<div class="form-group" [class.has-error]="!title.value">
+		<label class="control-label col-md-1">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
+		<div class="col-md-11">
+			<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
+			<span *ngIf="title?.dirty && title?.errors?.required" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-1">{{ 'ADMIN.category' | translate }} <span class="required">*</span></label>
+		<div class="col-md-11">
+			<select class="form-control" [(ngModel)]="Item.service_category_id">
+				<option *ngFor="let option of category_options" [value]="option.id">{{ option.text }}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-1">{{ 'ADMIN.description' | translate }}</label>
+		<div class="col-md-11">
+			<ckeditor name="description"
+				[(ngModel)]="Item.description"
+				[config]= "{
+					toolbarGroups : [
+						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
+						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
+						'/',
+						{ name: 'basicstyles', groups: ['basicstyles'] },
+						{ name: 'styles' },
+						{ name: 'links' }
+					]}"
+				debounce="1000">
+			</ckeditor>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-1">{{ 'ADMIN.content' | translate }}</label>
+		<div class="col-md-11">
+			<ckeditor name="content"
+				[(ngModel)]="Item.content"
+				[config]= "{
+					toolbarGroups : [
+						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
+						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
+						'/',
+						{ name: 'basicstyles', groups: ['basicstyles'] },
+						{ name: 'styles' },
+						{ name: 'links' }
+					]}"
+				debounce="1000">
+			</ckeditor>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-1">{{ 'ADMIN.image' | translate }}</label>
+		<div class="col-md-11">
+			<div class="uploader-files">
+				<div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
+					<div class="no-file" *ngIf="!uploader.queue.length">
+						<span>Drag and drop files…</span>
+						<span></span>
+						<!-- drag & drop file example-->
+					</div>
+					<ul class="uploader-files-in clearfix">
+						<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
+							<div class="item">
+								<img src="assets/admin/global/img/file.png">
+								<p>{{ item?.file?.name }}</p>
+								<div class="file-actions clearfix">
+								    <a title="削除" class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="uploader">
+				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
+				<span class="filename">Drag and drop files…</span>
+				<span class="btn btn-uploader">Choose File</span>
+			</div>
+		</div>
+	</div>
+</div>
