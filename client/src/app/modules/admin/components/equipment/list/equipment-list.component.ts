@@ -72,7 +72,6 @@ export class EquipmentListComponent implements OnInit {
 				{ 'data' : null },
 				{ 'data' : 'image_url' },
 				{ 'data' : 'title' },
-				{ 'data' : 'language_name' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -90,6 +89,7 @@ export class EquipmentListComponent implements OnInit {
 						return html;
 					},
 					bSortable: false,
+					className: 'text-center',
 					targets: [1]
 				},
 				{
@@ -102,7 +102,7 @@ export class EquipmentListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [4]
+					targets: [3]
 				},
 			]
 		});
