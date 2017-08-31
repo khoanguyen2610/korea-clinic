@@ -1,4 +1,3 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter, ElementRef } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -143,7 +142,7 @@ export class EquipmentFormContentComponent implements OnInit {
 		var self = this;
 		setTimeout(() => {
 			self.uploader.queue[0]['src'] = src_image;
-			console.log(self.uploader.queue)
+			self.uploader.queue = [self.uploader.queue[0]];
 		}, 100);
 
 		reader.readAsDataURL(event.target.files[0]);

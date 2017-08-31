@@ -60,7 +60,7 @@
 								<img [src]="item?.src"  alt="" width="200" height="auto">
 								<p>{{ item?.file?.name }}</p>
 								<div class="file-actions clearfix">
-								    <a title="削除" class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+								    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
 								</div>
 							</div>
 
