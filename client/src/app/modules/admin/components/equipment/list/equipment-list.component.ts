@@ -82,9 +82,10 @@ export class EquipmentListComponent implements OnInit {
 				},
 				{
 					render: function (data, type, full) {
-						var html = '<img src="assets/admin/global/img/file.png" width="50" height="50">';
+						console.log(data);
+						var html = '<img src="assets/admin/global/img/file.png" height="80">';
 						if(data){
-							html = '<img src="' + data + '" width="50" height="50">';
+							html = '<img src="' + data + '" height="80">';
 						}
 						return html;
 					},
