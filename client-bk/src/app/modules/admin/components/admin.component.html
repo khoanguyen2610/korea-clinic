@@ -1,0 +1,32 @@
+<div class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+	<div class="page-wrapper">
+		<!-- BEGIN HEADER -->
+		<app-admin-header></app-admin-header>
+		<!-- END HEADER -->
+
+		<!-- BEGIN CONTAINER -->
+		<div class="page-container">
+			<!-- BEGIN SIDEBAR -->
+			<app-admin-main-nav></app-admin-main-nav>
+			<!-- END SIDEBAR -->
+			<!-- BEGIN CONTENT -->
+			<div class="page-content-wrapper">
+				<!-- BEGIN CONTENT BODY -->
+				<div class="page-content"><!-- BEGIN PAGE HEADER-->
+	                <!-- BEGIN PAGE BAR -->
+	                <app-admin-breadcrumb></app-admin-breadcrumb>
+	                <!-- END PAGE BAR -->
+
+	                <router-outlet></router-outlet>
+	            </div>
+
+				<!-- END CONTENT BODY -->
+			</div>
+			<!-- END CONTENT -->
+		</div>
+		<!-- END CONTAINER -->
+		<!-- BEGIN FOOTER -->
+		<app-admin-footer></app-admin-footer>
+		<!-- END FOOTER -->
+	</div>
+</div>

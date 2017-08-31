@@ -6,20 +6,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Routing } from './app.routing';
 import { AuthService } from './services';
 
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 import { DndModule } from 'ng2-dnd';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-translate';
 
 //===================== Import Core Module =======================
 import { CoreModule } from "./shared/modules/core.module";
 
 //===================== Import Component =======================
 import { AppComponent } from './app.component';
-
-
 
 export function createTranslateLoader(_Http: Http) {
     return new TranslateStaticLoader(_Http, './assets/i18n', '.json');

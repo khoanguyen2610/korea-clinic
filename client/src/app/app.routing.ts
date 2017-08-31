@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from "@angular/router";
 
-
 const APP_ROUTES: Routes = [
 	//=================== Public Module ======================
 	{ path: '', loadChildren: 'app/modules/public/components/public.module#PublicModule' },

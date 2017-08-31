@@ -1,0 +1,13 @@
+{
+  "VALIDATE": {
+    "required": "This field is required.",
+    "invalid_date": "Please enter a valid date.",
+    "invalid_email": "Please enter a valid email address.",
+    "min_length": "Please enter at least :param:1 characters.",
+    "max_length": "Please enter no more than :param:1 characters."
+  },
+  "ADMIN": {
+    "title": "Title",
+    "description": "Description"
+  }
+}

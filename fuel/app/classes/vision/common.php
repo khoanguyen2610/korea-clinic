@@ -149,4 +149,48 @@ class Vision_Common {
 	public static function randomItemKey($params = null) {
 	    return strtotime('now') . rand(1, 99999);
 	}
+
+	/*===================================================
+	 * Author : k_nguyen
+	 * Class generate image
+	 * path & file name encode by base64_encode();
+	 * @Param:
+	 *		+ @filepath | path of image, ex: user/origin
+	 *		+ @filename | name of image, ex: sample.jpg
+	 *		+ @width, @height | resize image, ex: width=200&height=200
+	 *		+ @scale | resize image based on percent, ex: scale=50
+	 *		+ @square | resize image to square, ex: square=50
+	 *===================================================*/
+	public static function generate_image(){
+		$param = \Input::param();
+		$path = isset($param['filepath'])?base64_decode($param['filepath']):null;
+		$file = isset($param['filename'])?base64_decode($param['filename']):null;
+		$full_file = FILESPATH . $path . $file;
+		//================== Check File Exist ===============
+		if(!file_exists($full_file) || empty($file)){
+            $full_file = IMG_PLACEHOLDER_URL;
+        }
+		//================== Init Class Image ===============
+        $image = new \Vision_Image($full_file);
+		//================== Resize Image ===================
+		if(isset($param['width']) && isset($param['height'])){
+			$image->resize((float)$param['width'], (float)$param['height']);
+		}else if(isset($param['width']) && !isset($param['height'])){
+			$image->resizeToWidth((float)$param['width']);
+		}else if(!isset($param['width']) && isset($param['height'])){
+			$image->resizeToHeight((float)$param['height']);
+		}
+
+		//=================== Scale Image ====================
+		if(isset($param['scale'])){
+			$image->scale((float)$param['scale']);
+		}
+
+		//=================== Resize to Square Image ====================
+		if(isset($param['square'])){
+			$image->square((float)$param['square']);
+		}
+        $image->output();
+        return \Response::forge();
+    }
 }

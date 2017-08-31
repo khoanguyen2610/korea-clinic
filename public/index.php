@@ -47,11 +47,6 @@ defined('FUEL_START_MEM') or define('FUEL_START_MEM', memory_get_usage());
 
 define('FILESPATH',realpath(__DIR__.'/../public/files/').DIRECTORY_SEPARATOR);
 
-define('PROPOSALPATH',realpath(__DIR__.'/../public/files/proposal/').DIRECTORY_SEPARATOR);
-define('PAYMENTPATH',realpath(__DIR__.'/../public/files/payment/').DIRECTORY_SEPARATOR);
-
-define('FTPPAYMENTPATH','payment/');
-define('FTPPROPOSALPATH','proposal/');
 /*==========================================
  * Khoa Nguyen
  * Define Variables Vision System
