@@ -25,7 +25,7 @@ class Controller_Equipment extends \Controller_API {
         foreach($items as $k => $v){
             //generate image url
             $image = json_decode($v['image']);
-            $param_img = ['filepath' => isset($image->filepath)? base64_encode('equipment/' . $image->filepath): null,
+            $param_img = ['filepath' => isset($image->filepath)? base64_encode(EQUIPMENT_DIR . $image->filepath): null,
                             'filename' => isset($image->filename)? base64_encode($image->filename): null,
                             'width' => 300,
                             ];
