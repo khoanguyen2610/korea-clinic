@@ -38,7 +38,7 @@ export class EquipmentListComponent implements OnInit {
 
 		});
 
-		this.url_list_data = this._EquipmentService._list_data_URL;
+		this.url_list_data = this._EquipmentService._list_data_URL + '?language_code=vi';
 	}
 
 	ngOnInit(){
@@ -50,7 +50,7 @@ export class EquipmentListComponent implements OnInit {
 		let self = this,
 			_list_data_URL = this.url_list_data,
 			Configuration = this._Configuration;
-		this.DTList = $('#tbl-data').DataTable({
+		let datatable = this.DTList = $('#tbl-data').DataTable({
 			autoWidth: false,
 			pageLength: Configuration.DtbPageLength,
 			lengthMenu: Configuration.DtbLengthMenu,
@@ -69,12 +69,29 @@ export class EquipmentListComponent implements OnInit {
 				}
 			},
 			columns: [
-				{ 'data':'title' },
-				{ 'data':'content' },
-				{ 'data':'language_name' },
-				{ 'data': null },
+				{ 'data' : null },
+				{ 'data' : 'image_url' },
+				{ 'data' : 'title' },
+				{ 'data' : 'language_name' },
+				{ 'data' : null },
 			],
 			columnDefs: [
+				{
+					searchable: false,
+					bSortable: false,
+					targets: [0]
+				},
+				{
+					render: function (data, type, full) {
+						var html = '<img src="assets/admin/global/img/file.png" width="50" height="50">';
+						if(data){
+							html = '<img src="' + data + '" width="50" height="50">';
+						}
+						return html;
+					},
+					bSortable: false,
+					targets: [1]
+				},
 				{
 					render: function (data, type, full) {
 						var html = '<a class="btn btn-xs purple edit-record" href="#" id="btn_edit"><i class="fa fa-pencil"></i></a>'
@@ -85,10 +102,16 @@ export class EquipmentListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [3]
+					targets: [4]
 				},
 			]
 		});
+
+		datatable.on('order.dt search.dt', function() {
+			datatable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function(cell, i) {
+				cell.innerHTML = i + 1;
+			});
+		}).draw();
 
 		$('#tbl-data tbody').on( 'click', '#btn_edit', function () {
 			let tr = $(this).parents('tr');
