@@ -8,20 +8,20 @@
 		<div class="tabable-line boxless margin-bottom-20">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#tab_1" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true"> Tiếng Việt </a>
+					<a href="#tab_vi" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true"> Tiếng Việt </a>
 				</li>
 				<li class="">
-					<a href="#tab_2" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false"> English </a>
+					<a href="#tab_en" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false"> English </a>
 				</li>
 			</ul>
 		</div>
 		<div class="tab-content">
 			<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
-				<div class="tab-pane active" id="tab_1">
-					<app-news-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="language_code" (file)="onSetImage($event)"></app-news-form-content>
+				<div class="tab-pane active" id="tab_vi">
+					<app-news-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-news-form-content>
 				</div>
-				<div class="tab-pane" id="tab_2">
-					<app-news-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="language_code" (file)="onSetImage($event)"></app-news-form-content>
+				<div class="tab-pane" id="tab_en">
+					<app-news-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-news-form-content>
 				</div>
 				<div class="form-actions">
 					<div class="row">

@@ -1,27 +1,25 @@
-import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { Configuration } from '../../../../../../shared';
-
-import { Equipment } from '../../../../../../models';
+import { Slide } from '../../../../../../models';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
 @Component({
-	selector: 'app-equipment-form-content',
-	templateUrl: './equipment-form-content.component.html',
-
+	selector: 'app-slide-form-content',
+	templateUrl: './slide-form-content.component.html',
 })
 
-export class EquipmentFormContentComponent implements OnInit {
+export class SlideFormContentComponent implements OnInit {
 	private subscription: Subscription;
-	element: ElementRef;
 	@Input() is_validated: boolean;
-	@Input() Item = new Equipment();
+	@Input() language_code: string;
+	@Input() Item = new Slide();
 	@Output('file') fileOutput = new EventEmitter();
 
 	_params: any;
@@ -45,7 +43,7 @@ export class EquipmentFormContentComponent implements OnInit {
 		this.files_type = this._Configuration.upload_file_extension;
 	}
 
-	ngOnInit(){ console.log('here') }
+	ngOnInit(){ }
 
 	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
 		if(this.Item.image){
@@ -59,16 +57,9 @@ export class EquipmentFormContentComponent implements OnInit {
 			this.uploader = this.Item.image;
 		}else{
 			let image = JSON.parse(this.Item.image);
-			console.log(image)
 			let filename = image.filename;
 			let file_type = filename.split('.');
-			var image_url = '';
-			if (filename) {
-				image_url = this.Item['image_url'];
-			}
-
-			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
-			console.log(item)
+			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
 			this.uploader.queue.push(item);
 		}
 	}
@@ -137,32 +128,12 @@ export class EquipmentFormContentComponent implements OnInit {
 		}, 500);
 	}
 
-	onImageChange(event) {
-		var reader = new FileReader();
-		var image = $('#myImage');
-
-		var src_image = '';
-		reader.onload = function(e: any) {
-			src_image = e.target.result;
-			image.src = src_image;
-
-		};
-		var self = this;
-		setTimeout(() => {
-			self.uploader.queue[0]['src'] = src_image;
-			self.uploader.queue = [self.uploader.queue[0]];
-		}, 100);
-
-		reader.readAsDataURL(event.target.files[0]);
-	}
-
 	public fileOverBase(e: any): void {
 		this.hasBaseDropZoneOver = e;
 	}
 
 	public fileOverAnother(e: any): void {
-		// this.onValidateFormFileType();
-		this.onImageChange(e);
+		this.onValidateFormFileType();
 		this.hasAnotherDropZoneOver = e;
 	}
 

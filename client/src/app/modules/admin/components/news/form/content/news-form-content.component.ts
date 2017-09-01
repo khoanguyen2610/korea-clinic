@@ -19,6 +19,7 @@ declare let $: any;
 
 export class NewsFormContentComponent implements OnInit {
 	private subscription: Subscription;
+	@Input() is_validated: boolean;
 	@Input() language_code: string;
 	@Input() Item = new News();
 	@Output('file') fileOutput = new EventEmitter();

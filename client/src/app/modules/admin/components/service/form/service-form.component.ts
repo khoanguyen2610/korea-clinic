@@ -23,6 +23,7 @@ export class ServiceFormComponent implements OnInit {
 	_params: any;
 	queryParams: any;
 	language_code: string;
+	is_validated: boolean = true;
 	item_key: string;
 	Item_vi = new Service();
 	Item_en = new Service();
@@ -105,7 +106,8 @@ export class ServiceFormComponent implements OnInit {
 	}
 
 	onSubmit(form: NgForm){
-		if(!this.validateRequiredField()){
+		this.is_validated = this.validateRequiredField();
+		if(!this.is_validated){
 			return;
 		}
 
@@ -176,9 +178,11 @@ export class ServiceFormComponent implements OnInit {
 		this.Items.forEach(Item => {
 			if(!Item['title']){
 				valid = false;
-			}
-			if(!Item['language_code']){
-				valid = false;
+				this.language_code = Item['language_code'];
+				$('a[href="#tab_' + Item['language_code'] + '"]').click();
+				$('div[id^="tab_"]').removeClass('active');
+				$('div#tab_' + Item['language_code']).addClass('active');
+				return;
 			}
 		});
 

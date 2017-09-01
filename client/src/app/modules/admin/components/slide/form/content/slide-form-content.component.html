@@ -3,7 +3,7 @@
 		<label class="control-label col-md-1">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
 			<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
-			<span *ngIf="(title?.dirty && !Item.title) || !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
+			<span *ngIf="title?.dirty && title?.errors?.required" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
 	<div class="form-group">
@@ -26,22 +26,15 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.content' | translate }}</label>
+		<label class="control-label col-md-1">{{ 'ADMIN.url' | translate }}</label>
 		<div class="col-md-11">
-			<ckeditor name="content"
-				[(ngModel)]="Item.content"
-				[config]= "{
-					toolbarGroups : [
-						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
-						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
-						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
-						'/',
-						{ name: 'basicstyles', groups: ['basicstyles'] },
-						{ name: 'styles' },
-						{ name: 'links' }
-					]}"
-				debounce="1000">
-			</ckeditor>
+			<input type="text" name="url" [(ngModel)]="Item.url" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-1">{{ 'ADMIN.position' | translate }}</label>
+		<div class="col-md-11">
+			<input type="text" name="position" [(ngModel)]="Item.position" class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
@@ -57,24 +50,21 @@
 					<ul class="uploader-files-in clearfix">
 						<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
 							<div class="item">
-								<img [src]="item?.src"  alt="" width="200" height="auto">
-								<!-- <p>{{ item?.file?.name }}</p> -->
+								<img src="assets/admin/global/img/file.png">
+								<p>{{ item?.file?.name }}</p>
 								<div class="file-actions clearfix">
-								    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+								    <a title="削除" class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
 								</div>
 							</div>
-
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="uploader">
-				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onImageChange($event)"/>
+				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
 				<span class="filename">Drag and drop files…</span>
 				<span class="btn btn-uploader">Choose File</span>
 			</div>
-
-			<!-- <img src="" imgPreview [image]="item?.file" class="media-object" /> -->
 		</div>
 	</div>
 </div>

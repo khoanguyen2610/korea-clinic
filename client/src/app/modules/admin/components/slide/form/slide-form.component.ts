@@ -3,20 +3,20 @@ import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { NewsFormContentComponent } from './content/news-form-content.component';
-import { News } from '../../../../../models';
-import { AuthService, NewsService, GeneralService } from '../../../../../services';
+import { SlideFormContentComponent } from './content/slide-form-content.component';
+import { Slide } from '../../../../../models';
+import { AuthService, StaffService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 
 declare let $: any;
 
 @Component({
-	selector: 'app-news-form',
-	templateUrl: './news-form.component.html',
-	providers: [ NewsService, GeneralService ]
+	selector: 'app-slide-form',
+	templateUrl: './slide-form.component.html',
+	providers: [ StaffService, GeneralService ]
 })
 
-export class NewsFormComponent implements OnInit {
+export class SlideFormComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
 
@@ -25,14 +25,14 @@ export class NewsFormComponent implements OnInit {
 	language_code: string;
 	is_validated: boolean = true;
 	item_key: string;
-	Item_vi = new News();
-	Item_en = new News();
+	Item_vi = new Slide();
+	Item_en = new Slide();
 	Items: Array<any> = [];
 	uploadProgress: any;
 
 	constructor(
 		private _AuthService: AuthService,
-		private _NewsService: NewsService,
+		private _StaffService: StaffService,
 		private _GeneralService: GeneralService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -67,7 +67,7 @@ export class NewsFormComponent implements OnInit {
 				let params: URLSearchParams = new URLSearchParams();
 				params.set('item_key',this.queryParams.item_key);
 				params.set('response_quantity','all');
-				this._NewsService.getByID(undefined, params).subscribe(res => {
+				this._StaffService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
 							this._Router.navigate(['/admin/news/list']);
@@ -131,20 +131,20 @@ export class NewsFormComponent implements OnInit {
 			}
 
 			formData.append('language_code', Item['language_code']);
-			formData.append('title', Item['title']);
-			formData.append('news_category_id', Item['news_category_id']);
+			formData.append('fullname', Item['fullname']);
+			formData.append('position', Item['position']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 
-			this._NewsService.getObserver().subscribe(progress => {
+			this._StaffService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;
 			});
 			try {
-				this._NewsService.upload(formData, Item['id']).then((res) => {
+				this._StaffService.upload(formData, Item['id']).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
-							Item = new News();
+							Item = new Slide();
 							Item['language_code'] = lang;
 
 						}
@@ -176,7 +176,7 @@ export class NewsFormComponent implements OnInit {
 		this.Items = [this.Item_vi, this.Item_en];
 
 		this.Items.forEach(Item => {
-			if(!Item['title']){
+			if(!Item['fullname']){
 				valid = false;
 				this.language_code = Item['language_code'];
 				$('a[href="#tab_' + Item['language_code'] + '"]').click();
