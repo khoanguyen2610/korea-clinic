@@ -1,0 +1,38 @@
+{{'VALIDATE.required' | translate}}dsadsa
+<div class="portlet light bordered">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-dark sbold uppercase">Fordsadm</span>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<div class="tabable-line boxless margin-bottom-20">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#tab_1" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true"> Tiếng Việt </a>
+				</li>
+				<li class="">
+					<a href="#tab_2" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false"> English </a>
+				</li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
+				<div class="tab-pane active" id="tab_1">
+					<app-equipment-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" (file)="onSetImage($event)"></app-equipment-form-content>
+				</div>
+				<div class="tab-pane" id="tab_2">
+					<app-equipment-form-content *ngIf="language_code == 'en'" [Item]="Item_en" (file)="onSetImage($event)"></app-equipment-form-content>
+				</div>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-offset-5 col-md-7">
+							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> Save</button>
+							<a class="btn default" [routerLink]="['/admin/equipment/list']"><i class="fa fa-arrow-left"></i> Back</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

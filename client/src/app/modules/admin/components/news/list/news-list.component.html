@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title"></div>
+			<div class="portlet-body">
+				<!-- table-toolbar -->
+				<div class="table-toolbar">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="btn-group pull-right">
+							<a class="btn green" [routerLink]="['/admin/news/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end table-toolbar -->
+				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-data">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>{{ 'ADMIN.image' | translate }}</th>
+							<th>{{ 'ADMIN.title' | translate }}</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<modal #modal>
+	<modal-header [show-close]="true">
+		<h4 class="modal-title">{{ 'ADMIN.confirmation' | translate }}</h4>
+	</modal-header>
+	<modal-body>
+		Are you sure you want to delete this equipment?
+	</modal-body>
+	<modal-footer>
+		<button class="btn default" type="button" (click)="modal.close()">{{ 'ADMIN.no' | translate }}</button>
+		<button class="btn green" type="button" (click)="onConfirmDelete()"><i class="fa fa-trash"></i> {{ 'ADMIN.yes' | translate }}</button>
+	</modal-footer>
+</modal>
