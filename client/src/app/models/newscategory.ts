@@ -1,6 +1,7 @@
-export class ServiceNews {
+export class NewsCategory {
 	public id: number;
-	public lang_code: string;
+	public language_code: string;
+	public item_key: string;
 	public title: string;
 	public description: string;
 	public parent: number;

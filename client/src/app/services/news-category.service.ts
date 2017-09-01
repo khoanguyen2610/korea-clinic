@@ -1,11 +1,4 @@
-/*
-* @Author: th_le
-* @Date:   2016-12-05 13:14:32
-* @Last Modified by:   th_le
-* @Last Modified time: 2016-12-05 13:39:02
-*/
-
-import { Injectable, EventEmitter, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Response, RequestOptions, RequestOptionsArgs, Http, Headers } from '@angular/http';
 
 import { Configuration, HttpClient } from '../shared';
@@ -13,13 +6,12 @@ import { Observable } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 
 @Injectable()
+export class NewsCategoryService {
+    private serviceUrl: string = 'newscategory/';
+    _list_data_URL: string;
 
-export class MObicKariService {
-    private serviceUrl: string = 'master_mobickari/';
-    _list_data_URL?: string;
-
-    constructor(private _Configuration: Configuration, private _Http: Http) {
-        this._list_data_URL = this._Configuration.apiUrl + this.serviceUrl + 'list_data';
+    constructor( private _Configuration: Configuration, private _Http: Http) {
+        this._list_data_URL = _Configuration.apiUrl + this.serviceUrl + 'list_all?language_code=vi';
     }
 
     createAuthorizationHeader(headers: Headers) {
@@ -27,10 +19,10 @@ export class MObicKariService {
         headers.append('Authorization', 'Basic ' + this._Configuration.apiAuth);
     }
 
-    public getAll(params) {
+    public getByID(id: number, params?: URLSearchParams) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'index', {
+        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'detail/' + id, {
             search: params,
             headers: headers,
             withCredentials: true
@@ -39,18 +31,20 @@ export class MObicKariService {
         .catch(this.handleError);
     }
 
-    public getByID(id: number) {
+    public getListData(params) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'index/' + id, {
+        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'list_all', {
+            search: params,
             headers: headers,
             withCredentials: true
         })
-        .map(res => res.json())
-        .catch(this.handleError);
+            .map(res => res.json())
+            .catch(this.handleError);
+
     }
 
-    public save(params, id?: number) {
+    public save(params, id?:number) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
         return this._Http.post(this._Configuration.apiUrl + this.serviceUrl + 'index/' + id, params, {
@@ -61,7 +55,7 @@ export class MObicKariService {
         .catch(this.handleError);
     }
 
-    public delete(id: number) {
+    public delete(id:number){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
         return this._Http.delete(this._Configuration.apiUrl + this.serviceUrl + 'index/' + id, {
