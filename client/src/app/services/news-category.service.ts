@@ -11,7 +11,7 @@ export class NewsCategoryService {
     _list_data_URL: string;
 
     constructor( private _Configuration: Configuration, private _Http: Http) {
-        this._list_data_URL = _Configuration.apiUrl + this.serviceUrl + 'list_all?language_code=vi';
+        this._list_data_URL = _Configuration.apiUrl + this.serviceUrl + 'list_all';
     }
 
     createAuthorizationHeader(headers: Headers) {
@@ -34,7 +34,7 @@ export class NewsCategoryService {
     public getListData(params) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'list_all', {
+        return this._Http.get(this._list_data_URL, {
             search: params,
             headers: headers,
             withCredentials: true

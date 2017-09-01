@@ -23,6 +23,7 @@ export class ServiceCategoryFormComponent implements OnInit {
 	queryParams: any;
 	item_key: string;
 	language_code: string;
+	is_validated: boolean = true;
 
 	Item_vi = new ServiceCategory();
 	Item_en = new ServiceCategory();
@@ -106,8 +107,8 @@ export class ServiceCategoryFormComponent implements OnInit {
 	}
 
 	onSubmit(form: NgForm){
-
-		if (this.validateRequiredField()) { // Check form is valid
+		this.is_validated = this.validateRequiredField();
+		if (this.is_validated) { // Check form is valid
 			this.Items.forEach(Item => {
 				let paramData: URLSearchParams = new URLSearchParams();
 				// Prepare params

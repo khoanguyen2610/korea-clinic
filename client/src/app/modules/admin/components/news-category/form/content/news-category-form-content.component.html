@@ -1,9 +1,9 @@
 <div class="form-body">
-	<div class="form-group" [class.has-error]="is_validated">
+	<div class="form-group" [class.has-error]="!Item.title">
 		<label class="control-label col-md-1">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
 			<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
-			<span *ngIf="is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
+			<span *ngIf="(title?.dirty && !Item.title) || !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 
 	</div>

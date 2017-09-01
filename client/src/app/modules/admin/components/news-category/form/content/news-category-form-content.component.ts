@@ -63,15 +63,6 @@ export class NewsCategoryFormContentComponent implements OnInit {
 				});
 				this.NewsCategoryOptions = options;
 
-				if (this._params.method == 'create') {
-					let lang = this.language_code;
-					var Item = new NewsCategory();
-					this.Item['language_code'] = lang;
-					this.Item['parent'] = this.NewsCategoryOptions[0].id;
-
-				}
-console.log(this.NewsCategoryOptions[0].id)
-				console.log(this.Item)
 			}
 
 		});
