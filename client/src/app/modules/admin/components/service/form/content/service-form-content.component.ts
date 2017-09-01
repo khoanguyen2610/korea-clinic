@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { Configuration } from '../../../../../../shared';
-
+import { ServiceCategoryService, } from '../../../../../../services';
 import { Service } from '../../../../../../models';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
@@ -14,14 +14,16 @@ declare let $: any;
 @Component({
 	selector: 'app-service-form-content',
 	templateUrl: './service-form-content.component.html',
-
+	providers: [ ServiceCategoryService ]
 })
 
 export class ServiceFormContentComponent implements OnInit {
 	private subscription: Subscription;
+	@Input() language_code: string;
 	@Input() Item = new Service();
 	@Output('file') fileOutput = new EventEmitter();
 
+	category_options: Array<any> = [];
 	_params: any;
 	files_type = [];
 	files_upload = 0;
@@ -32,6 +34,7 @@ export class ServiceFormContentComponent implements OnInit {
 	constructor(
 		private _Configuration: Configuration,
 		private _ToastrService: ToastrService,
+		private _ServiceCategoryService: ServiceCategoryService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 	) {
@@ -43,7 +46,21 @@ export class ServiceFormContentComponent implements OnInit {
 		this.files_type = this._Configuration.upload_file_extension;
 	}
 
-	ngOnInit(){ }
+	ngOnInit(){
+		console.log(this.language_code);
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this.language_code);
+		this._ServiceCategoryService.getListData(params).subscribe(res => {
+			if(res.status == 'success'){
+				let items = res.data;
+				for(let i in items){
+					this.category_options.push({
+						'id': items[i].id, 'text': items[i].title
+					});
+				}
+			}
+		})
+	}
 
 	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
 		if(this.Item.image){

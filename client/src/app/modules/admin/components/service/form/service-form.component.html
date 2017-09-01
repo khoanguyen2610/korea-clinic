@@ -18,10 +18,10 @@
 		<div class="tab-content">
 			<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 				<div class="tab-pane active" id="tab_1">
-					<app-service-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" (file)="onSetImage($event)"></app-service-form-content>
+					<app-service-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="language_code" (file)="onSetImage($event)"></app-service-form-content>
 				</div>
 				<div class="tab-pane" id="tab_2">
-					<app-service-form-content *ngIf="language_code == 'en'" [Item]="Item_en" (file)="onSetImage($event)"></app-service-form-content>
+					<app-service-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="language_code" (file)="onSetImage($event)"></app-service-form-content>
 				</div>
 				<div class="form-actions">
 					<div class="row">
