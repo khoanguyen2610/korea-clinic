@@ -20,10 +20,10 @@
 		<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_vi">
-					<app-service-category-form-content [Item]="Items[0]" [language_code]="language_code"></app-service-category-form-content>
+					<app-service-category-form-content [Item]="Items[0]" [language_code]="language_code" [is_validated]="is_validated"></app-service-category-form-content>
 				</div>
 				<div class="tab-pane" id="tab_en">
-					<app-service-category-form-content [Item]="Items[1]" [language_code]="language_code"></app-service-category-form-content>
+					<app-service-category-form-content [Item]="Items[1]" [language_code]="language_code" [is_validated]="is_validated"></app-service-category-form-content>
 				</div>
 				<div class="form-actions">
 					<div class="row">

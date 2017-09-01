@@ -20,6 +20,7 @@ declare let $: any;
 export class ServiceCategoryFormContentComponent implements OnInit {
 	private subscription: Subscription;
 	@Input('language_code') language_code: string;
+	@Input('is_validated') is_validated: boolean;
 	@Input('Item') Item = new ServiceCategory();
 	@Output('file') fileOutput = new EventEmitter();
 
@@ -61,16 +62,6 @@ export class ServiceCategoryFormContentComponent implements OnInit {
 						options.push(option);
 				});
 				this.serviceCategoryOptions = options;
-
-				if (this._params.method == 'create') {
-					let lang = this.language_code;
-					var Item = new ServiceCategory();
-					this.Item['language_code'] = lang;
-					this.Item['parent'] = this.serviceCategoryOptions[0].id;
-
-				}
-console.log(this.serviceCategoryOptions[0].id)
-				console.log(this.Item)
 			}
 
 		});
