@@ -3,7 +3,7 @@
  * @Author: k_nguyen
  * @Date:   2016-11-14 14:04:29
  * @Last Modified by:   k_nguyen
- * @Last Modified time: 2017-08-30 13:59:36
+ * @Last Modified time: 2017-09-01 09:11:51
  */
 class Model_ServiceCategory extends \Orm\Model {
 	protected static $_table_name = 'service_category';
@@ -38,6 +38,9 @@ class Model_ServiceCategory extends \Orm\Model {
 			            ->from([self::$_table_name, 'SM'])
 						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
 			            ->and_where('SM.item_status', '=', 'active');
+
+		//Query by params
+		if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
 
         $result = $query->as_object()->execute()->as_array();
 
