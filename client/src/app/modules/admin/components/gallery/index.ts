@@ -1,0 +1,1 @@
+export * from './list/gallery-list.component';
