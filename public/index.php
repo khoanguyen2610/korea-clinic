@@ -47,6 +47,14 @@ defined('FUEL_START_MEM') or define('FUEL_START_MEM', memory_get_usage());
 
 define('FILESPATH',realpath(__DIR__.'/../public/files/').DIRECTORY_SEPARATOR);
 
+//Folder Storage Image
+define('EQUIPMENT_DIR', 'equipment/');
+define('GALLERY_DIR', 'gallery/');
+define('NEWS_DIR', 'news/');
+define('SERVICE_DIR', 'service/');
+define('SLIDE_DIR', 'slide/');
+define('STAFF_DIR', 'staff/');
+
 /*==========================================
  * Khoa Nguyen
  * Define Variables Vision System

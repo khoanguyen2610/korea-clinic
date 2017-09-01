@@ -3,7 +3,7 @@
  * @Author: k_nguyen
  * @Date:   2016-11-14 14:04:29
  * @Last Modified by:   k_nguyen
- * @Last Modified time: 2017-04-03 10:58:47
+ * @Last Modified time: 2017-08-31 16:57:14
  */
 class Model_Service extends \Orm\Model {
 	protected static $_table_name = 'service';
@@ -57,7 +57,7 @@ class Model_Service extends \Orm\Model {
      * Get detail informat based on primary key
      *============================================*/
 	public static function getDetail($pk = null, $params = null, $option = null){
-		$select = ['SM.*', DB::expr('VL.name as language_name'), DB::expr('SC.title as service_category_title')];
+		$select = ['SM.*', \DB::expr('NULL as image_url'), DB::expr('VL.name as language_name'), DB::expr('SC.title as service_category_title')];
 
 		$query = \DB::select_array($select)
 			            ->from([self::$_table_name, 'SM'])
@@ -79,6 +79,31 @@ class Model_Service extends \Orm\Model {
 		if(isset($params['response_quantity']) && $params['response_quantity'] == 'all') $result = $query->execute();
 		if((isset($params['response_quantity']) && $params['response_quantity'] == 'single') || !isset($params['response_quantity']) || empty($params['response_quantity'])) $result = $query->execute()->current();
 
+        //Generate image_url
+        if(!empty($result)){
+            if(isset($params['response_quantity']) && $params['response_quantity'] == 'all'){
+                foreach ($result as $k => $v) {
+                    if(!empty($v->image) || (isset($params['image_url_placeholder']) && $params['image_url_placeholder'] == true)){
+                        $image = json_decode($v->image);
+                        $param_img = ['filepath' => isset($image->filepath)? base64_encode(SERVICE_DIR . $image->filepath): null,
+                                        'filename' => isset($image->filename)? base64_encode($image->filename): null,
+                                        'width' => 300,
+                                        ];
+                        $result[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
+                    }
+                }
+            }
+            if((isset($params['response_quantity']) && $params['response_quantity'] == 'single') || !isset($params['response_quantity'])){
+                if(!empty($v->image) || (isset($params['image_url_placeholder']) && $params['image_url_placeholder'] == true)){
+                    $image = json_decode($result->image);
+                    $param_img = ['filepath' => isset($image->filepath)? base64_encode(SERVICE_DIR . $image->filepath): null,
+                                    'filename' => isset($image->filename)? base64_encode($image->filename): null,
+                                    'width' => 300,
+                                    ];
+                    $result->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
+                }
+            }
+        }
 
 		return $result;
 	}

@@ -24,6 +24,7 @@ export class ServiceFormContentComponent implements OnInit {
 	@Output('file') fileOutput = new EventEmitter();
 
 	category_options: Array<any> = [];
+	src_images: Array<any> = [];
 	_params: any;
 	files_type = [];
 	files_upload = 0;
@@ -76,7 +77,12 @@ export class ServiceFormContentComponent implements OnInit {
 			let image = JSON.parse(this.Item.image);
 			let filename = image.filename;
 			let file_type = filename.split('.');
-			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
+			var image_url = '';
+			if (filename) {
+				image_url = this.Item['image_url'];
+			}
+
+			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
 			this.uploader.queue.push(item);
 		}
 	}
@@ -94,63 +100,105 @@ export class ServiceFormContentComponent implements OnInit {
 	/*====================================
 	 * Validate Form File Type
 	 *====================================*/
-	onValidateFormFileType() {
-		this.uploader['error_limit_files'] = false;
+	onValidateFormFileType(event) {
+		this.onImageChange(event)
+		// this.uploader['error_limit_files'] = false;
+		// setTimeout(() => {
+		// 	let after_upload_files = +this.uploader.queue.length; // after drag upload files
+		// 	if (after_upload_files <= this._Configuration.limit_files) {
+		// 		if (after_upload_files != this.files_upload) {
+		// 			let uploader = [];
+		// 			for (let key in this.uploader.queue) {
+		// 				var checked = false;
+		// 				var ext = this.uploader.queue[key]._file.name.split('.').pop();
+		// 				ext = ext.toLowerCase();
+
+		// 				for (let k in this.files_type) {
+
+		// 					if (ext.indexOf(this.files_type[k]) > -1) {
+		// 						checked = true;
+		// 						break;
+		// 					}
+		// 				}
+
+		// 				if (!checked) {
+		// 					var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
+		// 					this._ToastrService.error(msgInvalidFileType);
+		// 					checked = false;
+		// 				}
+
+		// 				if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
+		// 					var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
+		// 					this._ToastrService.error(msgSizeTooLarge);
+		// 					checked = false;
+		// 				}
+
+		// 				if (!checked) {
+		// 					// this.uploader.queue.splice(+key, 1);
+		// 					this.uploader.queue[key].isError = true;
+		// 				} else {
+		// 					this.uploader.queue[key]._file['is_keeping'] = true;
+		// 					uploader.push(this.uploader.queue[key]);
+		// 				}
+
+
+		// 			}
+		// 			this.uploader.queue = uploader;
+		// 			this.files_upload = this.uploader.queue.length;
+		// 			this.fileOutput.emit(this.uploader);
+		// 		}
+		// 	}
+
+		// }, 500);
+	}
+
+	onImageChange(event) {
+		console.log(event.srcElement.files)
+		var self = this;
+		let files = event.target.files;
+
+		console.log(files)
+
+		for (var i = 0; i < files.length; i++) {
+			var reader = new FileReader();
+			var src_image = '';
+
+			reader.onload = function(e: any) {
+				src_image = e.target.result;
+				self.src_images.push(src_image);
+
+			};
+
+			var file = files[i];
+			//Only pics
+			if (!file.type.match('image')) continue;
+
+			//Read the image
+			reader.readAsDataURL(file);
+		}
+
+
 		setTimeout(() => {
-			let after_upload_files = +this.uploader.queue.length; // after drag upload files
-			if (after_upload_files <= this._Configuration.limit_files) {
-				if (after_upload_files != this.files_upload) {
-					let uploader = [];
-					for (let key in this.uploader.queue) {
-						var checked = false;
-						var ext = this.uploader.queue[key]._file.name.split('.').pop();
-						ext = ext.toLowerCase();
-
-						for (let k in this.files_type) {
-
-							if (ext.indexOf(this.files_type[k]) > -1) {
-								checked = true;
-								break;
-							}
-						}
-
-						if (!checked) {
-							var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
-							this._ToastrService.error(msgInvalidFileType);
-							checked = false;
-						}
-
-						if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
-							var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
-							this._ToastrService.error(msgSizeTooLarge);
-							checked = false;
-						}
-
-						if (!checked) {
-							// this.uploader.queue.splice(+key, 1);
-							this.uploader.queue[key].isError = true;
-						} else {
-							this.uploader.queue[key]._file['is_keeping'] = true;
-							uploader.push(this.uploader.queue[key]);
-						}
-
-
-					}
-					this.uploader.queue = uploader;
-					this.files_upload = this.uploader.queue.length;
-					this.fileOutput.emit(this.uploader);
-				}
+			var queue_files = self.uploader.queue;
+			var queue = [];
+			for (var i = 0; i < queue_files.length; i++) {
+				queue_files[i]['src'] = this.src_images[i];
+				queue.push(self.uploader.queue[i]);
 			}
+			queue_files = queue;
+		}, 100);
 
-		}, 500);
 	}
 
 	public fileOverBase(e: any): void {
+		console.log(e)
 		this.hasBaseDropZoneOver = e;
 	}
 
 	public fileOverAnother(e: any): void {
-		this.onValidateFormFileType();
+		console.log(e);
+		// this.onValidateFormFileType();
+		this.onImageChange(e);
 		this.hasAnotherDropZoneOver = e;
 	}
 
