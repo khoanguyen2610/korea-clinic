@@ -9,11 +9,15 @@ const APP_ROUTES: Routes = [
 			{ path: 'about-us', component: AboutUsComponent },
 			{ path: 'contact', component: ContactComponent },
 			{ path: 'equipment', loadChildren: 'app/modules/public/components/equipment/equipment.module#EquipmentModule' },
+			{ path: 'thiet-bi', loadChildren: 'app/modules/public/components/equipment/equipment.module#EquipmentModule' },
 			{ path: 'faq', loadChildren: 'app/modules/public/components/faq/faq.module#FaqModule' },
 			{ path: 'gallery', loadChildren: 'app/modules/public/components/gallery/gallery.module#GalleryModule' },
 			{ path: 'news', loadChildren: 'app/modules/public/components/news/news.module#NewsModule' },
+			{ path: 'tin-tuc', loadChildren: 'app/modules/public/components/news/news.module#NewsModule' },
 			{ path: 'service', loadChildren: 'app/modules/public/components/service/service.module#ServiceModule' },
+			{ path: 'dich-vu', loadChildren: 'app/modules/public/components/service/service.module#ServiceModule' },
 			{ path: 'staff', loadChildren: 'app/modules/public/components/staff/staff.module#StaffModule' },
+			{ path: 'nhan-vien', loadChildren: 'app/modules/public/components/staff/staff.module#StaffModule' },
 		]
 	}
 ];
