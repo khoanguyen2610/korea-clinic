@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { Configuration } from '../../../../../shared';
-import { AuthService, EquipmentService } from '../../../../../services';
+import { AuthService, StaffService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { BreadcrumbComponent, FooterComponent, HeaderComponent, MainNavComponent } from '../../general';
@@ -11,12 +11,12 @@ import { BreadcrumbComponent, FooterComponent, HeaderComponent, MainNavComponent
 declare var $: any;
 
 @Component({
-	selector: 'app-equipment-list',
-	templateUrl: './equipment-list.component.html',
-	providers: [ EquipmentService ]
+	selector: 'app-staff-list',
+	templateUrl: './staff-list.component.html',
+	providers: [ StaffService ]
 })
 
-export class EquipmentListComponent implements OnInit {
+export class StaffListComponent implements OnInit {
 	private subscription: Subscription;
 	private DTList;
 	@ViewChild('modal') modal: ModalComponent;
@@ -27,7 +27,7 @@ export class EquipmentListComponent implements OnInit {
 	constructor(
 		private _AuthService: AuthService,
 		private _Configuration: Configuration,
-		private _EquipmentService: EquipmentService,
+		private _StaffService: StaffService,
 		private _ToastrService: ToastrService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -37,7 +37,7 @@ export class EquipmentListComponent implements OnInit {
 
 		});
 
-		this.url_list_data = this._EquipmentService._list_data_URL + '?language_code=vi';
+		this.url_list_data = this._StaffService._list_data_URL + '?language_code=vi';
 	}
 
 	ngOnInit(){
@@ -70,7 +70,8 @@ export class EquipmentListComponent implements OnInit {
 			columns: [
 				{ 'data' : null },
 				{ 'data' : 'image_url' },
-				{ 'data' : 'title' },
+				{ 'data' : 'fullname' },
+				{ 'data' : 'position' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -98,7 +99,7 @@ export class EquipmentListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [3]
+					targets: [4]
 				},
 			]
 		});
@@ -125,7 +126,7 @@ export class EquipmentListComponent implements OnInit {
 	}
 
 	onRoutingUpdate(id: number, item_key: string){
-		this._Router.navigate(['/admin/equipment/form/update/' + id], {queryParams: { item_key: item_key }} );
+		this._Router.navigate(['/admin/staff/form/update/' + id], {queryParams: { item_key: item_key }} );
 	}
 
 	onOpenConfirm(item_key: string){
@@ -135,10 +136,10 @@ export class EquipmentListComponent implements OnInit {
 
 	onConfirmDelete(){
 		this.modal.close();
-		this._EquipmentService.deleteItemKey(this.delete_item_key).subscribe(res => {
+		this._StaffService.deleteItemKey(this.delete_item_key).subscribe(res => {
 			if(res.status == 'success'){
 				this._ToastrService.success('Deleted!');
-				this.DTList.ajax.url(this._EquipmentService._list_data_URL).load();
+				this.DTList.ajax.url(this._StaffService._list_data_URL).load();
 			}
 		})
 	}

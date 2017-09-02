@@ -19,6 +19,7 @@ declare let $: any;
 
 export class ServiceFormContentComponent implements OnInit {
 	private subscription: Subscription;
+	@Input() is_validated: boolean;
 	@Input() language_code: string;
 	@Input() Item = new Service();
 	@Output('file') fileOutput = new EventEmitter();

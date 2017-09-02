@@ -3,20 +3,20 @@ import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { ServiceFormContentComponent } from './content/service-form-content.component';
-import { Service } from '../../../../../models';
-import { AuthService, ServiceService, GeneralService } from '../../../../../services';
+import { StaffFormContentComponent } from './content/staff-form-content.component';
+import { Staff } from '../../../../../models';
+import { AuthService, StaffService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 
 declare let $: any;
 
 @Component({
-	selector: 'app-service-form',
-	templateUrl: './service-form.component.html',
-	providers: [ ServiceService, GeneralService ]
+	selector: 'app-staff-form',
+	templateUrl: './staff-form.component.html',
+	providers: [ StaffService, GeneralService ]
 })
 
-export class ServiceFormComponent implements OnInit {
+export class StaffFormComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
 
@@ -25,14 +25,14 @@ export class ServiceFormComponent implements OnInit {
 	language_code: string;
 	is_validated: boolean = true;
 	item_key: string;
-	Item_vi = new Service();
-	Item_en = new Service();
+	Item_vi = new Staff();
+	Item_en = new Staff();
 	Items: Array<any> = [];
 	uploadProgress: any;
 
 	constructor(
 		private _AuthService: AuthService,
-		private _ServiceService: ServiceService,
+		private _StaffService: StaffService,
 		private _GeneralService: GeneralService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -67,10 +67,10 @@ export class ServiceFormComponent implements OnInit {
 				let params: URLSearchParams = new URLSearchParams();
 				params.set('item_key',this.queryParams.item_key);
 				params.set('response_quantity','all');
-				this._ServiceService.getByID(undefined, params).subscribe(res => {
+				this._StaffService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
-							this._Router.navigate(['/admin/service/list']);
+							this._Router.navigate(['/admin/news/list']);
 						}else{
 							let items = res.data;
 							setTimeout(() => {
@@ -87,7 +87,7 @@ export class ServiceFormComponent implements OnInit {
 							}, 500);
 						}
 					}else{
-						this._Router.navigate(['/admin/service/list']);
+						this._Router.navigate(['/admin/news/list']);
 					}
 				});
 			}else{
@@ -131,20 +131,20 @@ export class ServiceFormComponent implements OnInit {
 			}
 
 			formData.append('language_code', Item['language_code']);
-			formData.append('title', Item['title']);
-			formData.append('service_category_id', Item['service_category_id']);
+			formData.append('fullname', Item['fullname']);
+			formData.append('position', Item['position']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 
-			this._ServiceService.getObserver().subscribe(progress => {
+			this._StaffService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;
 			});
 			try {
-				this._ServiceService.upload(formData, Item['id']).then((res) => {
+				this._StaffService.upload(formData, Item['id']).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
-							Item = new Service();
+							Item = new Staff();
 							Item['language_code'] = lang;
 
 						}
@@ -176,7 +176,15 @@ export class ServiceFormComponent implements OnInit {
 		this.Items = [this.Item_vi, this.Item_en];
 
 		this.Items.forEach(Item => {
-			if(!Item['title']){
+			if(!Item['fullname']){
+				valid = false;
+				this.language_code = Item['language_code'];
+				$('a[href="#tab_' + Item['language_code'] + '"]').click();
+				$('div[id^="tab_"]').removeClass('active');
+				$('div#tab_' + Item['language_code']).addClass('active');
+				return;
+			}
+			if(!Item['position']){
 				valid = false;
 				this.language_code = Item['language_code'];
 				$('a[href="#tab_' + Item['language_code'] + '"]').click();

@@ -18,16 +18,16 @@
 		<div class="tab-content">
 			<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 				<div class="tab-pane active" id="tab_vi">
-					<app-service-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-service-form-content>
+					<app-staff-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-staff-form-content>
 				</div>
 				<div class="tab-pane" id="tab_en">
-					<app-service-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-service-form-content>
+					<app-staff-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-staff-form-content>
 				</div>
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-md-offset-5 col-md-7">
 							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> {{ 'ADMIN.save' | translate }}</button>
-							<a class="btn default" [routerLink]="['/admin/service/list']"><i class="fa fa-arrow-left"></i> {{ 'ADMIN.back' | translate }}</a>
+							<a class="btn default" [routerLink]="['/admin/staff/list']"><i class="fa fa-arrow-left"></i> {{ 'ADMIN.back' | translate }}</a>
 						</div>
 					</div>
 				</div>
