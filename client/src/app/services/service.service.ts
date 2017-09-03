@@ -89,6 +89,18 @@ export class ServiceService {
         .catch(this.handleError);
     }
 
+    public getAll(params = null){
+    	let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this._Http.get(this._list_data_URL, {
+        	search: params,
+            headers: headers,
+            withCredentials: true
+        })
+        .map(res => res.json())
+        .catch(this.handleError);
+    }
+
 	public delete(id:number){
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);

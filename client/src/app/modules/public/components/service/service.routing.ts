@@ -5,7 +5,12 @@ import { AuthPermissionGuard, ChangeRouteGuard } from '../../../../guards';
 
 const APP_ROUTES: Routes = [
 	//=================== Payment Router======================
-	{ path: '', component: ServiceListComponent },
+	{ path: '',
+		children: [
+			{path: '', component: ServiceListComponent},
+			{path: ':id/:title', component: ServiceListComponent},
+		]
+	},
 	{ path: 'detail', component: ServiceDetailComponent },
 	{ path: 'before-after', component: BeforeAfterComponent },
 ];
