@@ -75,9 +75,15 @@ export class NewsFormContentComponent implements OnInit {
 			this.uploader = this.Item.image;
 		}else{
 			let image = JSON.parse(this.Item.image);
+			console.log(image)
 			let filename = image.filename;
 			let file_type = filename.split('.');
-			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
+			let image_url = '';
+			if (filename) {
+				image_url = this.Item['image_url'];
+			}
+
+			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
 			this.uploader.queue.push(item);
 		}
 	}
@@ -146,12 +152,32 @@ export class NewsFormContentComponent implements OnInit {
 		}, 500);
 	}
 
+	onImageChange(event) {
+		var reader = new FileReader();
+		var image = $('#myImage');
+
+		var src_image = '';
+		reader.onload = function(e: any) {
+			src_image = e.target.result;
+			image.src = src_image;
+
+		};
+		var self = this;
+		setTimeout(() => {
+			self.uploader.queue[0]['src'] = src_image;
+			self.uploader.queue = [self.uploader.queue[0]];
+		}, 100);
+
+		reader.readAsDataURL(event.target.files[0]);
+	}
+
 	public fileOverBase(e: any): void {
 		this.hasBaseDropZoneOver = e;
 	}
 
 	public fileOverAnother(e: any): void {
-		this.onValidateFormFileType();
+		// this.onValidateFormFileType();
+		this.onImageChange(e);
 		this.hasAnotherDropZoneOver = e;
 	}
 

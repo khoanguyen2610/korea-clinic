@@ -21,8 +21,10 @@ export class GalleryListComponent implements OnInit {
 	private DTList;
 	@ViewChild('modal') modal: ModalComponent;
 
-	delete_id: number;
+	delete_item_key: string;
 	url_list_data: String;
+	delete_id:number;
+
 
 	constructor(
 		private _AuthService: AuthService,
@@ -37,7 +39,7 @@ export class GalleryListComponent implements OnInit {
 
 		});
 
-		this.url_list_data = this._GalleryService._list_data_URL;
+		this.url_list_data = this._GalleryService._list_data_URL + '?language_code=vi';
 	}
 
 	ngOnInit(){

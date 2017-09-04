@@ -59,7 +59,12 @@ export class StaffFormContentComponent implements OnInit {
 			let image = JSON.parse(this.Item.image);
 			let filename = image.filename;
 			let file_type = filename.split('.');
-			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
+			let image_url = '';
+			if (filename) {
+				image_url = this.Item['image_url'];
+			}
+
+			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
 			this.uploader.queue.push(item);
 		}
 	}
@@ -152,7 +157,8 @@ export class StaffFormContentComponent implements OnInit {
 	}
 
 	public fileOverAnother(e: any): void {
-		this.onValidateFormFileType();
+		// this.onValidateFormFileType();
+		this.onImageChange(e);
 		this.hasAnotherDropZoneOver = e;
 	}
 
