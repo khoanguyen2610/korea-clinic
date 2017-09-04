@@ -46,7 +46,9 @@ export class ServiceListComponent implements OnInit {
 		params.set('item_status','active');
 
 		this._ServiceService.getAll(params).subscribe(res => {
-			console.log(res);
+			if(res.status == 'success'){
+				this.services = res.data;
+			}
 		})
 		console.log('ServiceListComponent');
 	}

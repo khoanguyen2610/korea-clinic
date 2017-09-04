@@ -3,9 +3,22 @@
 	<div class="column sc_column_container sc_col-sm-12">
 		<div class="sc_column-inner ">
 			<div class="wrapper">
-				<article class="myportfolio-container minimal-light">
+				<article class="myportfolio-container minimal-light" id="esg-grid-5-1-wrap">
 
 				</article>
+				<div class="esg-clear-no-height"></div>
+				<ul>
+					<li class="filterall filter-gallery filter-massage-therapy filter-massage-therapy eg-cleveland-massage-wrapper eg-post-id-209" data-date="1459261695" *ngFor="let item of services">
+						<div class="esg-media-cover-wrapper">
+							<div class="esg-entry-media">
+								<img [src]="item.image_url" alt="">
+							</div>
+							<div class="esg-entry-cover esg-fade" data-delay="0">
+
+							</div>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
