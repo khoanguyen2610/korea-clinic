@@ -128,6 +128,25 @@ export class SlideFormContentComponent implements OnInit {
 		}, 500);
 	}
 
+	onImageChange(event) {
+		var reader = new FileReader();
+		var image = $('#myImage');
+
+		var src_image = '';
+		reader.onload = function(e: any) {
+			src_image = e.target.result;
+			image.src = src_image;
+
+		};
+		var self = this;
+		setTimeout(() => {
+			self.uploader.queue[0]['src'] = src_image;
+			self.uploader.queue = [self.uploader.queue[0]];
+		}, 100);
+
+		reader.readAsDataURL(event.target.files[0]);
+	}
+
 	public fileOverBase(e: any): void {
 		this.hasBaseDropZoneOver = e;
 	}

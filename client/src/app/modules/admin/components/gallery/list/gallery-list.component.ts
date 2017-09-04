@@ -17,7 +17,28 @@ declare var $: any;
 })
 
 export class GalleryListComponent implements OnInit {
-	
+	private subscription: Subscription;
+	private DTList;
+	@ViewChild('modal') modal: ModalComponent;
+
+	delete_id: number;
+	url_list_data: String;
+
+	constructor(
+		private _AuthService: AuthService,
+		private _Configuration: Configuration,
+		private _GalleryService: GalleryService,
+		private _ToastrService: ToastrService,
+		private _ActivatedRoute: ActivatedRoute,
+		private _Router: Router,
+
+	) {
+		this.subscription = _ActivatedRoute.queryParams.subscribe((params:any) => {
+
+		});
+
+		this.url_list_data = this._GalleryService._list_data_URL;
+	}
 
 	ngOnInit(){
 
