@@ -3,7 +3,12 @@ interface Scripts {
    src: string;
 }
 export const ScriptStore: Scripts[] = [
-   {name: 'filepicker', src: '../assets/plugins/sweetalert2/sweetalert2.js'}
+   {name: 'filepicker', src: '../assets/plugins/sweetalert2/sweetalert2.js'},
+   {name: 'custom', src: '../../assets/public/js/custom/custom.js'},
+   // {name: 'core_utils', src: '../../assets/public/js/custom/core.utils.js'},
+   {name: 'core_init', src: '../../assets/public/js/custom/core.init.js'},
+   // {name: 'theme_init', src: '../../assets/public/js/custom/theme.init.js'},
+   // {name: 'theme_shortcodes', src: '../../assets/public/js/custom/theme.shortcodes.js'}
 ];
 
 export class ScriptService {

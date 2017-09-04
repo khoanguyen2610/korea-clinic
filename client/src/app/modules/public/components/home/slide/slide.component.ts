@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 
+import { Configuration } from '../../../../../shared';
+import { AuthService, SlideService } from '../../../../../services';
 
 declare let $: any;
 declare let moment: any;
