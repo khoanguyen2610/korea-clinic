@@ -8,8 +8,8 @@ import { Configuration } from '../../../../shared';
 import { AuthService } from '../../../../services';
 
 
-declare let $: any;
-declare let moment: any;
+declare let jQuery: any;
+declare let window: any;
 
 @Component({
 	selector: 'app-public-home',
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Public Homepage');
+
 	}
 
 

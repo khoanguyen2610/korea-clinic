@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
-import { AuthService, ServiceService } from '../../../../../services';
+import { AuthService, ServiceService, ServiceCategoryService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
 // declare let $: any;
@@ -12,7 +12,7 @@ declare let moment: any;
 @Component({
 	selector: 'app-public-service-list',
 	templateUrl: './service-list.component.html',
-	providers: [ ServiceService ]
+	providers: [ ServiceService, ServiceCategoryService ]
 })
 
 export class ServiceListComponent implements OnInit {
@@ -20,15 +20,19 @@ export class ServiceListComponent implements OnInit {
 	private querySubscription: Subscription;
 
 	controller: string = 'dich-vu';
+	categories: Array<any> = [];
 	services: Array<any> = [];
 	_params: any
 	queryParams: any;
-	lang_code: string = this._Configuration.defaultLang;
+	lang_code: string;
+	timestamp = 0;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _ServiceService: ServiceService,
-		private _Configuration: Configuration
+		private _ServiceCategoryService: ServiceCategoryService,
+		private _Configuration: Configuration,
+		private _cdr: ChangeDetectorRef
 	) {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
@@ -39,43 +43,42 @@ export class ServiceListComponent implements OnInit {
 				this.queryParams = param;
 			}
 		);
+
+		this.lang_code = _Configuration.defaultLang;
 	}
 
 	ngOnInit() {
-		let params: URLSearchParams = new URLSearchParams();
-		if(this._params.id){
-			params.set('service_category_id',this._params.id);
+		if(this._params.lang_code){
+			this.lang_code = this._params.lang_code;
 		}
+
+		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.lang_code);
 		params.set('item_status','active');
 
-		this._ServiceService.getListData(params).subscribe(res => {
+		this._ServiceCategoryService.getListData(params).subscribe(res => {
 			if(res.status == 'success'){
-				let data = res.data;
-				let temp = {
-					'items': [],
-					'timestamp': 0
-				};
-				let j = 0;
-				for(let i in data){
-					if(j == 4){
-						this.services.push(temp);
-						temp = {
-							'items': [],
-							'timestamp': 0
-						};
-						j = 0;
-					}
-					temp.items.push(data[i]);
-					temp.timestamp = moment('x');
-					j++;
-				}
-				console.log(this.services);
+				this.categories = res.data;
+			}
+		});
+
+
+		if(this._params.id){
+			params.set('service_category_id',this._params.id);
+		}
+
+		this._ServiceService.getListAll(params).subscribe(res => {
+			if(res.status == 'success'){
+				this.services = res.data;
 			}
 		})
 		console.log('ServiceListComponent');
 	}
 
+	onGetTimestamp(t){
+		t = new Date().getTime();
+		return t;
+	}
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
