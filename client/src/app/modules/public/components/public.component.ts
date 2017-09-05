@@ -25,7 +25,6 @@ export class PublicComponent  {
 			JACQUELINE_STORAGE['theme_init_counter'] = 0;
             jacqueline_init_actions();
 
-
         }).catch(error => console.log(error));
 
         _ScriptService.load('custom').then(data => {
@@ -41,10 +40,10 @@ export class PublicComponent  {
 
 	ngViewAfterInit(){
 
-		
+
 		// jacqueline_init_actions();
 
-		
+
 	}
 
 
