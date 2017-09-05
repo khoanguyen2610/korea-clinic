@@ -4,9 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { AuthService, StaffService } from '../../../../../services';
+import { Configuration } from '../../../../../shared';
 
 // declare let $: any;
-// declare let moment: any;
+declare let moment: any;
 
 @Component({
 	selector: 'app-public-general-staff-list',
@@ -26,6 +27,7 @@ export class StaffListComponent implements OnInit {
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _StaffService: StaffService,
+		private _Configuration: Configuration
 	) {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { AuthService, NewsService } from '../../../../../services';
+import { Configuration } from '../../../../../shared';
 
 // declare let $: any;
 // declare let moment: any;
@@ -26,6 +27,7 @@ export class NewsListComponent implements OnInit {
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _NewsService: NewsService,
+		private _Configuration: Configuration
 	) {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param

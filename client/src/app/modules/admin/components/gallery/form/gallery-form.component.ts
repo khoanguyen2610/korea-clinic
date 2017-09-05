@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { Configuration } from '../../../../../shared';
 import { AuthService, GalleryService, GeneralService } from '../../../../../services';
+import { Gallery } from '../../../../../models';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
@@ -23,7 +24,8 @@ export class GalleryFormComponent implements OnInit {
 	_params: any;
 	queryParams: any;
 	files_type = [];
-	files_upload = 0;
+	src_images: Array<any> = [];
+	Item = new Gallery();
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
@@ -58,11 +60,24 @@ export class GalleryFormComponent implements OnInit {
 	onSubmit(form: NgForm){
 		let formData: FormData = new FormData();
 
+		if (this.uploader.queue.length) {
+			for (let key in this.uploader.queue) {
+				var upload = this.uploader.queue[key]._file;
+				//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+				var objUpload = new Blob([upload]);
+
+				formData.append("image", objUpload, upload.name);
+			}
+		}
+
+		formData.append('title', this.Item.title);
+		formData.append('description', this.Item.description);
+
 		this._GalleryService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;
 		});
 		try {
-			this._GalleryService.upload(formData, undefined).then((res) => {
+			this._GalleryService.upload(formData, this.Item.id).then((res) => {
 				if (res.status == 'success') {
 					if(this._params.method == 'create'){
 
@@ -77,22 +92,41 @@ export class GalleryFormComponent implements OnInit {
 	}
 
 	onImageChange(event) {
-		var reader = new FileReader();
-		var image = $('#myImage');
-
-		var src_image = '';
-		reader.onload = function(e: any) {
-			src_image = e.target.result;
-			image.src = src_image;
-
-		};
+		console.log(event.srcElement.files)
 		var self = this;
+		let files = event.target.files;
+
+		console.log(files)
+
+		for (var i = 0; i < files.length; i++) {
+			var reader = new FileReader();
+			var src_image = '';
+
+			reader.onload = function(e: any) {
+				src_image = e.target.result;
+				self.src_images.push(src_image);
+
+			};
+
+			var file = files[i];
+			//Only pics
+			if (!file.type.match('image')) continue;
+
+			//Read the image
+			reader.readAsDataURL(file);
+		}
+
+
 		setTimeout(() => {
-			self.uploader.queue[0]['src'] = src_image;
-			self.uploader.queue = [self.uploader.queue[0]];
+			var queue_files = self.uploader.queue;
+			var queue = [];
+			for (var i = 0; i < queue_files.length; i++) {
+				queue_files[i]['src'] = this.src_images[i];
+				queue.push(self.uploader.queue[i]);
+			}
+			queue_files = queue;
 		}, 100);
 
-		reader.readAsDataURL(event.target.files[0]);
 	}
 
 	public fileOverBase(e: any): void {
@@ -100,7 +134,6 @@ export class GalleryFormComponent implements OnInit {
 	}
 
 	public fileOverAnother(e: any): void {
-		// this.onValidateFormFileType();
 		this.onImageChange(e);
 		this.hasAnotherDropZoneOver = e;
 	}
