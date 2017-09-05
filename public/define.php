@@ -52,7 +52,7 @@ define('CHECK_PERMISSION', TRUE);
 /*====================================================================
  * Default empty image URL
  *====================================================================*/
-define('IMG_PLACEHOLDER_URL', 'images/placeholder.png');
+define('IMG_PLACEHOLDER_URL', 'images/placeholder.jpg');
 
 /*====================================================================
  * Directory language flag image URL

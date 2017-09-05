@@ -1,9 +1,10 @@
 <div class="portlet light bordered">
 	<div class="portlet-title">
-		<div class="caption">
-			<span class="caption-subject font-dark sbold uppercase">Fordsadm</span>
-		</div>
-	</div>
+        <div class="caption">
+          <i class=" icon-layers font-red"></i>
+          <span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.equipment_management' | translate }}</span>
+        </div>
+  	</div>
 	<div class="portlet-body form">
 		<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 			<div class="form-group">
@@ -19,7 +20,9 @@
 							<ul class="uploader-files-in clearfix">
 								<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
 									<div class="item">
-										<img [src]="item?.src"  alt="" width="200" height="auto">
+										<a style="height: 125px">
+											<img [src]="item?.src"  alt="" width="200" height="auto">
+										</a>
 										<!-- <p>{{ item?.file?.name }}</p> -->
 										<div class="file-actions clearfix">
 										    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>

@@ -52,10 +52,8 @@ export class EquipmentListComponent implements OnInit {
 		let datatable = this.DTList = $('#tbl-data').DataTable({
 			autoWidth: false,
 			pageLength: Configuration.DtbPageLength,
-			lengthMenu: Configuration.DtbLengthMenu,
-			lengthChange: true,
+			lengthChange: false,
 			searching: false,
-			dom: '<"datatable-header clearfix"fli><"datatable-scroll table-responsive clearfix"tr><"datatable-footer clearfix"ip>',
 			order: [],
 			ajax: {
 				'url': _list_data_URL,

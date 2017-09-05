@@ -1,7 +1,12 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="portlet light bordered">
-			<div class="portlet-title"></div>
+			<div class="portlet-title">
+		        <div class="caption">
+		          <i class=" icon-layers font-red"></i>
+		          <span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.equipment_management' | translate }}</span>
+		        </div>
+	      	</div>
 			<div class="portlet-body">
 				<!-- table-toolbar -->
 				<div class="table-toolbar">
@@ -17,7 +22,7 @@
 				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-data">
 					<thead>
 						<tr>
-							<th>No.</th>
+							<th>{{ 'ADMIN.seq_no' | translate }}</th>
 							<th>{{ 'ADMIN.image' | translate }}</th>
 							<th>{{ 'ADMIN.title' | translate }}</th>
 							<th>Actions</th>
@@ -34,7 +39,7 @@
 		<h4 class="modal-title">{{ 'ADMIN.confirmation' | translate }}</h4>
 	</modal-header>
 	<modal-body>
-		Are you sure you want to delete this equipment?
+		{{ 'ADMIN.are_you_sure_you_want_to_delete_this_item'| translate }}
 	</modal-body>
 	<modal-footer>
 		<button class="btn default" type="button" (click)="modal.close()">{{ 'ADMIN.no' | translate }}</button>
