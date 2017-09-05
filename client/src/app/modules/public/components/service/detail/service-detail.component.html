@@ -1,1 +1,17 @@
 <h1>Service Detail</h1>
+<article class="post_item_excerpt post_item post">
+	<div class="post_featured">
+		<div class="post_thumb" data-image="images/image-1.jpg" data-title="Massage Therapy for Managing Workplace Stress">
+			<a class="hover_icon hover_icon_link" href="single-post.html">
+				<img alt="" [src]="Item['image_url']">
+			</a>
+		</div>
+	</div>
+	<div class="post_content clearfix">
+		<h1 class="post_title entry-title">
+			<span class="post_icon icon-book-open"></span>
+			{{ Item['title'] }}
+			<div [innerHTML]="Item['content']"></div>
+		</h1>
+	</div>
+</article>

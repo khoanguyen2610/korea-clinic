@@ -11,7 +11,7 @@ const APP_ROUTES: Routes = [
 			{path: ':lang_code/:item_key/:title', component: ServiceListComponent},
 		]
 	},
-	{ path: 'detail', component: ServiceDetailComponent },
+	{ path: 'detail/:lang_code/:item_key/:title', component: ServiceDetailComponent },
 	{ path: 'before-after', component: BeforeAfterComponent },
 ];
 export const Routing = RouterModule.forChild(APP_ROUTES);

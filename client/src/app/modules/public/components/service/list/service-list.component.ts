@@ -25,7 +25,6 @@ export class ServiceListComponent implements OnInit {
 	_params: any
 	queryParams: any;
 	lang_code: string;
-	timestamp = 0;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -69,15 +68,16 @@ export class ServiceListComponent implements OnInit {
 
 		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				this.services = res.data;
+				let data = res.data;
+				let items = [];
+				for(let i in data){
+					data[i]['nice_url'] = data[i]['title'].replace(/ /g, '-');
+					items.push(data[i]);
+				}
+				this.services = items;
 			}
 		})
 		console.log('ServiceListComponent');
-	}
-
-	onGetTimestamp(t){
-		t = new Date().getTime();
-		return t;
 	}
 
 	ngOnDestroy() {
