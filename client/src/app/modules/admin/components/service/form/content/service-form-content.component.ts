@@ -28,7 +28,6 @@ export class ServiceFormContentComponent implements OnInit {
 	src_images: Array<any> = [];
 	_params: any;
 	files_type = [];
-	files_upload = 0;
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
@@ -78,7 +77,7 @@ export class ServiceFormContentComponent implements OnInit {
 			let image = JSON.parse(this.Item.image);
 			let filename = image.filename;
 			let file_type = filename.split('.');
-			var image_url = '';
+			let image_url = '';
 			if (filename) {
 				image_url = this.Item['image_url'];
 			}
@@ -98,107 +97,31 @@ export class ServiceFormContentComponent implements OnInit {
 		}
 	}
 
-	/*====================================
-	 * Validate Form File Type
-	 *====================================*/
-	onValidateFormFileType(event) {
-		this.onImageChange(event)
-		// this.uploader['error_limit_files'] = false;
-		// setTimeout(() => {
-		// 	let after_upload_files = +this.uploader.queue.length; // after drag upload files
-		// 	if (after_upload_files <= this._Configuration.limit_files) {
-		// 		if (after_upload_files != this.files_upload) {
-		// 			let uploader = [];
-		// 			for (let key in this.uploader.queue) {
-		// 				var checked = false;
-		// 				var ext = this.uploader.queue[key]._file.name.split('.').pop();
-		// 				ext = ext.toLowerCase();
-
-		// 				for (let k in this.files_type) {
-
-		// 					if (ext.indexOf(this.files_type[k]) > -1) {
-		// 						checked = true;
-		// 						break;
-		// 					}
-		// 				}
-
-		// 				if (!checked) {
-		// 					var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
-		// 					this._ToastrService.error(msgInvalidFileType);
-		// 					checked = false;
-		// 				}
-
-		// 				if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
-		// 					var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
-		// 					this._ToastrService.error(msgSizeTooLarge);
-		// 					checked = false;
-		// 				}
-
-		// 				if (!checked) {
-		// 					// this.uploader.queue.splice(+key, 1);
-		// 					this.uploader.queue[key].isError = true;
-		// 				} else {
-		// 					this.uploader.queue[key]._file['is_keeping'] = true;
-		// 					uploader.push(this.uploader.queue[key]);
-		// 				}
-
-
-		// 			}
-		// 			this.uploader.queue = uploader;
-		// 			this.files_upload = this.uploader.queue.length;
-		// 			this.fileOutput.emit(this.uploader);
-		// 		}
-		// 	}
-
-		// }, 500);
-	}
-
 	onImageChange(event) {
-		console.log(event.srcElement.files)
+		var reader = new FileReader();
+		var image = $('#myImage');
+
+		var src_image = '';
+		reader.onload = function(e: any) {
+			src_image = e.target.result;
+			image.src = src_image;
+
+		};
 		var self = this;
-		let files = event.target.files;
-
-		console.log(files)
-
-		for (var i = 0; i < files.length; i++) {
-			var reader = new FileReader();
-			var src_image = '';
-
-			reader.onload = function(e: any) {
-				src_image = e.target.result;
-				self.src_images.push(src_image);
-
-			};
-
-			var file = files[i];
-			//Only pics
-			if (!file.type.match('image')) continue;
-
-			//Read the image
-			reader.readAsDataURL(file);
-		}
-
-
 		setTimeout(() => {
-			var queue_files = self.uploader.queue;
-			var queue = [];
-			for (var i = 0; i < queue_files.length; i++) {
-				queue_files[i]['src'] = this.src_images[i];
-				queue.push(self.uploader.queue[i]);
-			}
-			queue_files = queue;
+			self.uploader.queue[0]['src'] = src_image;
+			self.uploader.queue = [self.uploader.queue[0]];
+			self.fileOutput.emit(self.uploader);
 		}, 100);
 
+		reader.readAsDataURL(event.target.files[0]);
 	}
 
 	public fileOverBase(e: any): void {
-		console.log(e)
 		this.hasBaseDropZoneOver = e;
 	}
 
 	public fileOverAnother(e: any): void {
-		console.log(e);
-		// this.onValidateFormFileType();
 		this.onImageChange(e);
 		this.hasAnotherDropZoneOver = e;
 	}

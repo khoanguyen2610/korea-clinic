@@ -4,21 +4,54 @@
 		<div class="sc_column-inner ">
 			<div class="wrapper">
 				<article class="myportfolio-container minimal-light" id="esg-grid-5-1-wrap">
-
+					<div id="esg-grid-5-1" class="esg-grid">
+						<article class="esg-filters esg-singlefilters">
+							 <div id="esg-grid-5-1" class="esg-grid">
+								<article class="esg-filters esg-singlefilters">
+									<div class="esg-filter-wrapper esg-fgc-5">
+										<div class="esg-filterbutton selected esg-allfilter" data-filter="filterall" data-fid="-1">
+											<span>Filter - All</span>
+										</div>
+										<div class="esg-filterbutton" data-fid="49" data-pid="34" id="skin" data-filter="skin" *ngFor="let item of categories">
+											<span>{{ item.title }}</span>
+											<span class="esg-filter-checked">
+												<i class="eg-icon-ok-1"></i>
+											</span>
+										</div>
+									</div>
+								</article>
+							</div>
+						</article>
+						<div class="esg-clear-no-height"></div>
+						<ul>
+							<li class="filterall filter-gallery filter-massage-therapy filter-massage-therapy eg-cleveland-massage-wrapper eg-post-id-209" [attr.data-date]="onGetTimestamp(t)" *ngFor="let item of services">
+								<div class="esg-media-cover-wrapper">
+									<div class="esg-entry-media">
+										<img [src]="item.image_url" alt="">
+									</div>
+									<div class="esg-entry-cover esg-fade" data-delay="0">
+										<div class="esg-overlay esg-fade eg-cleveland-massage-container" data-delay="0"></div>
+										<div class="esg-center eg-post-209 eg-cleveland-massage-element-2-a esg-flipup" data-delay="0.1">
+											<a class="eg-cleveland-massage-element-2 eg-post-209" [routerLink]="['service/detail', lang_code]" target="_self">{{ 'PUBLIC.detail' | translate }}</a>
+										</div>
+										<div class="esg-bottom eg-post-209 eg-cleveland-massage-element-1-a esg-rollleft" data-delay="0.3">
+										    <a class="eg-cleveland-massage-element-1 eg-post-209 esgbox" href="{{ item.image_url }}">
+												<i class="eg-icon-link-ext"></i>
+											</a>
+										</div>
+									</div>
+									<div class="esg-entry-content eg-cleveland-massage-content">
+										<div class="esg-content eg-post-209 eg-cleveland-massage-element-0">{{ item.title }}</div>
+										<div class="esg-content eg-post-209 eg-cleveland-massage-element-3">March 29, 2016</div>
+										<div class="esg-content eg-cleveland-massage-element-22 esg-none esg-clear"></div>
+										<div class="esg-content eg-post-209 eg-cleveland-massage-element-6">Personalized Massage</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
 				</article>
-				<div class="esg-clear-no-height"></div>
-				<ul>
-					<li class="filterall filter-gallery filter-massage-therapy filter-massage-therapy eg-cleveland-massage-wrapper eg-post-id-209" data-date="1459261695" *ngFor="let item of services">
-						<div class="esg-media-cover-wrapper">
-							<div class="esg-entry-media">
-								<img [src]="item.image_url" alt="">
-							</div>
-							<div class="esg-entry-cover esg-fade" data-delay="0">
-
-							</div>
-						</div>
-					</li>
-				</ul>
+				<div class="clear"></div>
 			</div>
 		</div>
 	</div>
