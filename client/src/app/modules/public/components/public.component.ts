@@ -9,6 +9,7 @@ declare var jacqueline_init_actions: any;
 declare var initRevSlider: any;
 declare var initEssGrid: any;
 declare var itemsmenu: any;
+declare var window: any;
 
 
 
@@ -35,7 +36,10 @@ export class PublicComponent  {
 
 			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {
 				// JACQUELINE_STORAGE['theme_init_counter'] = 0;
+
+
 				setTimeout(() => {
+
 					JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
 					if (jQuery(".rev_slider").length > 0) { initRevSlider() };
@@ -44,7 +48,9 @@ export class PublicComponent  {
 
 					jacqueline_init_actions();
 
+
 				}, 500)
+
 
 
 	   //          //=========================
