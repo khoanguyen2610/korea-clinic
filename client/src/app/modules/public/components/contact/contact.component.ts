@@ -27,6 +27,7 @@ export class ContactComponent implements OnInit {
 		private _ToastrService: ToastrService,
 		private _SystemGeneralService: SystemGeneralService,
 	) {
+
 	}
 
 	ngOnInit() {
