@@ -24,7 +24,7 @@ export class PublicComponent  {
 		private _ScriptService: ScriptService,
 		private _Router: Router
 	) {
-
+		JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
 	}
 
@@ -40,7 +40,7 @@ export class PublicComponent  {
 
 				setTimeout(() => {
 
-					JACQUELINE_STORAGE['theme_init_counter'] = 0;
+
 
 					if (jQuery(".rev_slider").length > 0) { initRevSlider() };
 					if (jQuery(".esg-grid").length > 0) { initEssGrid() };
