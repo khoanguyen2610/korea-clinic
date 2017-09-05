@@ -13,7 +13,7 @@ export class Configuration {
 	//======================== System Config Variable ===============================
 	public base_href = '';
 	public session_expired = 8; //Session 8 hours
-	public defaultLang = 'en';
+	public defaultLang: string = 'en';
 	public formatDate: string = "YYYY/MM/DD";
 	public formatDateTime: string = "YYYY/MM/DD HH:mm:ss";
 	public formatDateMin: string = "YYYY/MM/DD HH:mm";

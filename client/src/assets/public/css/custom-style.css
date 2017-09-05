@@ -68,3 +68,11 @@
     font-family: fontello;
 }
 .sc_row.inverse_colors *:not(.sc_button_style_filled){ color: #9a9a9a; }
+.language_inactive{
+	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+.language_inactive:hover{
+	-webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+}
