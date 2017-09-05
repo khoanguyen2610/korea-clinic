@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 
 import { Configuration } from '../../../../shared';
-import { AuthService, SlideService } from '../../../../services';
+import { AuthService } from '../../../../services';
 
 
 declare let $: any;
@@ -13,14 +13,12 @@ declare let moment: any;
 
 @Component({
 	selector: 'app-public-home',
-	templateUrl: './home.component.html',
-	providers: [ SlideService ]
+	templateUrl: './home.component.html'
 })
 
 export class HomeComponent implements OnInit {
 
 	constructor(
-		private _SlideService: SlideService
 	) {
 
 	}

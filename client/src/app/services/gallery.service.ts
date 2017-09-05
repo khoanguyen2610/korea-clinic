@@ -8,7 +8,7 @@ import { URLSearchParams } from '@angular/http';
 @Injectable()
 export class GalleryService {
 	private serviceUrl: string = 'gallery/';
-	_list_data_URL:string;
+	_list_data_URL: string;
 
 	/**
      * @param Observable<number>
@@ -22,7 +22,7 @@ export class GalleryService {
 
 	private progressObserver: any;
 
-	constructor( private _Configuration: Configuration, private _Http: Http) {
+	constructor(private _Configuration: Configuration, private _Http: Http) {
 		this._list_data_URL = _Configuration.apiUrl + this.serviceUrl + 'list_data';
 
 		this.progress$ = Observable.create(observer => {
@@ -77,38 +77,62 @@ export class GalleryService {
 		});
 	}
 
-    public getByID(id: number, params = null) {
-        let headers = new Headers();
-        this.createAuthorizationHeader(headers);
-        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'detail/' + id, {
-        	search: params,
-            headers: headers,
-            withCredentials: true
-        })
-        .map(res => res.json())
-        .catch(this.handleError);
-    }
+	public getByID(id: number, params = null) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'detail/' + id, {
+			search: params,
+			headers: headers,
+			withCredentials: true
+		})
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
 
-	public delete(id:number){
+	public getListData(params = null) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.get(this._list_data_URL, {
+			search: params,
+			headers: headers,
+			withCredentials: true
+		})
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
+
+	public getListAll(params = null) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'list_all', {
+			search: params,
+			headers: headers,
+			withCredentials: true
+		})
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
+
+	public delete(id: number) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.delete(this._Configuration.apiUrl + this.serviceUrl + 'index/' + id, {
 			headers: headers,
 			withCredentials: true
 		})
-		.map(res => res.json())
-		.catch(this.handleError);
+			.map(res => res.json())
+			.catch(this.handleError);
 	}
 
-	public deleteItemKey(item_key: string){
+	public deleteItemKey(item_key: string) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.delete(this._Configuration.apiUrl + this.serviceUrl + 'item_key/' + item_key, {
 			headers: headers,
 			withCredentials: true
 		})
-		.map(res => res.json())
-		.catch(this.handleError);
+			.map(res => res.json())
+			.catch(this.handleError);
 	}
 
 	private handleError(error: Response) {

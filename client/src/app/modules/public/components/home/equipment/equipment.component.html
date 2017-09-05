@@ -7,7 +7,7 @@
                 </div>
                 <div class="sc_section sc_section_block">
                     <div class="sc_section_inner">
-                        <h6 class="sc_item_title sc_section_subtitle sc_item_subtitle">Trang Thiết Bị</h6>
+                        <h6 class="sc_item_title sc_section_subtitle sc_item_subtitle">{{ 'ADMIN.equipments' | translate }}</h6>
                         <div class="sc_section_content_wrap">
                             <div class="sc_empty_space em_height_2">
                                 <span class="sc_empty_space_inner"></span>
@@ -16,9 +16,9 @@
                                 <div class="sc_section sc_section_block aligncenter max_width cu_width-1080">
                                     <div class="esg-grid" id="esg-grid-1-1">
                                         <ul>
-                                            <li class="filterall filter-simple filter-skincare eg-eisenhower-massage-wrapper eg-post-id-332" data-date="1459258561">
+                                            <li *ngFor="let item of Items" class="filterall filter-simple filter-skincare eg-eisenhower-massage-wrapper eg-post-id-332" data-date="1459258561">
                                                 <div class="esg-media-cover-wrapper">
-                                                    <div class="esg-entry-media"><img alt="" src="./assets/public/images/3473311504060-hd.jpg"></div>
+                                                    <div class="esg-entry-media"><img alt="" [src]="item.image_url"></div>
                                                     <div class="esg-entry-cover">
                                                         <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
                                                         <div class="esg-center eg-post-332 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
@@ -30,16 +30,16 @@
                                                     </div>
                                                     <div class="esg-entry-content eg-eisenhower-massage-content">
                                                         <div class="esg-content eg-post-332 eg-eisenhower-massage-element-6-a">
-                                                            <a class="eg-eisenhower-massage-element-6 eg-post-332" href="shop.html" rel="category tag" title="View all posts in simple">simple</a>, <a class="eg-eisenhower-massage-element-6 eg-post-332" href="shop.html" rel="category tag" title="View all posts in Skincare">Skincare</a>
+                                                            <a [routerLink]="[getModuleNameByLang(), lang_code, item.item_key, item.title]" class="eg-eisenhower-massage-element-6 eg-post-332"  rel="category tag" title="View all posts in simple">{{ item.description }}</a>
                                                         </div>
                                                         <div class="esg-content eg-post-332 eg-eisenhower-massage-element-0">
-                                                            The Supreme Skin Care
+                                                            {{ item.title }}
                                                         </div>
                                                         <div class="esg-content eg-eisenhower-massage-element-2 esg-none esg-clear"></div>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="filterall filter-simple filter-skincare eg-eisenhower-massage-wrapper eg-post-id-337" data-date="1459258606">
+                                            <!-- <li class="filterall filter-simple filter-skincare eg-eisenhower-massage-wrapper eg-post-id-337" data-date="1459258606">
                                                 <div class="esg-media-cover-wrapper">
                                                     <div class="esg-entry-media"><img alt="" src="./assets/public/images/3473311421005_95.jpg"></div>
                                                     <div class="esg-entry-cover">
@@ -104,7 +104,7 @@
                                                         <div class="esg-content eg-eisenhower-massage-element-2 esg-none esg-clear"></div>
                                                     </div>
                                                 </div>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </div>
                                 </div>
