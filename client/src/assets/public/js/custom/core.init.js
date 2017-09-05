@@ -38,10 +38,10 @@ function jacqueline_init_actions() {
 
 	// Add resize handlers after VC row stretch handlers on('resize.vcRowBehaviour', ...)
 	setTimeout(function() {
-		jQuery(window).on('resize.jacqueline', function() {
-			jacqueline_resize_actions();
-			jacqueline_scroll_actions()
-		}).trigger('resize.jacqueline');
+		// jQuery(window).on('resize.jacqueline', function() {
+		// 	jacqueline_resize_actions();
+		// 	jacqueline_scroll_actions()
+		// }).trigger('resize.jacqueline');
 	}, 10);
 
 	// Scroll handlers
