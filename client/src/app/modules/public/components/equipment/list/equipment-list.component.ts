@@ -16,7 +16,13 @@ import { Configuration } from '../../../../../shared';
 })
 
 export class EquipmentListComponent implements OnInit {
+	private subscription: Subscription;
+
 	controller: string = 'thiet-bi';
+	items: Array<any> = [];
+	_params: any;
+	queryParams: any;
+	lang_code: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -31,7 +37,7 @@ export class EquipmentListComponent implements OnInit {
 		params.set('item_status','active');
 		this._EquipmentService.getListData(params).subscribe(res => {
 			if(res.status == 'success'){
-
+				this.items = res.data;
 			}
 		});
 		console.log('EquipmentListComponent');
@@ -39,6 +45,6 @@ export class EquipmentListComponent implements OnInit {
 
 
 	ngOnDestroy() {
-
+		this.subscription.unsubscribe();
 	}
 }
