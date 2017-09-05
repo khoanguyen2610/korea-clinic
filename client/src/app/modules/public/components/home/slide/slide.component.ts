@@ -57,21 +57,21 @@ export class SlideComponent implements OnInit {
 				if (res.data.length) {
 					this.Items = res.data;
 
-					this._ScriptService.load('custom').then(data => {
-						console.log('33333333333333333333custom')
-						if (jQuery(".rev_slider").length > 0) { initRevSlider() };
-						if (jQuery(".esg-grid").length > 0) { initEssGrid() };
-						itemsmenu();
+					// this._ScriptService.load('custom').then(data => {
+					// 	console.log('33333333333333333333custom')
+					// 	if (jQuery(".rev_slider").length > 0) { initRevSlider() };
+					// 	if (jQuery(".esg-grid").length > 0) { initEssGrid() };
+					// 	itemsmenu();
 
-					}).catch(error => console.log(error));
+					// }).catch(error => console.log(error));
 
-					this._ScriptService.load('core_init').then(data => {
-						JACQUELINE_STORAGE['theme_init_counter'] = 0;
-						jacqueline_init_actions();
+					// this._ScriptService.load('core_init').then(data => {
+					// 	JACQUELINE_STORAGE['theme_init_counter'] = 0;
+					// 	jacqueline_init_actions();
 
 
 
-					}).catch(error => console.log(error));
+					// }).catch(error => console.log(error));
 				}
 
 
