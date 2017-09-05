@@ -45,8 +45,8 @@ export class ScriptService {
                     this.scripts[name].loaded = true;
                     resolve({script: name, loaded: true, status: 'Loaded'});
                 };
-                script.onerror = (error: any) => resolve({script: name, loaded: false, status: 'Loaded'});
-                document.getElementsByTagName('head')[0].appendChild(script);
+                script.onerror = (error: any) => resolve({script:  name, loaded: false, status: 'Loaded'});
+                document.getElementsByTagName('body')[0].appendChild(script);
             }
         });
     }

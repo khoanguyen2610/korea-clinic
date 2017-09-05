@@ -41,7 +41,7 @@ export class StaffListComponent implements OnInit {
 	ngOnInit() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('item_status','acitve');
-		this._StaffService.getAll(params).subscribe(res => {
+		this._StaffService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.employees = res.data;
 			}

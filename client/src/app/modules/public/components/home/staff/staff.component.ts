@@ -4,27 +4,27 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
-import { AuthService, EquipmentService } from '../../../../../services';
+import { AuthService, StaffService } from '../../../../../services';
 
 declare let $: any;
 declare let moment: any;
 
 @Component({
-	selector: 'app-public-home-equipment',
-	templateUrl: './equipment.component.html',
-	providers: [EquipmentService]
+	selector: 'app-public-home-staff',
+	templateUrl: './staff.component.html',
+	providers: [StaffService]
 })
 
-export class EquipmentComponent implements OnInit {
+export class StaffComponent implements OnInit {
 
 	Items: Array<any> = [];
 	lang_code: string = this._Configuration.defaultLang;
 	number_item: number = 4;
-	module_name: string = 'equipment';
+	module_name: string = ''
 
 	constructor(
 		private _AuthService: AuthService,
-		private _EquipmentService: EquipmentService,
+		private _StaffService: StaffService,
 		private _Configuration: Configuration,
 
 	) {
@@ -44,19 +44,30 @@ export class EquipmentComponent implements OnInit {
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.lang_code);
-		params.set('limit', String(this.number_item));
-		this._EquipmentService.getListAll(params).subscribe(res => {
+		this._StaffService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
-				if (res.data.length) {
-					this.Items = res.data;
+				if(res.data.length) {
+					var items = res.data;
+
+					var next = 0;
+					for (let i = 0; i < items.length; i++) {
+
+						if (next < this.number_item) {
+							if (!next) {
+								var arr_item_four = [];
+							}
+							arr_item_four.push(items[i]);
+							next++;
+						} else {
+							next = 0;
+							this.Items.push(arr_item_four);
+						}
+					}
+
 				}
 
 			}
 		});
-	}
-
-	getModuleNameByLang() {
-		return this.module_name;
 	}
 }

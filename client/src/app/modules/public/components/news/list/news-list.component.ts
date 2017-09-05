@@ -45,7 +45,7 @@ export class NewsListComponent implements OnInit {
 		}
 		params.set('item_status','active');
 
-		this._NewsService.getAll(params).subscribe(res => {
+		this._NewsService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 
 			}
