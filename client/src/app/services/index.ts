@@ -9,4 +9,5 @@ export * from './slide.service';
 export * from './gallery.service';
 export * from './staff.service';
 export * from './news-category.service';
+export * from './system-general.service';
 export * from './core/script.service';

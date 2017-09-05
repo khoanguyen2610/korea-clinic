@@ -199,7 +199,7 @@ function jacqueline_replicate(str, num) {
 /* Numbers functions
 ---------------------------------------------------------------- */
 
-// Round number to specified precision. 
+// Round number to specified precision.
 // For example: num=1.12345, prec=2,  rounded=1.12
 //              num=12345,   prec=-2, rounded=12300
 function jacqueline_round_number(num) {
@@ -237,14 +237,14 @@ function jacqueline_clear_number(num) {
 			decimals = precision;
 		}
 		for (i=decimals; i>0; i--)
-			res +='0'; 
+			res +='0';
 	}
 	//if (isNaN(res)) res = clearNumber(defa, precision, defa);
 	return res;
 }
 
 // Convert number from decimal to hex
-function jacqueline_dec2hex(n) { 
+function jacqueline_dec2hex(n) {
 	"use strict";
 	return Number(n).toString(16);
 }
@@ -252,7 +252,7 @@ function jacqueline_dec2hex(n) {
 // Convert number from hex to decimal
 function jacqueline_hex2dec(hex) {
 	"use strict";
-	return parseInt(hex,16); 
+	return parseInt(hex,16);
 }
 
 
@@ -282,15 +282,15 @@ function jacqueline_sort_array(thearray)  {
 					tmp = thearray[x];
 					thearray[x] = thearray[y];
 					thearray[y] = tmp;
-				}  
+				}
 			} else {
 				if (thearray[x].toLowerCase() > thearray[y].toLowerCase())  {
 					tmp = thearray[x];
 					thearray[x] = thearray[y];
 					thearray[y] = tmp;
-				}  
+				}
 			}
-		}  
+		}
 	}
 	return thearray;
 }
@@ -363,14 +363,14 @@ function jacqueline_rgb2hex(color) {
 		color = 'transparent';
 	if (color.indexOf('rgba(')==0)
 		aRGB = color.match(/^rgba\((\d{1,3}[%]?),(\d{1,3}[%]?),(\d{1,3}[%]?),(\d{1,3}[%]?)\)$/i);
-	else	
+	else
 		aRGB = color.match(/^rgb\((\d{1,3}[%]?),(\d{1,3}[%]?),(\d{1,3}[%]?)\)$/i);
-	
+
 	if(aRGB) {
 		color = '';
-		for (var i=1; i<=3; i++) 
+		for (var i=1; i<=3; i++)
 			color += Math.round((aRGB[i][aRGB[i].length-1]=="%"?2.55:1)*parseInt(aRGB[i])).toString(16).replace(/^(.)$/,'0$1');
-	} else 
+	} else
 		color = color.replace(/^#?([\da-f])([\da-f])([\da-f])$/i, '$1$1$2$2$3$3');
 	return (color.substr(0,1)!='#' ? '#' : '') + color;
 }
@@ -447,7 +447,7 @@ function jacqueline_hsb2rgb(hsb) {
 function jacqueline_color_picker(){
 	"use strict";
 	var id = arguments[0] ? arguments[0] : "iColorPicker"+Math.round(Math.random()*1000);
-	var colors = arguments[1] ? arguments[1] : 
+	var colors = arguments[1] ? arguments[1] :
 	'#f00,#ff0,#0f0,#0ff,#00f,#f0f,#fff,#ebebeb,#e1e1e1,#d7d7d7,#cccccc,#c2c2c2,#b7b7b7,#acacac,#a0a0a0,#959595,'
 	+'#ee1d24,#fff100,#00a650,#00aeef,#2f3192,#ed008c,#898989,#7d7d7d,#707070,#626262,#555,#464646,#363636,#262626,#111,#000,'
 	+'#f7977a,#fbad82,#fdc68c,#fff799,#c6df9c,#a4d49d,#81ca9d,#7bcdc9,#6ccff7,#7ca6d8,#8293ca,#8881be,#a286bd,#bc8cbf,#f49bc1,#f5999d,'
@@ -502,7 +502,7 @@ function jacqueline_color_picker(){
 				}
 				jQuery('#'+id+'_Bg').fadeOut(500);
 				jQuery('#'+id).fadeOut(500);
-				
+
 			} else {
 				key.preventDefault();
 				return false;
@@ -613,7 +613,7 @@ function jacqueline_color_picker(){
 	return id;
 }
 
-function jacqueline_color_picker_show(id, fld, func) { 
+function jacqueline_color_picker_show(id, fld, func) {
 	"use strict";
 	if (id===null || id==='') {
 		id = jQuery('.iColorPickerTable').attr('id');
@@ -810,8 +810,8 @@ function jacqueline_sort_listbox(box)  {
 				temp = temp_opts[x];
 				temp_opts[x] = temp_opts[y];
 				temp_opts[y] = temp;
-			}  
-		}  
+			}
+		}
 	}
 	for(var i=0; i<box.options.length; i++)  {
 		box.options[i] = temp_opts[i].clone();
@@ -927,7 +927,7 @@ var error = jacqueline_form_validate(jQuery(form_selector), {				// -------- Opt
 });
 */
 
-function jacqueline_form_validate(form, opt) {
+/*function jacqueline_form_validate(form, opt) {
 	"use strict";
 	var error_msg = '';
 	form.find(":input").each(function() {
@@ -984,7 +984,7 @@ function jacqueline_form_validate(form, opt) {
 		setTimeout(function() { error_message_box.fadeOut(); }, opt.error_message_time);
 	}
 	return error_msg!='';
-}
+}*/
 
 
 

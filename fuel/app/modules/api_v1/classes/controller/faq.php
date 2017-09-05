@@ -11,6 +11,28 @@ class Controller_faq extends \Controller_API {
 
     }
 
+    /*=============================================================
+     * Author: Nguyen Anh Khoa
+     * Function get all data
+     * Method GET
+     * Table faq
+     * Response data: status[success|error], message[notification]
+     *=============================================================*/
+    public function get_list_all(){
+        $param = \Input::param();
+        $data     = \Model_Faq::getAll($param);
+
+        /*==================================================
+         * Response Data
+         *==================================================*/
+        $response = ['status' => 'success',
+                    'code' => Exception::E_ACCEPTED,
+                    'message' => Exception::getMessage(Exception::E_ACCEPTED),
+                    'total' => count($data),
+                    'data' => $data];
+        return $this->response($response);
+    }
+
 	/*=============================================================
      * Author: Nguyen Anh Khoa
      * Function get data for datatable

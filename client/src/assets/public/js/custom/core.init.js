@@ -24,7 +24,7 @@ function jacqueline_init_actions() {
 		setTimeout(jacqueline_init_actions, 200);
 		return;
 	}
-	
+
 	// Hide preloader
 //	jQuery('body.preloader>.outer_wrap,body.preloader>.body_wrap,body.preloader>.jacqueline_profiler').animate({opacity:1}, 'slow');	//.css({opacity:1});
 	jQuery('#page_preloader').animate({opacity:0}, 500, function() { jQuery(this).css({display: 'none'}); });
@@ -87,7 +87,7 @@ function jacqueline_ready_actions() {
 		}
 	});
 
-	
+
 	// Calendar handlers - change months
 	jQuery('.widget_calendar').on('click', '.month_prev a, .month_next a', function(e) {
 		"use strict";
@@ -192,7 +192,7 @@ function jacqueline_ready_actions() {
 		e.preventDefault();
 		return false;
 	});
-	
+
 	// Side menu widgets button
 	jQuery('.sidebar_outer_widgets_button').on('click', function(e){
 		"use strict";
@@ -223,7 +223,7 @@ function jacqueline_ready_actions() {
 			return false;
 		}
 	});
-	
+
 	// Init superfish menus
 	jacqueline_init_sfmenu('header .menu_main_nav_area ul.menu_main_nav, ul.menu_user_nav, ul#menu_side, body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories');
 	JACQUELINE_STORAGE['menu_slider'] = true;
@@ -260,8 +260,8 @@ function jacqueline_ready_actions() {
 			}
 		}
 	});
-	
-	
+
+
 	// Store height of the top and side panels
 	JACQUELINE_STORAGE['top_panel_height'] = 0;	//Math.max(0, jQuery('.top_panel_wrap').height());
 	JACQUELINE_STORAGE['side_panel_height'] = 0;
@@ -366,7 +366,7 @@ function jacqueline_ready_actions() {
 			'summa': total ? total : 0
 		});
 	});
-	// Show cart 
+	// Show cart
 	jQuery('.top_panel_middle .top_panel_cart_button, .header_mobile .top_panel_cart_button').on('click', function(e) {
 		"use strict";
 		jQuery(this).siblings('.sidebar_cart').slideToggle();
@@ -417,31 +417,31 @@ function jacqueline_ready_actions() {
     //----------------------------------------------
 
 	// Login form
-	jQuery('.popup_form.login_form').submit(function(e){
-		"use strict";
-		var rez = jacqueline_login_validate(jQuery(this));
-		if (!rez)
-			e.preventDefault();
-		return rez;
-	});
-	
-	// Registration form
-	jQuery('.popup_form.registration_form').submit(function(e){
-		"use strict";
-		var rez = jacqueline_registration_validate(jQuery(this));
-		if (!rez)
-			e.preventDefault();
-		return rez;
-	});
+	// jQuery('.popup_form.login_form').submit(function(e){
+	// 	"use strict";
+	// 	var rez = jacqueline_login_validate(jQuery(this));
+	// 	if (!rez)
+	// 		e.preventDefault();
+	// 	return rez;
+	// });
 
-	// Comment form
-	jQuery("form#commentform").submit(function(e) {
-		"use strict";
-		var rez = jacqueline_comments_validate(jQuery(this));
-		if (!rez)
-			e.preventDefault();
-		return rez;
-	});
+	// // Registration form
+	// jQuery('.popup_form.registration_form').submit(function(e){
+	// 	"use strict";
+	// 	var rez = jacqueline_registration_validate(jQuery(this));
+	// 	if (!rez)
+	// 		e.preventDefault();
+	// 	return rez;
+	// });
+
+	// // Comment form
+	// jQuery("form#commentform").submit(function(e) {
+	// 	"use strict";
+	// 	var rez = jacqueline_comments_validate(jQuery(this));
+	// 	if (!rez)
+	// 		e.preventDefault();
+	// 	return rez;
+	// });
 
 
 
@@ -531,40 +531,40 @@ function jacqueline_ready_actions() {
 
 	// Init hidden elements (if exists)
 	if (window.jacqueline_init_hidden_elements) jacqueline_init_hidden_elements(jQuery('body').eq(0));
-	
+
 	//Make columns equal height
 	jQuery('.columns_wrap.sc_columns.equal_height').each(function(){
 		var height = 0;
 		jQuery(this).find('.sc_column_item').each(function(){
-			if(jQuery(this).height() > height) height = jQuery(this).height();			
+			if(jQuery(this).height() > height) height = jQuery(this).height();
 		});
 		jQuery(this).find('.sc_column_item').height(height);
 	});
-	
-	
+
+
 	// Woo products buttons
 	jQuery('.woocommerce ul.products li.product .post_thumb').each(function(){
 		var button = jQuery(this).find('.add_to_cart_button');
 		jQuery(this).find('.button_container.cart').append(button);
 	});
-	
+
 	jQuery('.woocommerce ul.products li.product .post_thumb .button_container:not(.animate)').mouseover(function(){
 		if(jQuery(this).find('.added').length <= 0)
 			jQuery(this).addClass('animate').removeClass('animateOut');
 	});
-	
+
 	jQuery('.woocommerce ul.products li.product .post_thumb .button_container').mouseout(function(){
 		if(jQuery(this).find('.added').length <= 0)
 			jQuery(this).addClass('animateOut');
 	});
-	
+
 	jQuery('.woocommerce ul.products li.product .post_thumb .button').each(function(){
 		var item = jQuery(this);
 		var clone = jQuery(item).clone().addClass('clone');
 		jQuery(this).after( clone );
 	});
-	 
-	
+
+
 } //end ready
 
 
@@ -576,7 +576,7 @@ function jacqueline_ready_actions() {
 // Do actions when page scrolled
 function jacqueline_scroll_actions() {
 	"use strict";
-	
+
 	// Call skin specific action (if exists)
     //----------------------------------------------
 	if (window.jacqueline_skin_scroll_actions) jacqueline_skin_scroll_actions();
@@ -592,13 +592,13 @@ function jacqueline_scroll_actions() {
 	if (JACQUELINE_STORAGE['top_panel_height'] < 1) {
 		JACQUELINE_STORAGE['top_panel_height'] = Math.max(0, jQuery('.top_panel_wrap').height());
 	}
-	
+
 	// Scroll to top button show/hide
 	if (scroll_offset > JACQUELINE_STORAGE['top_panel_height'])
 		scroll_to_top_button.addClass('show');
 	else
 		scroll_to_top_button.removeClass('show');
-	
+
 	// Fix/unfix top panel
 	if (!jQuery('body').hasClass('menu_mobile') && JACQUELINE_STORAGE['menu_fixed']) {
 		var slider_height = 0;
@@ -620,10 +620,10 @@ function jacqueline_scroll_actions() {
 			}
 		}
 	}
-	
+
 	// Fix/unfix side panel
 	if (jQuery('.sidebar_outer').length > 0) {
-		if (JACQUELINE_STORAGE['side_panel_height'] == 0)	
+		if (JACQUELINE_STORAGE['side_panel_height'] == 0)
 			JACQUELINE_STORAGE['side_panel_height'] = jQuery('.sidebar_outer_logo_wrap').outerHeight() + jQuery('.sidebar_outer_menu').outerHeight() + jQuery('.sidebar_outer_widgets').outerHeight();
 		if (scroll_offset + jQuery(window).height() > JACQUELINE_STORAGE['side_panel_height'] + 100) {
 			if (jQuery('.sidebar_outer').css('position')!=='fixed') {
@@ -663,10 +663,10 @@ function jacqueline_scroll_actions() {
 		else
 			jQuery(this).removeClass('current');
 	});
-	
+
 	// Infinite pagination
 	jacqueline_infinite_scroll()
-	
+
 	// Parallax scroll
 	jacqueline_parallax_scroll();
 
@@ -698,12 +698,12 @@ function jacqueline_parallax_scroll(){
 		var offsetPrx = Math.max(jQuery(this).offset().top, windowHeight);
 		if ( offsetPrx <= scrollTops + windowHeight ) {
 			var speed  = Number(jQuery(this).data('parallax-speed'));
-			var xpos   = jQuery(this).data('parallax-x-pos');  
+			var xpos   = jQuery(this).data('parallax-x-pos');
 			var ypos   = Math.round((offsetPrx - scrollTops - windowHeight) * speed + (speed < 0 ? windowHeight*speed : 0));
 			jQuery(this).find('.sc_parallax_content').css('backgroundPosition', xpos+' '+ypos+'px');
 			// Uncomment next line if you want parallax video (else - video position is static)
 			jQuery(this).find('div.sc_video_bg').css('top', ypos+'px');
-		} 
+		}
 	});
 }
 
@@ -776,7 +776,7 @@ function jacqueline_responsive_menu() {
 			jQuery('body').removeClass('top_panel_fixed').addClass('menu_mobile');
 			jQuery('header.top_panel_wrap ').hide();
 			jQuery('.header_mobile').show();
-			
+
 			jQuery('header #popup_login').attr('id', 'popup_login_1');
 			jQuery('header #popup_registration').attr('id', 'popup_registration_1');
 			jQuery('.header_mobile #popup_login_1').attr('id', 'popup_login');
@@ -787,30 +787,30 @@ function jacqueline_responsive_menu() {
 			jQuery('body').removeClass('menu_mobile');
 			jQuery('header.top_panel_wrap ').show();
 			jQuery('.header_mobile').hide();
-			
+
 			jQuery('header #popup_login_1').attr('id', 'popup_login');
 			jQuery('header #popup_registration_1').attr('id', 'popup_registration');
 			jQuery('.header_mobile #popup_login').attr('id', 'popup_login_1');
 			jQuery('.header_mobile #popup_registration').attr('id', 'popup_registration_1');
 		}
 	}
-	
+
 	if (jQuery(window).width() < 640) {
 		var pass = jQuery('.header_mobile .popup_wrap.popup_registration .registration_form > .form_right');
-		if(pass.length > 0){ 
+		if(pass.length > 0){
 			jQuery('.header_mobile .popup_wrap.popup_registration .form_left .popup_form_field.email_field').after(pass);
 		}
 	}
 	else{
 		var pass = jQuery('.header_mobile .popup_wrap.popup_registration .form_left > .form_right');
-		if(pass.length > 0){ 
+		if(pass.length > 0){
 			jQuery('.header_mobile .popup_wrap.popup_registration .registration_form').append(pass);
 		}
 	}
 
 	if (!jQuery('.top_panel_wrap').hasClass('menu_show')) jQuery('.top_panel_wrap').addClass('menu_show');
 	// Show widgets block on the sidebar outer (if sidebar not responsive and widgets are hidden)
-	if (jQuery('.sidebar_outer').length > 0 && jQuery('.sidebar_outer').css('position')=='absolute' && jQuery('.sidebar_outer_widgets:visible').length==0) 
+	if (jQuery('.sidebar_outer').length > 0 && jQuery('.sidebar_outer').css('position')=='absolute' && jQuery('.sidebar_outer_widgets:visible').length==0)
 		jQuery('.sidebar_outer_widgets').show();
 	// Switch popup menu / hierarchical list on product categories list placed in sidebar
 	var cat_menu = jQuery('body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories');
@@ -926,7 +926,7 @@ function jacqueline_video_dimensions() {
 			h1 = h;
 			w1 = Math.ceil(h1 * ratio);
 		}
-		if (w1 < w) { 
+		if (w1 < w) {
 			w1 = w;
 			h1 = Math.ceil(w1 / ratio);
 		}
@@ -976,7 +976,7 @@ function jacqueline_video_dimensions() {
 function jacqueline_resize_video_background() {
 	"use strict";
 	var bg = jQuery('.video_bg');
-	if (bg.length < 1) 
+	if (bg.length < 1)
 		return;
 	if (JACQUELINE_STORAGE['media_elements_enabled'] && bg.find('.mejs-video').length == 0)  {
 		setTimeout(jacqueline_resize_video_background, 100);
@@ -993,7 +993,7 @@ function jacqueline_resize_video_background() {
 		h1 = h;
 		w1 = Math.ceil(h1 * ratio);
 	}
-	if (w1 < w) { 
+	if (w1 < w) {
 		w1 = w;
 		h1 = Math.ceil(w1 / ratio);
 	}
@@ -1029,10 +1029,10 @@ function jacqueline_set_mejs_player_dimensions(video, w, h) {
 function jacqueline_resize_fullscreen_slider() {
 	"use strict";
 	var slider_wrap = jQuery('.slider_wrap.slider_fullscreen');
-	if (slider_wrap.length < 1) 
+	if (slider_wrap.length < 1)
 		return;
 	var slider = slider_wrap.find('.sc_slider_swiper');
-	if (slider.length < 1) 
+	if (slider.length < 1)
 		return;
 	var h = jQuery(window).height() - jQuery('#wpadminbar').height() - (jQuery('body').hasClass('top_panel_above') && !jQuery('body').hasClass('.top_panel_fixed') ? jQuery('.top_panel_wrap').height() : 0);
 	slider.height(h);
@@ -1096,7 +1096,7 @@ function jacqueline_init_sfmenu(selector) {
 			dropShadows: false,
 			onBeforeShow: function(ul) {
 				if (jQuery(this).parents("ul").length > 1){
-					var w = jQuery(window).width();  
+					var w = jQuery(window).width();
 					var par_offset = jQuery(this).parents("ul").offset().left;
 					var par_width  = jQuery(this).parents("ul").outerWidth();
 					var ul_width   = jQuery(this).outerWidth();
@@ -1218,7 +1218,7 @@ function jacqueline_init_isotope() {
 		"use strict";
 		jQuery(this).parents('.isotope_filters').find('a').removeClass('active');
 		jQuery(this).addClass('active');
-	
+
 		var selector = jQuery(this).data('filter');
 		jQuery(this).parents('.isotope_filters').siblings('.isotope_wrap').eq(0).isotope({
 			filter: selector
@@ -1247,7 +1247,7 @@ function jacqueline_init_isotope() {
 			isotope_container.addClass('inited').find('.isotope_item').animate({opacity: 1}, 200, function () { jQuery(this).addClass('isotope_item_show'); });
 			return;
 		}
-		
+
 		// Init isotope with timeout
 		setTimeout(function() {
 			isotope_container.addClass('inited').isotope({
@@ -1258,25 +1258,25 @@ function jacqueline_init_isotope() {
 					queue: false
 				}
 			});
-	
+
 			// Show elements
-			isotope_container.find('.isotope_item').animate({opacity: 1}, 200, function () { 
-				jQuery(this).addClass('isotope_item_show'); 
+			isotope_container.find('.isotope_item').animate({opacity: 1}, 200, function () {
+				jQuery(this).addClass('isotope_item_show');
 			});
-			
+
 			// Resize Alter portfolio elements
 			jacqueline_resize_alter_portfolio();
-			
+
 		}, 500);
 
-	});		
+	});
 }
 
 function jacqueline_init_appended_isotope(posts_container, filters) {
 	"use strict";
-	
+
 	if (posts_container.parents('.sc_scroll_horizontal').length > 0) return;
-	
+
 	if (!jacqueline_check_images_complete(posts_container) && JACQUELINE_STORAGE['isotope_init_counter']++ < 30) {
 		setTimeout(function() { jacqueline_init_appended_isotope(posts_container, filters); }, 200);
 		return;
@@ -1313,7 +1313,7 @@ function jacqueline_init_post_formats() {
 
 	// MediaElement init
 	jacqueline_init_media_elements(jQuery('body'));
-	
+
 	// Isotope first init
 	if (jQuery('.isotope_wrap:not(.inited)').length > 0) {
 		JACQUELINE_STORAGE['isotope_init_counter'] = 0;
@@ -1349,7 +1349,7 @@ function jacqueline_init_post_formats() {
 				closeBtnInside: true,
 				fixedContentPos: true,
 				midClick: true,
-				//removalDelay: 500, 
+				//removalDelay: 500,
 				preloader: true,
 				gallery:{
 					enabled: true
@@ -1636,8 +1636,8 @@ function jacqueline_login_validate(form) {
 			result_box.toggleClass('sc_infobox_style_error', false).toggleClass('sc_infobox_style_success', false);
 			if (rez.error === '') {
 				result_box.addClass('sc_infobox sc_infobox_style_success').html(JACQUELINE_STORAGE['strings']['login_success']);
-				setTimeout(function() { 
-					location.reload(); 
+				setTimeout(function() {
+					location.reload();
 					}, 3000);
 			} else {
 				result_box.addClass('sc_infobox sc_infobox_style_error').html(JACQUELINE_STORAGE['strings']['login_failed'] + '<br>' + rez.error);
@@ -1649,7 +1649,7 @@ function jacqueline_login_validate(form) {
 }
 
 
-// Registration form 
+// Registration form
 function jacqueline_registration_validate(form) {
 	"use strict";
 	form.find('input').removeClass('error_fields_class');
@@ -1703,8 +1703,8 @@ function jacqueline_registration_validate(form) {
 			result_box.toggleClass('sc_infobox_style_error', false).toggleClass('sc_infobox_style_success', false);
 			if (rez.error === '') {
 				result_box.addClass('sc_infobox sc_infobox_style_success').html(JACQUELINE_STORAGE['strings']['registration_success']);
-				setTimeout(function() { 
-					jQuery('.popup_login_link').trigger('click'); 
+				setTimeout(function() {
+					jQuery('.popup_login_link').trigger('click');
 					}, 3000);
 			} else {
 				result_box.addClass('sc_infobox sc_infobox_style_error').html(JACQUELINE_STORAGE['strings']['registration_failed'] + ' ' + rez.error);

@@ -1,0 +1,47 @@
+<div class="sc_row row sc_row-fluid" *ngIf="Items.length">
+    <div class="column sc_column_container sc_col-sm-12">
+        <div class="sc_column-inner">
+            <div class="wrapper">
+                <div class="sc_empty_space em_height_4">
+                    <span class="sc_empty_space_inner"></span>
+                </div>
+                <div class="sc_team_wrap" id="sc_team_630_wrap">
+                    <div class="sc_team sc_team_style_team-3 aligncenter" id="sc_team_630">
+                        <h6 class="sc_item_title sc_team_subtitle sc_item_subtitle">{{ 'ADMIN.expert' | translate }}</h6>
+                        <div class="sc_section_content_wrap">
+                            <div class="sc_slider sc_slider_swiper swiper-slider-container sc_slider_controls sc_slider_pagination sc_slider_bg" data-interval="5776" id="sc_slider_061">
+                                <div class="slides swiper-wrapper">
+                                    <div *ngFor="let item of Items" class="swiper-slide" id="sw_slide" >
+                                        <div class="sc_columns columns_wrap">
+                                            <div *ngFor="let i of item; let k=index" class="column-1_4 column_padding_bottom" >
+                                                <div class="sc_team_item" id="sc_team_630_{{ k+ 1}}">
+                                                    <div class="sc_team_item_avatar">
+                                                        <img alt="" [src]="i.image_url">
+                                                        <div class="sc_team_item_hover">
+                                                            <a class="sc_team_item_icon" [routerLink]="[getModuleNameByLang(), lang_code, i.item_key, i.title]">&nbsp;</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sc_team_item_info">
+                                                        <h5 class="sc_team_item_title"><a [routerLink]="[getModuleNameByLang(), lang_code, i.item_key, i.title]">{{ i.fullname }}</a></h5>
+                                                        <div class="sc_team_item_position">
+                                                            {{ item.position }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sc_slider_controls_wrap">
+                                    <a class="sc_slider_prev sc_slider_home" href="#"></a> <a class="sc_slider_next sc_slider_home" href="#"></a>
+                                </div>
+                                <div class="sc_slider_pagination_wrap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

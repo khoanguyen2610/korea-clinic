@@ -3,9 +3,10 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
+import {  ScriptService } from '../../../../../services';
 
 
-// declare let $: any;
+declare let jacqueline_init_actions: any;
 // declare let moment: any;
 
 @Component({
@@ -16,9 +17,11 @@ import { URLSearchParams } from '@angular/http';
 export class FaqListComponent implements OnInit {
 
 	constructor(
-
+		private _ScriptService: ScriptService
 	) {
-
+		_ScriptService.load('theme_shortcodes', 'widget', 'accordion').then(data => {
+            // jacqueline_init_actions();
+        }).catch(error => console.log(error));
 	}
 
 	ngOnInit() {
