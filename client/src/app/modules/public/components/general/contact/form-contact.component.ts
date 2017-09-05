@@ -7,7 +7,7 @@ import { URLSearchParams } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
 
 
-import { SystemGeneralService } from '../../../../../services';
+import { SystemGeneralService, ScriptService } from '../../../../../services';
 
 
 declare let $: any;
@@ -24,9 +24,11 @@ export class FormContactComponent implements OnInit {
 	is_validated = false;
 	constructor(
 		private _ToastrService: ToastrService,
+		private _ScriptService: ScriptService,
 		private _SystemGeneralService: SystemGeneralService,
 	) {
-
+		this._ScriptService.load('grid_layout').then(data => {
+		}).catch(error => console.log(error));
 	}
 
 	ngOnInit() {
