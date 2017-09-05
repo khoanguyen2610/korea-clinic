@@ -48,57 +48,52 @@
 			<li class="nav-item  " [routerLinkActive]="['active']">
 				<a [routerLink]="['/admin/equipment/list']" class="nav-link">
 					<i class="icon-briefcase"></i>
-					<span class="title">Equipment</span>
+					<span class="title">{{'ADMIN.equipment' | translate}}</span>
 				</a>
 			</li>
+            <li class="nav-item  " [routerLinkActive]="['active']">
+                <a [routerLink]="['/admin/service-category/list']" class="nav-link">
+                    <i class="icon-puzzle"></i>
+                    <span class="title">{{'ADMIN.service_category' | translate}}</span>
+                </a>
+            </li>
 			<li class="nav-item  " [routerLinkActive]="['active']">
 				<a [routerLink]="['/admin/service/list']" class="nav-link">
 					<i class="icon-puzzle"></i>
-					<span class="title">Service</span>
+					<span class="title">{{'ADMIN.service' | translate}}</span>
 				</a>
 			</li>
-			<li class="nav-item  " [routerLinkActive]="['active']">
-				<a [routerLink]="['/admin/service-category/list']" class="nav-link">
-					<i class="icon-puzzle"></i>
-					<span class="title">Service Category</span>
-				</a>
-			</li>
+            <li class="nav-item  " [routerLinkActive]="['active']">
+                <a [routerLink]="['/admin/news-category/list']" class="nav-link">
+                    <i class="icon-list"></i>
+                    <span class="title">{{'ADMIN.news_category' | translate}}</span>
+                </a>
+            </li>
 			<li class="nav-item  " [routerLinkActive]="['active']">
 				<a [routerLink]="['/admin/news/list']" class="nav-link">
 					<i class="icon-list"></i>
-					<span class="title">News</span>
+					<span class="title">{{'ADMIN.news' | translate}}</span>
 				</a>
 			</li>
 			<li class="nav-item  " [routerLinkActive]="['active']">
 				<a [routerLink]="['/admin/staff/list']" class="nav-link">
 					<i class="icon-users"></i>
-					<span class="title">Staff</span>
+					<span class="title">{{'ADMIN.staff' | translate}}</span>
 				</a>
 			</li>
 			<li class="nav-item  " [routerLinkActive]="['active']">
 				<a [routerLink]="['/admin/slide/list']" class="nav-link">
 					<i class="icon-picture"></i>
-					<span class="title">Slide</span>
+					<span class="title">{{'ADMIN.slide' | translate}}</span>
 				</a>
-			</li>
-			<li class="nav-item  " [routerLinkActive]="['active']">
-				<a [routerLink]="['/admin/gallery/list']" class="nav-link">
-					<i class="icon-picture"></i>
-					<span class="title">Gallery</span>
-				</a>
-			</li>
-			<li class="heading">
-			    <h3 class="uppercase">Features</h3>
 			</li>
             <li class="nav-item  " [routerLinkActive]="['active']">
-                <a [routerLink]="['/admin/news-category/list']" class="nav-link">
-                    <i class="icon-puzzle"></i>
-                    <span class="title">News Category</span>
+                <a [routerLink]="['/admin/gallery/list']" class="nav-link">
+                    <i class="icon-picture"></i>
+                    <span class="title">{{'ADMIN.gallery' | translate}}</span>
                 </a>
             </li>
-            <li class="heading">
-                <h3 class="uppercase">Features</h3>
-            </li>
+
         </ul>
         <!-- END SIDEBAR MENU -->
         <!-- END SIDEBAR MENU -->

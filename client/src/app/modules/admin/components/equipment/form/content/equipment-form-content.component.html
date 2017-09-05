@@ -57,7 +57,9 @@
 					<ul class="uploader-files-in clearfix">
 						<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
 							<div class="item">
-								<img [src]="item?.src"  alt="" width="200" height="auto">
+								<a style="height: 125px">
+									<img [src]="item?.src"  alt="" width="200" height="auto">
+								</a>
 								<!-- <p>{{ item?.file?.name }}</p> -->
 								<div class="file-actions clearfix">
 								    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>

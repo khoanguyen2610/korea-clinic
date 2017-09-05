@@ -64,6 +64,8 @@ export class AdminComponent  {
 		// 	}
 		// });
 
+		this.onSetGobalScript();
+
 		/*==========================================
 		 * Config ToastrConfig
 		 *==========================================*/
@@ -168,6 +170,34 @@ export class AdminComponent  {
 			//
 		}
     }
+
+    onSetGobalScript(){
+    	$.fn.dataTable.ext.errMode = 'none';
+    	$.extend($.fn.dataTable.defaults, {
+	    	autoWidth: true,
+			processing: true,
+	    	dom: '<"datatable-header clearfix"fl><"datatable-scroll table-responsive clearfix"tr><"datatable-footer clearfix"ip>',
+	    	language: {
+	      		paginate: {
+	        		'first': 'First',
+	        		'last': 'Last',
+	        		'next': '&rarr;',
+	        		'previous': '&larr;'
+	      		},
+    //     		processing: '<div class="box-loading"><div class="cssload"><span></span></div></div>',
+				// lengthMenu: "_MENU_ <span>件表示</span>",
+				// search: "<span>検索:</span> _INPUT_",
+				// sEmptyTable: "データはありません。",
+				// sInfo: " _TOTAL_ 件中 _START_ から _END_ まで表示",
+				// sInfoEmpty: " 0 件中 0 から 0 まで表示",
+				// sInfoFiltered: "（全 _MAX_ 件より抽出）",
+				// sInfoPostFix: "",
+				// sUrl: "",
+	    	}
+	  	});
+
+    }
+
 	//
     // onCheckUserSession(routing, refill = null){
     // 	if (!routing.match(/^\/login.*/i) && !routing.match(/^\/logout.*/i) && !routing.match(/^\/forgot\-password.*/i) && !routing.match(/^\/$/i)) {

@@ -114,18 +114,18 @@ class Controller_News extends \Controller_API {
                  * Config Upload File
                  *============================================*/
                 $today_dir = date('Ymd');
-                $folder_name = 'news';
+                $folder_name = NEWS_DIR;
                 if(\Input::file()){
                     $has_upload = true;
 
                     if(empty($errors)){
                         try{
-                            \File::read_dir(FILESPATH . $folder_name . '/' . $today_dir, 0, null);
+                            \File::read_dir(FILESPATH . $folder_name . $today_dir, 0, null);
                         }catch(\FileAccessException $e){
                             \File::create_dir(FILESPATH  . $folder_name, $today_dir, 0777);
                         }
                         \Upload::process([
-                            'path' => FILESPATH . $folder_name . '/' . $today_dir . '/',
+                            'path' => FILESPATH . $folder_name . $today_dir . '/',
                             'max_size' => '5242880',
                             'ext_whitelist' => ['jpg', 'jpeg', 'gif', 'png'],
                             'suffix' => '_'.strtotime('now'). rand(0, 999),
