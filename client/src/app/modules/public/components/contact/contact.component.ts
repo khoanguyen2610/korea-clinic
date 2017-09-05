@@ -50,6 +50,8 @@ export class ContactComponent implements OnInit {
 			this._SystemGeneralService.send_mail_contact(paramData).subscribe(res => {
 				if (res.status == 'success') {
 					this._ToastrService.success('Email has been sent successfully');
+					//reset form
+					form.reset();
 				}
 			});
 		}else{

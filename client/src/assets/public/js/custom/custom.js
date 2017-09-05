@@ -88,11 +88,11 @@ JACQUELINE_STORAGE["strings"] = {
     editor_caption_close: "Close"
 };
 
-jQuery(document).ready(function() {
-	if (jQuery(".rev_slider").length > 0) {initRevSlider()};
-	if (jQuery(".esg-grid").length > 0) {initEssGrid()};
-	itemsmenu();
-});
+// jQuery(document).ready(function() {
+// 	if (jQuery(".rev_slider").length > 0) {initRevSlider()};
+// 	if (jQuery(".esg-grid").length > 0) {initEssGrid()};
+// 	itemsmenu();
+// });
 
 function initRevSlider() {
 	"use strict";

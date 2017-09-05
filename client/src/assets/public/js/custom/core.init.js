@@ -1,19 +1,19 @@
 /* global jQuery:false */
 /* global JACQUELINE_STORAGE:false */
 
-jQuery(document).ready(function() {
-	"use strict";
-	JACQUELINE_STORAGE['theme_init_counter'] = 0;
-	jacqueline_init_actions();
-});
+// jQuery(document).ready(function() {
+// 	"use strict";
+// 	JACQUELINE_STORAGE['theme_init_counter'] = 0;
+// 	jacqueline_init_actions();
+// });
 
-jQuery(window).on('beforeunload', function() {
-	"use strict";
-	// Show preloader
-//	jQuery('body.preloader>.outer_wrap,body.preloader>.body_wrap,body.preloader>.jacqueline_profiler').css({opacity:0});	//.animate({opacity:0}, 'fast');
-//	jQuery('#page_preloader').show();	//css({display: 'block', opacity: 0}).animate({opacity:1}, 300);
-	jQuery('#page_preloader').css({display: 'block', opacity: 0}).animate({opacity:1}, 300);
-});
+// jQuery(window).on('beforeunload', function() {
+// 	"use strict";
+// 	// Show preloader
+// //	jQuery('body.preloader>.outer_wrap,body.preloader>.body_wrap,body.preloader>.jacqueline_profiler').css({opacity:0});	//.animate({opacity:0}, 'fast');
+// //	jQuery('#page_preloader').show();	//css({display: 'block', opacity: 0}).animate({opacity:1}, 300);
+// 	jQuery('#page_preloader').css({display: 'block', opacity: 0}).animate({opacity:1}, 300);
+// });
 
 
 // Theme init actions
