@@ -19,21 +19,21 @@
                     <nav class="menu_main_nav_area">
                         <ul class="menu_main_nav">
                             <li class="menu-item current-menu-ancestor current-menu-parent menu-item-has-children">
-                                <a>Giới thiệu</a>
+                                <a>{{'PUBLIC.about_us' | translate}}</a>
                                 <ul class="sub-menu">
                                     <li class="menu-item current-menu-item">
                                         <a [routerLink]="['/about-us']" [routerLinkActive]="['active']">White Clinic</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a [routerLink]="['/staff']" [routerLinkActive]="['active']">Đội ngũ bác sĩ</a>
+                                        <a [routerLink]="['/staff']" [routerLinkActive]="['active']">{{'PUBLIC.staff' | translate}}</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a [routerLink]="['/equipment']" [routerLinkActive]="['active']">Trang Thiết Bị</a>
+                                        <a [routerLink]="['/equipment']" [routerLinkActive]="['active']">{{'PUBLIC.equipment' | translate}}</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="menu-item menu-item-has-children">
-                                <a [routerLink]="['/service']" [routerLinkActive]="['active']">Dịch vụ</a>
+                                <a [routerLink]="['/service']" [routerLinkActive]="['active']">{{'PUBLIC.service' | translate}}</a>
                                 <ul class="sub-menu">
                                     <li class="menu-item menu-item-has-children">
                                         <a href="list-services.html#skin">Da Liễu</a>
@@ -82,12 +82,12 @@
                                         </ul>
                                     </li>
                                     <li class="menu-item">
-                                        <a [routerLink]="['/faq']" [routerLinkActive]="['active']">Câu hỏi thường gặp</a>
+                                        <a [routerLink]="['/faq']" [routerLinkActive]="['active']">{{'PUBLIC.faq' | translate}}</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="menu-item menu-item-has-children">
-                                <a [routerLink]="['/news']" [routerLinkActive]="['active']">Tin Tức</a>
+                                <a [routerLink]="['/news']" [routerLinkActive]="['active']">{{'PUBLIC.news' | translate}}</a>
                                 <ul class="sub-menu">
                                     <li class="menu-item">
                                         <a [routerLink]="['/news']" [routerLinkActive]="['active']">Khuyến mãi</a>
@@ -98,10 +98,10 @@
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <a [routerLink]="['/service/before-after']" [routerLinkActive]="['active']">Trước & Sau</a>
+                                <a [routerLink]="['/service/before-after']" [routerLinkActive]="['active']">{{'PUBLIC.before_after' | translate}}</a>
                             </li>
                             <li class="menu-item">
-                                <a [routerLink]="['/contact']" [routerLinkActive]="['active']">Liên Hệ</a>
+                                <a [routerLink]="['/contact']" [routerLinkActive]="['active']">{{'PUBLIC.contact' | translate}}</a>
                             </li>
                         </ul>
                     </nav>

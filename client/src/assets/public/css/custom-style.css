@@ -61,9 +61,10 @@
 }
 
 .error{
-    color: #bd5d5d;
+    color: #bd5d5d !important;
     text-align: left;
     display: block;
     font-size: 15px;
     font-family: fontello;
 }
+.sc_row.inverse_colors *:not(.sc_button_style_filled){ color: #9a9a9a; }

@@ -12,36 +12,53 @@
                                         <div class="wrapper">
                                             <div class="sc_section sc_section_block aligncenter max_width cu_width-970">
                                                 <div class="sc_section_inner">
-                                                    <h6 class="sc_section_subtitle sc_item_subtitle">Đặt Lịch Hẹn</h6>
-                                                    <div class="sc_section_content_wrap">
-                                                        <div class="sc_form_wrap" id="sc_form_201_wrap">
-                                                            <div class="sc_form sc_form_style_form_1" id="sc_form_201">
-                                                                <form action="includes/sendmail.php" class="inited" data-formtype="form_1" id="sc_form_201_form" method="post" name="sc_form_201_form">
-                                                                    <div class="sc_form_info">
-                                                                        <div class="sc_form_item sc_form_field label_over">
-                                                                            <label class="required" for="sc_form_username">Họ và Tên</label> <input id="sc_form_username" name="username" placeholder="Họ và Tên *" type="text">
+                                                    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                                                        <h6 class="sc_section_subtitle sc_item_subtitle">{{'PUBLIC.contact' | translate}}</h6>
+                                                        <div class="sc_section_content_wrap">
+                                                            <div class="sc_form_wrap" id="sc_form_201_wrap">
+                                                                <div class="sc_form sc_form_style_form_1" id="sc_form_201">
+                                                                    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                                                                        <div class="sc_form_info">
+                                                                            <div class="sc_form_item sc_form_field label_over">
+
+                                                                                <label class="required" for="sc_form_username">{{'PUBLIC.fullname' | translate}}</label>
+                                                                                <input id="sc_form_username" type="text" name="fullname" placeholder="{{'PUBLIC.enter_your_name' | translate}}" [(ngModel)]="Item.fullname" #fullname="ngModel" required>
+                                                                                <span *ngIf="(fullname?.dirty || is_validated) && fullname?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                                                                            </div>
+                                                                            <div class="sc_form_item sc_form_field label_over">
+                                                                                <label class="required" for="sc_form_email">E-mail</label>
+                                                                                <input id="sc_form_email" type="text" name="email" placeholder="{{'PUBLIC.enter_your_email' | translate}}" [(ngModel)]="Item.email" #email="ngModel" required>
+                                                                                <span *ngIf="(email?.dirty || is_validated) && email?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                                                                            </div>
+                                                                            <div class="sc_form_item sc_form_field label_over" style="width: 100%">
+                                                                                <label class="required" for="sc_form_subj">{{'PUBLIC.subject' | translate}}</label>
+                                                                                <input id="sc_form_subj" type="text" name="subject" placeholder="{{'PUBLIC.enter_your_subject' | translate}}" [(ngModel)]="Item.subject" #subject="ngModel" required>
+                                                                                <span *ngIf="(subject?.dirty || is_validated) && subject?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="sc_form_item sc_form_field label_over">
-                                                                            <label class="required" for="sc_form_email">Điện Thoại</label> <input id="sc_form_phone" name="phone" placeholder="Điện Thoại *" type="text">
+                                                                        <div class="sc_form_item sc_form_message label_over">
+                                                                            <label class="required" for="sc_form_message">{{'PUBLIC.message' | translate}}</label>
+                                                                            <textarea id="sc_form_message" name="content" placeholder="{{'PUBLIC.enter_your_message' | translate}}" [(ngModel)]="Item.content" #content="ngModel" required></textarea>
+                                                                            <span *ngIf="(content?.dirty  || is_validated) && content?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
                                                                         </div>
-                                                                        <div class="sc_form_item sc_form_field label_over">
-                                                                            <label class="required" for="sc_form_username">Danh Mục</label> <input id="sc_form_username" name="username" placeholder="Danh Mục *" type="text">
+                                                                        <div class="sc_form_item sc_form_button">
+                                                                            <button class="sc_button sc_button_style_filled sc_button_size_medium">
+                                                                                <span class="overlay">
+                                                                                    <span class="first" (click)="f.submit">
+                                                                                        {{ 'PUBLIC.send_message' | translate }}
+                                                                                    </span>
+                                                                                    <span class="second" (click)="f.submit">
+                                                                                        {{ 'PUBLIC.send_message' | translate }}
+                                                                                    </span>
+                                                                                </span>
+                                                                            </button>
                                                                         </div>
-                                                                        <div class="sc_form_item sc_form_field label_over">
-                                                                            <label class="required" for="sc_form_email">Dịch Vụ</label> <input id="sc_form_phone" name="phone" placeholder="Dịch Vụ *" type="text">
-                                                                        </div>
-                                                                        <div class="sc_form_item sc_form_field label_over">
-                                                                            <label class="required" for="sc_form_subj">Nội Dung</label> <input id="sc_form_subj" name="subject" placeholder="Ngày Hẹn" type="text">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="sc_form_item sc_form_button">
-                                                                        <a class="sc_button sc_button_square sc_button_style_filled sc_button_size_base" href="booking.html">Hẹn</a>
-                                                                    </div>
-                                                                    <div class="result sc_infobox"></div>
-                                                                </form>
+                                                                        <div class="result sc_infobox"></div>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

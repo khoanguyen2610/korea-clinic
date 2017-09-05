@@ -53,7 +53,7 @@
 	                                        <div class="sc_form_item sc_form_message label_over">
 	                                            <label class="required" for="sc_form_message">{{'PUBLIC.message' | translate}}</label>
 	                                            <textarea id="sc_form_message" name="content" placeholder="{{'PUBLIC.enter_your_message' | translate}}" [(ngModel)]="Item.content" #content="ngModel" required></textarea>
-	                                                <span *ngIf="(content?.dirty  || is_validated) && content?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+                                                <span *ngIf="(content?.dirty  || is_validated) && content?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
 	                                        </div>
 	                                        <div class="sc_form_item sc_form_button">
 	                                            <button class="sc_button sc_button_style_filled sc_button_size_medium">

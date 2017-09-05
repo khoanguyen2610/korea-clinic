@@ -21,7 +21,7 @@ export class NewsListComponent implements OnInit {
 
 	controller: string = 'tin-tuc';
 	articles: Array<any> = [];
-	_params: any
+	_params: any;
 	queryParams: any;
 
 	constructor(
