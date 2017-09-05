@@ -89,7 +89,7 @@ export class SlideService {
         .catch(this.handleError);
     }
 
-    public getAll(params = null){
+    public getListData(params = null){
     	let headers = new Headers();
         this.createAuthorizationHeader(headers);
         return this._Http.get(this._list_data_URL, {
