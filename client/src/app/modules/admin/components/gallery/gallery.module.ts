@@ -4,11 +4,11 @@ import { Routing } from './gallery.routing';
 
 import { CoreModule } from "../../../../shared/modules/core.module";
 
-import { GalleryListComponent } from './';
+import { GalleryListComponent, GalleryFormComponent } from './';
 
 @NgModule({
 	declarations: [
-		GalleryListComponent
+		GalleryListComponent, GalleryFormComponent
 	],
 	imports: [ CoreModule, Routing ],
 })
