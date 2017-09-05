@@ -23,7 +23,7 @@ define('PORT', '80');
  * Name of source code directory
  * "" when project in root directory
  *====================================================================*/
-define('DIRECTORY_NAME','korea-clinic');
+define('DIRECTORY_NAME','/korea-clinic');
 
 /*====================================================================
  * Define Client URL
@@ -52,7 +52,7 @@ define('CHECK_PERMISSION', TRUE);
 /*====================================================================
  * Default empty image URL
  *====================================================================*/
-define('IMG_PLACEHOLDER_URL', 'images/placeholder.png');
+define('IMG_PLACEHOLDER_URL', 'images/placeholder.jpg');
 
 /*====================================================================
  * Directory language flag image URL

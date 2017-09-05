@@ -46,6 +46,8 @@ defined('FUEL_START_MEM') or define('FUEL_START_MEM', memory_get_usage());
 
 
 define('FILESPATH',realpath(__DIR__.'/../public/files/').DIRECTORY_SEPARATOR);
+define('MAILTEMPLATE_PATH',realpath(__DIR__.'/../public/files/system/mail_template/').DIRECTORY_SEPARATOR);
+
 
 //Folder Storage Image
 define('EQUIPMENT_DIR', 'equipment/');

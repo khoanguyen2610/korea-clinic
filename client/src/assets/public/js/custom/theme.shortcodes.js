@@ -4,7 +4,7 @@ function jacqueline_sc_init_actions() {
 	setTimeout(function() {
 		jacqueline_sc_animation();
 	}, 600);
-	
+
 	// MenuItems - init once
 	jacqueline_menuitems_init();
 
@@ -114,7 +114,7 @@ function jacqueline_sc_init(container) {
 			obj.addClass('inited').width(width);
 		});
 	}
-	
+
 	// Blogger: Scroll horizontal
 	setTimeout(function(){
 		if (container.find('.isotope_item_portfolio').length > 0) {
@@ -129,39 +129,39 @@ function jacqueline_sc_init(container) {
 		}}, 500);
 
 	// Form
-	if (container.find('.sc_form:not(.inited) form').length > 0) {
-		container.find(".sc_form:not(.inited) form").each(function() {
-			"use strict";
-			jQuery(this).addClass('inited');
-			jQuery(this).submit(function(e) {
-				"use strict";
-				jacqueline_sc_form_validate(jQuery(this));
-				e.preventDefault();
-				return false;
-			});
-			if (jQuery(this).find('.js__datepicker').length > 0) {
-				jQuery(this).find('.js__datepicker').pickadate({
-					// Work-around for some mobile browsers clipping off the picker.
-					onOpen: function() {
-						"use strict";
-						jQuery('pre').css('overflow', 'hidden');
-						},
-					onClose: function() {
-						"use strict";
-						jQuery('pre').css('overflow', '');
-					},
-					monthsShort: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ],
-					showMonthsShort: true,
-					format: 'dd.mm.yyyy',
-					formatSubmit: 'yyyy-mm-dd',
-					min: true
-				});
-			}
-			if (jQuery(this).find('.js__timepicker').length > 0) {
-				jQuery(this).find('.js__timepicker').pickatime();
-			}
-		});
-	}
+	// if (container.find('.sc_form:not(.inited) form').length > 0) {
+	// 	container.find(".sc_form:not(.inited) form").each(function() {
+	// 		"use strict";
+	// 		jQuery(this).addClass('inited');
+	// 		jQuery(this).submit(function(e) {
+	// 			"use strict";
+	// 			jacqueline_sc_form_validate(jQuery(this));
+	// 			e.preventDefault();
+	// 			return false;
+	// 		});
+	// 		if (jQuery(this).find('.js__datepicker').length > 0) {
+	// 			jQuery(this).find('.js__datepicker').pickadate({
+	// 				// Work-around for some mobile browsers clipping off the picker.
+	// 				onOpen: function() {
+	// 					"use strict";
+	// 					jQuery('pre').css('overflow', 'hidden');
+	// 					},
+	// 				onClose: function() {
+	// 					"use strict";
+	// 					jQuery('pre').css('overflow', '');
+	// 				},
+	// 				monthsShort: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ],
+	// 				showMonthsShort: true,
+	// 				format: 'dd.mm.yyyy',
+	// 				formatSubmit: 'yyyy-mm-dd',
+	// 				min: true
+	// 			});
+	// 		}
+	// 		if (jQuery(this).find('.js__timepicker').length > 0) {
+	// 			jQuery(this).find('.js__timepicker').pickatime();
+	// 		}
+	// 	});
+	// }
 
 	//Countdown
 	if (container.find('.sc_countdown:not(.inited)').length > 0) {
@@ -170,9 +170,9 @@ function jacqueline_sc_init(container) {
 				"use strict";
 				jQuery(this).addClass('inited');
 				var id = jQuery(this).attr('id');
-				var curDate = new Date(); 
+				var curDate = new Date();
 				var curDateTimeStr = curDate.getFullYear()+'-'+(curDate.getMonth()<9 ? '0' : '')+(curDate.getMonth()+1)+'-'+(curDate.getDate()<10 ? '0' : '')+curDate.getDate()
-					+' '+(curDate.getHours()<10 ? '0' : '')+curDate.getHours()+':'+(curDate.getMinutes()<10 ? '0' : '')+curDate.getMinutes()+':'+(curDate.getSeconds()<10 ? '0' : '')+curDate.getSeconds(); 
+					+' '+(curDate.getHours()<10 ? '0' : '')+curDate.getHours()+':'+(curDate.getMinutes()<10 ? '0' : '')+curDate.getMinutes()+':'+(curDate.getSeconds()<10 ? '0' : '')+curDate.getSeconds();
 				var interval = 1;	//jQuery(this).data('interval');
 				var endDateStr = jQuery(this).data('date');
 				var endDateParts = endDateStr.split('-');
@@ -182,16 +182,16 @@ function jacqueline_sc_init(container) {
 				var endDateTimeStr = endDateStr+' '+endTimeStr;
 				if (curDateTimeStr < endDateTimeStr) {
 					jQuery(this).find('.sc_countdown_placeholder').countdown({
-						until: new Date(endDateParts[0], endDateParts[1]-1, endDateParts[2], endTimeParts[0], endTimeParts[1], endTimeParts[2]), 
+						until: new Date(endDateParts[0], endDateParts[1]-1, endDateParts[2], endTimeParts[0], endTimeParts[1], endTimeParts[2]),
 						tickInterval: interval,
 						onTick: jacqueline_countdown
-					}); 
+					});
 				} else {
 					jQuery(this).find('.sc_countdown_placeholder').countdown({
-						since: new Date(endDateParts[0], endDateParts[1]-1, endDateParts[2], endTimeParts[0], endTimeParts[1], endTimeParts[2]), 
+						since: new Date(endDateParts[0], endDateParts[1]-1, endDateParts[2], endTimeParts[0], endTimeParts[1], endTimeParts[2]),
 						tickInterval: interval,
 						onTick: jacqueline_countdown
-					}); 
+					});
 				}
 			});
 	}
@@ -244,7 +244,7 @@ function jacqueline_sc_init(container) {
 				return false;
 			});
 	}
-	
+
 	// Googlemap init
 	if (container.find('.sc_googlemap:not(.inited)').length > 0) {
 		container.find('.sc_googlemap:not(.inited)')
@@ -319,25 +319,25 @@ function jacqueline_sc_init(container) {
 						rez = { error: JACQUELINE_STORAGE['ajax_error'] };
 						console.log(response);
 					}
-					if (rez.error === '') { 
+					if (rez.error === '') {
 						jQuery(table).find('.sc_table').remove();
 						jQuery(table).find('script').after(rez.data);
 						jQuery(table).data('sort', sort);
-						jacqueline_select_players_category(jQuery(table).find('.sc_players_table_category select'));		
+						jacqueline_select_players_category(jQuery(table).find('.sc_players_table_category select'));
 					}
 				});
 				e.preventDefault();
 				return false;
 			});
 	}
-	
+
 	// Matches & Players: Select category in the points table
 	if (container.find('.sc_players_table_category:not(.inited)').length > 0) {
 		container.find('.sc_players_table_category:not(.inited)')
 			.addClass('inited')
 			.on('change', function () {
 				"use strict";
-				jacqueline_select_players_category(jQuery(this));		
+				jacqueline_select_players_category(jQuery(this));
 			});
 	}
 
@@ -465,7 +465,7 @@ function jacqueline_sc_init(container) {
 		});
 	}
 
-	
+
 	// Section Pan init
 	if (container.find('.sc_pan:not(.inited_pan)').length > 0) {
 		container.find('.sc_pan:not(.inited_pan)')
@@ -592,9 +592,9 @@ function jacqueline_sc_init(container) {
 						}
 					}
 				});
-				
+
 				jQuery(this).data('settings', {mode: 'horizontal'});		// VC hook
-				
+
 				var curSlide = jQuery(this).find('.slides').data('current-slide');
 				if (curSlide > 0)
 					JACQUELINE_STORAGE['swipers'][id].slideTo(curSlide-1);
@@ -602,7 +602,7 @@ function jacqueline_sc_init(container) {
 				jacqueline_sc_prepare_slider_navi(jQuery(this));
 
 			});
-			
+
 		// Check slides per view
 		jacqueline_sc_sliders_resize();
 	}
@@ -689,7 +689,7 @@ function jacqueline_sc_init(container) {
 				var icon = jQuery(this).data('icon');
 				var id = jQuery(this).attr('id');
 				jQuery(".sc_tabs_title[aria-controls='" + id + "']").addClass(icon).addClass('icon');
-				
+
 			}
 		});
 	}
@@ -701,9 +701,9 @@ function jacqueline_sc_init(container) {
 			.on('click', function () {
 				"use strict";
 				jQuery(this).toggleClass('ui-state-active').parent().toggleClass('sc_active');
-				jQuery(this).parent().find('.sc_toggles_content').slideToggle(300, function () { 
+				jQuery(this).parent().find('.sc_toggles_content').slideToggle(300, function () {
 					"use strict";
-					jacqueline_sc_init(jQuery(this).parent().find('.sc_toggles_content')); 
+					jacqueline_sc_init(jQuery(this).parent().find('.sc_toggles_content'));
 					if (window.jacqueline_init_hidden_elements) jacqueline_init_hidden_elements(jQuery(this).parent().find('.sc_toggles_content'));
 				});
 			});
@@ -762,7 +762,7 @@ function jacqueline_sc_init_scroll_area(obj) {
 	if (bar.length > 0 && !bar.hasClass(id+'_bar')) {
 		bar.addClass(id+'_bar');
 	}
-	
+
 	// Correct wrapper width (if scroll dir = horizontal)
 	if (obj.hasClass('sc_scroll_horizontal')) {
 		obj.find('.sc_scroll_wrapper > .sc_scroll_slide').css('width', 'auto');
@@ -787,7 +787,7 @@ function jacqueline_sc_init_scroll_area(obj) {
         scrollbar: '.'+id+'_bar',
         scrollbarHide: true,
 	})
-	
+
 	// VC hook
 	obj.data('settings', {mode: 'horizontal'});
 }
@@ -796,7 +796,7 @@ function jacqueline_sc_init_scroll_area(obj) {
 function jacqueline_sc_prepare_slider_navi(slider) {
 	"use strict";
 	var navi = null;
-	
+
 	// Pagination with slide's title
 	navi = slider.siblings('.sc_slider_pagination');
 	if (navi.length > 0) {
@@ -852,7 +852,7 @@ function jacqueline_sc_sliders_resize() {
 		var width = jQuery(this).width();
 		var last_width = jQuery(this).data('last-width');
 		if (isNaN(last_width)) last_width = 0;
-		
+
 		// Change slides_per_view
 		if (last_width==0 || last_width!=width) {
 			var spv = jQuery(this).data('slides-per-view');
@@ -867,7 +867,7 @@ function jacqueline_sc_sliders_resize() {
 				//JACQUELINE_STORAGE['swipers'][id].reInit();
 			}
 		}
-		
+
 		// Resize slider
 		if ( resize && !jQuery(this).hasClass('sc_slider_height_fixed') ) {
 			var h = 0;
@@ -883,7 +883,7 @@ function jacqueline_sc_sliders_resize() {
 			}
 		}
 	});
-	
+
 	// Resize slider pagination area
 	jQuery('.sc_slider_pagination_area').each(function() {
 		"use strict";
@@ -1009,15 +1009,15 @@ function jacqueline_sc_init_skills_arc(container) {
 					step = Math.round(((w-20)/2-rad)/items.length),
 					stroke = Math.round(w/9/items.length),
 					speed = 400;
-				
-				
+
+
 				r.circle(c, c, Math.round(w/2)).attr({ stroke: 'none', fill: JACQUELINE_STORAGE['theme_skin_bg_color'] ? JACQUELINE_STORAGE['theme_skin_bg_color'] : '#ffffff' });
-				
+
 				var title = r.text(c, c, arc.data('caption')).attr({
 					font: Math.round(rad*0.75)+'px "'+JACQUELINE_STORAGE['theme_font']+'"',
 					fill: JACQUELINE_STORAGE['theme_skin_color'] ? JACQUELINE_STORAGE['theme_skin_color'] : '#909090'
 				}).toFront();
-				
+
 				rad -= Math.round(step/2);
 
 				r.customAttributes.arc = function(value, color, rad){
@@ -1034,17 +1034,17 @@ function jacqueline_sc_init_skills_arc(container) {
 						path = [['M', sx, sy], ['A', rad, rad, 0, +(alpha > 180), 1, x, y]];
 					return { path: path, stroke: color }
 				}
-				
+
 				items.each(function(i){
 					"use strict";
-					var t = jQuery(this), 
+					var t = jQuery(this),
 						color = t.find('.color').val(),
 						value = t.find('.percent').val(),
 						text = t.find('.text').text();
-					
+
 					rad += step;
 					var z = r.path().attr({ arc: [value, color, rad], 'stroke-width': stroke });
-					
+
 					z.mouseover(function(){
 						"use strict";
 						this.animate({ 'stroke-width': hover, opacity: .75 }, 1000, 'elastic');
@@ -1058,11 +1058,11 @@ function jacqueline_sc_init_skills_arc(container) {
 						this.stop().animate({ 'stroke-width': stroke, opacity: 1 }, speed*4, 'elastic');
 						title.stop().animate({ opacity: 0 }, speed, '>', function(){
 							title.attr({ text: arc.data('caption') }).animate({ opacity: 1 }, speed, '<');
-						});	
+						});
 					});
-					
+
 				});
-				
+
 			}
 		}
 		o.diagram();
@@ -1083,90 +1083,90 @@ function jacqueline_countdown(dt) {
 }
 
 // Contact form handlers
-function jacqueline_sc_form_validate(form){
-	"use strict";
-	var url = form.attr('action');
-	if (url == '') return false;
-	form.find('input').removeClass('error_fields_class');
-	var error = false;
-	var form_custom = form.data('formtype')=='form_custom';
-	if (!form_custom) {
-		error = jacqueline_form_validate(form, {
-			error_message_show: true,
-			error_message_time: 4000,
-			error_message_class: "sc_infobox sc_infobox_style_error",
-			error_fields_class: "error_fields_class",
-			exit_after_first_error: false,
-			rules: [
-				{
-					field: "username",
-					min_length: { value: 1,	 message: JACQUELINE_STORAGE['strings']['name_empty'] },
-					max_length: { value: 60, message: JACQUELINE_STORAGE['strings']['name_long'] }
-				},
-				{
-					field: "email",
-					min_length: { value: 7,	 message: JACQUELINE_STORAGE['strings']['email_empty'] },
-					max_length: { value: 60, message: JACQUELINE_STORAGE['strings']['email_long'] },
-					mask: { value: JACQUELINE_STORAGE['email_mask'], message: JACQUELINE_STORAGE['strings']['email_not_valid'] }
-				},
-				{
-					field: "subject",
-					min_length: { value: 1,	 message: JACQUELINE_STORAGE['strings']['subject_empty'] },
-					max_length: { value: 100, message: JACQUELINE_STORAGE['strings']['subject_long'] }
-				},
-				{
-					field: "message",
-					min_length: { value: 1,  message: JACQUELINE_STORAGE['strings']['text_empty'] },
-					max_length: { value: JACQUELINE_STORAGE['contacts_maxlength'], message: JACQUELINE_STORAGE['strings']['text_long'] }
-				}
-			]
-		});
-	}
-	if (!error && url!='#') {
-		jQuery.post(url, {
-			action: "send_form",
-			nonce: JACQUELINE_STORAGE['ajax_nonce'],
-			type: form.data('formtype'),
-			data: form.serialize()
-		}).done(function(response) {
-			"use strict";
-			var rez = {};
-			try {
-				rez = JSON.parse(response);
-			} catch (e) {
-				rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-				console.log(response);
-			}
-			var result = form.find(".result").toggleClass("sc_infobox_style_error", false).toggleClass("sc_infobox_style_success", false);
-			if (rez.error === '') {
-				form.get(0).reset();
-				result.addClass("sc_infobox_style_success").html(JACQUELINE_STORAGE['strings']['send_complete']);
-				var return_url = form.find('input[name="return_url"]');
-				if (return_url.length > 0 && return_url.val()!='') {
-					setTimeout(function() {
-						"use strict";
-						window.location.href = return_url.val();
-					}, 3300);
-				}
-			} else {
-				result.addClass("sc_infobox_style_error").html(JACQUELINE_STORAGE['strings']['send_error'] + ' ' + rez.error);
-			}
-			result.fadeIn().delay(3000).fadeOut();
-		});
-	}
-	return !error;
-}
+// function jacqueline_sc_form_validate(form){
+// 	"use strict";
+// 	var url = form.attr('action');
+// 	if (url == '') return false;
+// 	form.find('input').removeClass('error_fields_class');
+// 	var error = false;
+// 	var form_custom = form.data('formtype')=='form_custom';
+// 	if (!form_custom) {
+// 		error = jacqueline_form_validate(form, {
+// 			error_message_show: true,
+// 			error_message_time: 4000,
+// 			error_message_class: "sc_infobox sc_infobox_style_error",
+// 			error_fields_class: "error_fields_class",
+// 			exit_after_first_error: false,
+// 			rules: [
+// 				{
+// 					field: "username",
+// 					min_length: { value: 1,	 message: JACQUELINE_STORAGE['strings']['name_empty'] },
+// 					max_length: { value: 60, message: JACQUELINE_STORAGE['strings']['name_long'] }
+// 				},
+// 				{
+// 					field: "email",
+// 					min_length: { value: 7,	 message: JACQUELINE_STORAGE['strings']['email_empty'] },
+// 					max_length: { value: 60, message: JACQUELINE_STORAGE['strings']['email_long'] },
+// 					mask: { value: JACQUELINE_STORAGE['email_mask'], message: JACQUELINE_STORAGE['strings']['email_not_valid'] }
+// 				},
+// 				{
+// 					field: "subject",
+// 					min_length: { value: 1,	 message: JACQUELINE_STORAGE['strings']['subject_empty'] },
+// 					max_length: { value: 100, message: JACQUELINE_STORAGE['strings']['subject_long'] }
+// 				},
+// 				{
+// 					field: "message",
+// 					min_length: { value: 1,  message: JACQUELINE_STORAGE['strings']['text_empty'] },
+// 					max_length: { value: JACQUELINE_STORAGE['contacts_maxlength'], message: JACQUELINE_STORAGE['strings']['text_long'] }
+// 				}
+// 			]
+// 		});
+// 	}
+// 	if (!error && url!='#') {
+// 		jQuery.post(url, {
+// 			action: "send_form",
+// 			nonce: JACQUELINE_STORAGE['ajax_nonce'],
+// 			type: form.data('formtype'),
+// 			data: form.serialize()
+// 		}).done(function(response) {
+// 			"use strict";
+// 			var rez = {};
+// 			try {
+// 				rez = JSON.parse(response);
+// 			} catch (e) {
+// 				rez = { error: JACQUELINE_STORAGE['ajax_error'] };
+// 				console.log(response);
+// 			}
+// 			var result = form.find(".result").toggleClass("sc_infobox_style_error", false).toggleClass("sc_infobox_style_success", false);
+// 			if (rez.error === '') {
+// 				form.get(0).reset();
+// 				result.addClass("sc_infobox_style_success").html(JACQUELINE_STORAGE['strings']['send_complete']);
+// 				var return_url = form.find('input[name="return_url"]');
+// 				if (return_url.length > 0 && return_url.val()!='') {
+// 					setTimeout(function() {
+// 						"use strict";
+// 						window.location.href = return_url.val();
+// 					}, 3300);
+// 				}
+// 			} else {
+// 				result.addClass("sc_infobox_style_error").html(JACQUELINE_STORAGE['strings']['send_error'] + ' ' + rez.error);
+// 			}
+// 			result.fadeIn().delay(3000).fadeOut();
+// 		});
+// 	}
+// 	return !error;
+// }
 
 // Get players by category
 function jacqueline_select_players_category(sel) {
 	var value = sel.find(':selected').data('cat');
 	var table = sel.parents('.sc_players_table');
-	if (value == 'all') 
+	if (value == 'all')
 		jQuery(table).find('.sc_table tr:nth-child(n+2)').show();
 	else {
 		jQuery(table).find('.sc_table tr:nth-child(n+2)').hide();
-		jQuery(table).find('.sc_table tr').each(function() { 
-			var cat = jQuery(this).data('cat'); 
+		jQuery(table).find('.sc_table tr').each(function() {
+			var cat = jQuery(this).data('cat');
 			if (cat != null && cat.indexOf(value)!=-1)
 			   jQuery(this).show();
 		});
@@ -1180,25 +1180,25 @@ function jacqueline_menuitems_init() {
 	jQuery('.sc_menuitems_wrap').on('click', '.show_popup_menuitem', function(e) {
 		var id = jQuery(this).parents('.sc_menuitems_item').attr('id');
 		jacqueline_menuitems_show_popup(id);
-		
+
 		e.preventDefault();
 		return false;
 	});
-	
-	jQuery('body').on('click', '.close_menuitem', function(e) {	
+
+	jQuery('body').on('click', '.close_menuitem', function(e) {
 		console.log('close click');
 		jQuery(".popup_menuitem").remove();
-		
+
 		e.preventDefault();
 		return false;
-	});	
+	});
 	jQuery('body').on('click', '.popup_menuitem', function(e) {
 		if (e.target !== this)
 		return;
-	
+
 		console.log('close click');
 		jQuery(".popup_menuitem").remove();
-		
+
 		e.preventDefault();
 		return false;
 	});
@@ -1208,15 +1208,15 @@ function jacqueline_menuitems_show_popup(id) {
 	"use strict";
 	var menuitem = jQuery('#' + id);
 	var columns_wrap = menuitem.parents('.sc_menuitems_wrap').find('.columns_wrap');
-		
+
 	var url = menuitem.data('url');
-	
+
 	if(url != null) {
 		// Create popup
 		if (jQuery('.popup_menuitem').length == 0) {
 			jQuery('body').append('<div class="popup_menuitem"></div>');
-		} 
-		// load html file 
+		}
+		// load html file
 		jQuery(".popup_menuitem").load( url, function( response, status, xhr ) {
 		  if (status == "error") {
 			var msg = "Sorry but there was an error: ";
@@ -1224,18 +1224,18 @@ function jacqueline_menuitems_show_popup(id) {
 		  }else{
 			jQuery(".popup_menuitem").show();
 			jacqueline_menuitems_navigation(columns_wrap, menuitem);
-			
+
 			jQuery(".popup_menuitem").find('.show_popup_menuitem').on('click', function(e){
 				id = jQuery(this).data('id');
 				jacqueline_menuitems_show_popup(id);
-				
+
 				e.preventDefault();
 				return false;
 			});
 		 }
 		});
 	}
-		
+
 }
 
 // menuitems navigation
@@ -1243,7 +1243,7 @@ function jacqueline_menuitems_navigation(columns_wrap, menuitem) {
 	"use strict";
 	//navigation
 	if(jQuery(".popup_menuitem").find('.show_popup_menuitem').length > 0){
-		
+
 		// prev arrow
 		var prev_arrow = jQuery(".popup_menuitem").find('.show_popup_menuitem.prev_menuitem');
 		var prev_menuitem = menuitem.parent().prev().find('.sc_menuitems_item');
@@ -1251,7 +1251,7 @@ function jacqueline_menuitems_navigation(columns_wrap, menuitem) {
 			prev_menuitem = columns_wrap.find('[class*="column-"]').last().find('.sc_menuitems_item');
 		}
 		if( prev_menuitem.length ){
-			
+
 			var prev_id = prev_menuitem.attr('id');
 			if(prev_id != null){
 				prev_arrow.attr('data-id', prev_id);
@@ -1263,7 +1263,7 @@ function jacqueline_menuitems_navigation(columns_wrap, menuitem) {
 		else {
 			prev_arrow.remove();
 		}
-		
+
 		// next arrow
 		var next_arrow = jQuery(".popup_menuitem").find('.show_popup_menuitem.next_menuitem');
 		var next_menuitem = menuitem.parent().next().find('.sc_menuitems_item');
@@ -1271,7 +1271,7 @@ function jacqueline_menuitems_navigation(columns_wrap, menuitem) {
 			next_menuitem = columns_wrap.find('[class*="column-"]').first().find('.sc_menuitems_item');
 		}
 		if( next_menuitem.length ){
-			
+
 			var next_id = next_menuitem.attr('id');
 			if(next_id != null){
 				next_arrow.attr('data-id', next_id);

@@ -1,1 +1,81 @@
-<h1>Contact</h1>
+<div class="sc_empty_space em_height_5">
+    <span class="sc_empty_space_inner"></span>
+</div>
+<div class="contactus">
+	<div class="sc_row row sc_row-fluid">
+	    <div class="column sc_column_container sc_col-sm-12">
+	        <div class="sc_column-inner ">
+	            <div class="wrapper">
+	            	 <!-- data-style="greyscale" -->
+	                <div id="sc_googlemap_246" class="sc_googlemap" data-zoom="16">
+	                    <div id="sc_googlemap_246_1" class="sc_googlemap_marker"
+	                        data-title="93 Võ Văn Tần, phường 6, Quận 3, Hồ Chí Minh, Việt Nam"
+	                        data-description="93 Võ Văn Tần, phường 6, Quận 3, Hồ Chí Minh, Việt Nam"
+	                        data-address="93 Võ Văn Tần, phường 6, Quận 3, Hồ Chí Minh, Việt Nam"
+	                        data-latlng=""
+	                        data-point="/assets/public/images/icon_pin.png"></div>
+	                </div>
+	                <div class="sc_empty_space em_height_3-7">
+	                    <span class="sc_empty_space_inner"></span>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="sc_row row sc_row-fluid">
+	    <div class="column sc_column_container sc_col-sm-12">
+	        <div class="sc_column-inner ">
+	            <div class="wrapper">
+	                <div class="sc_section sc_section_block aligncenter max_width cu_width-770">
+	                    <div class="sc_section_inner">
+	                        <div class="sc_section_content_wrap">
+	                            <h2 class="sc_title sc_title_regular cu_mrg_5">have any questions?</h2>
+	                            <div id="sc_form_629_wrap" class="sc_form_wrap">
+	                                <div id="sc_form_629" class="sc_form sc_form_style_form_3">
+	                                    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+	                                        <div class="sc_form_info">
+	                                            <div class="sc_form_item sc_form_field label_over">
+	                                                <label class="required" for="sc_form_username">{{'PUBLIC.fullname' | translate}}</label>
+	                                                <input id="sc_form_username" type="text" name="fullname" placeholder="{{'PUBLIC.enter_your_name' | translate}}" [(ngModel)]="Item.fullname" #fullname="ngModel" required>
+	                                                <span *ngIf="(fullname?.dirty || is_validated) && fullname?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	                                            </div>
+	                                            <div class="sc_form_item sc_form_field label_over">
+	                                                <label class="required" for="sc_form_email">E-mail</label>
+	                                                <input id="sc_form_email" type="text" name="email" placeholder="{{'PUBLIC.enter_your_email' | translate}}" [(ngModel)]="Item.email" #email="ngModel" required>
+	                                                <span *ngIf="(email?.dirty || is_validated) && email?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	                                            </div>
+	                                            <div class="sc_form_item sc_form_field label_over">
+	                                                <label class="required" for="sc_form_subj">{{'PUBLIC.subject' | translate}}</label>
+	                                                <input id="sc_form_subj" type="text" name="subject" placeholder="{{'PUBLIC.enter_your_subject' | translate}}" [(ngModel)]="Item.subject" #subject="ngModel" required>
+	                                                <span *ngIf="(subject?.dirty || is_validated) && subject?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	                                            </div>
+	                                        </div>
+	                                        <div class="sc_form_item sc_form_message label_over">
+	                                            <label class="required" for="sc_form_message">{{'PUBLIC.message' | translate}}</label>
+	                                            <textarea id="sc_form_message" name="content" placeholder="{{'PUBLIC.enter_your_message' | translate}}" [(ngModel)]="Item.content" #content="ngModel" required></textarea>
+	                                                <span *ngIf="(content?.dirty  || is_validated) && content?.errors?.required" class="error">{{ 'VALIDATE.required' | translate }}</span>
+	                                        </div>
+	                                        <div class="sc_form_item sc_form_button">
+	                                            <button class="sc_button sc_button_style_filled sc_button_size_medium">
+	                                                <span class="overlay">
+	                                                    <span class="first" (click)="f.submit">
+	                                                    	{{ 'PUBLIC.send_message' | translate }}
+	                                                    </span>
+	                                                    <span class="second" (click)="f.submit">
+	                                                    	{{ 'PUBLIC.send_message' | translate }}
+	                                                    </span>
+	                                                </span>
+	                                            </button>
+	                                        </div>
+	                                        <div class="result sc_infobox"></div>
+	                                    </form>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>

@@ -1,4 +1,5 @@
 export * from './equipment';
+export * from './gallery';
 export * from './news';
 export * from './newscategory';
 export * from './service';

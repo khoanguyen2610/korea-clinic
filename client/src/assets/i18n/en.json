@@ -7,7 +7,36 @@
     "max_length": "Please enter no more than :param:1 characters."
   },
   "ADMIN": {
+    "equipment": "Equipment",
+    "service_category": "Service Category",
+    "service": "Service",
+    "news_category": "News Category",
+    "news": "News",
+    "staff": "Staff",
+    "slide": "Slide",
+    "gallery": "Gallery",
+    "seq_no": "No.",
     "title": "Title",
-    "description": "Description"
+    "description": "Description",
+    "content": "Content",
+    "category": "Category",
+    "image": "Image",
+    "fullname": "Fullname",
+    "position": "Position",
+    "create": "Create",
+    "actions": "Actions",
+    "save": "Save",
+    "back": "Back",
+    "yes": "Yes",
+    "no": "No",
+    "are_you_sure_you_want_to_delete_this_item": "Are your sure you want to delete this item",
+    "equipment_management": "Equipment Management",
+    "service_category_management": "Service Category Management",
+    "service_management": "Service Management",
+    "news_category_management": "News Category Management",
+    "news_management": "News Management",
+    "staff_management": "Staff Management",
+    "slide_management": "Slide Management",
+    "gallery_management": "Gallery Management"
   }
 }

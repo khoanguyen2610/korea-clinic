@@ -417,31 +417,31 @@ function jacqueline_ready_actions() {
     //----------------------------------------------
 
 	// Login form
-	jQuery('.popup_form.login_form').submit(function(e){
-		"use strict";
-		var rez = jacqueline_login_validate(jQuery(this));
-		if (!rez)
-			e.preventDefault();
-		return rez;
-	});
+	// jQuery('.popup_form.login_form').submit(function(e){
+	// 	"use strict";
+	// 	var rez = jacqueline_login_validate(jQuery(this));
+	// 	if (!rez)
+	// 		e.preventDefault();
+	// 	return rez;
+	// });
 
-	// Registration form
-	jQuery('.popup_form.registration_form').submit(function(e){
-		"use strict";
-		var rez = jacqueline_registration_validate(jQuery(this));
-		if (!rez)
-			e.preventDefault();
-		return rez;
-	});
+	// // Registration form
+	// jQuery('.popup_form.registration_form').submit(function(e){
+	// 	"use strict";
+	// 	var rez = jacqueline_registration_validate(jQuery(this));
+	// 	if (!rez)
+	// 		e.preventDefault();
+	// 	return rez;
+	// });
 
-	// Comment form
-	jQuery("form#commentform").submit(function(e) {
-		"use strict";
-		var rez = jacqueline_comments_validate(jQuery(this));
-		if (!rez)
-			e.preventDefault();
-		return rez;
-	});
+	// // Comment form
+	// jQuery("form#commentform").submit(function(e) {
+	// 	"use strict";
+	// 	var rez = jacqueline_comments_validate(jQuery(this));
+	// 	if (!rez)
+	// 		e.preventDefault();
+	// 	return rez;
+	// });
 
 
 

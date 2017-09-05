@@ -11,6 +11,41 @@ class Controller_Equipment extends \Controller_API {
 
     }
 
+
+
+    /*=============================================================
+     * Author: Nguyen Anh Khoa
+     * Function get all data
+     * Method GET
+     * Table equipment
+     * Response data: status[success|error], message[notification]
+     *=============================================================*/
+    public function get_list_all(){
+        $param = \Input::param();
+        $data     = \Model_Equipment::getAll($param);
+
+        foreach($data as $k => $v){
+            //generate image url
+            $image = json_decode($v->image);
+            $param_img = ['filepath' => isset($image->filepath)? base64_encode(EQUIPMENT_DIR . $image->filepath): null,
+                            'filename' => isset($image->filename)? base64_encode($image->filename): null,
+                            'width' => 300,
+                            ];
+            $data[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
+        }
+
+        /*==================================================
+         * Response Data
+         *==================================================*/
+        $response = ['status' => 'success',
+                    'code' => Exception::E_ACCEPTED,
+                    'message' => Exception::getMessage(Exception::E_ACCEPTED),
+                    'total' => count($data),
+                    'data' => $data];
+        return $this->response($response);
+    }
+
+
 	/*=============================================================
      * Author: Nguyen Anh Khoa
      * Function get data for datatable
@@ -108,18 +143,18 @@ class Controller_Equipment extends \Controller_API {
                  * Config Upload File
                  *============================================*/
                 $today_dir = date('Ymd');
-                $folder_name = 'equipment';
+                $folder_name = EQUIPMENT_DIR;
                 if(\Input::file()){
                     $has_upload = true;
 
                     if(empty($errors)){
                         try{
-                            \File::read_dir(FILESPATH . $folder_name . '/' . $today_dir, 0, null);
+                            \File::read_dir(FILESPATH . $folder_name .  $today_dir, 0, null);
                         }catch(\FileAccessException $e){
                             \File::create_dir(FILESPATH  . $folder_name, $today_dir, 0777);
                         }
                         \Upload::process([
-                            'path' => FILESPATH . $folder_name . '/' . $today_dir . '/',
+                            'path' => FILESPATH . $folder_name . $today_dir . '/',
                             'max_size' => '5242880',
                             'ext_whitelist' => ['jpg', 'jpeg', 'gif', 'png'],
                             'suffix' => '_'.strtotime('now'). rand(0, 999),

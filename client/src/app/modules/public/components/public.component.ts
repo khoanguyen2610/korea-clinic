@@ -19,14 +19,11 @@ import { Subscription } from 'rxjs';
 
 export class PublicComponent  {
 	constructor(
-		// private _ScriptService: ScriptService,
 	) {
 
 
 
 	}
-
-
 
 
 }
