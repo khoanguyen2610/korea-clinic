@@ -21,7 +21,7 @@ export class StaffListComponent implements OnInit {
 
 	controller: string = 'nhan-vien';
 	employees: Array<any> = [];
-	_params: any
+	_params: any;
 	queryParams: any;
 
 	constructor(

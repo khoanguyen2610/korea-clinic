@@ -21,8 +21,8 @@ export class ServiceListComponent implements OnInit {
 
 	controller: string = 'dich-vu';
 	categories: Array<any> = [];
-	services: Array<any> = [];
-	_params: any
+	items: Array<any> = [];
+	_params: any;
 	queryParams: any;
 	lang_code: string;
 
@@ -74,7 +74,7 @@ export class ServiceListComponent implements OnInit {
 					data[i]['nice_url'] = data[i]['title'].replace(/ /g, '-');
 					items.push(data[i]);
 				}
-				this.services = items;
+				this.items = items;
 			}
 		})
 		console.log('ServiceListComponent');

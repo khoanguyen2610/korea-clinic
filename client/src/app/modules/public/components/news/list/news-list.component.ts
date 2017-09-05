@@ -20,9 +20,9 @@ export class NewsListComponent implements OnInit {
 	private querySubscription: Subscription;
 
 	controller: string = 'tin-tuc';
-	articles: Array<any> = [];
 	categories: Array<any> = [];
-	_params: any
+	items: Array<any> = [];
+	_params: any;
 	queryParams: any;
 	lang_code: string;
 
@@ -73,7 +73,7 @@ export class NewsListComponent implements OnInit {
 					data[i]['nice_url'] = data[i]['title'].replace(/ /g, '-');
 					items.push(data[i]);
 				}
-				this.articles = items;
+				this.items = items;
 			}
 		});
 		console.log('NewsListComponent');

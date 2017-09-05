@@ -46,7 +46,7 @@ export class ServiceDetailComponent implements OnInit {
 			if(res.status == 'success'){
 				this.Item = res.data;
 			}
-		})
+		});
 		console.log('ServiceDetailComponent');
 	}
 
