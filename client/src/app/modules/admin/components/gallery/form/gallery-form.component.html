@@ -6,34 +6,70 @@
 	</div>
 	<div class="portlet-body form">
 		<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-md-1">{{ 'ADMIN.image' | translate }}</label>
-				<div class="col-md-11">
-					<div class="uploader-files">
-						<div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
-							<div class="no-file" *ngIf="!uploader.queue.length">
-								<span>Drag and drop files…</span>
-								<span></span>
-								<!-- drag & drop file example-->
-							</div>
-							<ul class="uploader-files-in clearfix">
-								<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
-									<div class="item">
-										<img [src]="item?.src"  alt="" width="200" height="auto">
-										<!-- <p>{{ item?.file?.name }}</p> -->
-										<div class="file-actions clearfix">
-										    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+			<div class="form-body">
+				<div class="form-group" [class.has-error]="!title.value">
+					<label class="control-label col-md-1">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
+					<div class="col-md-11">
+						<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
+						<span *ngIf="title?.dirty && title?.errors.required" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1">{{ 'ADMIN.description' | translate }}</label>
+					<div class="col-md-11">
+						<ckeditor name="description"
+							[(ngModel)]="Item.description"
+							[config]= "{
+								toolbarGroups : [
+									{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
+									{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+									{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
+									'/',
+									{ name: 'basicstyles', groups: ['basicstyles'] },
+									{ name: 'styles' },
+									{ name: 'links' }
+								]}"
+							debounce="1000">
+						</ckeditor>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1">{{ 'ADMIN.image' | translate }}</label>
+					<div class="col-md-11">
+						<div class="uploader-files">
+							<div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
+								<div class="no-file" *ngIf="!uploader.queue.length">
+									<span>Drag and drop files…</span>
+									<span></span>
+									<!-- drag & drop file example-->
+								</div>
+								<ul class="uploader-files-in clearfix">
+									<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
+										<div class="item">
+											<img [src]="item?.src"  alt="" width="200" height="auto">
+											<!-- <p>{{ item?.file?.name }}</p> -->
+											<div class="file-actions clearfix">
+											    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+											</div>
 										</div>
-									</div>
 
-								</li>
-							</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="uploader">
+							<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onImageChange($event)"/>
+							<span class="filename">Drag and drop files…</span>
+							<span class="btn btn-uploader">Choose File</span>
 						</div>
 					</div>
-					<div class="uploader">
-						<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onImageChange($event)"/>
-						<span class="filename">Drag and drop files…</span>
-						<span class="btn btn-uploader">Choose File</span>
+				</div>
+			</div>
+			<div class="form-actions">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-7">
+						<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> {{ 'ADMIN.save' | translate }}</button>
+						<a class="btn default" [routerLink]="['/admin/gallery/list']"><i class="fa fa-arrow-left"></i> {{ 'ADMIN.back' | translate }}</a>
 					</div>
 				</div>
 			</div>
