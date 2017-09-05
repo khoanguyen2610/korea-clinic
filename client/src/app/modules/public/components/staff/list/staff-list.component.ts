@@ -45,7 +45,34 @@ export class StaffListComponent implements OnInit {
 		params.set('item_status','acitve');
 		this._StaffService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				this.employees = res.data;
+				let data = res.data;
+				let temp = {
+					'items': [],
+					'timestamp': 0
+				};
+
+				let j = 0;
+				let c = res.data.length;
+				for(let i = 0; i < data.length; i++){
+					if(i && (i % 4 == 0)){
+						this.employees.push(temp);
+						temp = {
+							'items': [],
+							'timestamp': 0
+						};
+					}
+
+					temp.items.push(data[i]);
+					temp.timestamp = new Date().getTime();
+
+					j = i + 1;
+					if((c == j) && (j % 4 != 0)){
+						this.employees.push(temp);
+					}
+
+				}
+				console.log(this.employees);
+
 			}
 		});
 		console.log('StaffListComponent');
