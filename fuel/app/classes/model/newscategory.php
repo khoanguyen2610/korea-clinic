@@ -3,7 +3,7 @@
  * @Author: k_nguyen
  * @Date:   2016-11-14 14:04:29
  * @Last Modified by:   k_nguyen
- * @Last Modified time: 2017-09-01 09:11:58
+ * @Last Modified time: 2017-09-05 14:18:07
  */
 class Model_NewsCategory extends \Orm\Model {
 	protected static $_table_name = 'news_category';
@@ -37,15 +37,17 @@ class Model_NewsCategory extends \Orm\Model {
 		$query = \DB::select_array($select)
 			            ->from([self::$_table_name, 'SM'])
 						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
-			            ->and_where('SM.item_status', '=', 'active');
+			            ->and_where('SM.item_status', '=', 'active')
+                        ->order_by('SM.created_at', 'DESC');
 
 		//Query by params
 		if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+		if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
         $result = $query->as_object()->execute()->as_array();
 
 		//Recursive data
-		if(isset($params['recursive']) && $params['recursive']){
+		if(isset($params['recursive']) && $params['recursive'] && $params['recursive'] == 'true'){
 			$recursive = new \Vision_Recursive();
 			$recursive->recursiveData($result, 0, $resResult, 1);
             $result = $resResult;

@@ -23,7 +23,7 @@ define('PORT', '80');
  * Name of source code directory
  * "" when project in root directory
  *====================================================================*/
-define('DIRECTORY_NAME','korea-clinic');
+define('DIRECTORY_NAME','/korea-clinic');
 
 /*====================================================================
  * Define Client URL

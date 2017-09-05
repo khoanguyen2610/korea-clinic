@@ -11,6 +11,36 @@ class Controller_Slide extends \Controller_API {
 
     }
 
+    /*=============================================================
+     * Author: Nguyen Anh Khoa
+     * Function get all data
+     * Method GET
+     * Table slide
+     * Response data: status[success|error], message[notification]
+     *=============================================================*/
+    public function get_list_all(){
+        $param = \Input::param();
+        $data     = \Model_Slide::getAll($param);
+
+        foreach($data as $k => $v){
+            //generate image url
+            $image = json_decode($v->image);
+            $param_img = ['filepath' => isset($image->filepath)? base64_encode(SLIDE_DIR . $image->filepath): null,
+                            'filename' => isset($image->filename)? base64_encode($image->filename): null
+                            ];
+            $data[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
+        }
+
+        /*==================================================
+         * Response Data
+         *==================================================*/
+        $response = ['status' => 'success',
+                    'code' => Exception::E_ACCEPTED,
+                    'message' => Exception::getMessage(Exception::E_ACCEPTED),
+                    'total' => count($data),
+                    'data' => $data];
+        return $this->response($response);
+    }
 	/*=============================================================
      * Author: Nguyen Anh Khoa
      * Function get data for datatable

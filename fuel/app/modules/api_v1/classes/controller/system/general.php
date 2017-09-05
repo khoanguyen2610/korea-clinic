@@ -51,7 +51,7 @@ class Controller_System_General extends \Controller_API {
      *      + @scale | resize image based on percent, ex: scale=50
      *      + @square | resize image to square, ex: square=50
      *===================================================*/
-    public function action_image(){
+    public function get_image(){
         $param = \Input::param();
         $path = isset($param['filepath'])?base64_decode($param['filepath']):null;
         $file = isset($param['filename'])?base64_decode($param['filename']):null;
@@ -82,5 +82,25 @@ class Controller_System_General extends \Controller_API {
         }
         $image->output();
         return \Response::forge();
+    }
+
+
+
+    /*===================================================
+     * Author : k_nguyen
+     *===================================================*/
+    public function post_send_mail_contact(){
+        $param = \Input::param();
+
+        //open socket send email contact
+        $url_request = '/public/api/v1/system_socket/send_mail_contact?' . http_build_query($param);
+        $this->send_request($url_request);
+        /*==================================================
+         * Response Data
+         *==================================================*/
+        $response = ['status' => 'success',
+                    'code' => Exception::E_ACCEPTED,
+                    'message' => Exception::getMessage(Exception::E_ACCEPTED)];
+        return $this->response($response);
     }
 }

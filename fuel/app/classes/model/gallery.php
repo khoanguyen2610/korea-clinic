@@ -3,7 +3,7 @@
  * @Author: k_nguyen
  * @Date:   2016-11-14 14:04:29
  * @Last Modified by:   k_nguyen
- * @Last Modified time: 2017-08-30 11:58:58
+ * @Last Modified time: 2017-09-05 14:18:02
  */
 class Model_Gallery extends \Orm\Model {
 	protected static $_table_name = 'gallery';
@@ -26,6 +26,27 @@ class Model_Gallery extends \Orm\Model {
             return $Item->set($attributes)->save();
         }
         return false;
+    }
+
+
+    /*============================================
+     * Get all record
+     *============================================*/
+    public static function getAll($params = null, $option = null){
+        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*'];
+
+        $query = \DB::select_array($select)
+                        ->from([self::$_table_name, 'SM'])
+                        ->and_where('SM.item_status', '=', 'active')
+                        ->order_by('SM.created_at', 'DESC');
+
+        //Query by params
+        if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+        if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
+
+        $result = $query->as_object()->execute()->as_array();
+
+        return $result;
     }
 
 	/*============================================

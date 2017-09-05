@@ -21,19 +21,24 @@ export class PublicComponent  {
 	constructor(
 		private _ScriptService: ScriptService,
 	) {
-		_ScriptService.load('core_init').then(data => {
+		_ScriptService.load('core_init', 'custom', 'grid_layout').then(data => {
 			JACQUELINE_STORAGE['theme_init_counter'] = 0;
             jacqueline_init_actions();
 
-        }).catch(error => console.log(error));
-
-        _ScriptService.load('custom').then(data => {
-
+            //=========================
             if (jQuery(".rev_slider").length > 0) {initRevSlider()};
 			if (jQuery(".esg-grid").length > 0) {initEssGrid()};
 			itemsmenu();
 
         }).catch(error => console.log(error));
+
+   //      _ScriptService.load('custom').then(data => {
+
+   //          if (jQuery(".rev_slider").length > 0) {initRevSlider()};
+			// if (jQuery(".esg-grid").length > 0) {initEssGrid()};
+			// itemsmenu();
+
+   //      }).catch(error => console.log(error));
 
 	}
 
@@ -41,7 +46,6 @@ export class PublicComponent  {
 	ngViewAfterInit(){
 
 
-		// jacqueline_init_actions();
 
 
 	}
