@@ -145,7 +145,7 @@ export class ServiceFormComponent implements OnInit {
 							let lang = Item['language_code'];
 							Item = new Service();
 							Item['language_code'] = lang;
-
+							form.reset();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}

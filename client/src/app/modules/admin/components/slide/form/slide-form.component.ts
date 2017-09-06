@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { SlideFormContentComponent } from './content/slide-form-content.component';
 import { Slide } from '../../../../../models';
-import { AuthService, StaffService, GeneralService } from '../../../../../services';
+import { AuthService, SlideService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 
 declare let $: any;
@@ -13,7 +13,7 @@ declare let $: any;
 @Component({
 	selector: 'app-slide-form',
 	templateUrl: './slide-form.component.html',
-	providers: [ StaffService, GeneralService ]
+	providers: [ SlideService, GeneralService ]
 })
 
 export class SlideFormComponent implements OnInit {
@@ -32,7 +32,7 @@ export class SlideFormComponent implements OnInit {
 
 	constructor(
 		private _AuthService: AuthService,
-		private _StaffService: StaffService,
+		private _SlideService: SlideService,
 		private _GeneralService: GeneralService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -67,7 +67,7 @@ export class SlideFormComponent implements OnInit {
 				let params: URLSearchParams = new URLSearchParams();
 				params.set('item_key',this.queryParams.item_key);
 				params.set('response_quantity','all');
-				this._StaffService.getByID(undefined, params).subscribe(res => {
+				this._SlideService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
 							this._Router.navigate(['/admin/news/list']);
@@ -131,22 +131,22 @@ export class SlideFormComponent implements OnInit {
 			}
 
 			formData.append('language_code', Item['language_code']);
-			formData.append('fullname', Item['fullname']);
+			formData.append('title', Item['title']);
 			formData.append('position', Item['position']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 
-			this._StaffService.getObserver().subscribe(progress => {
+			this._SlideService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;
 			});
 			try {
-				this._StaffService.upload(formData, Item['id']).then((res) => {
+				this._SlideService.upload(formData, Item['id']).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
 							Item = new Slide();
 							Item['language_code'] = lang;
-
+							form.reset();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}
@@ -176,7 +176,7 @@ export class SlideFormComponent implements OnInit {
 		this.Items = [this.Item_vi, this.Item_en];
 
 		this.Items.forEach(Item => {
-			if(!Item['fullname']){
+			if(!Item['title']){
 				valid = false;
 				this.language_code = Item['language_code'];
 				$('a[href="#tab_' + Item['language_code'] + '"]').click();

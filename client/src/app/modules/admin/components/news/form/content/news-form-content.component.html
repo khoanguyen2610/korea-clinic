@@ -9,9 +9,24 @@
 	<div class="form-group">
 		<label class="control-label col-md-1">{{ 'ADMIN.category' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
-			<select class="form-control" name="service_category_id" [(ngModel)]="Item.service_category_id">
+			<select class="form-control" name="news_category_id" [(ngModel)]="Item.news_category_id">
 				<option *ngFor="let option of category_options" [value]="option.id">{{ option.text }}</option>
 			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-1">{{ 'ADMIN.feature' | translate }} </label>
+		<div class="col-md-11">
+			<div class="md-radio-inline">
+		        <label class="mt-radio">
+		            <input type="radio" name="feature_flag" value="0" [(ngModel)]="Item.feature_flag" /> {{ 'ADMIN.no' | translate }}
+		            <span></span>
+		        </label>
+		        <label class="mt-radio">
+		            <input type="radio" name="feature_flag" value="1" [(ngModel)]="Item.feature_flag" /> {{ 'ADMIN.yes' | translate }}
+		            <span></span>
+		        </label>
+		    </div>
 		</div>
 	</div>
 	<div class="form-group">

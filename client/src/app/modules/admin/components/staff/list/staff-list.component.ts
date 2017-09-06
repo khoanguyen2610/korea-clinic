@@ -70,6 +70,7 @@ export class StaffListComponent implements OnInit {
 				{ 'data' : 'image_url' },
 				{ 'data' : 'fullname' },
 				{ 'data' : 'position' },
+				{ 'data' : 'language_name' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -97,7 +98,7 @@ export class StaffListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [4]
+					targets: [5]
 				},
 			]
 		});
