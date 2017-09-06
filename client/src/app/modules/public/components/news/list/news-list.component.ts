@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { AuthService, NewsService, NewsCategoryService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
@@ -24,13 +25,14 @@ export class NewsListComponent implements OnInit {
 	items: Array<any> = [];
 	_params: any;
 	queryParams: any;
-	lang_code: string;
+	language_code: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _NewsService: NewsService,
 		private _NewsCategoryService: NewsCategoryService,
-		private _Configuration: Configuration
+		private _Configuration: Configuration,
+		private _LocalStorageService: LocalStorageService
 	) {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
@@ -42,17 +44,17 @@ export class NewsListComponent implements OnInit {
 			}
 		);
 
-		this.lang_code = _Configuration.defaultLang;
+		this.language_code = String(_LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit() {
-		if(this._params.lang_code){
-			this.lang_code = this._params.lang_code;
+		if(this._params.language_code){
+			this.language_code = this._params.language_code;
 		}
 
 		let params: URLSearchParams = new URLSearchParams();
 
-		params.set('language_code', this.lang_code);
+		params.set('language_code', this.language_code);
 		params.set('item_status','active');
 
 		this._NewsCategoryService.getListData(params).subscribe(res => {

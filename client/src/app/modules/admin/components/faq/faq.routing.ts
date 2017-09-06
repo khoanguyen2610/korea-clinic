@@ -1,16 +1,16 @@
 import { RouterModule, Routes } from "@angular/router";
 
-import { NewsDetailComponent, NewsListComponent } from './';
+import { FaqFormComponent, FaqListComponent } from './';
 import { AuthPermissionGuard, ChangeRouteGuard } from '../../../../guards';
 
 const APP_ROUTES: Routes = [
 	//=================== Payment Router======================
-	{ path: '',
+	{ path: 'form/:method',
 		children: [
-			{path: '', component: NewsListComponent},
-			{path: ':language_code/:item_key/:title', component: NewsListComponent},
+			{path: '', component: FaqFormComponent},
+			{path: ':id', component: FaqFormComponent},
 		]
 	},
-	{ path: 'detail/:language_code/:item_key/:title', component: NewsDetailComponent },
+	{ path: 'list', component: FaqListComponent },
 ];
 export const Routing = RouterModule.forChild(APP_ROUTES);

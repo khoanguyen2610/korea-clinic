@@ -1,6 +1,7 @@
 export * from './general.service';
 export * from './auth.service';
 export * from './equipment.service';
+export * from './faq.service';
 export * from './gallery.service';
 export * from './news.service';
 export * from './service.service';

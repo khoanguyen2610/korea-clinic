@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { AuthService, StaffService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
@@ -23,11 +24,13 @@ export class StaffListComponent implements OnInit {
 	employees: Array<any> = [];
 	_params: any;
 	queryParams: any;
+	language_code: string = String(this._LocalStorageService.get('language_code'));
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _StaffService: StaffService,
-		private _Configuration: Configuration
+		private _Configuration: Configuration,
+		private _LocalStorageService: LocalStorageService
 	) {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param

@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { AuthService, EquipmentService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
@@ -22,14 +23,15 @@ export class EquipmentListComponent implements OnInit {
 	items: Array<any> = [];
 	_params: any;
 	queryParams: any;
-	lang_code: string;
+	language_code: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _EquipmentService: EquipmentService,
-		private _Configuration: Configuration
+		private _Configuration: Configuration,
+		private _LocalStorageService: LocalStorageService
 	) {
-
+		this.language_code = String(_LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit() {
