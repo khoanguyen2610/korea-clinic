@@ -4,14 +4,14 @@
  * PHP Class
  *
  * LICENSE
- * 
+ *
  * @author Nguyen Anh Khoa-VISIONVN
  * @created Mar 17, 2014 1:39:32 PM
  */
 //namespace Auth;
 
 class Auth_Login_ComplexAuth extends \Auth_Login_Driver {
-    
+
     protected $user = null;
     protected $message = '';
     protected $table_name = null;
@@ -47,48 +47,15 @@ class Auth_Login_ComplexAuth extends \Auth_Login_Driver {
         if (!empty($username_post_key)) {
             if (is_null($this->user) or ($this->user[\Config::get('complexauth.username_post_key')] != $username_post_key)) {
                 $enable_date = date('Y-m-d');
-                $select = ['SM.*', \DB::expr('MP.id AS position_id'), \DB::expr('MP.name AS position_name'), \DB::expr('MP.code AS position_code'),
-                            \DB::expr('DEP.id AS department_id'), \DB::expr('DEP.name AS department_name'), \DB::expr('DEP.code AS department_code'), \DB::expr('DEP.sub_code AS department_sub_code'), 
-                            \DB::expr('DIV.id AS division_id'), \DB::expr('DIV.name AS division_name'), \DB::expr('DIV.code AS division_code'), 
-                            \DB::expr('BUS.id AS business_id'), \DB::expr('DEP.name AS business_name'), \DB::expr('BUS.code AS business_code'),
-                            \DB::expr('MCU.name AS currency_name'), \DB::expr('MCU.symbol AS currency_symbol')];
-                
+                $select = ['SM.*'];
+
                     $this->user = \DB::select_array($select)
                                         ->from([$this->table_name, 'SM'])
-                                        // ->join(['m_user_department', 'MUD'], 'left')->on('MUD.m_user_id', '=', 'SM.id')
-                                        ->join(['m_department', 'DEP'], 'left')->on('DEP.id', '=', 'SM.active_m_department_id')
-                                        ->join(['m_department', 'DIV'], 'left')->on('DIV.id', '=', 'DEP.parent')
-                                        ->join(['m_department', 'BUS'], 'left')->on('BUS.id', '=', 'DIV.parent')
-                                        ->join(['m_company', 'MC'], 'left')->on('MC.id', '=', 'BUS.m_company_id')
-                                        ->join(['m_position', 'MP'], 'left')->on('MP.id', '=', 'SM.active_m_position_id')
-                                        ->join(['m_currency', 'MCU'], 'left')->on('MCU.id', '=', 'SM.m_currency_id')
-
-
                                         ->where('SM.' . \Config::get('complexauth.username_post_key'), '=', $username_post_key)
                                         ->and_where('SM.item_status', 'active')
-                                        // ->and_where('MUD.item_status', '=', 'active')
-
-                                        // ->and_where_open()
-                                        //     ->and_where(\DB::expr("'{$enable_date}'"), 'BETWEEN', [\DB::expr('MUD.enable_start_date'), \DB::expr('MUD.enable_end_date')])
-                                        //     ->or_where_open()
-                                        //         ->and_where(\DB::expr('MUD.enable_start_date'), '<=', $enable_date)
-                                        //         ->and_where(\DB::expr('MUD.enable_end_date'), 'IS', \DB::expr('NULL'))
-                                        //     ->or_where_close()
-                                        // ->and_where_close()
-                                        ->and_where_open()
-                                            ->and_where('SM.retirement_date', '>=', $enable_date)
-                                            ->or_where('SM.retirement_date', 'IS', \DB::expr('NULL'))
-                                        ->and_where_close()
-
-                                        ->execute(\Config::get('complexauth.db_connection'))->current();                    
+                                        ->execute(\Config::get('complexauth.db_connection'))->current();
             }
             if ($this->user) {
-                /*=============================================
-                 * Check group of user
-                 *=============================================*/
-                $groups = \Model_System_VsvnUserGroup::list_permission(['m_user_id' => $this->user['id']]);
-                $this->user = array_merge($this->user, $groups);
-
                 return true;
             }
         }elseif (static::$remember_me and $user_id = static::$remember_me->get('user_id', null)) {
@@ -106,70 +73,29 @@ class Auth_Login_ComplexAuth extends \Auth_Login_Driver {
         if (empty($username_or_email) or empty($password)) {
             return false;
         }
-        
+
         $password = $this->hash_password($password);
-        $select = ['SM.*', \DB::expr('MP.id AS position_id'), \DB::expr('MP.name AS position_name'), \DB::expr('MP.code AS position_code'),
-                    \DB::expr('DEP.id AS department_id'), \DB::expr('DEP.name AS department_name'), \DB::expr('DEP.code AS department_code'), \DB::expr('DEP.sub_code AS department_sub_code'), 
-                    \DB::expr('DIV.id AS division_id'), \DB::expr('DIV.name AS division_name'), \DB::expr('DIV.code AS division_code'), 
-                    \DB::expr('BUS.id AS business_id'), \DB::expr('DEP.name AS business_name'), \DB::expr('BUS.code AS business_code'),
-                    \DB::expr('MCU.name AS currency_name'), \DB::expr('MCU.symbol AS currency_symbol')];
-                
+        $select = ['SM.*'];
+
 		$user = \DB::select_array($select)
                         ->from([$this->table_name, 'SM'])
-                        ->join(['m_user_department', 'MUD'], 'left')->on('MUD.m_user_id', '=', 'SM.id')
-                        ->join(['m_department', 'DEP'], 'left')->on('DEP.id', '=', 'MUD.m_department_id')
-                        ->join(['m_department', 'DIV'], 'left')->on('DIV.id', '=', 'DEP.parent')
-                        ->join(['m_department', 'BUS'], 'left')->on('BUS.id', '=', 'DIV.parent')
-                        ->join(['m_company', 'MC'], 'left')->on('MC.id', '=', 'BUS.m_company_id')
-                        ->join(['m_position', 'MP'], 'left')->on('MP.id', '=', 'MUD.m_position_id')
-                        ->join(['m_currency', 'MCU'], 'left')->on('MCU.id', '=', 'SM.m_currency_id')
-
                         ->where('SM.' . \Config::get('complexauth.username_post_key'), '=', $username_or_email)
                         ->and_where(\Config::get('complexauth.password_post_key'), '=', $password)
                         ->and_where('SM.item_status', 'active')
-                        ->and_where('MUD.item_status', '=', 'active')
-
-                        ->and_where_open()
-                            ->and_where(\DB::expr("'{$enable_date}'"), 'BETWEEN', [\DB::expr('MUD.enable_start_date'), \DB::expr('MUD.enable_end_date')])
-                            ->or_where_open()
-                                ->and_where(\DB::expr('MUD.enable_start_date'), '<=', $enable_date)
-                                ->and_where(\DB::expr('MUD.enable_end_date'), 'IS', \DB::expr('NULL'))
-                            ->or_where_close()
-                        ->and_where_close()
-
-                        ->and_where_open()
-                            ->and_where(\DB::expr("'{$enable_date}'"), 'BETWEEN', [\DB::expr('DEP.enable_start_date'), \DB::expr('DEP.enable_end_date')])
-                            ->or_where_open()
-                                ->and_where(\DB::expr('DEP.enable_start_date'), '<=', $enable_date)
-                                ->and_where(\DB::expr('DEP.enable_end_date'), 'IS', \DB::expr('NULL'))
-                            ->or_where_close()
-                        ->and_where_close()
-                        
-                        ->and_where_open()
-                            ->and_where('SM.retirement_date', '>=', $enable_date)
-                            ->or_where('SM.retirement_date', 'IS', \DB::expr('NULL'))
-                        ->and_where_close()
-
                         ->execute(\Config::get('complexauth.db_connection'))->current();
-           
+
         if(empty($user)){
-            $this->message = 'ログインエラーユーザーIDまたはパスワードに誤りがあります。';
+            $this->message = 'Enter any username and password.';
             return false;
         }
-
-        /*=============================================
-         * Check group of user
-         *=============================================*/
-        $groups = \Model_System_VsvnUserGroup::list_permission(['m_user_id' => $user['id']]);
-        $user = array_merge($user, $groups);
         return $user;
-                        
+
     }
 
     public function get_error(){
         return $this->message;
     }
-    
+
     public function login($username_or_email = '', $password = '') {
         if (!($this->user = $this->validate_user($username_or_email, $password))) {
             \Session::delete(\Config::get('complexauth.username_post_key'));
@@ -223,7 +149,7 @@ class Auth_Login_ComplexAuth extends \Auth_Login_Driver {
     }
 
     public function get($field = null, $default = null) {
-        
+
         if (isset($this->user[$field])) {
             return $this->user[$field];
         }else{
@@ -231,7 +157,7 @@ class Auth_Login_ComplexAuth extends \Auth_Login_Driver {
         }
         return $default;
     }
-    
+
     public function get_user_groups() {
         if (!empty($this->user)) {
             $roles = \Config::get('complexauth.roles');
@@ -247,12 +173,12 @@ class Auth_Login_ComplexAuth extends \Auth_Login_Driver {
             //================ Get Role Of User =================
             $roles = \Model_VsvnUserRole::find('all', ['where' => ['user_id' => $this->user['id']]]);
             $user_roles = \Vision_Common::as_array($roles, 'id', 'role_id');
-           
+
             $groups['user_role_key'] = array(
                                         'name' => 'Role of User',
                                         'roles' => $user_roles
                                         );
-            
+
             \Config::set('complexauth.groups', $groups);
             return array(array('complexgroup', $arrGroup));
         }

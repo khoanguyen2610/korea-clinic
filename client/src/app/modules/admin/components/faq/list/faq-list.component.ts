@@ -67,7 +67,7 @@ export class FaqListComponent implements OnInit {
 			},
 			columns: [
 				{ 'data' : null },
-				{ 'data' : null },
+				{ 'data' : 'service_title' },
 				{ 'data' : 'title' },
 				{ 'data' : 'content' },
 				{ 'data' : 'language_name' },

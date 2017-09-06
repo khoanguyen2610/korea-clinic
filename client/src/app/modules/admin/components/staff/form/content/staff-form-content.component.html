@@ -64,8 +64,9 @@
 					<ul class="uploader-files-in clearfix">
 						<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
 							<div class="item">
-								<a style="height: 125px">
-									<img [src]="item?.src"  alt="" width="200" height="auto">
+								<a style="height: 200px">
+									<img *ngIf="item?.edited" [src]="item?.src"  alt="" width="200" height="auto">
+									<img *ngIf="!item?.edited" imgPreview [image]="item?._file" class="media-object" />
 								</a>
 								<!-- <p>{{ item?.file?.name }}</p> -->
 								<div class="file-actions clearfix">
@@ -78,9 +79,9 @@
 				</div>
 			</div>
 			<div class="uploader">
-				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onImageChange($event)"/>
-				<span class="filename">Drag and drop files…</span>
-				<span class="btn btn-uploader">Choose File</span>
+				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
+				<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
+							<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
 			</div>
 		</div>
 	</div>

@@ -2,10 +2,9 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
-// import { GalleryService } from '../../../../../services';
+import { GalleryService } from '../../../../../services';
 
 declare let $: any;
 declare let moment: any;
@@ -13,51 +12,51 @@ declare let moment: any;
 @Component({
 	selector: 'app-public-home-gallery',
 	templateUrl: './gallery.component.html',
-	// providers: [GalleryService]
+	providers: [GalleryService]
 })
 
 export class GalleryComponent implements OnInit {
 
-	// Items: Array<any> = [];
-	// language_code: string = this._Configuration.defaultLang;
-	// number_item: number = 4;
-	// module_name: string = 'gallery';
+	Items: Array<any> = [];
+	lang_code: string = this._Configuration.defaultLang;
+	number_item: number = 4;
+	module_name: string = 'gallery';
 
-	// constructor(
-	// 	private _AuthService: AuthService,
-	// 	private _GalleryService: GalleryService,
-	// 	private _Configuration: Configuration,
+	constructor(
+		private _GalleryService: GalleryService,
+		private _Configuration: Configuration,
 
-	// ) {
-	// 	//=============== Get Params On Url ===============
+	) {
+		//=============== Get Params On Url ===============
 
 
-	// }
+	}
 
 	ngOnInit() {
 		// this.getListData();
 	}
 
-	// ngAfterViewInit() {
+	ngAfterViewInit() {
 
-	// }
+	}
 
-	// getListData() {
-	// 	let params: URLSearchParams = new URLSearchParams();
-	// 	params.set('language_code', this.language_code);
-	// 	params.set('limit', String(this.number_item));
-	// 	this._GalleryService.getListAll(params).subscribe(res => {
-	// 		if (res.status == 'success') {
-	// 			// Process Array include many array with 4 elements
-	// 			if (res.data.length) {
-	// 				this.Items = res.data;
-	// 			}
+	getListData() {
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this.lang_code);
+		params.set('limit', String(this.number_item));
+		this._GalleryService.getListAll(params).subscribe(res => {
+			if (res.status == 'success') {
+				// Process Array include many array with 4 elements
+				if (res.data.length) {
+					this.Items = res.data;
+					console.log(this.Items)
+				}
 
-	// 		}
-	// 	});
-	// }
+			}
+		});
+	}
 
-	// getModuleNameByLang() {
-	// 	return this.module_name;
-	// }
+	getModuleNameByLang() {
+		return this.module_name;
+	}
 }

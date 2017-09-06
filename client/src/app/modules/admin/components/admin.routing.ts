@@ -1,10 +1,8 @@
 import { RouterModule, Routes } from "@angular/router";
 
-import { DashboardComponent, AppointmentComponent, AdminComponent } from './';
+import { DashboardComponent, AppointmentComponent, AdminComponent, AuthComponent } from './';
 
 const APP_ROUTES: Routes = [
-
-
 	{ path: '', component: AdminComponent,
 		// canActivate: [AuthGuard],
 		children: [
@@ -19,8 +17,15 @@ const APP_ROUTES: Routes = [
 			{ path: 'news-category', loadChildren: 'app/modules/admin/components/news-category/news-category.module#NewsCategoryModule' },
 			{ path: 'staff', loadChildren: 'app/modules/admin/components/staff/staff.module#StaffModule' },
 			{ path: 'slide', loadChildren: 'app/modules/admin/components/slide/slide.module#SlideModule' },
+			// { path: 'auth', loadChildren: 'app/modules/admin/components/auth/auth.module#AuthModule' },
 		]
-	}
+	},
+	{ path: 'auth', component: AuthComponent,
+		// canActivate: [AuthGuard],
+		children: [
+			{ path: '', loadChildren: 'app/modules/admin/components/auth/auth.module#AuthModule' },
+		]
+	},
 ];
 
 export const Routing = RouterModule.forChild(APP_ROUTES);

@@ -1,0 +1,13 @@
+.page-header.navbar .page-logo .logo-default{
+    max-height: 35px;
+    margin-top: 8px;
+}
+.login .content {margin-top: 160px}
+.login .logo { margin-top: 0px; }
+
+.login .error{
+    color: #bd5d5d !important;
+    text-align: left;
+    display: block;
+    font-size: 15px;
+}

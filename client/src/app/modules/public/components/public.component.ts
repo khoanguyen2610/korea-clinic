@@ -48,8 +48,6 @@ export class PublicComponent  {
 
 			this.subscription = this._TranslateService.get('PUBLIC').subscribe((res: string) => {
 				this.module_name = res[str];
-				console.log(res)
-				console.log(res[str])
 			});
 
 
@@ -60,14 +58,14 @@ export class PublicComponent  {
 			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {
 				// JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
-				setTimeout(() => {
+			setTimeout(() => {
 
-					if (jQuery(".rev_slider").length > 0) { initRevSlider() };
-					if (jQuery(".esg-grid").length > 0) { initEssGrid() };
-					itemsmenu();
-					jacqueline_init_actions();
+				if (jQuery(".rev_slider").length > 0) { initRevSlider() };
+				if (jQuery(".esg-grid").length > 0) { initEssGrid() };
+				itemsmenu();
+				jacqueline_init_actions();
 
-				}, 500)
+			}, 500)
 
 
 

@@ -9,9 +9,24 @@
 	<div class="form-group">
 		<label class="control-label col-md-1">{{ 'ADMIN.category' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
-			<select class="form-control" name="service_category_id" [(ngModel)]="Item.service_category_id">
+			<select class="form-control" name="news_category_id" [(ngModel)]="Item.news_category_id">
 				<option *ngFor="let option of category_options" [value]="option.id">{{ option.text }}</option>
 			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-1">{{ 'ADMIN.feature' | translate }} </label>
+		<div class="col-md-11">
+			<div class="md-radio-inline">
+		        <label class="mt-radio">
+		            <input type="radio" name="feature_flag" value="0" [(ngModel)]="Item.feature_flag" /> {{ 'ADMIN.no' | translate }}
+		            <span></span>
+		        </label>
+		        <label class="mt-radio">
+		            <input type="radio" name="feature_flag" value="1" [(ngModel)]="Item.feature_flag" /> {{ 'ADMIN.yes' | translate }}
+		            <span></span>
+		        </label>
+		    </div>
 		</div>
 	</div>
 	<div class="form-group">
@@ -65,8 +80,9 @@
 					<ul class="uploader-files-in clearfix">
 						<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
 							<div class="item">
-								<a style="height: 125px">
-									<img [src]="item?.src"  alt="" width="200" height="auto">
+								<a style="height: 200px">
+									<img *ngIf="item?.edited" [src]="item?.src"  alt="" width="200" height="auto">
+									<img *ngIf="!item?.edited" imgPreview [image]="item?._file" class="media-object" />
 								</a>
 								<!-- <p>{{ item?.file?.name }}</p> -->
 								<div class="file-actions clearfix">
@@ -78,9 +94,9 @@
 				</div>
 			</div>
 			<div class="uploader">
-				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onImageChange($event)"/>
-				<span class="filename">Drag and drop files…</span>
-				<span class="btn btn-uploader">Choose File</span>
+				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
+				<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
+							<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
 			</div>
 		</div>
 	</div>

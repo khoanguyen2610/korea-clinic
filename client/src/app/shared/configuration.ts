@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Configuration {
 	//======================== API Config Variable ===============================
-	public server: string = "http://clinic.laptrinhaz.com/api/public/";
-	// public server: string = "http://192.168.153.27/korea-clinic/public/";
+	// public server: string = "http://clinic.laptrinhaz.com/api/public/";
+	public server: string = "http://192.168.153.27/korea-clinic/public/";
 	public apiUrl: string = this.server + "api/v1/";
 	public apiAuthUsername: string = "visionvn";
 	public apiAuthPassword: string = "system_vws_vsvn";
@@ -18,6 +18,7 @@ export class Configuration {
 	public formatDateTime: string = "YYYY/MM/DD HH:mm:ss";
 	public formatDateMin: string = "YYYY/MM/DD HH:mm";
 	public formatLocale: string = 'en-Us';
+	public news_format_date: string = 'MMMM, DD YYYY';
 
 	//======================== Static Option Or Variable =====================
 	public system_version = 'Version 2.0';

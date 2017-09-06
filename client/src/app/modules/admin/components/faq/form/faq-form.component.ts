@@ -130,6 +130,7 @@ export class FaqFormComponent implements OnInit {
 			}
 
 			formData.append('language_code', Item['language_code']);
+			formData.append('service_id', Item['service_id']);
 			formData.append('title', Item['title']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);

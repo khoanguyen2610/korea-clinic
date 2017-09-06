@@ -38,7 +38,13 @@
     "news_management": "News Management",
     "staff_management": "Staff Management",
     "slide_management": "Slide Management",
-    "gallery_management": "Gallery Management"
+    "gallery_management": "Gallery Management",
+    "faq_management": "FAQ Management",
+    "language": "Language",
+    "parent": "Parent",
+    "parent_category": "Parent Category",
+    "url": "Url",
+    "feature": "Feature"
   },
   "PUBLIC": {
     "equipment": "Equipment",

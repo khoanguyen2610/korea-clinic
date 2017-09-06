@@ -6,9 +6,9 @@ import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
 import { AuthService, NewsService } from '../../../../../services';
+import * as moment from 'moment';
 
 declare let $: any;
-declare let moment: any;
 
 @Component({
 	selector: 'app-public-home-news',
@@ -22,6 +22,7 @@ export class NewsComponent implements OnInit {
 	controller: string = 'tin-tuc';
 	language_code: string;
 	number_item: number = 4;
+	news_format_date: string = this._Configuration.news_format_date;
 
 	constructor(
 		private _AuthService: AuthService,
@@ -50,7 +51,12 @@ export class NewsComponent implements OnInit {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
-					this.Items = res.data;
+					var items = res.data;
+					items.forEach(item => {
+						item['created_format_date'] = moment(item['created_at']).format(this.news_format_date);
+					});
+					this.Items = items;
+
 				}
 
 			}

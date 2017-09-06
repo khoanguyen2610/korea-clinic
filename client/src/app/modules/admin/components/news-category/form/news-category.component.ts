@@ -50,21 +50,10 @@ export class NewsCategoryFormComponent implements OnInit {
 			}
 		);
 
-		this.Item_vi.language_code = 'vi';
-		this.Item_vi.parent = 0;
-		this.Item_en.language_code = 'en';
-		this.Item_en.parent = 0;
-		this.Items = [this.Item_vi, this.Item_en];
-
-		_GeneralService.getItemKey().subscribe(res => {
-			if(res.status == 'success'){
-				this.item_key = res.data.item_key;
-			}
-		});
 	}
 
 	ngOnInit(){
-
+		this.initData();
 		this.language_code = 'vi';
 		if (this._params.method == 'update') {
 			if (this._params.id != null) {
@@ -107,7 +96,7 @@ export class NewsCategoryFormComponent implements OnInit {
 	}
 
 	onSubmit(form: NgForm){
-		this.is_validated = this.validateRequiredField()
+		this.is_validated = this.validateRequiredField();
 		if (this.is_validated) { // Check form is valid
 			this.Items.forEach(Item => {
 				let paramData: URLSearchParams = new URLSearchParams();
@@ -130,7 +119,7 @@ export class NewsCategoryFormComponent implements OnInit {
 							let lang = Item['language_code'];
 							Item = new NewsCategory();
 							Item['language_code'] = lang;
-
+							this.initData();
 						}
 						this._ToastrService.success('Record has been saved successfully.');
 					}
@@ -143,6 +132,27 @@ export class NewsCategoryFormComponent implements OnInit {
 
 	}
 
+	initData() {
+		this.Item_en = new NewsCategory();
+		this.Item_vi = new NewsCategory();
+		this.Item_vi.language_code = 'vi';
+		this.Item_vi.parent = 0;
+		this.Item_en.language_code = 'en';
+		this.Item_en.parent = 0;
+		this.Items = [this.Item_vi, this.Item_en];
+		this.is_validated = true;
+
+		this.generateItemKey();
+	}
+
+
+	generateItemKey() {
+		this._GeneralService.getItemKey().subscribe(res => {
+			if (res.status == 'success') {
+				this.item_key = res.data.item_key;
+			}
+		});
+	}
 
 	validateRequiredField(){
 		let valid = true;
