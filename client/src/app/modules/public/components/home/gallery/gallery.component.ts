@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
 // import { GalleryService } from '../../../../../services';
@@ -18,7 +19,7 @@ declare let moment: any;
 export class GalleryComponent implements OnInit {
 
 	// Items: Array<any> = [];
-	// lang_code: string = this._Configuration.defaultLang;
+	// language_code: string = this._Configuration.defaultLang;
 	// number_item: number = 4;
 	// module_name: string = 'gallery';
 
@@ -43,7 +44,7 @@ export class GalleryComponent implements OnInit {
 
 	// getListData() {
 	// 	let params: URLSearchParams = new URLSearchParams();
-	// 	params.set('language_code', this.lang_code);
+	// 	params.set('language_code', this.language_code);
 	// 	params.set('limit', String(this.number_item));
 	// 	this._GalleryService.getListAll(params).subscribe(res => {
 	// 		if (res.status == 'success') {

@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
 import { AuthService, EquipmentService } from '../../../../../services';
 
@@ -16,9 +17,9 @@ declare let moment: any;
 })
 
 export class EquipmentComponent implements OnInit {
-
 	Items: Array<any> = [];
-	lang_code: string = this._Configuration.defaultLang;
+	controller: string = 'thiet-bi';
+	language_code: string = this._Configuration.defaultLang;
 	number_item: number = 4;
 	module_name: string = 'equipment';
 
@@ -26,11 +27,12 @@ export class EquipmentComponent implements OnInit {
 		private _AuthService: AuthService,
 		private _EquipmentService: EquipmentService,
 		private _Configuration: Configuration,
-
+		private _LocalStorageService: LocalStorageService
 	) {
 		//=============== Get Params On Url ===============
 
 
+		this.language_code = String(_LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit() {
@@ -43,7 +45,7 @@ export class EquipmentComponent implements OnInit {
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this.lang_code);
+		params.set('language_code', this.language_code);
 		params.set('limit', String(this.number_item));
 		this._EquipmentService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {

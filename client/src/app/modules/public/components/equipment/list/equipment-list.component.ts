@@ -28,6 +28,7 @@ export class EquipmentListComponent implements OnInit {
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _EquipmentService: EquipmentService,
+
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService
 	) {
