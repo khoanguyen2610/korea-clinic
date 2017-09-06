@@ -48,7 +48,8 @@
 									<li *ngFor="let item of uploader.queue; let i = index" class="file-item text-center" >
 										<div class="item">
 											<a style="height: 200px">
-												<img [src]="item?.src"  alt="" width="200" height="auto">
+												<img *ngIf="item?.edited" [src]="item?.src"  alt="" width="200" height="auto">
+												<img *ngIf="!item?.edited" imgPreview [image]="item?._file" class="media-object" />
 											</a>
 											<div class="file-actions clearfix">
 											    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
@@ -60,8 +61,8 @@
 						</div>
 						<div class="uploader">
 							<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
-							<span class="filename">Drag and drop files…</span>
-							<span class="btn btn-uploader">Choose File</span>
+							<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
+							<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
 						</div>
 					</div>
 				</div>

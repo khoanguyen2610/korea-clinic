@@ -73,8 +73,8 @@
 			</div>
 			<div class="uploader">
 				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
-				<span class="filename">Drag and drop files…</span>
-				<span class="btn btn-uploader">Choose File</span>
+				<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
+							<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
 			</div>
 
 			<!-- <img src="" imgPreview [image]="item?.file" class="media-object" /> -->

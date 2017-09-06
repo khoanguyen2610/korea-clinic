@@ -134,13 +134,13 @@ export class GalleryFormComponent implements OnInit {
 	 * Validate Form File Type
 	 *====================================*/
 	onValidateFormFileType() {
-		let uploader = [];
+
 		this.uploader['error_limit_files'] = false;
 		setTimeout(() => {
 			let after_upload_files = +this.uploader.queue.length; // after drag upload files
 			if (after_upload_files <= this._Configuration.limit_files) {
 				if (after_upload_files != this.files_upload) {
-
+					let uploader = [];
 					for (let key in this.uploader.queue) {
 						var checked = false;
 						var ext = this.uploader.queue[key]._file.name.split('.').pop();
@@ -183,43 +183,6 @@ export class GalleryFormComponent implements OnInit {
 			}
 
 		}, 500);
-	}
-
-	onImageChange(event) {
-
-		var self = this;
-		let files = event.target.files;
-
-
-		for (var i = 0; i < files.length; i++) {
-			var reader = new FileReader();
-			var src_image = '';
-
-			reader.onload = function(e: any) {
-				src_image = e.target.result;
-				self.src_images.push(src_image);
-
-			};
-
-			var file = files[i];
-			//Only pics
-			if (!file.type.match('image')) continue;
-
-			//Read the image
-			reader.readAsDataURL(file);
-		}
-
-
-		setTimeout(() => {
-			var queue_files = self.uploader.queue;
-			var queue = [];
-			for (var i = 0; i < queue_files.length; i++) {
-				queue_files[i]['src'] = this.src_images[i];
-				queue.push(self.uploader.queue[i]);
-			}
-			queue_files = queue;
-		}, 100);
-
 	}
 
 	public fileOverBase(e: any): void {
