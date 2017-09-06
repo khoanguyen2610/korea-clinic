@@ -19,12 +19,14 @@ declare let moment: any;
 export class ServiceListComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
+	private hashtagSubscription: Subscription;
 
 	controller: string = 'dich-vu';
 	categories: Array<any> = [];
 	items: Array<any> = [];
 	_params: any;
 	queryParams: any;
+	hashtagParams:any;
 	language_code: string;
 
 	constructor(
@@ -41,6 +43,12 @@ export class ServiceListComponent implements OnInit {
 		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
 			(param: any) => {
 				this.queryParams = param;
+			}
+		);
+
+		this.hashtagSubscription = _ActivatedRoute.fragment.subscribe(
+			(param: any) => {
+				this.hashtagParams = param;console.log(param);
 			}
 		);
 
