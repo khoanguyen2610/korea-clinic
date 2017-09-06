@@ -18,6 +18,7 @@ export class Configuration {
 	public formatDateTime: string = "YYYY/MM/DD HH:mm:ss";
 	public formatDateMin: string = "YYYY/MM/DD HH:mm";
 	public formatLocale: string = 'en-Us';
+	public news_format_date: string = 'MMMM, DD YYYY';
 
 	//======================== Static Option Or Variable =====================
 	public system_version = 'Version 2.0';
