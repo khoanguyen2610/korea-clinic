@@ -12,9 +12,7 @@ import { Configuration } from '../../../../../shared';
 @Component({
 	selector: 'app-public-faq-list',
 	templateUrl: './faq-list.component.html',
-
 	providers: [ FaqService, ServiceCategoryService ]
-
 })
 
 export class FaqListComponent implements OnInit {

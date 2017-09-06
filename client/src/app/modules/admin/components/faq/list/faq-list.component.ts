@@ -67,8 +67,10 @@ export class FaqListComponent implements OnInit {
 			},
 			columns: [
 				{ 'data' : null },
-				{ 'data' : 'image_url' },
+				{ 'data' : null },
 				{ 'data' : 'title' },
+				{ 'data' : 'content' },
+				{ 'data' : 'language_name' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -76,15 +78,6 @@ export class FaqListComponent implements OnInit {
 					searchable: false,
 					bSortable: false,
 					targets: [0]
-				},
-				{
-					render: function (data, type, full) {
-						var	html = '<img src="' + data + '" height="80">';
-						return html;
-					},
-					bSortable: false,
-					className: 'text-center',
-					targets: [1]
 				},
 				{
 					render: function (data, type, full) {
@@ -96,7 +89,7 @@ export class FaqListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [3]
+					targets: [5]
 				},
 			]
 		});
@@ -123,7 +116,7 @@ export class FaqListComponent implements OnInit {
 	}
 
 	onRoutingUpdate(id: number, item_key: string){
-		this._Router.navigate(['/admin/equipment/form/update/' + id], {queryParams: { item_key: item_key }} );
+		this._Router.navigate(['/admin/faq/form/update/' + id], {queryParams: { item_key: item_key }} );
 	}
 
 	onOpenConfirm(item_key: string){

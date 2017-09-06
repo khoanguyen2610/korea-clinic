@@ -22,11 +22,11 @@ export class AppComponent {
 		 *==========================================*/
 		if(!this._LocalStorageService.get('language_code')){
 			this._LocalStorageService.set('language_code', _Configuration.defaultLang);
+
 		}
 		let language_code: string = String(this._LocalStorageService.get('language_code'));
 		this._TranslateService.setDefaultLang(language_code);
 		this._TranslateService.use(language_code);
-
 
 		/*==========================================
 		 * Config ToastrConfig
