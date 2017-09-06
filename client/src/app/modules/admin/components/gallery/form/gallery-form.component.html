@@ -60,7 +60,7 @@
 							</div>
 						</div>
 						<div class="uploader">
-							<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
+							<input type="file" multiple ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
 							<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
 							<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
 						</div>

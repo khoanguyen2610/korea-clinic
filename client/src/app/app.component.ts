@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from 'ng2-translate';
 import { ToastrConfig } from 'ngx-toastr';
 import { LocalStorageService } from 'angular-2-local-storage';
+import * as moment from 'moment';
 
 import { Configuration } from './shared';
 
@@ -25,6 +26,7 @@ export class AppComponent {
 
 		}
 		let language_code: string = String(this._LocalStorageService.get('language_code'));
+		moment.locale(language_code);
 		this._TranslateService.setDefaultLang(language_code);
 		this._TranslateService.use(language_code);
 
