@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import {  ScriptService } from './../../../services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from 'ng2-translate';
+import { Configuration } from './../../../shared';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 declare var jQuery: any;
 declare var JACQUELINE_STORAGE: any;
@@ -29,7 +31,9 @@ export class PublicComponent  {
 	constructor(
 		private _ScriptService: ScriptService,
 		private _Router: Router,
-		private _TranslateService: TranslateService
+		private _TranslateService: TranslateService,
+		private _Configuration: Configuration,
+		private _LocalStorageService: LocalStorageService
 	) {
 		JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
@@ -47,7 +51,7 @@ export class PublicComponent  {
 				this.module_name = res[str];
 			});
 
-
+			this._Configuration.language_code = String(this._LocalStorageService.get('language_code'));
 			this.template = 'default';
 			if(this.template_home.indexOf(str) > -1) {
 				this.template = 'slide';

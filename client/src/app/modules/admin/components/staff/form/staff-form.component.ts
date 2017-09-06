@@ -53,11 +53,7 @@ export class StaffFormComponent implements OnInit {
 		this.Item_vi.language_code = 'vi';
 		this.Item_en.language_code = 'en';
 
-		_GeneralService.getItemKey().subscribe(res => {
-			if(res.status == 'success'){
-				this.item_key = res.data.item_key;
-			}
-		});
+		this.generateItemKey();
 	}
 
 	ngOnInit(){
@@ -147,6 +143,7 @@ export class StaffFormComponent implements OnInit {
 							Item = new Staff();
 							Item['language_code'] = lang;
 
+						this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}
@@ -169,6 +166,14 @@ export class StaffFormComponent implements OnInit {
 				this.Item_en.image = obj;
 				break;
 		}
+	}
+
+	generateItemKey() {
+		this._GeneralService.getItemKey().subscribe(res => {
+			if (res.status == 'success') {
+				this.item_key = res.data.item_key;
+			}
+		});
 	}
 
 	validateRequiredField(){

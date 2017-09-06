@@ -30,7 +30,7 @@ export class ServiceComponent implements OnInit {
 	) {
 		//=============== Get Params On Url ===============
 
-		
+
 	}
 
 	ngOnInit(){
@@ -38,13 +38,13 @@ export class ServiceComponent implements OnInit {
 	}
 
 	ngAfterViewInit(){
-		
+
 	}
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('recursive', 'false');
-		params.set('language_code', this.lang_code);
+		params.set('language_code', this._Configuration.language_code);;
 		this._ServiceCategoryService.getListData(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.Items = res.data;
@@ -53,5 +53,5 @@ export class ServiceComponent implements OnInit {
 		});
 	}
 
-	
+
 }

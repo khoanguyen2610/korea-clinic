@@ -43,7 +43,7 @@ export class StaffComponent implements OnInit {
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this.lang_code);
+		params.set('language_code', this._Configuration.language_code);;
 		this._StaffService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
