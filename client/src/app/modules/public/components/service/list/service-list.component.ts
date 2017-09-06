@@ -45,13 +45,12 @@ export class ServiceListComponent implements OnInit {
 		);
 
 		this.language_code = String(_LocalStorageService.get('language_code'));
+		if(this.language_code == 'en'){
+			this.controller = 'service';
+		}
 	}
 
 	ngOnInit() {
-		if(this._params.language_code){
-			this.language_code = this._params.language_code;
-		}
-
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
@@ -61,7 +60,6 @@ export class ServiceListComponent implements OnInit {
 				this.categories = res.data;
 			}
 		});
-
 
 		if(this._params.id){
 			params.set('service_category_id',this._params.id);

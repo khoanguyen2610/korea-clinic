@@ -53,7 +53,34 @@ export class GalleryFormComponent implements OnInit {
 
 	ngOnInit(){
 		if(this._params.method == 'update'){
+			if(this._params.id != null){
+				let params: URLSearchParams = new URLSearchParams();
+				this._GalleryService.getByID(this._params.id, params).subscribe(res => {
+					if (res.status == 'success') {
+						if(res.data == null){
+							this._Router.navigate(['/admin/gallery/list']);
+						}else{
+							this.Item = res.data;
+							if(this.Item.image){
+								let image = JSON.parse(this.Item.image);
+								let filename = image.filename;
+								let file_type = filename.split('.');
+								var image_url = '';
+								if (filename) {
+									image_url = this.Item['image_url'];
+								}
 
+								let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
+								this.uploader.queue.push(item);
+							}
+						}
+					}else{
+						this._Router.navigate(['/admin/gallery/list']);
+					}
+				});
+			}else{
+				this._Router.navigate(['/']);
+			}
 		}
 	}
 
@@ -88,6 +115,15 @@ export class GalleryFormComponent implements OnInit {
 			});
 		} catch (error) {
 			document.write(error)
+		}
+	}
+
+	/*==============================================
+	 * Remove file on stack
+	 *==============================================*/
+	onRemoveFile(index, file_id) {
+		if (this.uploader.queue.length) {
+			this.uploader.queue.splice(index, 1);
 		}
 	}
 
