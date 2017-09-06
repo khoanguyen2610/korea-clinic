@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {  ScriptService } from './../../../services';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from 'ng2-translate';
 
 declare var jQuery: any;
 declare var JACQUELINE_STORAGE: any;
@@ -19,13 +20,16 @@ declare var window: any;
 })
 
 export class PublicComponent  {
+	private subscription: Subscription;
 	curRouting?: string;
 	template:string;
 	template_home: Array<any> = ['', 'home', 'trang-chu'];
+	module_name: string;
 	// template_pic
 	constructor(
 		private _ScriptService: ScriptService,
-		private _Router: Router
+		private _Router: Router,
+		private _TranslateService: TranslateService
 	) {
 		JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
@@ -37,12 +41,19 @@ export class PublicComponent  {
 		if(this.curRouting != routing){
 			this.curRouting = routing;
 			var str = routing.substring(1);
-			
+
+
+			this.subscription = this._TranslateService.get('PUBLIC').subscribe((res: string) => {
+				this.module_name = res[str];
+				console.log(res)
+				console.log(res[str])
+			});
+
+
 			this.template = 'default';
 			if(this.template_home.indexOf(str) > -1) {
 				this.template = 'slide';
 			}
-			console.log(this.template)
 			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {
 				// JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
@@ -66,6 +77,10 @@ export class PublicComponent  {
 			// jacqueline_init_actions();
 		}
     }
+
+	ngOnDestroy() {
+		this.subscription.unsubscribe();
+	}
 
 
 
