@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {  ScriptService } from './../../../services';
+import { ScriptService } from './../../../services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from 'ng2-translate';
 
@@ -21,10 +21,14 @@ declare var window: any;
 
 export class PublicComponent  {
 	private subscription: Subscription;
+
 	curRouting?: string;
 	template:string;
 	template_home: Array<any> = ['', 'home', 'trang-chu'];
 	module_name: string;
+
+	page_content_wrap: string = 'page_content_wrap page_paddings_no';
+
 	// template_pic
 	constructor(
 		private _ScriptService: ScriptService,
@@ -34,7 +38,6 @@ export class PublicComponent  {
 		JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
 	}
-
 
 	ngAfterContentChecked() {
     	let routing = this._Router.url;
@@ -76,6 +79,22 @@ export class PublicComponent  {
 	        // }).catch(error => console.log(error));
 			// jacqueline_init_actions();
 		}
+    }
+
+    onActivate(componentRef){
+		let action = componentRef.getAction();
+		switch (action) {
+			case 'list':
+				this.page_content_wrap = 'page_content_wrap';
+				break;
+			case 'detail':
+				this.page_content_wrap = 'page_content_wrap page_paddings_yes';
+				break;
+			default:
+				// code...
+				break;
+		}
+		console.log(this.page_content_wrap);
     }
 
 	ngOnDestroy() {
