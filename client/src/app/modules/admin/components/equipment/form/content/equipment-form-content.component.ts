@@ -92,8 +92,9 @@ export class EquipmentFormContentComponent implements OnInit {
 		};
 		var self = this;
 		setTimeout(() => {
-			self.uploader.queue[0]['src'] = src_image;
-			self.uploader.queue = [self.uploader.queue[0]];
+			var last = self.uploader.queue.length - 1;
+			self.uploader.queue[last]['src'] = src_image;
+			self.uploader.queue = [self.uploader.queue[last]];
 			self.fileOutput.emit(self.uploader);
 		}, 100);
 

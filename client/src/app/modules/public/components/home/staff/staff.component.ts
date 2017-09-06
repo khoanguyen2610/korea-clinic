@@ -20,7 +20,7 @@ export class StaffComponent implements OnInit {
 	Items: Array<any> = [];
 	lang_code: string = this._Configuration.defaultLang;
 	number_item: number = 4;
-	module_name: string = ''
+	module_name: string = 'staff';
 
 	constructor(
 		private _AuthService: AuthService,
@@ -69,5 +69,9 @@ export class StaffComponent implements OnInit {
 
 			}
 		});
+	}
+
+	getModuleNameByLang() {
+		return this.module_name;
 	}
 }

@@ -107,7 +107,7 @@ export class NewsCategoryFormComponent implements OnInit {
 	}
 
 	onSubmit(form: NgForm){
-		this.is_validated = this.validateRequiredField()
+		this.is_validated = this.validateRequiredField();
 		if (this.is_validated) { // Check form is valid
 			this.Items.forEach(Item => {
 				let paramData: URLSearchParams = new URLSearchParams();

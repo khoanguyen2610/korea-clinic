@@ -33,7 +33,7 @@ import { AuthService, ScriptService } from '../../services';
 import { KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim } from '../../pipes';
 
 //===================== Import Directive =======================
-import { HelperDirective, EqualValidator, SmallerValidator } from '../../directives/';
+import { HelperDirective, EqualValidator, SmallerValidator, ImagePreview } from '../../directives/';
 
 
 
@@ -45,7 +45,7 @@ import { HelperDirective, EqualValidator, SmallerValidator } from '../../directi
         //======================= Import Pipe =======================
         KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim,
         // FileSelectDirective, FileDropDirective,
-        EqualValidator, SmallerValidator, HelperDirective
+        EqualValidator, SmallerValidator, HelperDirective, ImagePreview
     ],
     imports: [
         CommonModule,
@@ -74,7 +74,7 @@ import { HelperDirective, EqualValidator, SmallerValidator } from '../../directi
         CommonModule,
         KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim,
         // FileSelectDirective, FileDropDirective,
-        EqualValidator, SmallerValidator, HelperDirective,
+        EqualValidator, SmallerValidator, HelperDirective, ImagePreview,
         HttpInterceptorModule,
         HttpModule,
         FormsModule,

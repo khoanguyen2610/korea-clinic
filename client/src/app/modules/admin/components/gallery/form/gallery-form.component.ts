@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -20,6 +20,7 @@ declare let $: any;
 export class GalleryFormComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
+	@Output('file') fileOutput = new EventEmitter();
 
 	_params: any;
 	queryParams: any;
@@ -30,6 +31,7 @@ export class GalleryFormComponent implements OnInit {
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
 	uploadProgress: any;
+	files_upload: number = 10;
 
 	constructor(
 		private _AuthService: AuthService,
@@ -38,6 +40,7 @@ export class GalleryFormComponent implements OnInit {
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 		private _ToastrService: ToastrService,
+		private _Configuration: Configuration
 	) {
 		//=============== Get Params On Url ===============
 		this.subscription = _ActivatedRoute.params.subscribe(
@@ -127,12 +130,65 @@ export class GalleryFormComponent implements OnInit {
 		}
 	}
 
+	/*====================================
+	 * Validate Form File Type
+	 *====================================*/
+	onValidateFormFileType() {
+		this.uploader['error_limit_files'] = false;
+		setTimeout(() => {
+			let after_upload_files = +this.uploader.queue.length; // after drag upload files
+			if (after_upload_files <= this._Configuration.limit_files) {
+				if (after_upload_files != this.files_upload) {
+					let uploader = [];
+					for (let key in this.uploader.queue) {
+						var checked = false;
+						var ext = this.uploader.queue[key]._file.name.split('.').pop();
+						ext = ext.toLowerCase();
+
+						for (let k in this.files_type) {
+
+							if (ext.indexOf(this.files_type[k]) > -1) {
+								checked = true;
+								break;
+							}
+						}
+
+						if (!checked) {
+							var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
+							this._ToastrService.error(msgInvalidFileType);
+							checked = false;
+						}
+
+						if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
+							var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
+							this._ToastrService.error(msgSizeTooLarge);
+							checked = false;
+						}
+
+						if (!checked) {
+							// this.uploader.queue.splice(+key, 1);
+							this.uploader.queue[key].isError = true;
+						} else {
+							this.uploader.queue[key]._file['is_keeping'] = true;
+							uploader.push(this.uploader.queue[key]);
+						}
+
+
+					}
+					this.uploader.queue = uploader;
+					this.files_upload = this.uploader.queue.length;
+					this.fileOutput.emit(this.uploader);
+				}
+			}
+
+		}, 500);
+	}
+
 	onImageChange(event) {
-		console.log(event.srcElement.files)
+
 		var self = this;
 		let files = event.target.files;
 
-		console.log(files)
 
 		for (var i = 0; i < files.length; i++) {
 			var reader = new FileReader();

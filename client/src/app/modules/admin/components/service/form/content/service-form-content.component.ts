@@ -28,6 +28,7 @@ export class ServiceFormContentComponent implements OnInit {
 	src_images: Array<any> = [];
 	_params: any;
 	files_type = [];
+	files_upload:number = 1;
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
@@ -82,7 +83,7 @@ export class ServiceFormContentComponent implements OnInit {
 				image_url = this.Item['image_url'];
 			}
 
-			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
+			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true }, edited: true };
 			this.uploader.queue.push(item);
 		}
 	}
@@ -97,6 +98,60 @@ export class ServiceFormContentComponent implements OnInit {
 		}
 	}
 
+	/*====================================
+	 * Validate Form File Type
+	 *====================================*/
+	onValidateFormFileType() {
+		this.uploader['error_limit_files'] = false;
+		setTimeout(() => {
+			let after_upload_files = +this.uploader.queue.length; // after drag upload files
+			if (after_upload_files <= this._Configuration.limit_files) {
+				if (after_upload_files != this.files_upload) {
+					let uploader = [];
+					for (let key in this.uploader.queue) {
+						var checked = false;
+						var ext = this.uploader.queue[key]._file.name.split('.').pop();
+						ext = ext.toLowerCase();
+
+						for (let k in this.files_type) {
+
+							if (ext.indexOf(this.files_type[k]) > -1) {
+								checked = true;
+								break;
+							}
+						}
+
+						if (!checked) {
+							var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
+							this._ToastrService.error(msgInvalidFileType);
+							checked = false;
+						}
+
+						if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
+							var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
+							this._ToastrService.error(msgSizeTooLarge);
+							checked = false;
+						}
+
+						if (!checked) {
+							// this.uploader.queue.splice(+key, 1);
+							this.uploader.queue[key].isError = true;
+						} else {
+							this.uploader.queue[key]._file['is_keeping'] = true;
+							uploader.push(this.uploader.queue[key]);
+						}
+
+
+					}
+					this.uploader.queue = uploader;
+					this.files_upload = this.uploader.queue.length;
+					this.fileOutput.emit(this.uploader);
+				}
+			}
+
+		}, 500);
+	}
+
 	onImageChange(event) {
 		var reader = new FileReader();
 		var image = $('#myImage');
@@ -109,8 +164,9 @@ export class ServiceFormContentComponent implements OnInit {
 		};
 		var self = this;
 		setTimeout(() => {
-			self.uploader.queue[0]['src'] = src_image;
-			self.uploader.queue = [self.uploader.queue[0]];
+			var last = self.uploader.queue.length - 1;
+			self.uploader.queue[last]['src'] = src_image;
+			self.uploader.queue = [self.uploader.queue[last]];
 			self.fileOutput.emit(self.uploader);
 		}, 100);
 
@@ -122,7 +178,7 @@ export class ServiceFormContentComponent implements OnInit {
 	}
 
 	public fileOverAnother(e: any): void {
-		this.onImageChange(e);
+		this.onValidateFormFileType();
 		this.hasAnotherDropZoneOver = e;
 	}
 
