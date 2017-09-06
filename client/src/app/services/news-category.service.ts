@@ -44,6 +44,18 @@ export class NewsCategoryService {
 
     }
 
+    public getListAll(params = null) {
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'list_all', {
+            search: params,
+            headers: headers,
+            withCredentials: true
+        })
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     public save(params, id?:number) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
