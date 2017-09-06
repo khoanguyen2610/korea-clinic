@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { Configuration } from '../../../../../../shared';
+import { ServiceService } from '../../../../../../services';
 import { Faq } from '../../../../../../models';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
@@ -13,7 +14,7 @@ declare let $: any;
 @Component({
 	selector: 'app-faq-form-content',
 	templateUrl: './faq-form-content.component.html',
-
+	providers: [ ServiceService ]
 })
 
 export class FaqFormContentComponent implements OnInit {
@@ -21,17 +22,21 @@ export class FaqFormContentComponent implements OnInit {
 	element: ElementRef;
 	@Input() is_validated: boolean;
 	@Input() Item = new Faq();
+	@Input() language_code: string;
 	@Output('file') fileOutput = new EventEmitter();
 
 	_params: any;
 	files_type = [];
+	service_options: Array<any> = [];
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
+	category_options: Array<any> = [];
 
 	constructor(
 		private _Configuration: Configuration,
 		private _ToastrService: ToastrService,
+		private _ServiceService: ServiceService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 	) {
@@ -43,7 +48,22 @@ export class FaqFormContentComponent implements OnInit {
 		this.files_type = this._Configuration.upload_file_extension;
 	}
 
-	ngOnInit(){ console.log('here') }
+	ngOnInit(){
+		console.log(this.language_code);
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this.language_code);
+		this._ServiceService.getListAll(params).subscribe(res => {
+			if(res.status == 'success'){
+				let items = res.data;
+				console.log(items);
+				for(let i in items){
+					this.service_options.push({
+						'id': items[i].id, 'text': items[i].title
+					});
+				}
+			}
+		})
+	}
 
 	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
 		if(this.Item.image){

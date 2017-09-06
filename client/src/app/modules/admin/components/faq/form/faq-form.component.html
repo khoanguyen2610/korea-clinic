@@ -19,10 +19,10 @@
 		<div class="tab-content">
 			<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 				<div class="tab-pane active" id="tab_vi">
-					<app-faq-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-faq-form-content>
+					<app-faq-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-faq-form-content>
 				</div>
 				<div class="tab-pane" id="tab_en">
-					<app-faq-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-faq-form-content>
+					<app-faq-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-faq-form-content>
 				</div>
 				<div class="form-actions">
 					<div class="row">
