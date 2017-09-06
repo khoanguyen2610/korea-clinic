@@ -45,12 +45,13 @@ export class NewsListComponent implements OnInit {
 		);
 
 		this.language_code = String(_LocalStorageService.get('language_code'));
+		if(this.language_code == 'en'){
+			this.controller = 'news';
+		}
 	}
 
 	ngOnInit() {
-		if(this._params.language_code){
-			this.language_code = this._params.language_code;
-		}
+
 
 		let params: URLSearchParams = new URLSearchParams();
 

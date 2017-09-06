@@ -32,12 +32,16 @@ export class EquipmentListComponent implements OnInit {
 		private _LocalStorageService: LocalStorageService
 	) {
 		this.language_code = String(_LocalStorageService.get('language_code'));
+		if(this.language_code == 'en'){
+			this.controller = 'equipment';
+		}
 	}
 
 	ngOnInit() {
 		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this.language_code);
 		params.set('item_status','active');
-		this._EquipmentService.getListData(params).subscribe(res => {
+		this._EquipmentService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;
 			}

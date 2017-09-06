@@ -21,6 +21,7 @@ export class ServiceDetailComponent implements OnInit {
 
 	_params: any
 	Item:Array<any> = [];
+	controller: string = 'dich-vu';
 	language_code: string;
 
 	constructor(
@@ -34,13 +35,12 @@ export class ServiceDetailComponent implements OnInit {
 		);
 
 		this.language_code = String(_LocalStorageService.get('language_code'));
+		if(this.language_code == 'en'){
+			this.controller = 'service';
+		}
 	}
 
 	ngOnInit() {
-		if(this._params.lang_code){
-			this.language_code = this._params.lang_code;
-		}
-
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);
