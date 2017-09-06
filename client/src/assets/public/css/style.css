@@ -1726,6 +1726,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 .top_panel_top_socials .sc_socials {
     display: inline-block;
     height: 2em;
+    margin-top: 2px;
 }
 .top_panel_top_socials .label {
     line-height: 2em;
@@ -2190,6 +2191,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 .top_panel_style_7 .top_panel_icon {
     float: right;
 }
+.slider .top_panel_image, .no_slider app-public-home-slide {display: none}
 .top_panel_image {
     height: 25em;
     overflow: hidden;

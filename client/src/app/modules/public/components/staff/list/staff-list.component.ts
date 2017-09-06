@@ -24,7 +24,7 @@ export class StaffListComponent implements OnInit {
 	employees: Array<any> = [];
 	_params: any;
 	queryParams: any;
-	language_code: string = String(this._LocalStorageService.get('language_code'));
+	language_code: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -41,10 +41,16 @@ export class StaffListComponent implements OnInit {
 				this.queryParams = param;
 			}
 		);
+
+		this.language_code = String(_LocalStorageService.get('language_code'));
+		if(this.language_code == 'en'){
+			this.controller = 'staff';
+		}
 	}
 
 	ngOnInit() {
 		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this.language_code);
 		params.set('item_status','acitve');
 		this._StaffService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){

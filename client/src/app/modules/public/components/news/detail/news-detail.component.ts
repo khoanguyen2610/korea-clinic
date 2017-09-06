@@ -22,6 +22,7 @@ export class NewsDetailComponent implements OnInit {
 	_params: any
 	categories:Array<any> = [];
 	Item:Array<any> = [];
+	controller: string = 'tin-tuc';
 	language_code: string;
 
 	constructor(
@@ -36,6 +37,9 @@ export class NewsDetailComponent implements OnInit {
 		);
 
 		this.language_code = String(_LocalStorageService.get('language_code'));
+		if(this.language_code == 'en'){
+			this.controller = 'news';
+		}
 
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('recursive','true');
@@ -44,7 +48,7 @@ export class NewsDetailComponent implements OnInit {
 			if(res.status == 'success'){
 				this.categories = res.data;
 			}
-		})
+		});
 
 
 	}
