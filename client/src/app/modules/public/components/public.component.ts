@@ -20,6 +20,9 @@ declare var window: any;
 
 export class PublicComponent  {
 	curRouting?: string;
+	template:string;
+	template_home: Array<any> = ['', 'home', 'trang-chu'];
+	// template_pic
 	constructor(
 		private _ScriptService: ScriptService,
 		private _Router: Router
@@ -33,6 +36,13 @@ export class PublicComponent  {
     	let routing = this._Router.url;
 		if(this.curRouting != routing){
 			this.curRouting = routing;
+			var str = routing.substring(1);
+			
+			this.template = 'default';
+			if(this.template_home.indexOf(str) > -1) {
+				this.template = 'slide';
+			}
+			console.log(this.template)
 			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {
 				// JACQUELINE_STORAGE['theme_init_counter'] = 0;
 

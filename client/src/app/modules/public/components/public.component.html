@@ -1,6 +1,6 @@
 <div class="home page body_filled article_style_stretch scheme_original preloader top_panel_above sidebar_hide sidebar_outer_hide sc_responsive">
     <div class="body_wrap">
-        <div class="page_wrap">
+        <div class="page_wrap" [ngSwitch]="template">
             <div class="top_panel_fixed_wrap"></div>
             <!-- Header -->
             <app-public-general-header></app-public-general-header>
@@ -13,6 +13,15 @@
             <!-- Home Main Slide -->
             <app-public-home-slide></app-public-home-slide>
             <!-- Home Main Slide -->
+
+
+            <template *ngSwitchCase="slide">
+                <app-public-home-slide></app-public-home-slide>
+            </template>
+            <template *ngSwitchDefault>
+                <div>BARRRR</div>
+            </template>
+    
 
             <div class="page_content_wrap page_paddings_no">
                 <div class="content_wrap">
