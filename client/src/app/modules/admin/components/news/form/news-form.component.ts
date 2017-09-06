@@ -132,6 +132,7 @@ export class NewsFormComponent implements OnInit {
 			formData.append('language_code', Item['language_code']);
 			formData.append('title', Item['title']);
 			formData.append('news_category_id', Item['news_category_id']);
+			formData.append('feature_flag', Item['feature_flag']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 

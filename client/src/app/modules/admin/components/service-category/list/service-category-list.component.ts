@@ -68,6 +68,7 @@ export class ServiceCategoryListComponent implements OnInit {
 			columns: [
 				{ 'data': null },
 				{ 'data': 'title' },
+				{ 'data': 'language_name' },
 				{ 'data': null },
 			],
 			columnDefs: [
@@ -92,7 +93,7 @@ export class ServiceCategoryListComponent implements OnInit {
 					bSortable: false,
 					orderable: false,
 					className: 'text-center',
-					targets: [2]
+					targets: [3]
 				},
 			]
 		});

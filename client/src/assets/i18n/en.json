@@ -42,7 +42,9 @@
     "faq_management": "FAQ Management",
     "language": "Language",
     "parent": "Parent",
-    "parent_category": "Parent Category"
+    "parent_category": "Parent Category",
+    "url": "Url",
+    "feature": "Feature"
   },
   "PUBLIC": {
     "equipment": "Equipment",
