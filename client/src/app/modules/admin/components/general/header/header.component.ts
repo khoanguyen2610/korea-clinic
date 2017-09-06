@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
+import { AuthService } from '../../../../../services';
 
 
 // declare let $: any;
@@ -16,7 +17,7 @@ import { URLSearchParams } from '@angular/http';
 export class HeaderComponent implements OnInit {
 
 	constructor(
-
+		private _AuthService: AuthService,
 	) {
 
 	}
@@ -24,6 +25,15 @@ export class HeaderComponent implements OnInit {
 	ngOnInit() {
 		console.log('Admin Header');
 	}
+
+	/*===================================================
+	 * Logout system
+	 *===================================================*/
+  	logout(){
+  		let redirect_url = '/admin/auth/login';
+  		this._AuthService.logout(redirect_url);
+		return false;
+  	}
 
 
 	ngOnDestroy() {

@@ -3,7 +3,7 @@
  * PHP Class
  *
  * LICENSE
- * 
+ *
  * @author Nguyen Anh Khoa-VISIONVN
  * @created Mar 17, 2014 1:39:32 PM
  */
@@ -35,7 +35,7 @@ $role = \Model_System_VsvnRole::find('all', ['where' => ['item_status'=>'active'
 
 $arrRole = [];
 if(!empty($role)){
-    foreach ($role as $k => $v) { 
+    foreach ($role as $k => $v) {
         $role = json_decode($v['content'], true);
         $arrRole[$v['id']] = !empty($role)?$role:[];
     }
@@ -46,15 +46,15 @@ if(!empty($role)){
  *=================================================*/
 return array(
     'db_connection'         => null,
-    'table_name'            => 'm_user',
-    'table_columns'         => array(\DB::expr('m_user.id AS id'), 'm_user.*'),
+    'table_name'            => 'vsvn_user',
+    'table_columns'         => array(\DB::expr('vsvn_user.id AS id'), 'm_user.*'),
     'table_group_name'      => 'vsvn_group',
     'table_group_columns'   => array('m_user.*'),
     'guest_login'           => true,
     'groups'                => $arrGroups,
     'roles'                 => $arrRole,
     'login_hash_salt'       => '',
-    'username_post_key'     => 'user_id',
+    'username_post_key'     => 'username',
     'password_post_key'     => 'password',
     'group_id'              => '',
     'remember_me'           => array(

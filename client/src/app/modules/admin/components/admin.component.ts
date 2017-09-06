@@ -165,9 +165,16 @@ export class AdminComponent  {
 	    	// if (routing.match(/^\/login.*/i) || routing.match(/^\/logout.*/i) || routing.match(/^\/forgot\-password.*/i)) {
 			//     this.hasHeader = false;
 			// }
-			// this.onCheckUserSession(routing, true);
+			this.onCheckUserSession(routing, true);
 			//
 			//
+		}
+    }
+
+
+    onCheckUserSession(routing, refill = null){
+    	if (!routing.match(/^\/admin\/auth\/login.*/i) ) {
+    		this._AuthService.checkUserSession(routing, refill);
 		}
     }
 
