@@ -102,6 +102,8 @@ export class ServiceFormContentComponent implements OnInit {
 	 * Validate Form File Type
 	 *====================================*/
 	onValidateFormFileType() {
+		var last = this.uploader.queue.length - 1;
+		this.uploader.queue = [this.uploader.queue[last]];
 		this.uploader['error_limit_files'] = false;
 		setTimeout(() => {
 			let after_upload_files = +this.uploader.queue.length; // after drag upload files
@@ -150,27 +152,6 @@ export class ServiceFormContentComponent implements OnInit {
 			}
 
 		}, 500);
-	}
-
-	onImageChange(event) {
-		var reader = new FileReader();
-		var image = $('#myImage');
-
-		var src_image = '';
-		reader.onload = function(e: any) {
-			src_image = e.target.result;
-			image.src = src_image;
-
-		};
-		var self = this;
-		setTimeout(() => {
-			var last = self.uploader.queue.length - 1;
-			self.uploader.queue[last]['src'] = src_image;
-			self.uploader.queue = [self.uploader.queue[last]];
-			self.fileOutput.emit(self.uploader);
-		}, 100);
-
-		reader.readAsDataURL(event.target.files[0]);
 	}
 
 	public fileOverBase(e: any): void {

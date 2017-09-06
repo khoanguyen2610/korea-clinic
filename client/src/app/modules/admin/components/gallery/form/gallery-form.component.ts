@@ -24,14 +24,14 @@ export class GalleryFormComponent implements OnInit {
 
 	_params: any;
 	queryParams: any;
-	files_type = [];
+	files_type = this._Configuration.upload_file_extension;
 	src_images: Array<any> = [];
 	Item = new Gallery();
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
 	uploadProgress: any;
-	files_upload: number = 10;
+	files_upload: number = 8;
 
 	constructor(
 		private _AuthService: AuthService,
@@ -134,12 +134,13 @@ export class GalleryFormComponent implements OnInit {
 	 * Validate Form File Type
 	 *====================================*/
 	onValidateFormFileType() {
+		let uploader = [];
 		this.uploader['error_limit_files'] = false;
 		setTimeout(() => {
 			let after_upload_files = +this.uploader.queue.length; // after drag upload files
 			if (after_upload_files <= this._Configuration.limit_files) {
 				if (after_upload_files != this.files_upload) {
-					let uploader = [];
+
 					for (let key in this.uploader.queue) {
 						var checked = false;
 						var ext = this.uploader.queue[key]._file.name.split('.').pop();
@@ -226,7 +227,7 @@ export class GalleryFormComponent implements OnInit {
 	}
 
 	public fileOverAnother(e: any): void {
-		this.onImageChange(e);
+		this.onValidateFormFileType();
 		this.hasAnotherDropZoneOver = e;
 	}
 

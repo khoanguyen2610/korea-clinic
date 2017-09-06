@@ -24,7 +24,7 @@ export class StaffFormContentComponent implements OnInit {
 
 	_params: any;
 	files_type = [];
-	files_upload = 0;
+	files_upload:number = 1;
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
@@ -51,11 +51,11 @@ export class StaffFormContentComponent implements OnInit {
 		}
 	}
 
-	onGetImage(){
+	onGetImage() {
 		this.uploader = new FileUploader({});
-		if(this.Item.image instanceof Object){
+		if (this.Item.image instanceof Object) {
 			this.uploader = this.Item.image;
-		}else{
+		} else {
 			let image = JSON.parse(this.Item.image);
 			let filename = image.filename;
 			let file_type = filename.split('.');
@@ -64,7 +64,7 @@ export class StaffFormContentComponent implements OnInit {
 				image_url = this.Item['image_url'];
 			}
 
-			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
+			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true }, edited: true };
 			this.uploader.queue.push(item);
 		}
 	}
@@ -79,33 +79,70 @@ export class StaffFormContentComponent implements OnInit {
 		}
 	}
 
-	onImageChange(event) {
-		var reader = new FileReader();
-		var image = $('#myImage');
-
-		var src_image = '';
-		reader.onload = function(e: any) {
-			src_image = e.target.result;
-			image.src = src_image;
-
-		};
-		var self = this;
+	/*====================================
+	 * Validate Form File Type
+	 *====================================*/
+	onValidateFormFileType() {
+		var last = this.uploader.queue.length - 1;
+		this.uploader.queue = [this.uploader.queue[last]];
+		this.uploader['error_limit_files'] = false;
 		setTimeout(() => {
-			var last = self.uploader.queue.length - 1;
-			self.uploader.queue[last]['src'] = src_image;
-			self.uploader.queue = [self.uploader.queue[last]];
-			self.fileOutput.emit(self.uploader);
-		}, 100);
+			let after_upload_files = +this.uploader.queue.length; // after drag upload files
+			if (after_upload_files <= this._Configuration.limit_files) {
+				if (after_upload_files != this.files_upload) {
+					let uploader = [];
+					for (let key in this.uploader.queue) {
+						var checked = false;
+						var ext = this.uploader.queue[key]._file.name.split('.').pop();
+						ext = ext.toLowerCase();
 
-		reader.readAsDataURL(event.target.files[0]);
+						for (let k in this.files_type) {
+
+							if (ext.indexOf(this.files_type[k]) > -1) {
+								checked = true;
+								break;
+							}
+						}
+
+						if (!checked) {
+							var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
+							this._ToastrService.error(msgInvalidFileType);
+							checked = false;
+						}
+
+						if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
+							var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
+							this._ToastrService.error(msgSizeTooLarge);
+							checked = false;
+						}
+
+						if (!checked) {
+							// this.uploader.queue.splice(+key, 1);
+							this.uploader.queue[key].isError = true;
+						} else {
+							this.uploader.queue[key]._file['is_keeping'] = true;
+							uploader.push(this.uploader.queue[key]);
+						}
+
+
+					}
+					this.uploader.queue = uploader;
+					this.files_upload = this.uploader.queue.length;
+					this.fileOutput.emit(this.uploader);
+				}
+			}
+
+		}, 500);
 	}
+
+
 
 	public fileOverBase(e: any): void {
 		this.hasBaseDropZoneOver = e;
 	}
 
 	public fileOverAnother(e: any): void {
-		this.onImageChange(e);
+		this.onValidateFormFileType();
 		this.hasAnotherDropZoneOver = e;
 	}
 
