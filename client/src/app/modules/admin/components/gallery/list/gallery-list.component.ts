@@ -109,23 +109,23 @@ export class GalleryListComponent implements OnInit {
 			});
 		}).draw();
 
-		$('#tbl-data tbody').on( 'click', '#btn_edit', function () {
+		$('#tbl-data tbody').on('click', '#btn_edit', function() {
 			let tr = $(this).parents('tr');
 			let obj = self.DTList.row(tr).data();
-			self.onRoutingUpdate(obj.id);
+			self.onRoutingUpdate(obj.id, obj.item_key);
 			return false;
 		});
 
-		$('#tbl-data tbody').on( 'click', '#btn_delete', function () {
+		$('#tbl-data tbody').on('click', '#btn_delete', function() {
 			let tr = $(this).parents('tr');
 			let obj = self.DTList.row(tr).data();
-			self.onOpenConfirm(obj.id);
+			self.onOpenConfirm(obj.item_key);
 			return false;
 		});
 	}
 
-	onRoutingUpdate(id: number){
-		this._Router.navigate(['/admin/gallery/form/update/', id]);
+	onRoutingUpdate(id: number, item_key: string) {
+		this._Router.navigate(['/admin/gallery/form/update/' + id], { queryParams: { item_key: item_key } });
 	}
 
 	onOpenConfirm(id: number){
