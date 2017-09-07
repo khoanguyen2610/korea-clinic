@@ -45,7 +45,7 @@ export class EquipmentComponent implements OnInit {
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this.language_code);
+		params.set('language_code', this._Configuration.language_code);
 		params.set('limit', String(this.number_item));
 		this._EquipmentService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {

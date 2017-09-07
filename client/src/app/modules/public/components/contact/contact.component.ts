@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
+import { Configuration } from '../../../../shared';
 
 
 import { SystemGeneralService } from '../../../../services';
@@ -26,6 +27,7 @@ export class ContactComponent implements OnInit {
 	constructor(
 		private _ToastrService: ToastrService,
 		private _SystemGeneralService: SystemGeneralService,
+		private _Configuration: Configuration
 	) {
 
 	}

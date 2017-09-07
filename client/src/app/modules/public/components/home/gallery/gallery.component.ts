@@ -42,14 +42,13 @@ export class GalleryComponent implements OnInit {
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this.language_code);
+		params.set('language_code', this._Configuration.language_code);
 		params.set('limit', String(this.number_item));
 		this._GalleryService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
 					this.Items = res.data;
-					console.log(this.Items)
 				}
 
 			}

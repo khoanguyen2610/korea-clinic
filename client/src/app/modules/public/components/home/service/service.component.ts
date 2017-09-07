@@ -45,8 +45,10 @@ export class ServiceComponent implements OnInit {
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('recursive', 'false');
-		params.set('language_code', this.language_code);
-		this._ServiceCategoryService.getListData(params).subscribe(res => {
+		params.set('language_code', this._Configuration.language_code);
+		this._ServiceCategoryService.getListAll(params).subscribe(res => {
+			console.log(res)
+
 			if(res.status == 'success'){
 				this.Items = res.data;
 				console.log(this.Items)
