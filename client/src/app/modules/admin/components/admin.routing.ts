@@ -8,6 +8,7 @@ const APP_ROUTES: Routes = [
 		children: [
 			{ path: 'dashboard', component: DashboardComponent },
 			{ path: 'appointment', component: AppointmentComponent },
+			{ path: 'before-after', loadChildren: 'app/modules/admin/components/before-after/before-after.module#BeforeAfterModule' },
 			{ path: 'equipment', loadChildren: 'app/modules/admin/components/equipment/equipment.module#EquipmentModule' },
 			{ path: 'faq', loadChildren: 'app/modules/admin/components/faq/faq.module#FaqModule' },
 			{ path: 'gallery', loadChildren: 'app/modules/admin/components/gallery/gallery.module#GalleryModule' },
