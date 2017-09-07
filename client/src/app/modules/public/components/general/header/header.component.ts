@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Public Header');
 	}
 
 	onChangeLanguageCode(language_code: string){

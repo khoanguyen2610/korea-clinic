@@ -97,7 +97,6 @@ export class PublicComponent  {
 				// code...
 				break;
 		}
-		console.log(this.page_content_wrap);
     }
 
 	ngOnDestroy() {

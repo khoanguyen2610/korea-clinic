@@ -9,5 +9,17 @@
   "ADMIN": {
     "title": "Tiêu đề",
     "description": "Description"
+  },
+  "MODULE": {
+    "home": "trang-chu",
+    "equipment": "trang-thiet-bi",
+    "service": "dich-vu",
+    "news": "tin-tuc",
+    "staff": "chuyen-gia",
+    "before_after": "truoc-sau",
+    "contact": "lien-he",
+    "faq": "faq",
+    "about_us": "ve-chung-toi",
+    "lang": "vi"
   }
 }

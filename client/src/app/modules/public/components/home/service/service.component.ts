@@ -21,7 +21,7 @@ export class ServiceComponent implements OnInit {
 
 	Items: Array<any> = [];
 	controller: string = 'dich-vu';
-	language_code: string;
+	language_code: string = this._Configuration.language_code;
 
 	constructor(
 		private _AuthService: AuthService,
@@ -30,8 +30,6 @@ export class ServiceComponent implements OnInit {
 		private _LocalStorageService: LocalStorageService
 	) {
 		//=============== Get Params On Url ===============
-
-		this.language_code = String(_LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit(){
@@ -45,13 +43,11 @@ export class ServiceComponent implements OnInit {
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('recursive', 'false');
-		params.set('language_code', this._Configuration.language_code);
+		params.set('language_code', this.language_code);
 		this._ServiceCategoryService.getListAll(params).subscribe(res => {
-			console.log(res)
 
 			if(res.status == 'success'){
 				this.Items = res.data;
-				console.log(this.Items)
 			}
 		});
 	}

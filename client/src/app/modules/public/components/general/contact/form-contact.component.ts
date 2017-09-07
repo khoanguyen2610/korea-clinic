@@ -32,7 +32,6 @@ export class FormContactComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Contract Homepage');
 	}
 
 	onSubmit(form: NgForm){

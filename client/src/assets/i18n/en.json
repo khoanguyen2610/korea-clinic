@@ -94,5 +94,17 @@
     "enter_your_message": "Enter your message",
     "send_message": "Send Message",
     "faq": "FAQ"
+  },
+  "MODULE": {
+    "home": "home",
+    "equipment": "equipment",
+    "service": "service",
+    "news": "news",
+    "staff": "staff",
+    "before_after": "before-after",
+    "contact": "contact",
+    "faq": "faq",
+    "about_us": "about-us",
+    "lang": "en"
   }
 }
