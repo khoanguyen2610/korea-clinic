@@ -113,13 +113,8 @@ export class GalleryFormComponent implements OnInit {
 						var upload = uploader.queue[key]._file;
 						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
 						var objUpload = new Blob([upload]);
-
-<<<<<<< HEAD
-					formData.append("image[]", objUpload, upload.name);
-=======
 						formData.append("image[]", objUpload, upload.name);
 					}
->>>>>>> 9fa882ce3e62dc666ca892694bb1fd51cf666d5d
 				}
 
 				if (this._params.method == 'create') {
