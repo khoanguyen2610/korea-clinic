@@ -7,5 +7,6 @@ export * from './br2nl.pipe';
 export * from './nl2br.pipe';
 export * from './htmlentities.pipe';
 export * from './trim.pipe';
+export * from './niceurl.pipe';
 export * from './selectobject.pipe';
 

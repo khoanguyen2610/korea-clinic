@@ -22,7 +22,6 @@ export class HeaderMobileComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Public Header');
 	}
 
 

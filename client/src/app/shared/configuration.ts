@@ -14,7 +14,7 @@ export class Configuration {
 	public base_href = '';
 	public session_expired = 8; //Session 8 hours
 	public defaultLang: string = 'en';
-	public language_code: string = this.defaultLang;
+	public language_code: string;
 	public formatDate: string = "YYYY/MM/DD";
 	public formatDateTime: string = "YYYY/MM/DD HH:mm:ss";
 	public formatDateMin: string = "YYYY/MM/DD HH:mm";
