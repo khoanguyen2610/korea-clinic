@@ -89,6 +89,7 @@ export class PublicComponent  {
 			case 'list':
 				this.page_content_wrap = 'page_content_wrap';
 				break;
+			case 'contact':
 			case 'detail':
 				this.page_content_wrap = 'page_content_wrap page_paddings_yes';
 				break;

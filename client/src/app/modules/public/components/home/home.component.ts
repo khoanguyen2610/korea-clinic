@@ -27,6 +27,9 @@ export class HomeComponent implements OnInit {
 
 	}
 
+	getAction(){
+		return 'home';
+	}
 
 	ngOnDestroy() {
 

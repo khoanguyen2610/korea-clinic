@@ -25,6 +25,9 @@ export class BeforeAfterComponent implements OnInit {
 		console.log('BeforeAfterComponent');
 	}
 
+	getAction(){
+		return 'before-after';
+	}
 
 	ngOnDestroy() {
 

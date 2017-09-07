@@ -87,6 +87,10 @@ export class StaffListComponent implements OnInit {
 		console.log('StaffListComponent');
 	}
 
+	getAction(){
+		return 'list';
+	}
+
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
 		this.querySubscription.unsubscribe();

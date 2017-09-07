@@ -50,8 +50,11 @@ export class EquipmentListComponent implements OnInit {
 		console.log('EquipmentListComponent');
 	}
 
+	getAction(){
+		return 'list';
+	}
 
 	ngOnDestroy() {
-		this.subscription.unsubscribe();
+		// this.subscription.unsubscribe();
 	}
 }
