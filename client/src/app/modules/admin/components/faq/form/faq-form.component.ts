@@ -141,8 +141,7 @@ export class FaqFormComponent implements OnInit {
 							let lang = Item['language_code'];
 							Item = new Faq();
 							Item['language_code'] = lang;
-
-						this.generateItemKey();
+							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}

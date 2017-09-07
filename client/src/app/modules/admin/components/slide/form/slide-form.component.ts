@@ -143,7 +143,7 @@ export class SlideFormComponent implements OnInit {
 							Item = new Slide();
 							Item['language_code'] = lang;
 							form.reset();
-						this.generateItemKey();
+							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}

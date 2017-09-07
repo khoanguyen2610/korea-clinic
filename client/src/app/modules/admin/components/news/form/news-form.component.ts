@@ -142,8 +142,7 @@ export class NewsFormComponent implements OnInit {
 							let lang = Item['language_code'];
 							Item = new News();
 							Item['language_code'] = lang;
-
-						this.generateItemKey();
+							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}
