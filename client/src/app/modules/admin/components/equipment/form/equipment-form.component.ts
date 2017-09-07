@@ -140,8 +140,7 @@ export class EquipmentFormComponent implements OnInit {
 							let lang = Item['language_code'];
 							Item = new Equipment();
 							Item['language_code'] = lang;
-
-						this.generateItemKey();
+							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}
