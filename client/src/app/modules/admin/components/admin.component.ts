@@ -50,19 +50,19 @@ export class AdminComponent  {
         current_href = current_href.replace(current_domain, '');
 		this.current_user_info = this._AuthService.getCurrent();
 
-		if (!current_href.match(/^\/login.*/i) && !current_href.match(/^\/logout.*/i) && !current_href.match(/^\/forgot\-password.*/i)) {
-			this._SlimLoadingBarService.start();
-		}
+		// if (!current_href.match(/^\/login.*/i) && !current_href.match(/^\/logout.*/i) && !current_href.match(/^\/forgot\-password.*/i)) {
+		// 	this._SlimLoadingBarService.start();
+		// }
 
-		// this._Router.events.subscribe((val) => {
-		// 	if (current_href.match(/^\/login.*/i) || current_href.match(/^\/logout.*/i) || current_href.match(/^\/forgot\-password.*/i)) {
-		// 	    this.activeRoute = true;
-		// 	    this.onCheckUserSession(current_href, true);
-		// 	}
-		// 	if(this.current_user_info){
-		// 		this.activeRoute = true;
-		// 	}
-		// });
+		this._Router.events.subscribe((val) => {
+			if (current_href.match(/^\/admin\/alogin.*/i)) {
+			    this.activeRoute = true;
+			    this.onCheckUserSession(current_href, true);
+			}
+			if(this.current_user_info){
+				this.activeRoute = true;
+			}
+		});
 
 		this.onSetGobalScript();
 
