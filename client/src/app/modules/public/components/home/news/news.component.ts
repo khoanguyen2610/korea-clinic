@@ -3,9 +3,9 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
 import { AuthService, NewsService } from '../../../../../services';
-import { LocalStorageService } from 'angular-2-local-storage';
 import * as moment from 'moment';
 
 declare let $: any;
@@ -19,7 +19,8 @@ declare let $: any;
 export class NewsComponent implements OnInit {
 
 	Items: Array<any> = [];
-	lang_code: string = this._Configuration.defaultLang;
+	controller: string = 'tin-tuc';
+	language_code: string;
 	number_item: number = 4;
 	news_format_date: string = this._Configuration.news_format_date;
 
@@ -28,11 +29,10 @@ export class NewsComponent implements OnInit {
 		private _NewsService: NewsService,
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService
-
 	) {
 		//=============== Get Params On Url ===============
 
-
+		this.language_code = String(_LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit() {

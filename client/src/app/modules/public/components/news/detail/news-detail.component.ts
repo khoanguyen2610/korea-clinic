@@ -69,6 +69,10 @@ export class NewsDetailComponent implements OnInit {
 		console.log('NewsDetailComponent');
 	}
 
+	getAction(){
+		return 'detail';
+	}
+
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();

@@ -44,6 +44,9 @@ export class StaffDetailComponent implements OnInit {
 		console.log('StaffDetailComponent');
 	}
 
+	getAction(){
+		return 'detail';
+	}
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();

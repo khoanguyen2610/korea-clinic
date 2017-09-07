@@ -36,6 +36,10 @@ export class ContactComponent implements OnInit {
 		console.log('Public Header');
 	}
 
+	getAction(){
+		return 'contact';
+	}
+
 
 	ngOnDestroy() {
 

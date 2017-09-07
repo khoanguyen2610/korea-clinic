@@ -48,7 +48,7 @@ export class ServiceListComponent implements OnInit {
 
 		this.hashtagSubscription = _ActivatedRoute.fragment.subscribe(
 			(param: any) => {
-				this.hashtagParams = param;console.log(param);
+				this.hashtagParams = param;
 			}
 		);
 
@@ -56,6 +56,7 @@ export class ServiceListComponent implements OnInit {
 		if(this.language_code == 'en'){
 			this.controller = 'service';
 		}
+
 	}
 
 	ngOnInit() {
@@ -85,6 +86,10 @@ export class ServiceListComponent implements OnInit {
 			}
 		})
 		console.log('ServiceListComponent');
+	}
+
+	getAction(){
+		return 'list';
 	}
 
 	ngOnDestroy() {

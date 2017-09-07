@@ -18,7 +18,7 @@ declare let moment: any;
 export class GalleryComponent implements OnInit {
 
 	Items: Array<any> = [];
-	lang_code: string = this._Configuration.defaultLang;
+	language_code: string = this._Configuration.defaultLang;
 	number_item: number = 4;
 	module_name: string = 'gallery';
 
@@ -42,7 +42,7 @@ export class GalleryComponent implements OnInit {
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this._Configuration.language_code);;
+		params.set('language_code', this._Configuration.language_code);
 		params.set('limit', String(this.number_item));
 		this._GalleryService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {

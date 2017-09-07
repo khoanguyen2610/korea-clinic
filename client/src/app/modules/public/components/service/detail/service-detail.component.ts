@@ -52,6 +52,9 @@ export class ServiceDetailComponent implements OnInit {
 		console.log('ServiceDetailComponent');
 	}
 
+	getAction(){
+		return 'detail';
+	}
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
