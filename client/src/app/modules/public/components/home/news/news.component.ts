@@ -6,7 +6,6 @@ import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
 import { AuthService, NewsService } from '../../../../../services';
-import { LocalStorageService } from 'angular-2-local-storage';
 import * as moment from 'moment';
 
 declare let $: any;
@@ -30,10 +29,6 @@ export class NewsComponent implements OnInit {
 		private _NewsService: NewsService,
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService
-<<<<<<< HEAD
-=======
-
->>>>>>> 0b8a2fd8720677a2ae0d24c452623292f93bf15d
 	) {
 		//=============== Get Params On Url ===============
 
@@ -51,11 +46,7 @@ export class NewsComponent implements OnInit {
 	getListData() {
 		console.log(this._Configuration.language_code);
 		let params: URLSearchParams = new URLSearchParams();
-<<<<<<< HEAD
-		params.set('language_code', this.language_code);
-=======
 		params.set('language_code', String(this._LocalStorageService.get('language_code')));
->>>>>>> 0b8a2fd8720677a2ae0d24c452623292f93bf15d
 		params.set('limit', String(this.number_item));
 		this._NewsService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
