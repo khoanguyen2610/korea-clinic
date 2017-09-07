@@ -33,10 +33,11 @@ class Model_Gallery extends \Orm\Model {
      * Get all record
      *============================================*/
     public static function getAll($params = null, $option = null){
-        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*'];
+        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', 'SM.*', DB::expr('VL.name as language_name')];
 
         $query = \DB::select_array($select)
                         ->from([self::$_table_name, 'SM'])
+						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
                         ->and_where('SM.item_status', '=', 'active')
                         ->order_by('SM.created_at', 'DESC');
 
@@ -58,10 +59,11 @@ class Model_Gallery extends \Orm\Model {
                             ['db' => 'SM.title', 'dt' => 0],
                             ['db' => 'SM.description', 'dt' => 1]
                         ];
-            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*'];
+            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*', 'SM.*', DB::expr('VL.name as language_name')];
 
             $query = DB::select_array($colums)
                          ->from([static::$_table_name, 'SM'])
+						 ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
                          ->where('SM.item_status', '!=', 'delete');
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);
@@ -73,10 +75,11 @@ class Model_Gallery extends \Orm\Model {
      * Get detail informat based on primary key
      *============================================*/
 	public static function getDetail($pk = null, $params = null, $option = null){
-		$select = ['SM.*'];
+		$select = ['SM.*', 'SM.*', DB::expr('VL.name as language_name')];
 
 		$query = \DB::select_array($select)
 			            ->from([self::$_table_name, 'SM'])
+						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
 			            ->where('SM.item_status', '=', 'active')
 						->as_object();
 
