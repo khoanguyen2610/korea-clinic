@@ -1,13 +1,12 @@
-import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { Configuration } from '../../../../../shared';
-import { AuthService, GalleryService, GeneralService } from '../../../../../services';
+import { GalleryFormContentComponent } from './content/gallery-form-content.component';
 import { Gallery } from '../../../../../models';
+import { AuthService, GalleryService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
@@ -20,18 +19,16 @@ declare let $: any;
 export class GalleryFormComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
-	@Output('file') fileOutput = new EventEmitter();
 
 	_params: any;
 	queryParams: any;
-	files_type = this._Configuration.upload_file_extension;
-	src_images: Array<any> = [];
-	Item = new Gallery();
-	public uploader: FileUploader = new FileUploader({});
-	public hasBaseDropZoneOver: boolean = false;
-	public hasAnotherDropZoneOver: boolean = false;
+	language_code: string;
+	is_validated: boolean = true;
+	item_key: string;
+	Item_vi = new Gallery();
+	Item_en = new Gallery();
+	Items: Array<any> = [];
 	uploadProgress: any;
-	files_upload: number = 8;
 
 	constructor(
 		private _AuthService: AuthService,
@@ -40,7 +37,7 @@ export class GalleryFormComponent implements OnInit {
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 		private _ToastrService: ToastrService,
-		private _Configuration: Configuration
+		private _ElementRef: ElementRef,
 	) {
 		//=============== Get Params On Url ===============
 		this.subscription = _ActivatedRoute.params.subscribe(
@@ -52,33 +49,38 @@ export class GalleryFormComponent implements OnInit {
 				this.queryParams = param;
 			}
 		);
+
 	}
 
 	ngOnInit(){
+		this.initData();
+		this.language_code = 'vi';
 		if(this._params.method == 'update'){
 			if(this._params.id != null){
 				let params: URLSearchParams = new URLSearchParams();
-				this._GalleryService.getByID(this._params.id, params).subscribe(res => {
+				params.set('item_key',this.queryParams.item_key);
+				params.set('response_quantity','all');
+				this._GalleryService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
-							this._Router.navigate(['/admin/gallery/list']);
+							this._Router.navigate(['/admin/Gallery/list']);
 						}else{
-							this.Item = res.data;
-							if(this.Item.image){
-								let image = JSON.parse(this.Item.image);
-								let filename = image.filename;
-								let file_type = filename.split('.');
-								var image_url = '';
-								if (filename) {
-									image_url = this.Item['image_url'];
-								}
-
-								let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true } };
-								this.uploader.queue.push(item);
-							}
+							let items = res.data;
+							setTimeout(() => {
+								items.forEach(item => {
+									switch(item['language_code']){
+										case 'vi':
+											this.Item_vi = item;
+											break;
+										case 'en':
+											this.Item_en = item;
+											break;
+									}
+								});
+							}, 500);
 						}
 					}else{
-						this._Router.navigate(['/admin/gallery/list']);
+						this._Router.navigate(['/admin/Gallery/list']);
 					}
 				});
 			}else{
@@ -87,111 +89,118 @@ export class GalleryFormComponent implements OnInit {
 		}
 	}
 
-	onSubmit(form: NgForm){
-		let formData: FormData = new FormData();
-
-		if (this.uploader.queue.length) {
-			for (let key in this.uploader.queue) {
-				var upload = this.uploader.queue[key]._file;
-				//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
-				var objUpload = new Blob([upload]);
-
-				formData.append("image", objUpload, upload.name);
-			}
-		}
-
-		formData.append('title', this.Item.title);
-		formData.append('description', this.Item.description);
-
-		this._GalleryService.getObserver().subscribe(progress => {
-				this.uploadProgress = progress;
-		});
-		try {
-			this._GalleryService.upload(formData, this.Item.id).then((res) => {
-				if (res.status == 'success') {
-					if(this._params.method == 'create'){
-
-					}
-					this._ToastrService.success('Record has been saved successfully');
-				}
-
+	ngAfterViewInit(){
+		let self = this;
+		this._ElementRef.nativeElement.querySelectorAll('.link-tab').forEach(function(elm){
+			elm.addEventListener('click', function(event){
+				self.language_code = event.toElement.dataset.lang;
 			});
-		} catch (error) {
-			document.write(error)
-		}
+		});
 	}
 
-	/*==============================================
-	 * Remove file on stack
-	 *==============================================*/
-	onRemoveFile(index, file_id) {
-		if (this.uploader.queue.length) {
-			this.uploader.queue.splice(index, 1);
+	onSubmit(form: NgForm){
+
+		this.is_validated = this.validateRequiredField();
+		console.log(this.is_validated)
+		if(!this.is_validated){
+			return;
 		}
-	}
 
-	/*====================================
-	 * Validate Form File Type
-	 *====================================*/
-	onValidateFormFileType() {
+		this.Items.forEach(Item => {
+			let formData: FormData = new FormData();
 
-		this.uploader['error_limit_files'] = false;
-		setTimeout(() => {
-			let after_upload_files = +this.uploader.queue.length; // after drag upload files
-			if (after_upload_files <= this._Configuration.limit_files) {
-				if (after_upload_files != this.files_upload) {
-					let uploader = [];
-					for (let key in this.uploader.queue) {
-						var checked = false;
-						var ext = this.uploader.queue[key]._file.name.split('.').pop();
-						ext = ext.toLowerCase();
+			let uploader = Item['image'];
+			if (uploader instanceof Object && uploader.queue.length) {
+				for (let key in uploader.queue) {
+					var upload = uploader.queue[key]._file;
+					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+					var objUpload = new Blob([upload]);
 
-						for (let k in this.files_type) {
-
-							if (ext.indexOf(this.files_type[k]) > -1) {
-								checked = true;
-								break;
-							}
-						}
-
-						if (!checked) {
-							var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
-							this._ToastrService.error(msgInvalidFileType);
-							checked = false;
-						}
-
-						if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
-							var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
-							this._ToastrService.error(msgSizeTooLarge);
-							checked = false;
-						}
-
-						if (!checked) {
-							// this.uploader.queue.splice(+key, 1);
-							this.uploader.queue[key].isError = true;
-						} else {
-							this.uploader.queue[key]._file['is_keeping'] = true;
-							uploader.push(this.uploader.queue[key]);
-						}
-
-
-					}
-					this.uploader.queue = uploader;
-					this.files_upload = this.uploader.queue.length;
-					this.fileOutput.emit(this.uploader);
+					formData.append("image", objUpload, upload.name);
 				}
 			}
 
-		}, 500);
+			if(this._params.method == 'create'){
+				formData.append('item_key', this.item_key);
+			}
+
+			formData.append('language_code', Item['language_code']);
+			formData.append('title', Item['title']);
+			// formData.append('gallery_category_id', Item['gallery_category_id']);
+			formData.append('feature_flag', Item['feature_flag']);
+			formData.append('content', Item['content']);
+			formData.append('description', Item['description']);
+
+			this._GalleryService.getObserver().subscribe(progress => {
+				this.uploadProgress = progress;
+			});
+			try {console.log('a')
+				this._GalleryService.upload(formData, Item['id']).then((res) => {
+					if (res.status == 'success') {
+						if(this._params.method == 'create'){
+							let lang = Item['language_code'];
+							Item = new Gallery();
+							Item['language_code'] = lang;
+							this.generateItemKey();
+						}
+						this._ToastrService.success('Record has been saved successfully');
+					}
+
+				});
+			} catch (error) {
+				document.write(error)
+			}
+
+		});
+
 	}
 
-	public fileOverBase(e: any): void {
-		this.hasBaseDropZoneOver = e;
+	onSetImage(obj){
+		switch(this.language_code){
+			case 'vi':
+				this.Item_vi.image = obj;
+				break;
+			case 'en':
+				this.Item_en.image = obj;
+				break;
+		}
 	}
 
-	public fileOverAnother(e: any): void {
-		this.onValidateFormFileType();
-		this.hasAnotherDropZoneOver = e;
+	initData() {
+		this.Item_en = new Gallery();
+		this.Item_vi = new Gallery();
+		this.Item_vi.language_code = 'vi';
+		// this.Item_vi.parent = 0;
+		this.Item_en.language_code = 'en';
+		// this.Item_en.parent = 0;
+		this.Items = [this.Item_vi, this.Item_en];
+		this.is_validated = true;
+
+		this.generateItemKey();
+	}
+
+	generateItemKey() {
+		this._GeneralService.getItemKey().subscribe(res => {
+			if (res.status == 'success') {
+				this.item_key = res.data.item_key;
+			}
+		});
+	}
+
+	validateRequiredField() {
+		let valid = true;
+
+		this.Items.forEach(Item => {
+			if (!Item['title']) {
+				valid = false;
+				$('a[href="#tab_' + Item['language_code'] + '"]').click();
+				$('div[id^="tab_"]').removeClass('active');
+				$('div#tab_' + Item['language_code']).addClass('active');
+				return;
+			}
+		});
+
+		return valid;
 	}
 
 	ngOnDestroy(){
