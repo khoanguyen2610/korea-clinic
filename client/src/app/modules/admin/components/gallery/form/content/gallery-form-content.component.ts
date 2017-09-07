@@ -89,39 +89,6 @@ export class GalleryFormContentComponent implements OnInit {
 		}
 	}
 
-	onSubmit(form: NgForm){
-		let formData: FormData = new FormData();
-
-		if (this.uploader.queue.length) {
-			for (let key in this.uploader.queue) {
-				var upload = this.uploader.queue[key]._file;
-				//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
-				var objUpload = new Blob([upload]);
-
-				formData.append("image[]", objUpload, upload.name);
-			}
-		}
-
-		formData.append('title', this.Item.title);
-		formData.append('description', this.Item.description);
-
-		this._GalleryService.getObserver().subscribe(progress => {
-				this.uploadProgress = progress;
-		});
-		try {
-			this._GalleryService.upload(formData, this.Item.id).then((res) => {
-				if (res.status == 'success') {
-					if(this._params.method == 'create'){
-
-					}
-					this._ToastrService.success('Record has been saved successfully');
-				}
-
-			});
-		} catch (error) {
-			document.write(error)
-		}
-	}
 
 	/*==============================================
 	 * Remove file on stack
