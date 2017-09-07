@@ -51,8 +51,6 @@ export class NewsListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
-
 		let params: URLSearchParams = new URLSearchParams();
 
 		params.set('language_code', this.language_code);
@@ -80,6 +78,10 @@ export class NewsListComponent implements OnInit {
 			}
 		});
 		console.log('NewsListComponent');
+	}
+
+	getAction(){
+		return 'list';
 	}
 
 	ngOnDestroy() {
