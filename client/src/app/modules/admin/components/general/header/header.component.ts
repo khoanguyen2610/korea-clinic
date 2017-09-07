@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
   	logout(){
   		let redirect_url = '/admin/auth/login';
   		this._AuthService.logout(redirect_url);
+		console.log('test');
 		return false;
   	}
 
