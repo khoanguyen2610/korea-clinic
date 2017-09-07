@@ -13,6 +13,9 @@ export const ScriptStore: Scripts[] = [
    {name: 'accordion', src: '../../assets/public/js/vendor/jquery/accordion.min.js'},
    {name: 'core_googlemap', src: '../../assets/public/js/vendor/core.googlemap.js'},
 
+   {name: 'backstretch', src: '../../assets/admin/global/plugins/backstretch/jquery.backstretch.min.js'},
+   {name: 'login-4', src: '../../assets/admin/pages/scripts/login-4.js'},
+
    // {name: 'theme_init', src: '../../assets/public/js/custom/theme.init.js'},
    // {name: 'theme_shortcodes', src: '../../assets/public/js/custom/theme.shortcodes.js'}
 ];

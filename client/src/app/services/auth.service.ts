@@ -43,7 +43,7 @@ export class AuthService {
 
     }
 
-    public logout(redirect_url = '/login', callback_uri = null, params = null) {
+    public logout(redirect_url = '/admin/auth/login', callback_uri = null, params = null) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
         let response = this._Http.get(this._Configuration.apiUrl + this.serviceUrl + 'logout', {
@@ -84,7 +84,7 @@ export class AuthService {
         var user_session_start = this._LocalStorageService.get('user_session_start');
         var current_user_info = this._LocalStorageService.get('current_user_info');
         if(now - +user_session_start > this.session_expired*60*60*1000 || !current_user_info) {
-            this.logout('/login', callback_uri);
+            this.logout('/admin/auth/login', callback_uri);
         }else{
             if(refill == true){
                 this.refillSession(callback_uri);
@@ -97,7 +97,7 @@ export class AuthService {
         let now = new Date().getTime();
         var current_user_info = this._LocalStorageService.get('current_user_info');
         if(!current_user_info) {
-            this.logout('/login', callback_uri);
+            this.logout('/admin/auth/login', callback_uri);
         }else{
             this._LocalStorageService.set('user_session_start', now);
         }
