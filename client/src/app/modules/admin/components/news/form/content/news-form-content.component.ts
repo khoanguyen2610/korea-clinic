@@ -78,7 +78,10 @@ export class NewsFormContentComponent implements OnInit {
 			let image = JSON.parse(this.Item.image);
 			let filename = image.filename;
 			let filepath = image.filepath;
-
+			var file_type = '';
+			if (filename) {
+				file_type = filename.split('.');
+			}
 
 			let image_url = '';
 			if (filename) {
