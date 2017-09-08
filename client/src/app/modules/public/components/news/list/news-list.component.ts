@@ -18,7 +18,7 @@ import { Configuration } from '../../../../../shared';
 
 export class NewsListComponent implements OnInit {
 	private subscription: Subscription;
-	private querySubscription: Subscription;
+	private subscriptionEvents: Subscription;
 
 	controller: string = 'tin-tuc';
 	categories: Array<any> = [];
@@ -26,9 +26,11 @@ export class NewsListComponent implements OnInit {
 	_params: any;
 	queryParams: any;
 	language_code: string;
+	curRouting: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
+		private _Router: Router,
 		private _NewsService: NewsService,
 		private _NewsCategoryService: NewsCategoryService,
 		private _Configuration: Configuration,
@@ -38,11 +40,13 @@ export class NewsListComponent implements OnInit {
 			(param: any) => this._params = param
 		);
 
-		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
-			(param: any) => {
-				this.queryParams = param;
+		this.subscriptionEvents = this._Router.events.subscribe((val) => {
+			let routing = this._Router.url;
+			if (this.curRouting != routing) {
+				this.curRouting = routing;
+				this.loadPage();
 			}
-		);
+		});
 
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){
@@ -51,6 +55,10 @@ export class NewsListComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		console.log('NewsListComponent');
+	}
+
+	loadPage(){
 		let params: URLSearchParams = new URLSearchParams();
 
 		params.set('language_code', this.language_code);
@@ -62,22 +70,15 @@ export class NewsListComponent implements OnInit {
 			}
 		});
 
-		if(this._params.id){
-			params.set('news_category_id',this._params.id);
+		if(this._params.category_id){
+			params.set('news_category_id',this._params.category_id);
 		}
 
 		this._NewsService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				let data = res.data;
-				let items = [];
-				for(let i in data){
-					data[i]['nice_url'] = data[i]['title'].replace(/ /g, '-');
-					items.push(data[i]);
-				}
-				this.items = items;
+				this.items = res.data;
 			}
 		});
-		console.log('NewsListComponent');
 	}
 
 	getAction(){
@@ -86,6 +87,6 @@ export class NewsListComponent implements OnInit {
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
-		this.querySubscription.unsubscribe();
+		this.subscriptionEvents.unsubscribe();
 	}
 }

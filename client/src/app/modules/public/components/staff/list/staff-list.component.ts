@@ -20,8 +20,8 @@ export class StaffListComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
 
-	controller: string = 'nhan-vien';
-	employees: Array<any> = [];
+	controller: string = 'chuyen-gia';
+	items: Array<any> = [];
 	_params: any;
 	queryParams: any;
 	language_code: string;
@@ -64,7 +64,7 @@ export class StaffListComponent implements OnInit {
 				let c = res.data.length;
 				for(let i = 0; i < data.length; i++){
 					if(i && (i % 4 == 0)){
-						this.employees.push(temp);
+						this.items.push(temp);
 						temp = {
 							'items': [],
 							'timestamp': 0
@@ -76,11 +76,11 @@ export class StaffListComponent implements OnInit {
 
 					j = i + 1;
 					if((c == j) && (j % 4 != 0)){
-						this.employees.push(temp);
+						this.items.push(temp);
 					}
 
 				}
-				console.log(this.employees);
+				console.log(this.items);
 
 			}
 		});

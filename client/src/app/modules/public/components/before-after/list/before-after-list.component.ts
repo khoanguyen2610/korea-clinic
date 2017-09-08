@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 
-
 @Component({
 	selector: 'app-public-before-after-list',
 	templateUrl: './before-after-list.component.html',
