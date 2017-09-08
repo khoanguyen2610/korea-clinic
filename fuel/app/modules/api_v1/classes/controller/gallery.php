@@ -104,13 +104,6 @@ class Controller_Gallery extends \Controller_API {
             }
 
 
-			echo "<pre>";
-			print_r($param);
-			echo "</pre>";
-			echo "<pre>";
-			print_r(\Input::file());
-			echo "</pre>";
-			die;
             //======================== Default Data =================
 			try{
 				\DB::start_transaction();

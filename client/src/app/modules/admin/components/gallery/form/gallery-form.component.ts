@@ -109,7 +109,7 @@ export class GalleryFormComponent implements OnInit {
 				let formData: FormData = new FormData();
 
 				let uploader = Item['image'];
-				let current_image = [];
+				// var current_image = JSON.parse(Item['image']);
 				if (uploader instanceof Object && uploader.queue.length) {
 					for (let key in uploader.queue) {
 						var upload = uploader.queue[key]._file;
@@ -117,11 +117,11 @@ export class GalleryFormComponent implements OnInit {
 						var objUpload = new Blob([upload]);
 
 						formData.append("image[]", objUpload, upload.name);
-						current_image.push(upload)
+						// current_image.push(upload)
 					}
 				}
 				// current_image for check to remove existing image
-				formData.append("current_image", JSON.stringify(current_image));
+				// formData.append("current_image", JSON.stringify(current_image));
 
 				if (this._params.method == 'create') {
 					formData.append('item_key', this.item_key);
@@ -130,6 +130,7 @@ export class GalleryFormComponent implements OnInit {
 				formData.append('language_code', Item['language_code']);
 				formData.append('title', Item['title']);
 				formData.append('description', Item['description']);
+				formData.append('current_image', Item['current_image']);
 
 				this._GalleryService.getObserver().subscribe(progress => {
 					this.uploadProgress = progress;
