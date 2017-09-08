@@ -189,18 +189,27 @@ export class ServiceFormComponent implements OnInit {
 
 	validateRequiredField(){
 		let valid = true;
+		let ctab: string = '';
 		this.Items = [this.Item_vi, this.Item_en];
 
 		this.Items.forEach(Item => {
 			if(!Item['title']){
 				valid = false;
-				this.language_code = Item['language_code'];
-				$('a[href="#tab_' + Item['language_code'] + '"]').click();
-				$('div[id^="tab_"]').removeClass('active');
-				$('div#tab_' + Item['language_code']).addClass('active');
-				return;
+				ctab = Item['language_code'];
+			}
+
+			if(!Item['service_category_id']){
+				valid = false;
+				ctab = Item['language_code'];
 			}
 		});
+
+		if(!valid){
+			this.language_code = ctab;
+			$('a[href="#tab_' + ctab + '"]').click();
+			$('div[id^="tab_"]').removeClass('active');
+			$('div#tab_' + ctab).addClass('active');
+		}
 
 		return valid;
 	}
