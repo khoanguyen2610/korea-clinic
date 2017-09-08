@@ -8,5 +8,5 @@ export class News {
 	public content: string;
 	public feature: number = 0;
 	public image: any;
-	public date: any
+	public date: any;
 }
