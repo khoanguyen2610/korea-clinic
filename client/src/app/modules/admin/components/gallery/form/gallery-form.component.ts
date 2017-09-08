@@ -124,7 +124,9 @@ export class GalleryFormComponent implements OnInit {
 						current_image.push(upload)
 					}
 				}
+
 				// current_image for check to remove existing image
+
 				formData.append("current_image", JSON.stringify(current_image));
 
 				if (this._params.method == 'create') {
@@ -134,7 +136,6 @@ export class GalleryFormComponent implements OnInit {
 				formData.append('language_code', Item['language_code']);
 				formData.append('title', Item['title']);
 				formData.append('description', Item['description']);
-				formData.append('current_image', Item['current_image']);
 
 				this._GalleryService.getObserver().subscribe(progress => {
 					this.uploadProgress = progress;
