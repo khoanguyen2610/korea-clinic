@@ -50,10 +50,13 @@ export class GalleryFormComponent implements OnInit {
 			}
 		);
 
+		this.Item_vi.language_code = 'vi';
+		this.Item_en.language_code = 'en';
+
+		this.generateItemKey();
 	}
 
 	ngOnInit(){
-		this.initData();
 		this.language_code = 'vi';
 		if(this._params.method == 'update'){
 			if(this._params.id != null){
@@ -63,7 +66,7 @@ export class GalleryFormComponent implements OnInit {
 				this._GalleryService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
-							this._Router.navigate(['/admin/Gallery/list']);
+							this._Router.navigate(['/admin/news/list']);
 						}else{
 							let items = res.data;
 							setTimeout(() => {
@@ -80,7 +83,7 @@ export class GalleryFormComponent implements OnInit {
 							}, 500);
 						}
 					}else{
-						this._Router.navigate(['/admin/Gallery/list']);
+						this._Router.navigate(['/admin/news/list']);
 					}
 				});
 			}else{
@@ -99,15 +102,13 @@ export class GalleryFormComponent implements OnInit {
 	}
 
 	onSubmit(form: NgForm){
-
 		this.is_validated = this.validateRequiredField();
-		if (this.is_validated) { // Check form is valid
 
+		if (this.is_validated) {
 			this.Items.forEach(Item => {
 				let formData: FormData = new FormData();
 
 				let uploader = Item['image'];
-				console.log(uploader);
 				if (uploader instanceof Object && uploader.queue.length) {
 					for (let key in uploader.queue) {
 						var upload = uploader.queue[key]._file;
@@ -124,16 +125,12 @@ export class GalleryFormComponent implements OnInit {
 
 				formData.append('language_code', Item['language_code']);
 				formData.append('title', Item['title']);
-				// formData.append('gallery_category_id', Item['gallery_category_id']);
-				formData.append('feature_flag', Item['feature_flag']);
-				formData.append('content', Item['content']);
 				formData.append('description', Item['description']);
 
 				this._GalleryService.getObserver().subscribe(progress => {
 					this.uploadProgress = progress;
 				});
 				try {
-					console.log('a')
 					this._GalleryService.upload(formData, Item['id']).then((res) => {
 						if (res.status == 'success') {
 							if (this._params.method == 'create') {
@@ -153,6 +150,8 @@ export class GalleryFormComponent implements OnInit {
 			});
 		}
 
+
+
 	}
 
 	onSetImage(obj){
@@ -166,19 +165,6 @@ export class GalleryFormComponent implements OnInit {
 		}
 	}
 
-	initData() {
-		this.Item_en = new Gallery();
-		this.Item_vi = new Gallery();
-		this.Item_vi.language_code = 'vi';
-		// this.Item_vi.parent = 0;
-		this.Item_en.language_code = 'en';
-		// this.Item_en.parent = 0;
-		this.Items = [this.Item_vi, this.Item_en];
-		this.is_validated = true;
-
-		this.generateItemKey();
-	}
-
 	generateItemKey() {
 		this._GeneralService.getItemKey().subscribe(res => {
 			if (res.status == 'success') {
@@ -187,17 +173,20 @@ export class GalleryFormComponent implements OnInit {
 		});
 	}
 
-	validateRequiredField() {
+	validateRequiredField(){
 		let valid = true;
+		this.Items = [this.Item_vi, this.Item_en];
 
 		this.Items.forEach(Item => {
-			if (!Item['title']) {
+			if(!Item['title']){
 				valid = false;
+				this.language_code = Item['language_code'];
 				$('a[href="#tab_' + Item['language_code'] + '"]').click();
 				$('div[id^="tab_"]').removeClass('active');
 				$('div#tab_' + Item['language_code']).addClass('active');
 				return;
 			}
+
 		});
 
 		return valid;
