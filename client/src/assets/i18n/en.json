@@ -44,7 +44,9 @@
     "parent": "Parent",
     "parent_category": "Parent Category",
     "url": "Url",
-    "feature": "Feature"
+    "feature": "Feature",
+    "drag_and_drop_files": "Drag and drop files",
+    "choose_file": "Choose file"
   },
   "PUBLIC": {
     "equipment": "Equipment",

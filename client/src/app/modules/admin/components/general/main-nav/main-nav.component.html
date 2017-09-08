@@ -96,6 +96,12 @@
                 </a>
             </li>
             <li class="nav-item  " [routerLinkActive]="['active']">
+                <a [routerLink]="['/admin/before-after/list']" class="nav-link">
+                    <i class="icon-picture"></i>
+                    <span class="title">{{'ADMIN.before_after' | translate}}</span>
+                </a>
+            </li>
+            <li class="nav-item  " [routerLinkActive]="['active']">
                 <a [routerLink]="['/admin/faq/list']" class="nav-link">
                     <i class="icon-question"></i>
                     <span class="title">{{'ADMIN.faq' | translate}}</span>

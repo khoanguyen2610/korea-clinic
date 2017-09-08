@@ -110,6 +110,53 @@ class Controller_Gallery extends \Controller_API {
 				\DB::start_transaction();
 	            $obj = empty($pk)?\Model_Gallery::forge():\Model_Gallery::find($pk);
 
+				//Generate random item key
+				empty($pk) && !isset($arrData['item_key']) && $arrData['item_key'] = \Vision_Common::randomItemKey();
+
+				/*============================================
+                 * Config Upload File
+                 *============================================*/
+                $today_dir = date('Ymd');
+                $folder_name = GALLERY_DIR;
+                if(\Input::file()){
+                    $has_upload = true;
+
+                    if(empty($errors)){
+                        try{
+                            \File::read_dir(FILESPATH . $folder_name . $today_dir, 0, null);
+                        }catch(\FileAccessException $e){
+                            \File::create_dir(FILESPATH  . $folder_name, $today_dir, 0777);
+                        }
+                        \Upload::process([
+                            'path' => FILESPATH . $folder_name . $today_dir . '/',
+                            'max_size' => '5242880',
+                            'ext_whitelist' => ['jpg', 'jpeg', 'gif', 'png'],
+                            'suffix' => '_'.strtotime('now'). rand(0, 999),
+                            'normalize' => true
+                        ]);
+                        $upload_valid = \Upload::is_valid();
+                    }else{
+                        $upload_valid = !$has_upload;
+                    }
+                }else{
+                    $upload_valid = !($has_upload = false);
+                }
+
+                /*============================================
+                 * Upload file
+                 *============================================*/
+                if($has_upload){
+                    \Upload::save();
+
+                    foreach(\Upload::get_files() as $file) {
+                        //==== Save into database
+                        $arrFiles[] = ['filename' => $file['name'],
+                                    'filepath' => $today_dir . '/' . $file['saved_as']];
+                    }
+					//Now just save first image
+					$arrData['image'] = json_encode($arrFiles);
+                }
+
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();
 

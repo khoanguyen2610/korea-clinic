@@ -3,20 +3,20 @@ import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { GalleryFormContentComponent } from './content/gallery-form-content.component';
-import { Gallery } from '../../../../../models';
-import { AuthService, GalleryService, GeneralService } from '../../../../../services';
+import { BeforeAfterFormContentComponent } from './content/before-after-form-content.component';
+import { BeforeAfter } from '../../../../../models';
+import { AuthService, BeforeAfterService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 
 declare let $: any;
 
 @Component({
-	selector: 'app-gallery-form',
-	templateUrl: './gallery-form.component.html',
-	providers: [ GalleryService, GeneralService ]
+	selector: 'app-before-after-form',
+	templateUrl: './before-after-form.component.html',
+	providers: [ BeforeAfterService, GeneralService ]
 })
 
-export class GalleryFormComponent implements OnInit {
+export class BeforeAfterFormComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
 
@@ -25,14 +25,14 @@ export class GalleryFormComponent implements OnInit {
 	language_code: string;
 	is_validated: boolean = true;
 	item_key: string;
-	Item_vi = new Gallery();
-	Item_en = new Gallery();
+	Item_vi = new BeforeAfter();
+	Item_en = new BeforeAfter();
 	Items: Array<any> = [];
 	uploadProgress: any;
 
 	constructor(
 		private _AuthService: AuthService,
-		private _GalleryService: GalleryService,
+		private _BeforeAfterService: BeforeAfterService,
 		private _GeneralService: GeneralService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -63,10 +63,10 @@ export class GalleryFormComponent implements OnInit {
 				let params: URLSearchParams = new URLSearchParams();
 				params.set('item_key',this.queryParams.item_key);
 				params.set('response_quantity','all');
-				this._GalleryService.getByID(undefined, params).subscribe(res => {
+				this._BeforeAfterService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
-							this._Router.navigate(['/admin/news/list']);
+							this._Router.navigate(['/admin/faq/list']);
 						}else{
 							let items = res.data;
 							setTimeout(() => {
@@ -83,7 +83,7 @@ export class GalleryFormComponent implements OnInit {
 							}, 500);
 						}
 					}else{
-						this._Router.navigate(['/admin/news/list']);
+						this._Router.navigate(['/admin/faq/list']);
 					}
 				});
 			}else{
@@ -103,54 +103,55 @@ export class GalleryFormComponent implements OnInit {
 
 	onSubmit(form: NgForm){
 		this.is_validated = this.validateRequiredField();
-
-		if (this.is_validated) {
-			this.Items.forEach(Item => {
-				let formData: FormData = new FormData();
-
-				let uploader = Item['image'];
-				if (uploader instanceof Object && uploader.queue.length) {
-					for (let key in uploader.queue) {
-						var upload = uploader.queue[key]._file;
-						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
-						var objUpload = new Blob([upload]);
-						formData.append("image[]", objUpload, upload.name);
-					}
-					formData.append("current_image", JSON.stringify(uploader.queue));
-				}
-
-				if (this._params.method == 'create') {
-					formData.append('item_key', this.item_key);
-				}
-
-				formData.append('language_code', Item['language_code']);
-				formData.append('title', Item['title']);
-				formData.append('description', Item['description']);
-
-				this._GalleryService.getObserver().subscribe(progress => {
-					this.uploadProgress = progress;
-				});
-				try {
-					this._GalleryService.upload(formData, Item['id']).then((res) => {
-						if (res.status == 'success') {
-							if (this._params.method == 'create') {
-								let lang = Item['language_code'];
-								Item = new Gallery();
-								Item['language_code'] = lang;
-								this.generateItemKey();
-							}
-							this._ToastrService.success('Record has been saved successfully');
-						}
-
-					});
-				} catch (error) {
-					document.write(error)
-				}
-
-			});
+		if(!this.is_validated){
+			return;
 		}
 
+		this.Items.forEach(Item => {
+			let formData: FormData = new FormData();
 
+			let uploader = Item['image'];
+			if (uploader instanceof Object && uploader.queue.length) {
+				for (let key in uploader.queue) {
+					var upload = uploader.queue[key]._file;
+					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+					var objUpload = new Blob([upload]);
+
+					formData.append("image", objUpload, upload.name);
+				}
+			}
+
+			if(this._params.method == 'create'){
+				formData.append('item_key', this.item_key);
+			}
+
+			formData.append('language_code', Item['language_code']);
+			formData.append('service_id', Item['service_id']);
+			formData.append('title', Item['title']);
+			formData.append('content', Item['content']);
+			formData.append('description', Item['description']);
+
+			this._BeforeAfterService.getObserver().subscribe(progress => {
+				this.uploadProgress = progress;
+			});
+			try {
+				this._BeforeAfterService.upload(formData, Item['id']).then((res) => {
+					if (res.status == 'success') {
+						if(this._params.method == 'create'){
+							let lang = Item['language_code'];
+							Item = new BeforeAfter();
+							Item['language_code'] = lang;
+							this.generateItemKey();
+						}
+						this._ToastrService.success('Record has been saved successfully');
+					}
+
+				});
+			} catch (error) {
+				document.write(error)
+			}
+
+		});
 
 	}
 

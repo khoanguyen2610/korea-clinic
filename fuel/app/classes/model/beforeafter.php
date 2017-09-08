@@ -3,10 +3,10 @@
  * @Author: k_nguyen
  * @Date:   2016-11-14 14:04:29
  * @Last Modified by:   k_nguyen
- * @Last Modified time: 2017-09-05 14:18:02
+ * @Last Modified time: 2017-09-05 14:18:00
  */
-class Model_Gallery extends \Orm\Model {
-	protected static $_table_name = 'gallery';
+class Model_BeforeAfter extends \Orm\Model {
+	protected static $_table_name = 'before_after';
 	protected static $_primary_key = ['id'];
 
     protected static $_observers = array(
@@ -33,11 +33,12 @@ class Model_Gallery extends \Orm\Model {
      * Get all record
      *============================================*/
     public static function getAll($params = null, $option = null){
-        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', 'SM.*', DB::expr('VL.name as language_name')];
+        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('S.title as service_title')];
 
         $query = \DB::select_array($select)
                         ->from([self::$_table_name, 'SM'])
-						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+                        ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+                        ->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
                         ->and_where('SM.item_status', '=', 'active')
                         ->order_by('SM.created_at', 'DESC');
 
@@ -56,14 +57,18 @@ class Model_Gallery extends \Orm\Model {
     public static function listData($params = null, $options = null){
         if($options['task'] == 'list-dbtable'){
             $columns = [
-                            ['db' => 'SM.title', 'dt' => 0],
-                            ['db' => 'SM.description', 'dt' => 1]
+                            ['db' => 'SM.image', 'dt' => 0],
+                            ['db' => 'S.title', 'dt' => 1],
+                            ['db' => 'SM.title', 'dt' => 2],
+                            ['db' => 'SM.content', 'dt' => 3],
+                            ['db' => 'SM.language_code', 'dt' => 4]
                         ];
-            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*', 'SM.*', DB::expr('VL.name as language_name')];
+            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('S.title as service_title')];
 
             $query = DB::select_array($colums)
                          ->from([static::$_table_name, 'SM'])
 						 ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+                         ->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
                          ->where('SM.item_status', '!=', 'delete');
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);
@@ -75,11 +80,12 @@ class Model_Gallery extends \Orm\Model {
      * Get detail informat based on primary key
      *============================================*/
 	public static function getDetail($pk = null, $params = null, $option = null){
-		$select = ['SM.*', 'SM.*', DB::expr('VL.name as language_name')];
+		$select = ['SM.*', DB::expr('VL.name as language_name'), DB::expr('S.title as service_title')];
 
 		$query = \DB::select_array($select)
 			            ->from([self::$_table_name, 'SM'])
 						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+						->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
 			            ->where('SM.item_status', '=', 'active')
 						->as_object();
 
@@ -96,7 +102,7 @@ class Model_Gallery extends \Orm\Model {
 		if(isset($params['response_quantity']) && $params['response_quantity'] == 'all') $result = $query->execute();
 		if((isset($params['response_quantity']) && $params['response_quantity'] == 'single') || !isset($params['response_quantity']) || empty($params['response_quantity'])) $result = $query->execute()->current();
 
+
 		return $result;
 	}
-
 }

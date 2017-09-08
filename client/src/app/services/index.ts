@@ -1,3 +1,4 @@
+export * from './before-after.service';
 export * from './general.service';
 export * from './auth.service';
 export * from './equipment.service';

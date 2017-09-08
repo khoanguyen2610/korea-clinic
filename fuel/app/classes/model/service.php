@@ -42,6 +42,7 @@ class Model_Service extends \Orm\Model {
                         ->order_by('SM.created_at', 'DESC');
 
         //Query by params
+        if(isset($params['service_category_id']) && !empty($params['service_category_id'])) $query->where('SM.service_category_id', '=', $params['service_category_id']);
         if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 

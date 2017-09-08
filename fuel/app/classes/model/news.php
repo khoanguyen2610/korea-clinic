@@ -42,6 +42,7 @@ class Model_News extends \Orm\Model {
 
         //Query by params
         if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+        if(isset($params['feature_flag']) && !empty($params['feature_flag'])) $query->where('SM.feature_flag', '=', $params['feature_flag']);
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
         $result = $query->as_object()->execute()->as_array();

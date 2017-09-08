@@ -8,6 +8,8 @@ import { URLSearchParams } from '@angular/http';
 
 import { LocalStorageService } from 'angular-2-local-storage';
 
+declare var $: any;
+
 @Injectable()
 export class AuthService {
     private session_expired?: any;
@@ -55,6 +57,7 @@ export class AuthService {
         .subscribe(
             res => {
                 if (res.status == 'success') {
+                    $('div.backstretch').show();
                     this._LocalStorageService.clearAll();
                     if(callback_uri){
                         this._Router.navigate([redirect_url], { queryParams: { callback_uri: callback_uri } });
