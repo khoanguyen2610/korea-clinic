@@ -164,19 +164,40 @@ class Controller_BeforeAfter extends \Controller_API {
                 /*============================================
                  * Upload file
                  *============================================*/
+				$arrUploadImage = [];
                 if($has_upload){
                     \Upload::save();
 
                     foreach(\Upload::get_files() as $file) {
                         //==== Save into database
                         $arrFiles = ['filename' => $file['name'],
-                                    'filepath' => $today_dir . '/' . $file['saved_as']];
+                                     'filepath' => $today_dir . '/' . $file['saved_as']];
 
                         //Now just save first image
-                        $arrData['image'] = json_encode($arrFiles);
+                        // $arrData['image'] = json_encode($arrFiles);
                         break;
                     }
+ 					//Now just save first image
+ 					$arrUploadImage = $arrFiles;
                 }
+
+ 				if(!empty($pk)){
+ 					if(!empty($param['current_image']) && $param['current_image'] != 'null'){
+ 						$current_images = json_decode($param['current_image']);
+ 						$arr_current_images = [];
+ 						// foreach ($current_images as $k => $v) {
+ 							if(isset($current_images->filename) && isset($current_images->filepath)){
+ 								$arr_current_images = ['filename' => $current_images->filename,
+ 		                                    			'filepath' => $current_images->filepath];
+ 							}
+ 						// }
+ 						if(!empty($arr_current_images)){
+ 							$arrUploadImage = $arr_current_images;
+ 						}
+ 						// $arrUploadImage = array_values($arrUploadImage);
+ 					}
+ 				}
+ 				$arrData['image'] = json_encode($arrUploadImage);
 
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();
