@@ -3,15 +3,16 @@
 		<label class="control-label col-md-1">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
 			<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
-			<span *ngIf="(title?.dirty && !Item.title) || !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
+			<span *ngIf="(title?.dirty || !is_validated) && !title.value" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
-	<div class="form-group">
+	<div class="form-group" [class.has-error]="!service_id.value">
 		<label class="control-label col-md-1">{{ 'ADMIN.service' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
-			<select class="form-control" name="service_id" [(ngModel)]="Item.service_id">
+			<select class="form-control" name="service_id" [(ngModel)]="Item.service_id" #service_id="ngModel">
 				<option *ngFor="let option of service_options" [value]="option.id">{{ option.text }}</option>
 			</select>
+			<span *ngIf="(!service_id.value && !Item.service_id) && !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
 	<div class="form-group">
