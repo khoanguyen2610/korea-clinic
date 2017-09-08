@@ -25,7 +25,7 @@ export class EquipmentFormContentComponent implements OnInit {
 
 	_params: any;
 	files_type = [];
-	files_upload:number = 1;
+	files_upload:number = 2;
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;

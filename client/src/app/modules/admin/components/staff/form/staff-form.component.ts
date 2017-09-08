@@ -122,7 +122,6 @@ export class StaffFormComponent implements OnInit {
 			}
 
 			if(this._params.method == 'create'){
-				console.log(this.item_key);
 				formData.append('item_key', this.item_key);
 			}
 
