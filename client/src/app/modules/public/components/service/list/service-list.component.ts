@@ -18,7 +18,7 @@ declare let moment: any;
 
 export class ServiceListComponent implements OnInit {
 	private subscription: Subscription;
-	private querySubscription: Subscription;
+	private subscriptionEvents: Subscription;
 	private hashtagSubscription: Subscription;
 
 	controller: string = 'dich-vu';
@@ -28,9 +28,11 @@ export class ServiceListComponent implements OnInit {
 	queryParams: any;
 	hashtagParams:any;
 	language_code: string;
+	curRouting: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
+		private _Router: Router,
 		private _ServiceService: ServiceService,
 		private _ServiceCategoryService: ServiceCategoryService,
 		private _Configuration: Configuration,
@@ -40,11 +42,13 @@ export class ServiceListComponent implements OnInit {
 			(param: any) => this._params = param
 		);
 
-		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
-			(param: any) => {
-				this.queryParams = param;
+		this.subscriptionEvents = this._Router.events.subscribe((val) => {
+			let routing = this._Router.url;
+			if (this.curRouting != routing) {
+				this.curRouting = routing;
+				this.loadPage();
 			}
-		);
+		});
 
 		this.hashtagSubscription = _ActivatedRoute.fragment.subscribe(
 			(param: any) => {
@@ -60,6 +64,10 @@ export class ServiceListComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		console.log('ServiceListComponent');
+	}
+
+	loadPage(){
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
@@ -70,22 +78,15 @@ export class ServiceListComponent implements OnInit {
 			}
 		});
 
-		if(this._params.id){
-			params.set('service_category_id',this._params.id);
+		if(this._params.category_id){
+			params.set('service_category_id',this._params.category_id);
 		}
 
 		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				let data = res.data;
-				let items = [];
-				for(let i in data){
-					data[i]['nice_url'] = data[i]['title'].replace(/ /g, '-');
-					items.push(data[i]);
-				}
-				this.items = items;
+				this.items = res.data;
 			}
-		})
-		console.log('ServiceListComponent');
+		});
 	}
 
 	getAction(){
@@ -94,6 +95,6 @@ export class ServiceListComponent implements OnInit {
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
-		this.querySubscription.unsubscribe();
+		this.subscriptionEvents.unsubscribe();
 	}
 }

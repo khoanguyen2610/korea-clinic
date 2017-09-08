@@ -18,6 +18,7 @@ import { Configuration } from '../../../../../shared';
 export class FaqListComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
+
 	Items: Array<any> = [];
 	serviceCategories: Array<any> = [];
 	_params: any;

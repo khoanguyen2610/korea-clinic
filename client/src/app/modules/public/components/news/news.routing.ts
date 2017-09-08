@@ -8,9 +8,10 @@ const APP_ROUTES: Routes = [
 	{ path: '',
 		children: [
 			{path: '', component: NewsListComponent},
-			{path: ':language_code/:item_key/:title', component: NewsListComponent},
+			{path: ':language_code/:category_id/:title', component: NewsListComponent},
 		]
 	},
 	{ path: 'detail/:language_code/:item_key/:title', component: NewsDetailComponent },
+	{ path: 'chi-tiet/:language_code/:item_key/:title', component: NewsDetailComponent },
 ];
 export const Routing = RouterModule.forChild(APP_ROUTES);
