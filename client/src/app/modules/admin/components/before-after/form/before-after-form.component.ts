@@ -66,7 +66,7 @@ export class BeforeAfterFormComponent implements OnInit {
 				this._BeforeAfterService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
-							this._Router.navigate(['/admin/faq/list']);
+							this._Router.navigate(['/admin/before-after/list']);
 						}else{
 							let items = res.data;
 							setTimeout(() => {
@@ -83,7 +83,7 @@ export class BeforeAfterFormComponent implements OnInit {
 							}, 500);
 						}
 					}else{
-						this._Router.navigate(['/admin/faq/list']);
+						this._Router.navigate(['/admin/before-after/list']);
 					}
 				});
 			}else{
