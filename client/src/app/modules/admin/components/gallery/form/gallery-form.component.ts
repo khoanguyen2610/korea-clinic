@@ -127,7 +127,6 @@ export class GalleryFormComponent implements OnInit {
 						current_image.push(upload);
 					}
 				}
-
 				// current_image for check to remove existing image
 				formData.append("current_image", JSON.stringify(current_image));
 
