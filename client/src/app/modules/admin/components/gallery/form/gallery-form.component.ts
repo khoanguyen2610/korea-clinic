@@ -117,6 +117,7 @@ export class GalleryFormComponent implements OnInit {
 
 						formData.append("image[]", objUpload, upload.name);
 					}
+					formData.append("current_image", JSON.stringify(uploader.queue));
 				}
 
 				if (this._params.method == 'create') {
