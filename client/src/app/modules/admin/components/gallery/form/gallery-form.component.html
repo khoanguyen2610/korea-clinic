@@ -9,31 +9,30 @@
 		<div class="tabable-line boxless margin-bottom-20">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#tab_vi" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true">Tiếng Việt </a>
+					<a href="#tab_vi" class="link-tab" data-toggle="tab" data-lang="vi" aria-expanded="true"> Tiếng Việt </a>
 				</li>
 				<li class="">
-					<a href="#tab_en" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false">English </a>
+					<a href="#tab_en" class="link-tab" data-toggle="tab" data-lang="en" aria-expanded="false"> English </a>
 				</li>
 			</ul>
 		</div>
-
-		<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
-			<div class="tab-content">
+		<div class="tab-content">
+			<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 				<div class="tab-pane active" id="tab_vi">
-					<app-gallery-form-content [Item]="Items[0]" [language_code]="language_code" [is_validated]="is_validated"></app-gallery-form-content>
+					<app-gallery-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-gallery-form-content>
 				</div>
 				<div class="tab-pane" id="tab_en">
-					<app-gallery-form-content [Item]="Items[1]" [language_code]="language_code" [is_validated]="is_validated"></app-gallery-form-content>
+					<app-gallery-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="language_code" [is_validated] = "is_validated" (file)="onSetImage($event)"></app-gallery-form-content>
 				</div>
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-md-offset-5 col-md-7">
-							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i>{{ 'ADMIN.save' | translate }}</button>
-							<a class="btn default" [routerLink]="['/admin/gallery/list']"><i class="fa fa-arrow-left"></i>{{ 'ADMIN.back' | translate }}</a>
+							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> {{ 'ADMIN.save' | translate }}</button>
+							<a class="btn default" [routerLink]="['/admin/gallery/list']"><i class="fa fa-arrow-left"></i> {{ 'ADMIN.back' | translate }}</a>
 						</div>
 					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
