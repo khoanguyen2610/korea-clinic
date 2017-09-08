@@ -109,6 +109,7 @@ export class GalleryFormComponent implements OnInit {
 				let formData: FormData = new FormData();
 
 				let uploader = Item['image'];
+				let current_image = [];
 				if (uploader instanceof Object && uploader.queue.length) {
 					for (let key in uploader.queue) {
 						var upload = uploader.queue[key]._file;
@@ -116,9 +117,11 @@ export class GalleryFormComponent implements OnInit {
 						var objUpload = new Blob([upload]);
 
 						formData.append("image[]", objUpload, upload.name);
+						current_image.push(upload)
 					}
-					formData.append("current_image", JSON.stringify(uploader.queue));
 				}
+				// current_image for check to remove existing image
+				formData.append("current_image", JSON.stringify(current_image));
 
 				if (this._params.method == 'create') {
 					formData.append('item_key', this.item_key);
