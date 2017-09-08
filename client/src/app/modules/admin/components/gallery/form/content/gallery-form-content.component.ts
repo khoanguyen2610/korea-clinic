@@ -56,19 +56,22 @@ export class GalleryFormContentComponent implements OnInit {
 		if (this.Item.image instanceof Object) {
 			this.uploader = this.Item.image;
 		} else {
+			console.log(this.Item)
 			let arrImages = JSON.parse(this.Item.image);
-			arrImages.forEach(image => {
-				console.log(image)
+
+			for(let i in arrImages) {
+				let image = arrImages[i];
 				let filename = image.filename;
 				let file_type = filename.split('.');
 				let image_url = '';
 				if (filename) {
-					image_url = this.Item['image_url'];
+					image_url = this.Item['image_url'][i];
+					console.log(image_url);
 				}
 
 				let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true }, edited: true };
 				this.uploader.queue.push(item);
-			});
+			}
 
 		}
 	}
