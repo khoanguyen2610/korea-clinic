@@ -109,19 +109,24 @@ export class GalleryFormComponent implements OnInit {
 				let formData: FormData = new FormData();
 
 				let uploader = Item['image'];
-				// var current_image = JSON.parse(Item['image']);
+				var current_image = [];
+				if (!(uploader instanceof Object)) {
+					current_image = JSON.parse(Item['image']);
+				}
+
 				if (uploader instanceof Object && uploader.queue.length) {
+
 					for (let key in uploader.queue) {
 						var upload = uploader.queue[key]._file;
 						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
 						var objUpload = new Blob([upload]);
 
 						formData.append("image[]", objUpload, upload.name);
-						// current_image.push(upload)
+						current_image.push(upload)
 					}
 				}
 				// current_image for check to remove existing image
-				// formData.append("current_image", JSON.stringify(current_image));
+				formData.append("current_image", JSON.stringify(current_image));
 
 				if (this._params.method == 'create') {
 					formData.append('item_key', this.item_key);
