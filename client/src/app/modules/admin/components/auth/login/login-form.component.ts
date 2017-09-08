@@ -8,8 +8,6 @@ import { NgForm } from '@angular/forms';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 declare var $: any;
-declare var window: any;
-declare var applyCleaveJs: any;
 
 @Component({
 	selector: 'app-auth-login-form',
@@ -36,6 +34,7 @@ export class LoginFormComponent  {
 	Item: Array<any> = [];
 	is_validated = false;
 	validate_message: string = "";
+	component_destroy = false;
 
 	constructor(
 		private _Configuration: Configuration,
@@ -56,17 +55,42 @@ export class LoginFormComponent  {
 			(param: any) => this._queryParams = param
 		);
 
+		setInterval(() => {
+			this.onCheckUserSession();
+		}, 5000)
 	}
+
+  	/*======================================
+  	 * Check if login other tab || exist user sesion
+  	 *======================================*/
+  	onCheckUserSession(){
+  		if(!this.component_destroy){
+  			let now = new Date().getTime();
+	  		let current_user_info = this._LocalStorageService.get('current_user_info');
+			let user_session_start = this._LocalStorageService.get('user_session_start');
+			let session_expired = this._Configuration.session_expired;
+	  		if(current_user_info && now - +user_session_start < session_expired*60*60*1000 ){
+
+				$('div.backstretch').hide();
+	  			if(this._queryParams['callback_uri']){
+	  				var callback_uri = this._queryParams['callback_uri'];
+	  				//redirect when remote login auth like FB & google
+	  				this._Router.navigateByUrl(callback_uri);
+	  			}else{
+	  				this._Router.navigate(['/admin/service/list']);
+	  			}
+	  		}
+	  	}
+  	}
 
 	onSubmit(form: NgForm){
 		if(form.valid){
 			let paramData: URLSearchParams = new URLSearchParams();
-			console.log(this.Item);
 			paramData.set('username', this.Item['username']);
 			paramData.set('password', this.Item['password']);
 			this._AuthService.login(paramData).subscribe(res => {
 				if (res.status == 'success') {
-					$('div.backstretch').remove();
+					$('div.backstretch').hide();
 
 
 					let now = new Date().getTime();
@@ -92,8 +116,8 @@ export class LoginFormComponent  {
 	}
 
 
-    ngAfterContentChecked() {
-
+    ngOnDestroy() {
+		this.component_destroy = true;
     }
 
 

@@ -16,7 +16,6 @@ import { URLSearchParams } from '@angular/http';
 export class MainNavComponent implements OnInit {
 
 	constructor(
-
 	) {
 
 	}
@@ -24,7 +23,6 @@ export class MainNavComponent implements OnInit {
 	ngOnInit() {
 		console.log('Admin Main Nav');
 	}
-
 
 	ngOnDestroy() {
 

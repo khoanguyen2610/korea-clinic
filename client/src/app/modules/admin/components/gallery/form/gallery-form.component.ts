@@ -101,57 +101,56 @@ export class GalleryFormComponent implements OnInit {
 	onSubmit(form: NgForm){
 
 		this.is_validated = this.validateRequiredField();
-		console.log(this.is_validated)
-		if(!this.is_validated){
-			return;
-		}
+		if (this.is_validated) { // Check form is valid
 
-		this.Items.forEach(Item => {
-			let formData: FormData = new FormData();
+			this.Items.forEach(Item => {
+				let formData: FormData = new FormData();
 
-			let uploader = Item['image'];
-			if (uploader instanceof Object && uploader.queue.length) {
-				for (let key in uploader.queue) {
-					var upload = uploader.queue[key]._file;
-					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
-					var objUpload = new Blob([upload]);
-
-					formData.append("image", objUpload, upload.name);
-				}
-			}
-
-			if(this._params.method == 'create'){
-				formData.append('item_key', this.item_key);
-			}
-
-			formData.append('language_code', Item['language_code']);
-			formData.append('title', Item['title']);
-			// formData.append('gallery_category_id', Item['gallery_category_id']);
-			formData.append('feature_flag', Item['feature_flag']);
-			formData.append('content', Item['content']);
-			formData.append('description', Item['description']);
-
-			this._GalleryService.getObserver().subscribe(progress => {
-				this.uploadProgress = progress;
-			});
-			try {console.log('a')
-				this._GalleryService.upload(formData, Item['id']).then((res) => {
-					if (res.status == 'success') {
-						if(this._params.method == 'create'){
-							let lang = Item['language_code'];
-							Item = new Gallery();
-							Item['language_code'] = lang;
-							this.generateItemKey();
-						}
-						this._ToastrService.success('Record has been saved successfully');
+				let uploader = Item['image'];
+				console.log(uploader);
+				if (uploader instanceof Object && uploader.queue.length) {
+					for (let key in uploader.queue) {
+						var upload = uploader.queue[key]._file;
+						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+						var objUpload = new Blob([upload]);
+						formData.append("image[]", objUpload, upload.name);
 					}
+				}
 
+				if (this._params.method == 'create') {
+					formData.append('item_key', this.item_key);
+				}
+
+				formData.append('language_code', Item['language_code']);
+				formData.append('title', Item['title']);
+				// formData.append('gallery_category_id', Item['gallery_category_id']);
+				formData.append('feature_flag', Item['feature_flag']);
+				formData.append('content', Item['content']);
+				formData.append('description', Item['description']);
+
+				this._GalleryService.getObserver().subscribe(progress => {
+					this.uploadProgress = progress;
 				});
-			} catch (error) {
-				document.write(error)
-			}
+				try {
+					console.log('a')
+					this._GalleryService.upload(formData, Item['id']).then((res) => {
+						if (res.status == 'success') {
+							if (this._params.method == 'create') {
+								let lang = Item['language_code'];
+								Item = new Gallery();
+								Item['language_code'] = lang;
+								this.generateItemKey();
+							}
+							this._ToastrService.success('Record has been saved successfully');
+						}
 
-		});
+					});
+				} catch (error) {
+					document.write(error)
+				}
+
+			});
+		}
 
 	}
 
