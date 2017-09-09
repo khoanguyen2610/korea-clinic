@@ -22,6 +22,23 @@ class Controller_Gallery extends \Controller_API {
         $param = \Input::param();
         $data     = \Model_Gallery::getAll($param);
 
+		foreach($data as $k => $v){
+            //generate image url
+            $image = json_decode($v->image);
+			$arrImageUrl = [];
+			if(!empty($image)){
+				foreach ($image as $img) {
+					$param_img = ['filepath' => isset($img->filepath)? base64_encode(NEWS_DIR . $img->filepath): null,
+		                            'filename' => isset($img->filename)? base64_encode($img->filename): null,
+		                            'width' => 300,
+		                            ];
+					$arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
+				}
+			}
+
+            $data[$k]->image_url = $arrImageUrl;
+        }
+
         /*==================================================
          * Response Data
          *==================================================*/
@@ -164,8 +181,10 @@ class Controller_Gallery extends \Controller_API {
 						$current_images = json_decode($param['current_image']);
 						$arr_current_images = [];
 						foreach ($current_images as $k => $v) {
-							$arr_current_images[] = ['filename' => $v->filename,
-	                                    			'filepath' => $v->filepath];
+							if(isset($v->filename) && isset($v->filepath)){
+								$arr_current_images[] = ['filename' => $v->filename,
+		                                    			'filepath' => $v->filepath];
+							}
 						}
 						$arrUploadImage = array_merge($arr_current_images, $arrUploadImage);
 						$arrUploadImage = array_values($arrUploadImage);
