@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, ElementRef } from '@angular/cor
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from 'ng2-translate';7
 
 import { Configuration } from '../../../../../../shared';
 import { ToastrService } from 'ngx-toastr';
@@ -21,7 +21,7 @@ declare let $: any;
 export class NavigationComponent implements OnInit {
 	private subscription: Subscription;
 	language_code: string;
-	modules: string;
+	modules: any;
 	serviceCategories: Array<any>;
 	services: Array<any>;
 	newsCategories: Array<any>;

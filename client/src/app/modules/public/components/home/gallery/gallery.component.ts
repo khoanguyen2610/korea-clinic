@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
 import { GalleryService } from '../../../../../services';
@@ -25,10 +26,11 @@ export class GalleryComponent implements OnInit {
 	constructor(
 		private _GalleryService: GalleryService,
 		private _Configuration: Configuration,
+		private _LocalStorageService: LocalStorageService
 
 	) {
 		//=============== Get Params On Url ===============
-
+		this.language_code = String(_LocalStorageService.get('language_code'));
 
 	}
 
@@ -42,7 +44,7 @@ export class GalleryComponent implements OnInit {
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this._Configuration.language_code);
+		params.set('language_code', this.language_code);
 		params.set('limit', String(this.number_item));
 		this._GalleryService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {

@@ -12,6 +12,7 @@ export class Configuration {
 
 	//======================== System Config Variable ===============================
 	public base_href = '';
+	public base_url_image = this.server +  'files/';
 	public session_expired = 8; //Session 8 hours
 	public defaultLang: string = 'en';
 	public language_code: string;

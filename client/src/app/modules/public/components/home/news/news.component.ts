@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -17,7 +17,7 @@ declare let $: any;
 })
 
 export class NewsComponent implements OnInit {
-
+	@Input() modules: any;
 	Items: Array<any> = [];
 	controller: string = 'tin-tuc';
 	language_code: string;
@@ -46,7 +46,7 @@ export class NewsComponent implements OnInit {
 	getListData() {
 		console.log(this._Configuration.language_code);
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', String(this._LocalStorageService.get('language_code')));
+		params.set('language_code', this.language_code);
 		params.set('limit', String(this.number_item));
 		this._NewsService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {

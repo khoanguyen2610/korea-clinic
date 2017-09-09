@@ -15,16 +15,16 @@
                             <div *ngFor="let item of Items" class="column-1_3 column_padding_bottom">
                                 <div class="sc_services_item" id="sc_services_809_1">
                                     <div class="sc_services_item_featured post_featured">
-                                        <div class="post_thumb" data-image="images/3-1.jpg" data-title="Special Offers">
-                                            <a class="hover_icon hover_icon_link" href="single-post.html"><img alt="" [src]="item.image_url"></a>
+                                        <div class="post_thumb"  data-title="{{item.description}}">
+                                            <a class="hover_icon hover_icon_link" [routerLink]="[ '/' + modules.service, modules.lang, item.item_key, item.title | niceurl]" ><img alt="" [src]="item.image_url"></a>
                                         </div>
                                     </div>
                                     <div class="sc_services_item_content">
                                         <div class="sc_services_item_category">
-                                            <a href="list-services.html" rel="tag">{{ item.title }}</a>
+                                            <a [routerLink]="[ '/' + modules.service, modules.lang, item.item_key, item.title | niceurl]" rel="tag">{{ item.title }}</a>
                                         </div>
                                         <div class="sc_services_item_description">
-                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" href="single-post.html">
+                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" [routerLink]="[ '/' + modules.service, modules.lang, item.item_key, item.title | niceurl]" >
                                             <div>
                                                 <span class="first">{{ 'PUBLIC.detail' | translate }}</span> <span class="second">{{ 'PUBLIC.detail' | translate }}</span>
                                             </div></a>
@@ -36,15 +36,15 @@
                                 <div class="sc_services_item" id="sc_services_809_2">
                                     <div class="sc_services_item_featured post_featured">
                                         <div class="post_thumb" data-image="images/2-2.jpg" data-title="Gift Cards Available">
-                                            <a class="hover_icon hover_icon_link" href="single-post.html"><img alt="" src="./assets/public/images/2-2-358x393.jpg"></a>
+                                            <a class="hover_icon hover_icon_link" [routerLink]="[ '/' + modules.service, modules.lang, item.item_key, item.title | niceurl]" ><img alt="" src="./assets/public/images/2-2-358x393.jpg"></a>
                                         </div>
                                     </div>
                                     <div class="sc_services_item_content">
                                         <div class="sc_services_item_category">
-                                            <a href="list-services.html" rel="tag">{{ 'PUBLIC.dentistry' | translate }}</a>
+                                            <a [routerLink]="[ '/' + modules.service, modules.lang, sCategory.item_key, sCategory.title | niceurl]" rel="tag">{{ 'PUBLIC.dentistry' | translate }}</a>
                                         </div>
                                         <div class="sc_services_item_description">
-                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" href="single-post.html">
+                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" [routerLink]="[ '/' + modules.service, modules.lang, item.item_key, item.title | niceurl]" >
                                             <div>
                                                 <span class="first">{{ 'PUBLIC.detail' | translate }}</span> <span class="second">{{ 'PUBLIC.detail' | translate }}</span>
                                             </div></a>
@@ -56,15 +56,15 @@
                                 <div class="sc_services_item" id="sc_services_809_3">
                                     <div class="sc_services_item_featured post_featured">
                                         <div class="post_thumb" data-image="images/1-2.jpg" data-title="Online Appointment">
-                                            <a class="hover_icon hover_icon_link" href="single-post.html"><img alt="" src="./assets/public/images/1-2-358x393.jpg"></a>
+                                            <a class="hover_icon hover_icon_link" [routerLink]="[ '/' + modules.service, modules.lang, item.item_key, item.title | niceurl]" ><img alt="" src="./assets/public/images/1-2-358x393.jpg"></a>
                                         </div>
                                     </div>
                                     <div class="sc_services_item_content">
                                         <div class="sc_services_item_category">
-                                            <a href="list-services.html" rel="tag">{{ 'PUBLIC.cosmetic_surgery' | translate }}</a>
+                                            <a [routerLink]="[ '/' + modules.service, modules.lang, sCategory.item_key, sCategory.title | niceurl]" rel="tag">{{ 'PUBLIC.cosmetic_surgery' | translate }}</a>
                                         </div>
                                         <div class="sc_services_item_description">
-                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" href="single-post.html">
+                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" [routerLink]="[ '/' + modules.service, modules.lang, item.item_key, item.title | niceurl]" >
                                             <div>
                                                 <span class="first">{{ 'PUBLIC.detail' | translate }}</span> <span class="second">{{ 'PUBLIC.detail' | translate }}</span>
                                             </div></a>

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input} from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -18,10 +18,10 @@ declare let moment: any;
 })
 
 export class ServiceComponent implements OnInit {
-
+	@Input() modules: any;
 	Items: Array<any> = [];
 	controller: string = 'dich-vu';
-	language_code: string = this._Configuration.language_code;
+	language_code: string;
 
 	constructor(
 		private _AuthService: AuthService,
@@ -30,6 +30,7 @@ export class ServiceComponent implements OnInit {
 		private _LocalStorageService: LocalStorageService
 	) {
 		//=============== Get Params On Url ===============
+		this.language_code = String(_LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit(){
