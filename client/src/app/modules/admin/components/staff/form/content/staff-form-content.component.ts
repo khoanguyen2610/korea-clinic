@@ -24,7 +24,7 @@ export class StaffFormContentComponent implements OnInit {
 
 	_params: any;
 	files_type = [];
-	files_upload:number = 1;
+	files_upload:number = 2;
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
@@ -58,13 +58,17 @@ export class StaffFormContentComponent implements OnInit {
 		} else {
 			let image = JSON.parse(this.Item.image);
 			let filename = image.filename;
-			let file_type = filename.split('.');
+				let filepath = image.filepath;
+				var file_type = '';
+			if (filename) {
+				file_type = filename.split('.');
+			}
 			let image_url = '';
 			if (filename) {
 				image_url = this.Item['image_url'];
 			}
 
-			let item: any = { file: { name: filename, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, type: file_type[1], is_keeping: true }, edited: true };
+			let item: any = { file: { name: filename, filename: filename, filepath: filepath, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, filename: filename, filepath: filepath, type: file_type[1], is_keeping: true }, edited: true };
 			this.uploader.queue.push(item);
 		}
 	}
@@ -88,7 +92,9 @@ export class StaffFormContentComponent implements OnInit {
 		this.uploader['error_limit_files'] = false;
 		setTimeout(() => {
 			let after_upload_files = +this.uploader.queue.length; // after drag upload files
+			console.log(after_upload_files <= this._Configuration.limit_files)
 			if (after_upload_files <= this._Configuration.limit_files) {
+				console.log(after_upload_files != this.files_upload);
 				if (after_upload_files != this.files_upload) {
 					let uploader = [];
 					for (let key in this.uploader.queue) {
@@ -128,6 +134,7 @@ export class StaffFormContentComponent implements OnInit {
 					}
 					this.uploader.queue = uploader;
 					this.files_upload = this.uploader.queue.length;
+					console.log(this.uploader)
 					this.fileOutput.emit(this.uploader);
 				}
 			}

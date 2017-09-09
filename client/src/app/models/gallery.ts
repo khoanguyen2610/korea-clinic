@@ -5,4 +5,5 @@ export class Gallery {
 	public item_key: string;
 	public description: string;
 	public image: any;
+	public item_status: string;
 }

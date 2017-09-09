@@ -113,7 +113,7 @@ class Controller_BeforeAfter extends \Controller_API {
         $validation->add_callable('MyRules');
         $validation->add_field('title',__('Title', [], 'Title'),'required');
         $validation->add_field('language_code',__('Language', [], 'Language'),'required');
-        $validation->add_field('service_category_id',__('Service Category', [], 'Service Category'),'required');
+        $validation->add_field('service_id',__('Service', [], 'Service'),'required');
 
 
         if($validation->run()){

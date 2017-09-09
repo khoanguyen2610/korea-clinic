@@ -118,6 +118,7 @@ class Controller_Gallery extends \Controller_API {
                  *============================================*/
                 $today_dir = date('Ymd');
                 $folder_name = GALLERY_DIR;
+
                 if(\Input::file()){
                     $has_upload = true;
 
@@ -145,6 +146,7 @@ class Controller_Gallery extends \Controller_API {
                 /*============================================
                  * Upload file
                  *============================================*/
+				$arrUploadImage = [];
                 if($has_upload){
                     \Upload::save();
 
@@ -154,8 +156,23 @@ class Controller_Gallery extends \Controller_API {
                                     'filepath' => $today_dir . '/' . $file['saved_as']];
                     }
 					//Now just save first image
-					$arrData['image'] = json_encode($arrFiles);
+					$arrUploadImage = $arrFiles;
                 }
+
+				if(!empty($pk)){
+					if(!empty($param['current_image']) && $param['current_image'] != 'null'){
+						$current_images = json_decode($param['current_image']);
+						$arr_current_images = [];
+						foreach ($current_images as $k => $v) {
+							$arr_current_images[] = ['filename' => $v->filename,
+	                                    			'filepath' => $v->filepath];
+						}
+						$arrUploadImage = array_merge($arr_current_images, $arrUploadImage);
+						$arrUploadImage = array_values($arrUploadImage);
+					}
+
+				}
+				$arrData['image'] = json_encode($arrUploadImage);
 
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();
@@ -247,4 +264,61 @@ class Controller_Gallery extends \Controller_API {
         return $this->response($response);
     }
 
+	/*=============================================================
+     * Author: Nguyen Anh Khoa
+     * Function delete a record based on item_key
+     * Update status record to 'delete'
+     * Method DELETE
+     * Table gallery
+     * Response data: status[success|error], message[notification]
+     *=============================================================*/
+    public function delete_item_key($item_key = null){
+        $Ids = $result = [];
+        if(!empty($item_key)){
+            try{
+                \DB::start_transaction();
+
+                $items = \Model_Gallery::find('all', ['select' => ['id'], 'where' => ['item_key' => $item_key]]);
+
+                if(!empty($items)){
+                    foreach ($items as $val) {
+                        $Ids[] = $val->id;
+                        $result = \Model_Gallery::softDelete($val->id, array('item_status' => 'delete'));
+                    }
+                }
+                \DB::commit_transaction();
+            } catch (\Exception $e) {
+                \DB::rollback_transaction();
+                /*==================================================
+                 * Response Data
+                 *==================================================*/
+                $response = ['status' => 'error',
+                            'code' => Exception::E_UNEXPECTED_ERR,
+                            'message' => Exception::getMessage(Exception::E_UNEXPECTED_ERR),
+                            'error' => $e->getMessage()];
+                return $this->response($response);
+            }
+
+            $status = 'success';
+            $response_code = Exception::E_DELETE_SUCCESS;
+            $response_message = Exception::getMessage(Exception::E_DELETE_SUCCESS);
+            if(!$result){
+                $status = 'error';
+                $response_code = Exception::E_NO_RECORD;
+                $response_message = Exception::getMessage(Exception::E_NO_RECORD);
+            }
+        }else{
+            $status = 'error';
+            $response_code = Exception::E_PK_MISS;
+            $response_message = Exception::getMessage(Exception::E_PK_MISS);
+        }
+        /*==================================================
+         * Response Data
+         *==================================================*/
+        $response = ['status' => $status,
+                    'code' => $response_code,
+                    'message' => $response_message,
+                    'record_id' => $Ids];
+        return $this->response($response);
+    }
 }

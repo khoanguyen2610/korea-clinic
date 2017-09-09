@@ -96,6 +96,46 @@ class Model_Gallery extends \Orm\Model {
 		if(isset($params['response_quantity']) && $params['response_quantity'] == 'all') $result = $query->execute();
 		if((isset($params['response_quantity']) && $params['response_quantity'] == 'single') || !isset($params['response_quantity']) || empty($params['response_quantity'])) $result = $query->execute()->current();
 
+		//Generate image_url
+        if(!empty($result)){
+            if(isset($params['response_quantity']) && $params['response_quantity'] == 'all'){
+                foreach ($result as $k => $v) {
+                    if(!empty($v->image) || (isset($params['image_url_placeholder']) && $params['image_url_placeholder'] == true)){
+                        $image = json_decode($v->image);
+						if(!empty($image)){
+							$arrImageUrl = [];
+							foreach ($image as $va) {
+								$param_img = ['filepath' => isset($va->filepath)? base64_encode(GALLERY_DIR . $va->filepath): null,
+		                                        'filename' => isset($va->filename)? base64_encode($va->filename): null,
+		                                        'width' => 300,
+		                                        ];
+		                        $arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
+							}
+							$result[$k]->image_url = $arrImageUrl;
+						}
+
+                    }
+                }
+            }
+            if((isset($params['response_quantity']) && $params['response_quantity'] == 'single') || !isset($params['response_quantity'])){
+
+                if(!empty($result->image) || (isset($params['image_url_placeholder']) && $params['image_url_placeholder'] == true)){
+                    $image = json_decode($result->image);
+					if(!empty($image)){
+						$arrImageUrl = [];
+						foreach ($image as $va) {
+							$param_img = ['filepath' => isset($va->filepath)? base64_encode(GALLERY_DIR . $va->filepath): null,
+											'filename' => isset($va->filename)? base64_encode($va->filename): null,
+											'width' => 300,
+											];
+							$arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
+						}
+						$result->image_url = $arrImageUrl;
+					}
+                }
+            }
+        }
+
 		return $result;
 	}
 

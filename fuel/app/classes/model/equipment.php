@@ -114,7 +114,7 @@ class Model_Equipment extends \Orm\Model {
                 }
             }
             if((isset($params['response_quantity']) && $params['response_quantity'] == 'single') || !isset($params['response_quantity'])){
-                if(!empty($v->image) || (isset($params['image_url_placeholder']) && $params['image_url_placeholder'] == true)){
+                if(!empty($result->image) || (isset($params['image_url_placeholder']) && $params['image_url_placeholder'] == true)){
                     $image = json_decode($result->image);
                     $param_img = ['filepath' => isset($image->filepath)? base64_encode(EQUIPMENT_DIR . $image->filepath): null,
                                     'filename' => isset($image->filename)? base64_encode($image->filename): null,

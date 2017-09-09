@@ -6,5 +6,5 @@ export class Slide {
 	public description: string;
 	public url: string;
 	public image: any;
-	public position: string
+	public position: string;
 }

@@ -128,14 +128,14 @@ export class GalleryListComponent implements OnInit {
 		this._Router.navigate(['/admin/gallery/form/update/' + id], { queryParams: { item_key: item_key } });
 	}
 
-	onOpenConfirm(id: number){
-		this.delete_id = id;
+	onOpenConfirm(item_key: string){
+		this.delete_item_key = item_key;
 		this.modal.open();
 	}
 
 	onConfirmDelete(){
 		this.modal.close();
-		this._GalleryService.delete(this.delete_id).subscribe(res => {
+		this._GalleryService.deleteItemKey(this.delete_item_key).subscribe(res => {
 			if(res.status == 'success'){
 				this._ToastrService.success('Deleted!');
 				this.DTList.ajax.url(this._GalleryService._list_data_URL).load();

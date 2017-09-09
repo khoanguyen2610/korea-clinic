@@ -66,7 +66,7 @@ export class BeforeAfterFormComponent implements OnInit {
 				this._BeforeAfterService.getByID(undefined, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
-							this._Router.navigate(['/admin/faq/list']);
+							this._Router.navigate(['/admin/before-after/list']);
 						}else{
 							let items = res.data;
 							setTimeout(() => {
@@ -83,7 +83,7 @@ export class BeforeAfterFormComponent implements OnInit {
 							}, 500);
 						}
 					}else{
-						this._Router.navigate(['/admin/faq/list']);
+						this._Router.navigate(['/admin/before-after/list']);
 					}
 				});
 			}else{
@@ -111,15 +111,26 @@ export class BeforeAfterFormComponent implements OnInit {
 			let formData: FormData = new FormData();
 
 			let uploader = Item['image'];
-			if (uploader instanceof Object && uploader.queue.length) {
-				for (let key in uploader.queue) {
-					var upload = uploader.queue[key]._file;
-					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
-					var objUpload = new Blob([upload]);
-
-					formData.append("image", objUpload, upload.name);
+				var current_image = [];
+				if (!(uploader instanceof Object) && typeof uploader != 'undefined') {
+					current_image = JSON.parse(Item['image']);
 				}
-			}
+
+				if (uploader instanceof Object && uploader.queue.length) {
+					for (let key in uploader.queue) {
+						var upload = uploader.queue[key]._file;
+						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+						var objUpload = new Blob([upload]);
+
+						if (upload['id']) {
+						} else {
+							formData.append("image[]", objUpload, upload.name);
+						}
+						current_image.push(upload);
+					}
+				}
+				// current_image for check to remove existing image
+				formData.append("current_image", JSON.stringify(current_image));
 
 			if(this._params.method == 'create'){
 				formData.append('item_key', this.item_key);
