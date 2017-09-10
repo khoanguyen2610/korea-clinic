@@ -22,6 +22,23 @@ class Controller_Gallery extends \Controller_API {
         $param = \Input::param();
         $data     = \Model_Gallery::getAll($param);
 
+		foreach($data as $k => $v){
+            //generate image url
+            $image = json_decode($v->image);
+			$arrImageUrl = [];
+			if(!empty($image)){
+				foreach ($image as $img) {
+					$param_img = ['filepath' => isset($img->filepath)? base64_encode(NEWS_DIR . $img->filepath): null,
+		                            'filename' => isset($img->filename)? base64_encode($img->filename): null,
+		                            'width' => 300,
+		                            ];
+					$arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
+				}
+			}
+
+            $data[$k]->image_url = $arrImageUrl;
+        }
+
         /*==================================================
          * Response Data
          *==================================================*/
@@ -104,6 +121,7 @@ class Controller_Gallery extends \Controller_API {
             }
 
 
+
             //======================== Default Data =================
 			try{
 				\DB::start_transaction();
@@ -117,6 +135,7 @@ class Controller_Gallery extends \Controller_API {
                  *============================================*/
                 $today_dir = date('Ymd');
                 $folder_name = GALLERY_DIR;
+
                 if(\Input::file()){
                     $has_upload = true;
 
@@ -144,6 +163,7 @@ class Controller_Gallery extends \Controller_API {
                 /*============================================
                  * Upload file
                  *============================================*/
+				$arrUploadImage = [];
                 if($has_upload){
                     \Upload::save();
 
@@ -153,8 +173,25 @@ class Controller_Gallery extends \Controller_API {
                                     'filepath' => $today_dir . '/' . $file['saved_as']];
                     }
 					//Now just save first image
-					$arrData['image'] = json_encode($arrFiles);
+					$arrUploadImage = $arrFiles;
                 }
+
+				if(!empty($pk)){
+					if(!empty($param['current_image']) && $param['current_image'] != 'null'){
+						$current_images = json_decode($param['current_image']);
+						$arr_current_images = [];
+						foreach ($current_images as $k => $v) {
+							if(isset($v->filename) && isset($v->filepath)){
+								$arr_current_images[] = ['filename' => $v->filename,
+		                                    			'filepath' => $v->filepath];
+							}
+						}
+						$arrUploadImage = array_merge($arr_current_images, $arrUploadImage);
+						$arrUploadImage = array_values($arrUploadImage);
+					}
+
+				}
+				$arrData['image'] = json_encode($arrUploadImage);
 
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();

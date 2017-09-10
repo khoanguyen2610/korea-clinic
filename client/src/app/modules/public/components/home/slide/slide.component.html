@@ -2,54 +2,46 @@
     <div class="rev_slider_wrapper fullwidthbanner-container" id="rev_slider_1_1_wrapper">
         <div class="rev_slider fullwidthabanner" data-version="5.2.6" id="rev_slider_1_1">
             <ul>
-                <li *ngFor="let item of Items" data-delay="9000" data-description="" data-easein="default" data-easeout="default" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/1-1-100x50.jpg" data-title="Slide" data-transition="fade">
-                    <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" height="758" [src]="item.image_url" title="1" width="1920">
-                    <div class="tp-caption tp-resizeme" data-height="none" data-hoffset="['0','0','0','1']" data-responsive_offset="on" data-start="1000" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1200;e:Power2.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-117','-117','-117','-167']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-1-layer-5"><img alt="" data-hh="['20px','20px','20px','20px']" data-no-retina="" data-ww="['169px','169px','169px','169px']" height="20" src="./assets/public/images/Vector-Smart-Object-6.png" width="169"></div>
-                    <div class="tp-caption black tp-resizeme" data-fontsize="['68','68','68','55']" data-height="['91','91','91','none']" data-hoffset="['0','0','0','6']" data-lineheight="['90','90','90','55']" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-67','-67','-67','-123']" data-whitespace="normal" data-width="['465','465','465','466']" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-1-layer-1">
+                <li *ngFor="let item of Items"  data-transition="fade">
+                    <img [src]="item.image_url" alt="Sky" class="rev-slidebg">
+                    <div class="tp-caption tp-resizeme" data-height="none" data-hoffset="['0','0','0','1']" data-responsive_offset="on" data-start="1000" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1200;e:Power2.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-117','-117','-117','-167']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" >
+                        <img alt="" data-hh="['20px','20px','20px','20px']" data-no-retina="" data-ww="['169px','169px','169px','169px']" height="20" src="./assets/public/images/Vector-Smart-Object-6.png" width="169">
+                    </div>
+                    <div class="tp-caption black tp-resizeme"
+                        data-fontsize="['68','68','68','55']"
+                        data-height="['91','91','91','none']"
+                        data-hoffset="['0','0','0','6']"
+                        data-lineheight="['90','90','90','55']"
+                        data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                        data-mask_out="x:0;y:0;s:inherit;e:inherit;"
+                        data-responsive_offset="on"
+                        data-splitin="none"
+                        data-splitout="none"
+                        data-start="1000"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power3.easeInOut;"
+                        data-transform_out="auto:auto;s:1000;"
+                        data-voffset="['-67','-67','-67','-123']"
+                        data-whitespace="normal"
+                        data-width="['465','465','465','466']"
+                        data-x="['center','center','center','center']"
+                        data-y="['middle','middle','middle','middle']">
                         {{ item.title}}
                     </div>
-                    <!-- <div class="tp-caption black tp-resizeme" data-fontsize="['68','68','60','55']" data-height="none" data-hoffset="['0','0','0','-1']" data-lineheight="['68','68','60','55']" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:2500;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-5','-5','-5','-37']" data-whitespace="['nowrap','nowrap','nowrap','normal']" data-width="['none','none','none','600']" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-1-layer-2">
-                        sessions of relaxation
-                    </div> -->
-                    <div class="tp-caption black tp-resizeme" data-fontsize="['17','17','17','20']" data-height="none" data-hoffset="['1','1','1','3']" data-lineheight="['30','30','30','25']" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:50px;opacity:0;s:2500;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['63','63','63','70']" data-whitespace="['nowrap','nowrap','nowrap','normal']" data-width="['none','none','none','550']" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-1-layer-3">
+                    <div
+                        class="tp-caption black tp-resizeme"
+                        data-fontsize="['17','17','17','20']"
+                        data-height="none"
+                        data-hoffset="['1','1','1','3']"
+                        data-lineheight="['30','30','30','25']"
+                        data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000"
+                        data-transform_idle="o:1;" data-transform_in="y:50px;opacity:0;s:2500;e:Power3.easeInOut;"
+                        data-transform_out="auto:auto;s:1000;" data-voffset="['63','63','63','70']"
+                        data-whitespace="['nowrap','nowrap','nowrap','normal']" data-width="['none','none','none','550']"
+                        data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']">
                         {{ item.description }}
                     </div>
-                    <!-- <div class="tp-caption black tp-resizeme" data-actions='[{"event":"click","action":"simplelink","target":"_self","url":"booking.html","delay":""}]' data-fontsize="['11','11','11','15']" data-height="none" data-hoffset="['0','0','0','1']" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-style_hover="c:rgba(249, 163, 146, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Linear.easeNone;" data-transform_idle="o:1;" data-transform_in="y:50px;opacity:0;s:3000;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['142','142','142','163']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-1-layer-4">
-                        make an appointment
-                    </div> -->
                 </li>
-                <!-- <li data-delay="9000" data-description="" data-easein="default" data-easeout="default" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-4" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/3-2-100x50.jpg" data-title="Slide" data-transition="fade">
-                    <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" height="758" src="./assets/public/images/3-2.jpg" title="3" width="1920">
-                    <div class="tp-caption tp-resizeme" data-height="none" data-hoffset="['0','0','0','0']" data-responsive_offset="on" data-start="1000" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1200;e:Power2.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-117','-117','-117','-173']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-4-layer-5"><img alt="" data-hh="['20px','20px','20px','20px']" data-no-retina="" data-ww="['169px','169px','169px','169px']" height="20" src="./assets/public/images/Vector-Smart-Object-6.png" width="169"></div>
-                    <div class="tp-caption black tp-resizeme" data-fontsize="['68','68','68','55']" data-height="['91','91','91','none']" data-hoffset="['0','0','0','0']" data-lineheight="['90','90','90','55']" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-67','-67','-67','-130']" data-whitespace="normal" data-width="['465','465','465','466']" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-4-layer-1">
-                        Welcome to our
-                    </div>
-                    <div class="tp-caption black tp-resizeme" data-fontsize="['68','68','60','55']" data-height="none" data-hoffset="['0','0','0','0']" data-lineheight="['68','68','60','55']" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:2500;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-5','-5','-5','-40']" data-whitespace="['nowrap','nowrap','nowrap','normal']" data-width="['none','none','none','600']" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-4-layer-2">
-                        massage theraphy center
-                    </div>
-                    <div class="tp-caption black tp-resizeme" data-fontsize="['17','17','17','20']" data-height="none" data-hoffset="['0','0','0','0']" data-lineheight="['30','30','30','25']" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:50px;opacity:0;s:2500;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['61','61','61','61']" data-whitespace="['nowrap','nowrap','nowrap','normal']" data-width="['none','none','none','600']" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-4-layer-3">
-                        Give yourself a moment to relax. Find a minute to rejuvenate your body
-                    </div>
-                    <div class="tp-caption black tp-resizeme" data-actions='[{"event":"click","action":"simplelink","target":"_self","url":"https:\/\/themeforest.net\/user\/themerex\/portfolio?term=jacqueline","delay":""}]' data-fontsize="['11','11','11','15']" data-height="none" data-hoffset="['0','0','0','0']" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-style_hover="c:rgba(249, 163, 146, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Linear.easeNone;" data-transform_idle="o:1;" data-transform_in="y:50px;opacity:0;s:3000;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['142','142','142','142']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-4-layer-4">
-                        Purchase Template
-                    </div>
-                </li>
-                <li data-delay="9000" data-description="" data-easein="default" data-easeout="default" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-3" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/2-3-100x50.jpg" data-title="Slide" data-transition="fade">
-                    <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" height="758" src="./assets/public/images/2-3.jpg" title="2" width="1920">
-                    <div class="tp-caption tp-resizeme" data-height="none" data-hoffset="['-200','-200','-150','0']" data-responsive_offset="on" data-start="1000" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1200;e:Power2.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-158','-158','-158','-118']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-3-layer-5"><img alt="" data-hh="['20px','20px','20px','20px']" data-no-retina="" data-ww="['169px','169px','169px','169px']" height="20" src="./assets/public/images/Vector-Smart-Object-6.png" width="169"></div>
-                    <div class="tp-caption black tp-resizeme" data-fontsize="['68','68','68','55']" data-height="['91','91','91','none']" data-hoffset="['-200','-200','-150','0']" data-lineheight="['90','90','90','55']" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-107','-107','-107','-79']" data-whitespace="normal" data-width="['465','465','465','466']" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-3-layer-1">
-                        Modern and attractive
-                    </div>
-                    <div class="tp-caption black tp-resizeme" data-fontsize="['68','68','60','55']" data-height="none" data-hoffset="['-200','-200','-150','0']" data-lineheight="['68','68','60','55']" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:2500;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['-45','-45','-45','-24']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-3-layer-2">
-                        HTML Template
-                    </div>
-                    <div class="tp-caption black tp-resizeme" data-fontsize="['17','17','17','20']" data-height="none" data-hoffset="['-200','-200','-150','0']" data-lineheight="['30','30','30','25']" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-transform_idle="o:1;" data-transform_in="y:50px;opacity:0;s:2500;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['23','23','23','43']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-3-layer-3">
-                        Build your wellness business with clean and elegant template
-                    </div>
-                    <div class="tp-caption black tp-resizeme" data-actions='[{"event":"click","action":"simplelink","target":"_self","url":"https:\/\/themeforest.net\/user\/themerex\/portfolio","delay":""}]' data-fontsize="['11','11','11','15']" data-height="none" data-hoffset="['-200','-200','-150','0']" data-responsive_offset="on" data-splitin="none" data-splitout="none" data-start="1000" data-style_hover="c:rgba(249, 163, 146, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Linear.easeNone;" data-transform_idle="o:1;" data-transform_in="y:50px;opacity:0;s:3000;e:Power3.easeInOut;" data-transform_out="auto:auto;s:1000;" data-voffset="['102','102','102','127']" data-whitespace="nowrap" data-width="none" data-x="['center','center','center','center']" data-y="['middle','middle','middle','middle']" id="slide-3-layer-4">
-                        read more info
-                    </div>
-                </li> -->
             </ul>
             <div class="tp-bannertimer tp-bottom"></div>
         </div>

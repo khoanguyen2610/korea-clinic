@@ -120,8 +120,11 @@ export class GalleryFormComponent implements OnInit {
 						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
 						var objUpload = new Blob([upload]);
 
-						formData.append("image[]", objUpload, upload.name);
-						current_image.push(upload)
+						if (upload['id']) {
+						} else {
+							formData.append("image[]", objUpload, upload.name);
+						}
+						current_image.push(upload);
 					}
 				}
 				// current_image for check to remove existing image
@@ -134,7 +137,6 @@ export class GalleryFormComponent implements OnInit {
 				formData.append('language_code', Item['language_code']);
 				formData.append('title', Item['title']);
 				formData.append('description', Item['description']);
-				formData.append('current_image', Item['current_image']);
 
 				this._GalleryService.getObserver().subscribe(progress => {
 					this.uploadProgress = progress;

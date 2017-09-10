@@ -12,12 +12,12 @@
                         <article class="esg-filters esg-singlefilters">
                             <div class="esg-filter-wrapper esg-fgc-3">
                                 <div class="esg-filterbutton selected esg-allfilter" data-fid="-1" data-filter="filterall">
-                                    <span>Filter - All</span>
+                                    <span>{{ 'PUBLIC.filter_all' | translate }}</span>
                                 </div>
-                                <div class="esg-filterbutton" data-fid="49" data-filter="filter-deep-tissue" data-pid="34">
-                                    <span>Deep tissue</span> <span class="esg-filter-checked"><i class="eg-icon-ok-1"></i></span>
+                                <div class="esg-filterbutton" *ngFor="let item of Items" [attr.data-fid]="item.id" [attr.data-filter]="'filter-gallery-' + item.id" data-pid="34">
+                                    <span>{{ item.title }}</span> <span class="esg-filter-checked"><i class="eg-icon-ok-1"></i></span>
                                 </div>
-                                <div class="esg-filterbutton" data-fid="50" data-filter="filter-massage-therapy" data-pid="34">
+                                <!-- <div class="esg-filterbutton" data-fid="50" data-filter="filter-massage-therapy" data-pid="34">
                                     <span>Massage therapy</span> <span class="esg-filter-checked"><i class="eg-icon-ok-1"></i></span>
                                 </div>
                                 <div class="esg-filterbutton" data-fid="51" data-filter="filter-sports-massage" data-pid="34">
@@ -25,16 +25,17 @@
                                 </div>
                                 <div class="esg-filterbutton" data-fid="52" data-filter="filter-swedish-massage" data-pid="34">
                                     <span>Swedish massage</span> <span class="esg-filter-checked"><i class="eg-icon-ok-1"></i></span>
-                                </div>
+                                </div> -->
                                 <div class="eg-clearfix"></div>
                             </div>
                         </article>
                         <div class="esg-clear-no-height"></div>
                         <ul>
-                            <li class="filterall filter-gallery filter-massage-therapy filter-massage-therapy eg-washington-massage-wrapper eg-post-id-209" data-cobblesh="1" data-cobblesw="1" data-date="1459261695" *ngFor="let item of items">
+                            <ng-template ngFor let-item [ngForOf]="Items">
+                            <li *ngFor="let preview_image of item.preview_images" class="filterall filter-gallery eg-washington-massage-wrapper eg-post-id-209" data-cobblesh="1" data-cobblesw="1" data-date="1459261695" [ngClass]="'attr.filter-gallery-' + item.id">
                                 <div class="esg-media-cover-wrapper">
-                                    <div class="esg-entry-media"><img alt="" src="./assets/public/images/image-10.jpg"></div>
-                                    <div class="esg-entry-cover esg-fade" data-delay="0">
+                                    <div class="esg-entry-media"><img alt="" [src]="preview_image"></div>
+                                    <!-- <div class="esg-entry-cover esg-fade" data-delay="0">
                                         <div class="esg-overlay esg-fade eg-washington-massage-container" data-delay="0"></div>
                                         <div class="esg-top eg-post-209 eg-washington-massage-element-1-a esg-slideright" data-delay="0.8">
                                             <a class="eg-washington-massage-element-1 eg-post-209" href="single-post.html" target="_self"><i class="eg-icon-plus"></i></a>
@@ -49,8 +50,21 @@
                                             <a class="eg-washington-massage-element-11 eg-post-209" href="#" rel="category tag" title="View all posts in Gallery">Gallery</a> <a class="eg-washington-massage-element-11 eg-post-209" href="#" rel="category tag" title="View all posts in Massage therapy">Massage therapy</a>
                                         </div>
                                     </div>
+
+                                    <div class="esg-entry-media"><img alt="" [src]="item.preview_image"></div> -->
+                                    <div class="esg-entry-cover">
+                                        <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
+                                        <div class="esg-center eg-post-332 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
+                                            <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" [href]="item.preview_image"><i class="eg-icon-search"></i></a>
+                                        </div>
+                                        <div class="esg-center eg-post-332 eg-eisenhower-massage-element-3-a esg-rollleft" data-delay="0.18">
+                                            <a class="eg-eisenhower-massage-element-3 eg-post-332" href="single-product.html" target="_self"><i class="eg-icon-forward"></i></a>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </li>
+                            </ng-template>
                             <!-- <li class="filterall filter-gallery filter-sports-massage filter-swedish-massage filter-sports-massage filter-swedish-massage eg-washington-massage-wrapper eg-post-id-211" data-cobblesh="1" data-cobblesw="1" data-date="1459261777">
                                 <div class="esg-media-cover-wrapper">
                                     <div class="esg-entry-media"><img alt="" src="./assets/public/images/image-2-1.jpg"></div>
