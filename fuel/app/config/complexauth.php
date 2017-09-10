@@ -49,7 +49,7 @@ return array(
     'table_name'            => 'vsvn_user',
     'table_columns'         => array(\DB::expr('vsvn_user.id AS id'), 'm_user.*'),
     'table_group_name'      => 'vsvn_group',
-    'table_group_columns'   => array('m_user.*'),
+    'table_group_columns'   => array('vsvn_user.*'),
     'guest_login'           => true,
     'groups'                => $arrGroups,
     'roles'                 => $arrRole,
