@@ -56,7 +56,18 @@ export class SlideComponent implements OnInit {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
-					this.Items = res.data;
+					var items = res.data;
+					items.forEach(item => {
+						var image = JSON.parse(item.image);
+						if(image) {
+							item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
+							item['preview_image'] = 'assets/public/images/3-2.jpg';
+						}
+						
+					});
+					this.Items = items;
+
+					console.log(this.Items)
 
 					// this._ScriptService.load('custom').then(data => {
 					// 	console.log('33333333333333333333custom')

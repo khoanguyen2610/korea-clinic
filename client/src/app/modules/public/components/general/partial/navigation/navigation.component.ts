@@ -62,7 +62,6 @@ export class NavigationComponent implements OnInit {
 		this._ServiceCategoryService.getListData(params).subscribe(res => {
 			if (res.status == 'success') {
 				this.serviceCategories = res.data;
-				console.log(this.serviceCategories)
 			}
 		});
 

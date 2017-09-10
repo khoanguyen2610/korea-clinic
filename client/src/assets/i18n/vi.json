@@ -94,7 +94,8 @@
     "enter_your_subject": "Tiêu đề",
     "enter_your_message": "Nội Dung",
     "send_message": "Gửi",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "filter_all": "Lọc - Tất cả"
   },
   "MODULE": {
     "home": "trang-chu",
