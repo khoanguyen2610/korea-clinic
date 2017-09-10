@@ -65,6 +65,7 @@ export class PublicComponent  {
 				// 
 
 			// this.initLayout();
+			this.initFullRow();
 			setTimeout(() => {
 				JACQUELINE_STORAGE['theme_init_counter'] = 0;
 				jacqueline_init_actions();
@@ -106,6 +107,37 @@ export class PublicComponent  {
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
+	}
+
+	initFullRow() {
+		var $elements = jQuery('[data-sc-full-width="true"]');
+        jQuery.each($elements, function(key, item) {
+            var $el = jQuery(this);
+            $el.addClass("sc_hidden");
+            var $el_full = $el.next(".sc_row-full-width");
+            if ($el_full.length || ($el_full = $el.parent().next(".sc_row-full-width")), $el_full.length) {
+                var el_margin_left = parseInt($el.css("margin-left"), 10),
+                    el_margin_right = parseInt($el.css("margin-right"), 10),
+                    offset = 0 - $el_full.offset().left - el_margin_left,
+                    width = jQuery(window).width();
+                if ($el.css({
+                        position: "relative",
+                        left: offset,
+                        "box-sizing": "border-box",
+                        width: jQuery(window).width()
+                    }), !$el.data("scStretchContent")) {
+                    var padding = -1 * offset;
+                    0 > padding && (padding = 0);
+                    var paddingRight = width - padding - $el_full.width() + el_margin_left + el_margin_right;
+                    0 > paddingRight && (paddingRight = 0), $el.css({
+                        "padding-left": padding + "px",
+                        "padding-right": paddingRight + "px"
+                    })
+                }
+                $el.attr("data-sc-full-width-init", "true"), $el.removeClass("sc_hidden")
+                console.log('tét2')
+            }
+        }), jQuery(document).trigger("sc-full-width-row", $elements)
 	}
 
 	initLayout() {
@@ -289,7 +321,6 @@ export class PublicComponent  {
 	                        })
 	                    }
 	                    $el.attr("data-sc-full-width-init", "true"), $el.removeClass("sc_hidden")
-	                    console.log('tét')
 	                }
 	            }), $(document).trigger("sc-full-width-row", $elements)
 	        }
