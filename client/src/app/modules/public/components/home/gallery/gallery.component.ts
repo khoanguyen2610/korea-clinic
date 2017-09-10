@@ -43,6 +43,7 @@ export class GalleryComponent implements OnInit {
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this._Configuration.language_code);
+		params.set('item_status', 'active');
 		params.set('limit', String(this.number_item));
 		this._GalleryService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
