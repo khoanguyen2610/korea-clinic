@@ -31,7 +31,7 @@
 											{{ Item['title'] }}
 											<div class="post_info">
 												<span class="post_info_item post_info_posted">
-													<a href="single-post.html" class="post_info_date date updated" [attr.content]="Item['date']">{{ Item['date'] | date }}</a>
+													<a href="single-post.html" class="post_info_date date updated" [attr.content]="Item['created_at']">{{ Item['created_format_date'] }}</a>
 												</span>
 											</div>
 											<div [innerHTML]="Item['content']"></div>
@@ -120,6 +120,23 @@
                                                             <li class="cat-item"><a href="#">Masonry 2 columns</a>
                                                             </li>
                                                             <li class="cat-item"><a href="#">Masonry 3 columns</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sc_accordion_item">
+                                            <h5 class="sc_accordion_title">
+                                                <span class="sc_accordion_icon"></span>
+                                                {{ 'PUBLIC.news' | translate }}
+                                            </h5>
+                                            <div class="sc_accordion_content">
+                                                <div class="text_column content_element">
+                                                    <div class="wrapper">
+                                                        <ul>
+                                                            <li class="cat-item" *ngFor="let item of news_categories">
+                                                                <a [routerLink]="['/'+ controller, language_code, item.item_key, item.title | niceurl]">{{ item.title }}</a>
                                                             </li>
                                                         </ul>
                                                     </div>

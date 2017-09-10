@@ -151,9 +151,9 @@ export class SlideFormComponent implements OnInit {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
+							form.reset();
 							Item = new Slide();
 							Item['language_code'] = lang;
-							form.reset();
 							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');

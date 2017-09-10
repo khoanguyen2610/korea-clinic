@@ -68,6 +68,9 @@ export class FaqListComponent implements OnInit {
 		});
 	}
 
+	getAction(){
+		return 'list';
+	}
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
