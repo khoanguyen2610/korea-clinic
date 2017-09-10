@@ -28,6 +28,7 @@ export class ServiceCategoryFormComponent implements OnInit {
 	Item_vi = new ServiceCategory();
 	Item_en = new ServiceCategory();
 	Items: Array<any> = [];
+	uploadProgress: any;
 
 	constructor(
 		private _AuthService: AuthService,
@@ -97,38 +98,66 @@ export class ServiceCategoryFormComponent implements OnInit {
 
 	onSubmit(form: NgForm){
 		this.is_validated = this.validateRequiredField();
-		if (this.is_validated) { // Check form is valid
-			this.Items.forEach(Item => {
-				let paramData: URLSearchParams = new URLSearchParams();
-				// Prepare params
-				if(this._params.method == 'update'){
-					if(Item['item_key']) {
-						this.item_key = Item['item_key'];
-					}
+		if(!this.is_validated){
+			return;
+		}
+
+		this.Items.forEach(Item => {
+			let formData: FormData = new FormData();
+
+			let uploader = Item['image'];
+				var current_image = [];
+				if (!(uploader instanceof Object) && typeof uploader != 'undefined') {
+					current_image = JSON.parse(Item['image']);
 				}
 
-				paramData.set('item_key', this.item_key);
-				paramData.set('language_code', Item['language_code']);
-				paramData.set('title', Item['title']);
-				paramData.set('description', Item['description']);
-				paramData.set('parent', Item['parent']);
+				if (uploader instanceof Object && uploader.queue.length) {
+					for (let key in uploader.queue) {
+						var upload = uploader.queue[key]._file;
+						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+						var objUpload = new Blob([upload]);
 
-				this._ServiceCategoryService.save(paramData, Item['id']).subscribe(res => {
+						if (upload['id']) {
+						} else {
+							formData.append("image[]", objUpload, upload.name);
+						}
+						current_image.push(upload);
+					}
+				}
+				// current_image for check to remove existing image
+				formData.append("current_image", JSON.stringify(current_image));
+
+			if(this._params.method == 'create'){
+				formData.append('item_key', this.item_key);
+			}
+
+			formData.append('item_key', this.item_key);
+			formData.append('language_code', Item['language_code']);
+			formData.append('title', Item['title']);
+			formData.append('description', Item['description']);
+			formData.append('parent', Item['parent']);
+
+			this._ServiceCategoryService.getObserver().subscribe(progress => {
+				this.uploadProgress = progress;
+			});
+			try {
+				this._ServiceCategoryService.upload(formData, Item['id']).then((res) => {
 					if (res.status == 'success') {
-						if (this._params.method == 'create') {
+						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
 							Item = new ServiceCategory();
 							Item['language_code'] = lang;
-							this.initData();
+							this.generateItemKey();
 						}
-						this._ToastrService.success('Record has been saved successfully.');
+						this._ToastrService.success('Record has been saved successfully');
 					}
 
 				});
-			});
+			} catch (error) {
+				document.write(error)
+			}
 
-
-		}
+		});
 
 	}
 
@@ -143,6 +172,17 @@ export class ServiceCategoryFormComponent implements OnInit {
 		this.is_validated = true;
 
 		this.generateItemKey();
+	}
+
+	onSetImage(obj){
+		switch(this.language_code){
+			case 'vi':
+				this.Item_vi.image = obj;
+				break;
+			case 'en':
+				this.Item_en.image = obj;
+				break;
+		}
 	}
 
 	generateItemKey() {

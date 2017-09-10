@@ -46,7 +46,9 @@
     "url": "Url",
     "feature": "Feature",
     "drag_and_drop_files": "Drag and drop files",
-    "choose_file": "Choose file"
+    "choose_file": "Choose file",
+    "before_after": "Before After",
+    "before_after_management": "Before After Management"
   },
   "PUBLIC": {
     "equipment": "Equipment",

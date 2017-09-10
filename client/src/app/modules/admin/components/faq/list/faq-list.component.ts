@@ -129,7 +129,7 @@ export class FaqListComponent implements OnInit {
 		this._FaqService.deleteItemKey(this.delete_item_key).subscribe(res => {
 			if(res.status == 'success'){
 				this._ToastrService.success('Deleted!');
-				this.DTList.ajax.url(this._FaqService._list_data_URL).load();
+				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
 	}
