@@ -61,29 +61,10 @@ export class SlideComponent implements OnInit {
 						var image = JSON.parse(item.image);
 						if(image) {
 							item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
-							item['preview_image'] = 'assets/public/images/3-2.jpg';
 						}
 						
 					});
 					this.Items = items;
-
-					console.log(this.Items)
-
-					// this._ScriptService.load('custom').then(data => {
-					// 	console.log('33333333333333333333custom')
-					// 	if (jQuery(".rev_slider").length > 0) { initRevSlider() };
-					// 	if (jQuery(".esg-grid").length > 0) { initEssGrid() };
-					// 	itemsmenu();
-
-					// }).catch(error => console.log(error));
-
-					// this._ScriptService.load('core_init').then(data => {
-					// 	JACQUELINE_STORAGE['theme_init_counter'] = 0;
-					// 	jacqueline_init_actions();
-
-
-
-					// }).catch(error => console.log(error));
 				}
 
 

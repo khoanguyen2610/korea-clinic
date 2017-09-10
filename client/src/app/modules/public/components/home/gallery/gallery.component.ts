@@ -66,8 +66,10 @@ export class GalleryComponent implements OnInit {
 						}
 						
 					});
-
 					this.Items = items;
+
+
+					console.log(this.Items)
 				}
 
 			}
