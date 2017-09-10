@@ -53,6 +53,7 @@ define('MAILTEMPLATE_PATH',realpath(__DIR__.'/../public/files/system/mail_templa
 define('EQUIPMENT_DIR', 'equipment/');
 define('GALLERY_DIR', 'gallery/');
 define('NEWS_DIR', 'news/');
+define('SERVICE_CATEGORY_DIR', 'service_category/');
 define('SERVICE_DIR', 'service/');
 define('SLIDE_DIR', 'slide/');
 define('STAFF_DIR', 'staff/');

@@ -134,7 +134,7 @@ export class NewsCategoryListComponent implements OnInit {
 		this._NewsCategoryService.delete(this.delete_id).subscribe(res => {
 			if(res.status == 'success'){
 				this._ToastrService.success('Record has been deleted successfully.');
-				this.DTList.ajax.url(this._NewsCategoryService._list_data_URL).load();
+				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
 	}

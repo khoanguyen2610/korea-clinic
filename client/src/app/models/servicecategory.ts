@@ -7,4 +7,5 @@ export class ServiceCategory {
 	public parent: number;
 	public level: number;
 	public language_name: string;
+	public image: any;
 }

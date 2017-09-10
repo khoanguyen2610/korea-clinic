@@ -22,10 +22,18 @@ class Controller_ServiceCategory extends \Controller_API {
 		$param = \Input::param();
         $data     = \Model_ServiceCategory::getAll($param);
 
-		foreach ($data as $key => $value) {
+		foreach ($data as $k => $v) {
 			if(isset($param['get_list_services']) && ($param['get_list_services'] || $param['get_list_services'] == 'true')){
-				$data[$key]->list_services = \Model_Service::getAll(['service_category_id' => $value->id]);
+				$data[$k]->list_services = \Model_Service::getAll(['service_category_id' => $v->id]);
 			}
+
+			//generate image url
+            $image = json_decode($v->image);
+            $param_img = ['filepath' => isset($image->filepath)? base64_encode(SERVICE_CATEGORY_DIR . $image->filepath): null,
+                            'filename' => isset($image->filename)? base64_encode($image->filename): null,
+                            'width' => 300,
+                            ];
+            $data[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
 		}
 
 		/*==================================================
@@ -109,6 +117,73 @@ class Controller_ServiceCategory extends \Controller_API {
 
 				//Generate random item key
 				empty($pk) && !isset($arrData['item_key']) && $arrData['item_key'] = \Vision_Common::randomItemKey();
+
+				/*============================================
+                 * Config Upload File
+                 *============================================*/
+                $today_dir = date('Ymd');
+                $folder_name = SERVICE_CATEGORY_DIR;
+                if(\Input::file()){
+                    $has_upload = true;
+
+                    if(empty($errors)){
+                        try{
+                            \File::read_dir(FILESPATH . $folder_name . $today_dir, 0, null);
+                        }catch(\FileAccessException $e){
+                            \File::create_dir(FILESPATH  . $folder_name, $today_dir, 0777);
+                        }
+                        \Upload::process([
+                            'path' => FILESPATH . $folder_name . $today_dir . '/',
+                            'max_size' => '5242880',
+                            'ext_whitelist' => ['jpg', 'jpeg', 'gif', 'png'],
+                            'suffix' => '_'.strtotime('now'). rand(0, 999),
+                            'normalize' => true
+                        ]);
+                        $upload_valid = \Upload::is_valid();
+                    }else{
+                        $upload_valid = !$has_upload;
+                    }
+                }else{
+                    $upload_valid = !($has_upload = false);
+                }
+
+                /*============================================
+                 * Upload file
+                 *============================================*/
+				$arrUploadImage = [];
+                if($has_upload){
+                    \Upload::save();
+
+                    foreach(\Upload::get_files() as $file) {
+                        //==== Save into database
+                        $arrFiles = ['filename' => $file['name'],
+                                    'filepath' => $today_dir . '/' . $file['saved_as']];
+
+                        //Now just save first image
+                        // $arrData['image'] = json_encode($arrFiles);
+                        break;
+                    }
+					//Now just save first image
+					$arrUploadImage = $arrFiles;
+                }
+
+				if(!empty($pk)){
+					if(!empty($param['current_image']) && $param['current_image'] != 'null'){
+						$current_images = json_decode($param['current_image']);
+						$arr_current_images = [];
+						// foreach ($current_images as $k => $v) {
+							if(isset($current_images->filename) && isset($current_images->filepath)){
+								$arr_current_images = ['filename' => $current_images->filename,
+		                                    			'filepath' => $current_images->filepath];
+							}
+						// }
+						if(!empty($arr_current_images)){
+							$arrUploadImage = $arr_current_images;
+						}
+						// $arrUploadImage = array_values($arrUploadImage);
+					}
+				}
+				$arrData['image'] = json_encode($arrUploadImage);
 
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();

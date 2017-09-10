@@ -80,11 +80,9 @@ export class StaffListComponent implements OnInit {
 					}
 
 				}
-				console.log(this.items);
 
 			}
 		});
-		console.log('StaffListComponent');
 	}
 
 	getAction(){
