@@ -66,14 +66,20 @@ export class NewsCategoryFormComponent implements OnInit {
 						if (res.data == null) {
 							this._Router.navigate(['/admin/service-category/list']);
 						} else {
-
 							// Binding data for 2 langs
-							var Items = res.data;
-							for(let i in this.Items) {
-								if(Items[i]) {
-									this.Items[i] = Items[i];
-								}
-							}
+							let items = res.data;
+							setTimeout(() => {
+								items.forEach(item => {
+									switch(item['language_code']){
+										case 'vi':
+											this.Item_vi = item;
+											break;
+										case 'en':
+											this.Item_en = item;
+											break;
+									}
+								});
+							}, 500);
 						}
 					} else {
 						this._Router.navigate(['/admin/service-category/list']);
@@ -139,7 +145,6 @@ export class NewsCategoryFormComponent implements OnInit {
 		this.Item_vi.parent = 0;
 		this.Item_en.language_code = 'en';
 		this.Item_en.parent = 0;
-		this.Items = [this.Item_vi, this.Item_en];
 		this.is_validated = true;
 
 		this.generateItemKey();
@@ -156,6 +161,7 @@ export class NewsCategoryFormComponent implements OnInit {
 
 	validateRequiredField(){
 		let valid = true;
+		this.Items = [this.Item_vi, this.Item_en];
 
 		this.Items.forEach(Item => {
 			if(!Item['title']){
