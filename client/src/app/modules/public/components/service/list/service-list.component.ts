@@ -29,6 +29,7 @@ export class ServiceListComponent implements OnInit {
 	hashtagParams:any;
 	language_code: string;
 	curRouting: string;
+	module_name: string = 'service';
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -84,7 +85,15 @@ export class ServiceListComponent implements OnInit {
 
 		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				this.items = res.data;
+				let items = res.data;
+				items.forEach(item => {
+					var image = JSON.parse(item.image);
+					if(image) {
+						item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
+					}
+
+				});
+				this.items = items;
 			}
 		});
 	}
