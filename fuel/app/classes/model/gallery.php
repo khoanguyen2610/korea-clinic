@@ -106,9 +106,11 @@ class Model_Gallery extends \Orm\Model {
 							$arrImageUrl = [];
 							foreach ($image as $va) {
 								$param_img = ['filepath' => isset($va->filepath)? base64_encode(GALLERY_DIR . $va->filepath): null,
-		                                        'filename' => isset($va->filename)? base64_encode($va->filename): null,
-		                                        'width' => 300,
+		                                        'filename' => isset($va->filename)? base64_encode($va->filename): null
 		                                        ];
+								isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];				
+								//Last param
+								$param_img['file_extentsion'] = isset($va->filepath)? '.' . pathinfo($va->filepath, PATHINFO_EXTENSION): '.jpg';
 		                        $arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
 							}
 							$result[$k]->image_url = $arrImageUrl;
@@ -125,10 +127,13 @@ class Model_Gallery extends \Orm\Model {
 						$arrImageUrl = [];
 						foreach ($image as $va) {
 							$param_img = ['filepath' => isset($va->filepath)? base64_encode(GALLERY_DIR . $va->filepath): null,
-											'filename' => isset($va->filename)? base64_encode($va->filename): null,
-											'width' => 300,
+											'filename' => isset($va->filename)? base64_encode($va->filename): null
 											];
+							isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];
+							//Last param
+							$param_img['file_extentsion'] = isset($va->filepath)? '.' . pathinfo($va->filepath, PATHINFO_EXTENSION): '.jpg';
 							$arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
+
 						}
 						$result->image_url = $arrImageUrl;
 					}

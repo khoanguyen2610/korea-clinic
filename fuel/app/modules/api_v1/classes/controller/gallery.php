@@ -28,11 +28,14 @@ class Controller_Gallery extends \Controller_API {
 			$arrImageUrl = [];
 			if(!empty($image)){
 				foreach ($image as $img) {
-					$param_img = ['filepath' => isset($img->filepath)? base64_encode(NEWS_DIR . $img->filepath): null,
-		                            'filename' => isset($img->filename)? base64_encode($img->filename): null,
-		                            'width' => 300,
+					$param_img = ['filepath' => isset($img->filepath)? base64_encode(GALLERY_DIR . $img->filepath): null,
+		                            'filename' => isset($img->filename)? base64_encode($img->filename): null
 		                            ];
-					isset($param['image_resize_square']) && !empty($param['image_resize_square'])	&& $param_img['square'] = $param['image_resize_square'];
+					isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
+					isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
+
+					//Last param
+					$param['file_extentsion'] = isset($img->filepath)? '.' . pathinfo($img->filepath, PATHINFO_EXTENSION): null;
 					$arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
 				}
 			}

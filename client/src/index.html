@@ -43,6 +43,14 @@
 	<link href="assets/admin/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
 	<!-- END THEME LAYOUT STYLES -->
 	<link href="assets/admin/css/custom.css" rel="stylesheet" type="text/css" />
+	<script>
+	    var current_href = window.location.href;
+	    let current_domain = window.location.origin;
+	    current_href = current_href.replace(current_domain, '');
+	    if (current_href.match(/^\/?$/i)) {
+	        window.location.href = current_domain + '/admin';
+	    }
+	</script>
 </head>
 <body>
     <app-root></app-root>
