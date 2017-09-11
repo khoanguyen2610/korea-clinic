@@ -129,7 +129,7 @@ export class BeforeAfterListComponent implements OnInit {
 		this._BeforeAfterService.deleteItemKey(this.delete_item_key).subscribe(res => {
 			if(res.status == 'success'){
 				this._ToastrService.success('Deleted!');
-				this.DTList.ajax.url(this._BeforeAfterService._list_data_URL).load();
+				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
 	}

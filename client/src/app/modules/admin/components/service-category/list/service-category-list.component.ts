@@ -67,6 +67,7 @@ export class ServiceCategoryListComponent implements OnInit {
 			},
 			columns: [
 				{ 'data': null },
+				{ 'data': 'image_url' },
 				{ 'data': 'title' },
 				{ 'data': 'language_name' },
 				{ 'data': null },
@@ -78,9 +79,21 @@ export class ServiceCategoryListComponent implements OnInit {
 					targets: [0]
 				},
 				{
+					render: function (data, type, full) {
+						var html = '<img src="assets/admin/global/img/file.png" height="80">';
+						if(data){
+							html = '<img src="' + data + '" height="80">';
+						}
+						return html;
+					},
+					bSortable: false,
+					className: 'text-center',
+					targets: [1]
+				},
+				{
 					className: 'text-left',
 					orderable: false,
-					targets: [1]
+					targets: [2]
 				},
 				{
 					render: function(data, type, full) {
@@ -93,7 +106,7 @@ export class ServiceCategoryListComponent implements OnInit {
 					bSortable: false,
 					orderable: false,
 					className: 'text-center',
-					targets: [3]
+					targets: [4]
 				},
 			]
 		});
@@ -133,7 +146,7 @@ export class ServiceCategoryListComponent implements OnInit {
 		this._ServiceCategoryService.delete(this.delete_id).subscribe(res => {
 			if(res.status == 'success'){
 				this._ToastrService.success('Record has been deleted successfully.');
-				this.DTList.ajax.url(this._ServiceCategoryService._list_data_URL).load();
+				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
 	}

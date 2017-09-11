@@ -22,7 +22,7 @@ class Vision_Recursive {
                 if($value->parent == $parent){
                     $str = '-';
                     if($value->level == $level){
-                        $value->title = '+ ' . $value->title;
+                        $value->title =$value->title;
                     }else{
                         $value->title = '  ' . @str_repeat($str, $value->level) . ' ' . $value->title;
                     }

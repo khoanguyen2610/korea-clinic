@@ -80,7 +80,6 @@ export class ServiceListComponent implements OnInit {
 				},
 				{
 					render: function (data, type, full) {
-						console.log(data);
 						var html = '<img src="assets/admin/global/img/file.png" height="80">';
 						if(data){
 							html = '<img src="' + data + '" height="80">';
@@ -141,7 +140,7 @@ export class ServiceListComponent implements OnInit {
 		this._ServiceService.deleteItemKey(this.delete_item_key).subscribe(res => {
 			if(res.status == 'success'){
 				this._ToastrService.success('Deleted!');
-				this.DTList.ajax.url(this._ServiceService._list_data_URL).load();
+				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
 	}
