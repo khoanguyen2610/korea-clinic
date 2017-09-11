@@ -6,6 +6,7 @@ import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { AuthService, NewsService, NewsCategoryService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
+import * as moment from 'moment';
 
 // declare let $: any;
 // declare let moment: any;
@@ -29,6 +30,7 @@ export class NewsListComponent implements OnInit {
 	language_code: string;
 	curRouting: string;
 	module_name: string = 'news';
+	news_format_date: string = this._Configuration.news_format_date;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -82,6 +84,7 @@ export class NewsListComponent implements OnInit {
 			if(res.status == 'success'){
 				let items = res.data;
 				items.forEach(item => {
+					item['created_format_date'] = moment(item['created_at']).format(this.news_format_date);
 					var image = JSON.parse(item.image);
 					if(image) {
 						item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
@@ -91,6 +94,22 @@ export class NewsListComponent implements OnInit {
 				this.items = items;
 			}
 		});
+	}
+
+	ngAfterViewInit(){
+		setTimeout(() => {
+			let data = this.categories;
+			for(let i in data){
+				/* item_key of service_category*/
+				if(this._params.item_key){
+					let item_key = this._params.item_key;
+					if(item_key == data[i]['item_key'] && data[i]['language_code'] == this.language_code){
+						let category_id = data[i]['id'];
+						this.onFireClickFilter(category_id);
+					}
+				}
+			}
+		}, 500);
 	}
 
 	onFireClickFilter(filter_id){
