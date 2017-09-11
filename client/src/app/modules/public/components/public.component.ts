@@ -59,7 +59,7 @@ export class PublicComponent  {
 				let arr_split_routing = routing.split('/');
 
 				if (arr_split_routing.length > 1) {
-					var matches = routing.match(/detail|chi-tiet/g);
+					var matches = routing.match(/service\/detail|dich-vu\/chi-tiet|news\/detail|tin-tuc\/chi-tiet/g);
 					if (matches) {
 						this.template = 'blog';
 					}
@@ -67,17 +67,12 @@ export class PublicComponent  {
 			}
 
 
-
 			this.subscription = this._TranslateService.get('PUBLIC').subscribe((res: string) => {
 				this.module_name = res[str];
-				console.log(str)
-				console.log(this.module_name)
 			});
 
 			this._Configuration.language_code = String(this._LocalStorageService.get('language_code'));
 
-
-			console.log(this.template)
 			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {
 				//
 
