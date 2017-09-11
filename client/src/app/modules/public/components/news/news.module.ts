@@ -6,7 +6,7 @@ import { NewsDetailComponent, NewsListComponent } from './';
 
 @NgModule({
     declarations: [
-       NewsDetailComponent, NewsListComponent
+		NewsDetailComponent, NewsListComponent
     ],
     imports: [ CoreModule, Routing ]
 })
