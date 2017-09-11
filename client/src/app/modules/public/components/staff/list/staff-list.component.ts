@@ -22,11 +22,12 @@ export class StaffListComponent implements OnInit {
 	private querySubscription: Subscription;
 
 	controller: string = 'chuyen-gia';
-	items: Array<any> = [];
+	Items: Array<any> = [];
 	_params: any;
 	queryParams: any;
 	language_code: string;
 	modules: any;
+	number_item: number = 4;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -57,34 +58,71 @@ export class StaffListComponent implements OnInit {
 		params.set('image_resize_square', String(this._Configuration.image_resize_square));
 		params.set('item_status','acitve');
 		this._StaffService.getListAll(params).subscribe(res => {
+			console.log(res)
 			if(res.status == 'success'){
-				let data = res.data;
-				let temp = {
-					'items': [],
-					'timestamp': 0
-				};
+				// let data = res.data;
+				// let temp = {
+				// 	'items': [],
+				// 	'timestamp': 0
+				// };
 
-				let j = 0;
-				let c = res.data.length;
-				for(let i = 0; i < data.length; i++){
-					if(i && (i % 4 == 0)){
-						this.items.push(temp);
-						temp = {
-							'items': [],
-							'timestamp': 0
-						};
+				// let j = 0;
+				// let c = res.data.length;
+				// for(let i = 0; i < data.length; i++){
+				// 	if(i && (i % 4 == 0)){
+				// 		this.items.push(temp);
+				// 		temp = {
+				// 			'items': [],
+				// 			'timestamp': 0
+				// 		};
+				// 	}
+
+				// 	temp.items.push(data[i]);
+				// 	temp.timestamp = new Date().getTime();
+
+				// 	j = i + 1;
+				// 	if((c == j) && (j % 4 != 0)){
+				// 		this.items.push(temp);
+				// 	}
+
+				// }
+
+				// Process Array include many array with 4 elements
+				var items = res.data;
+
+				var next = 0;
+				if (items.length <= this.number_item) {
+					for (let i = 0; i < items.length; i++) {
+
+						if (next < this.number_item) {
+							if (!next) {
+								var arr_item_four = [];
+							}
+							arr_item_four.push(items[i]);
+
+							next++;
+						}
 					}
+					this.Items.push(arr_item_four);
+				} else {
+					for (let i = 0; i < items.length; i++) {
 
-					temp.items.push(data[i]);
-					temp.timestamp = new Date().getTime();
+						if (next < this.number_item) {
+							if (!next) {
+								var arr_item_four = [];
+							}
+							arr_item_four.push(items[i]);
 
-					j = i + 1;
-					if((c == j) && (j % 4 != 0)){
-						this.items.push(temp);
+							next++;
+						} else {
+							next = 0;
+							this.Items.push(arr_item_four);
+						}
+
+
 					}
-
 				}
-				console.log(this.items)
+				console.log(this.Items)
 
 			}
 		});
