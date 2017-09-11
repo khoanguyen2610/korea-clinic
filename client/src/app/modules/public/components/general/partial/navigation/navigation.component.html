@@ -21,10 +21,10 @@
       <a [routerLink]="[ '/' + modules.service]" [routerLinkActive]="['active']">{{'PUBLIC.service' | translate}}</a>
       <ul class="sub-menu">
         <li class="menu-item menu-item-has-children" *ngFor="let sCategory of serviceCategories">
-          <a [routerLink]="[ '/' + modules.service, modules.lang, sCategory.item_key, sCategory.title | niceurl]">{{ sCategory.title }}</a>
+          <a [routerLink]="[ '/' + modules.service, sCategory.item_key, sCategory.title | niceurl]">{{ sCategory.title }}</a>
           <ul class="sub-menu">
             <li class="menu-item" *ngFor="let s of sCategory['list_services']">
-              <a [routerLink]="[ '/' + modules.service,  modules.detail, modules.lang, s.item_key, sCategory.title | niceurl ]" [routerLinkActive]="['active']">{{ s.title }}</a>
+              <a [routerLink]="[ '/' + modules.service,  modules.detail, s.item_key, sCategory.title | niceurl ]" [routerLinkActive]="['active']">{{ s.title }}</a>
             </li>
           </ul>
         </li>
@@ -37,7 +37,7 @@
       <a [routerLink]="[ '/' + modules.news]" [routerLinkActive]="['active']">{{'PUBLIC.news' | translate}}</a>
       <ul class="sub-menu">
         <li class="menu-item" *ngFor="let nCategory of newsCategories">
-          <a [routerLink]="[ '/' + modules.news, modules.lang, nCategory.item_key, nCategory.title | niceurl]" [routerLinkActive]="['active']">{{ nCategory.title }}</a>
+          <a [routerLink]="[ '/' + modules.news, nCategory.item_key, nCategory.title | niceurl]" [routerLinkActive]="['active']">{{ nCategory.title }}</a>
         </li>
       </ul>
     </li>

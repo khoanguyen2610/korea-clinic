@@ -60,9 +60,8 @@ export class PublicComponent  {
 			if(this.template_home.indexOf(str) > -1) {
 				this.template = 'slide';
 			}
-			console.log('erererr')
 			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {
-				// 
+				//
 
 			// this.initLayout();
 			this.initFullRow();
@@ -72,9 +71,9 @@ export class PublicComponent  {
 				if (jQuery(".rev_slider").length > 0) { initRevSlider() };
 				if (jQuery(".esg-grid").length > 0) { initEssGrid() };
 				itemsmenu();
-				
-				
-	            
+
+
+
 			}, 1000)
 
 
@@ -351,6 +350,6 @@ export class PublicComponent  {
 	            i++
 	        }
 	    });
-	
+
 	}
 }

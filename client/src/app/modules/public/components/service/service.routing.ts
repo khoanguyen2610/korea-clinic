@@ -8,11 +8,11 @@ const APP_ROUTES: Routes = [
 	{ path: '',
 		children: [
 			{path: '', component: ServiceListComponent},
-			{path: ':language_code/:category_id/:title', component: ServiceListComponent},
+			{path: '/:category_id/:title', component: ServiceListComponent},
 		]
 	},
-	{ path: 'detail/:language_code/:item_key/:title', component: ServiceDetailComponent },
-	{ path: 'chi-tiet/:language_code/:item_key/:title', component: ServiceDetailComponent },
+	{ path: 'detail/:item_key/:title', component: ServiceDetailComponent },
+	{ path: 'chi-tiet/:item_key/:title', component: ServiceDetailComponent },
 	{ path: 'before-after', component: BeforeAfterComponent },
 	{ path: 'truoc-sau', component: BeforeAfterComponent },
 ];
