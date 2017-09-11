@@ -20,7 +20,7 @@
 					<div class="esg-clear-no-height"></div>
 					<ul>
 						<ng-template ngFor let-item [ngForOf]="Items">
-							<li [ngClass]="'filterall filter-gallery filter-massage-therapy filter-massage-therapy eg-roosevelt-massage-wrapper eg-post-id-209 filter-' + item.title" data-date="1459261695" *ngFor="let preview_image of item.preview_images">
+							<li [ngClass]="'filterall filter-gallery filter-massage-therapy filter-massage-therapy eg-roosevelt-massage-wrapper eg-post-id-209 filter-' + item.title" data-date="1459261695" *ngFor="let image_url of item.image_url">
 								<div class="esg-media-cover-wrapper">
 									<div class="esg-entry-media esg-shifttotop" data-delay="0">
 										<img [src]="image_url" alt="">

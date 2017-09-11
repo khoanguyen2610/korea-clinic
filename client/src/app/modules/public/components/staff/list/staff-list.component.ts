@@ -122,7 +122,6 @@ export class StaffListComponent implements OnInit {
 
 					}
 				}
-				console.log(this.Items)
 
 			}
 		});

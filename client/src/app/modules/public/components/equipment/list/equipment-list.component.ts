@@ -40,10 +40,12 @@ export class EquipmentListComponent implements OnInit {
 	ngOnInit() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
+		params.set('image_resize_square', '480');
 		params.set('item_status','active');
 		this._EquipmentService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;
+				console.log(this.items)
 			}
 		});
 		console.log('EquipmentListComponent');
