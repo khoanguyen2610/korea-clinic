@@ -17,12 +17,12 @@
 											    <div class="sc_team_item_avatar">
 											        <img alt="" [src]="item.image_url">
 											        <div class="sc_team_item_hover">
-											            <a [routerLink]="[ '/' + modules.staff, modules.detail, modules.lang, i.item_key, i.fullname | niceurl]" class="sc_team_item_icon icon-email19"></a>
+											            <a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]" class="sc_team_item_icon icon-email19"></a>
 											        </div>
 											    </div>
 											    <div class="sc_team_item_info">
 											        <h5 class="sc_team_item_title">
-											            <a [routerLink]="[ '/' + modules.staff, modules.detail, modules.lang, i.item_key, i.fullname | niceurl]">{{ item.fullname }}</a>
+											            <a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]">{{ item.fullname }}</a>
 											        </h5>
 											        <div class="sc_team_item_position">Massagist</div>
 											    </div>
@@ -42,12 +42,12 @@
                                                 <div class="sc_team_item_avatar">
                                                     <img alt="" [src]="i.image_url">
                                                     <div class="sc_team_item_hover">
-                                                        <a [routerLink]="[ '/' + modules.staff, modules.detail, modules.lang, i.item_key, i.fullname | niceurl]" class="sc_team_item_icon"></a>
+                                                        <a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]" class="sc_team_item_icon"></a>
                                                     </div>
                                                 </div>
                                                 <div class="sc_team_item_info">
                                                     <h5 class="sc_team_item_title">
-                                                        <a [routerLink]="[ '/' + modules.staff, modules.detail, modules.lang, i.item_key, i.fullname | niceurl]">{{ i.fullname }}</a>
+                                                        <a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]">{{ i.fullname }}</a>
                                                     </h5>
                                                     <div class="sc_team_item_position">{{ i.position }}</div>
                                                 </div>

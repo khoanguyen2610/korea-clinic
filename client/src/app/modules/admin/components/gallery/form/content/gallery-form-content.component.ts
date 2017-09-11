@@ -64,9 +64,9 @@ export class GalleryFormContentComponent implements OnInit {
 				let filename = image.filename;
 				let filepath = image.filepath;
 				var file_type = '';
-			if (filename) {
-				file_type = filename.split('.');
-			}
+				if (filename) {
+					file_type = filename.split('.');
+				}
 				let image_url = '';
 				if (filename) {
 					image_url = this.Item['image_url'][i];
