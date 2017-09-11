@@ -55,7 +55,6 @@ export class NewsListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('NewsListComponent');
 	}
 
 	loadPage(){
@@ -71,7 +70,7 @@ export class NewsListComponent implements OnInit {
 		});
 
 		if(this._params.category_id){
-			params.set('news_category_id',this._params.category_id);
+			params.set('item_key',this._params.item_key);
 		}
 
 		this._NewsService.getListAll(params).subscribe(res => {
