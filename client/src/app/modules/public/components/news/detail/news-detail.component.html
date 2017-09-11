@@ -4,12 +4,12 @@
     <img alt="" [src]="Item['image_url']" width="100%">
     <div class="top_panel_image_hover"></div>
     <div class="top_panel_image_header">
-        <!-- <h1 class="top_panel_image_title">{{ module_name }}</h1> -->
+        <h1 class="top_panel_image_title">{{ Item['title'] }}</h1>
     </div>
 </section>
 <!-- Background Header -->
 
-<div [ngClass]="page_content_wrap">
+<div class="page_content_wrap">
     <div class="content_wrap">
         <div class="content">
             <article class="post_item post_item_single page">
@@ -43,13 +43,13 @@
                                                         </div> -->
                                                         <div class="post_content clearfix">
                                                             <h1 class="post_title entry-title">
-                                                                <span class="post_icon icon-book-open"></span>
+                                                                <!-- <span class="post_icon icon-book-open"></span>
                                                                 {{ Item['title'] }}
                                                                 <div class="post_info">
                                                                     <span class="post_info_item post_info_posted">
                                                                         <a href="single-post.html" class="post_info_date date updated" [attr.content]="Item['created_at']">{{ Item['created_format_date'] }}</a>
                                                                     </span>
-                                                                </div>
+                                                                </div> -->
                                                                 <div [innerHTML]="Item['content']"></div>
                                                             </h1>
                                                         </div>
@@ -65,7 +65,7 @@
                                             <div class="widgetised_column content_element sidebar">
                                                 <div class="wrapper">
                                                     <aside class="widget widget_categories">
-														<h5 class="widget_title">Categories</h5>
+														<h5 class="widget_title">{{ 'PUBLIC.category' | translate }}</h5>
 														<div class="sc_accordion" data-active="0">
 															<div class="sc_accordion_item" [ngClass]="{ 'odd first': i == 0 }" *ngFor="let item of service_categories; let i = index">
 																<ng-template [ngIf]="item.list_services.length">
@@ -117,14 +117,14 @@
 					                                            <h5 class="sc_accordion_title">
 					                                                <a [routerLink]="['/'+ service_controller + '/' + action_before_after]">
 					                                                	<span class="sc_accordion_icon"></span>
-					                                                	Hình Ảnh Trước & Sau
+                                                                        {{ 'PUBLIC.before_after' | translate }}
 					                                                </a>
 					                                            </h5>
 					                                        </div>
 					                                        <div class="sc_accordion_item">
 					                                            <h5 class="sc_accordion_title">
 					                                                <a [routerLink]="['/faq']"><span class="sc_accordion_icon "></span>
-					                                                Câu Hỏi Thường Gặp</a>
+                                                                    {{ 'PUBLIC.faq' | translate }}</a>
 					                                            </h5>
 					                                        </div>
 														</div>

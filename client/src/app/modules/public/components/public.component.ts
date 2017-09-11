@@ -59,7 +59,7 @@ export class PublicComponent  {
 				let arr_split_routing = routing.split('/');
 
 				if (arr_split_routing.length > 1) {
-					var matches = routing.match(/detail/g);
+					var matches = routing.match(/detail|chi-tiet/g);
 					if (matches) {
 						this.template = 'blog';
 					}
@@ -70,6 +70,8 @@ export class PublicComponent  {
 
 			this.subscription = this._TranslateService.get('PUBLIC').subscribe((res: string) => {
 				this.module_name = res[str];
+				console.log(str)
+				console.log(this.module_name)
 			});
 
 			this._Configuration.language_code = String(this._LocalStorageService.get('language_code'));
@@ -81,6 +83,7 @@ export class PublicComponent  {
 
 			// this.initLayout();
 			// this.initFullRow();
+			jQuery(window).resize();
 			setTimeout(() => {
 				JACQUELINE_STORAGE['theme_init_counter'] = 0;
 				jacqueline_init_actions();
