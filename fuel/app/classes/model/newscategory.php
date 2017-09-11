@@ -41,6 +41,7 @@ class Model_NewsCategory extends \Orm\Model {
                         ->order_by('SM.created_at', 'DESC');
 
 		//Query by params
+		if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
 		if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
 		if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 

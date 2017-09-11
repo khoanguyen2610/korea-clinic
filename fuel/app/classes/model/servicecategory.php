@@ -41,6 +41,7 @@ class Model_ServiceCategory extends \Orm\Model {
                         ->order_by('SM.created_at', 'DESC');
 
 		//Query by params
+		if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
 		if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
 		if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
@@ -91,7 +92,7 @@ class Model_ServiceCategory extends \Orm\Model {
                         $param_img = ['filepath' => isset($image->filepath)? base64_encode(SERVICE_CATEGORY_DIR . $image->filepath): null,
                                         'filename' => isset($image->filename)? base64_encode($image->filename): null
                                         ];
-						isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];				
+						isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];
 						isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];
 
 						//Last param
