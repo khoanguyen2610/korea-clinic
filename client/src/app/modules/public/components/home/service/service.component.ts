@@ -45,6 +45,7 @@ export class ServiceComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('recursive', 'false');
 		params.set('language_code', this.language_code);
+		params.set('image_resize_width', '480');
 		this._ServiceCategoryService.getListAll(params).subscribe(res => {
 
 			if(res.status == 'success'){

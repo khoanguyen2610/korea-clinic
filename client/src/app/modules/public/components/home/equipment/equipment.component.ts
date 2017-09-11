@@ -47,6 +47,7 @@ export class EquipmentComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this._Configuration.language_code);
 		params.set('limit', String(this.number_item));
+		params.set('image_resize_width', '1280');
 		this._EquipmentService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
@@ -57,7 +58,7 @@ export class EquipmentComponent implements OnInit {
 						if(image) {
 							item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
 						}
-						
+
 					});
 					this.Items = items;
 				}

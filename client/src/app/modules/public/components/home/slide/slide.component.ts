@@ -52,6 +52,7 @@ export class SlideComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);;
 		params.set('limit', String(this.number_item));
+		params.set('image_resize_width', '1280');
 		this._SlideService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements

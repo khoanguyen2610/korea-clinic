@@ -35,7 +35,7 @@ class Controller_Gallery extends \Controller_API {
 					isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
 
 					//Last param
-					$param['file_extentsion'] = isset($img->filepath)? '.' . pathinfo($img->filepath, PATHINFO_EXTENSION): null;
+					$param_img['file_extentsion'] = isset($img->filepath)? '.' . pathinfo($img->filepath, PATHINFO_EXTENSION): null;
 					$arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
 				}
 			}
@@ -157,7 +157,7 @@ class Controller_Gallery extends \Controller_API {
                         }
                         \Upload::process([
                             'path' => FILESPATH . $folder_name . $today_dir . '/',
-                            'max_size' => '5242880',
+                            'max_size' => '10485760',
                             'ext_whitelist' => ['jpg', 'jpeg', 'gif', 'png'],
                             'suffix' => '_'.strtotime('now'). rand(0, 999),
                             'normalize' => true

@@ -32,7 +32,7 @@ class Controller_BeforeAfter extends \Controller_API {
 			isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
 
 			//Last param
-			$param['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
+			$param_img['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
             $data[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
         }
 
@@ -68,7 +68,7 @@ class Controller_BeforeAfter extends \Controller_API {
 			isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
 
 			//Last param
-			$param['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
+			$param_img['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
             $items[$k]['image_url'] = \Uri::create('api/v1/system_general/image', [], $param_img);
         }
 
@@ -156,7 +156,7 @@ class Controller_BeforeAfter extends \Controller_API {
                         }
                         \Upload::process([
                             'path' => FILESPATH . $folder_name . $today_dir . '/',
-                            'max_size' => '5242880',
+                            'max_size' => '10485760',
                             'ext_whitelist' => ['jpg', 'jpeg', 'gif', 'png'],
                             'suffix' => '_'.strtotime('now'). rand(0, 999),
                             'normalize' => true

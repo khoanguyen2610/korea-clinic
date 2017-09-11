@@ -55,7 +55,7 @@ export class StaffListComponent implements OnInit {
 	ngOnInit() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
-		params.set('image_resize_square', String(this._Configuration.image_resize_square));
+		params.set('image_resize_square', '370');
 		params.set('item_status','acitve');
 		this._StaffService.getListAll(params).subscribe(res => {
 			console.log(res)

@@ -25,12 +25,11 @@ export class Configuration {
 	//======================== Static Option Or Variable =====================
 	public system_version = 'Version 2.0';
 	public upload_file_extension = ['jpg', 'jpeg', 'gif', 'png'];
-	public image_resize_square = 370;
 
 	//======================== Datatabe Configuration ========================
 	public DtbPageLength = 20;
 	public DtbLengthMenu = [10, 20, 50, 100];
-	public limit_file_size = 5*1024*1024; // 5Mb
+	public limit_file_size = 10*1024*1024; // 10Mb
 	public limit_files = 10;
 
 	//======================== Route State Change ========================

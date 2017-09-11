@@ -40,40 +40,20 @@ export class GalleryComponent implements OnInit {
 	}
 
 	ngAfterContentChecked() {
-	
+
 	}
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		params.set('limit', String(this.number_item));
+		params.set('image_resize_width', '1280');
 		this._GalleryService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
-<<<<<<< HEAD
 					this.Items = res.data;
-=======
-					// this.Items = res.data;
-					// console.log(this.Items)
-
-					var items = res.data;
-					items.forEach(item => {
-						var images = JSON.parse(item.image);
-						var preview_images = [];
-						if(images) {
-							images.forEach(image => {
-								var preview_image = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
-								preview_images.push(preview_image);
-							});
-							item['preview_images'] = preview_images;
-						}
-
-					});
-					this.Items = items;
->>>>>>> 824b258cc4d06a6fa1f4e12a92b7af5ac16f05c6
 				}
-
 			}
 		});
 	}
