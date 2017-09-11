@@ -98,7 +98,9 @@
     "enter_your_subject": "Enter your subject",
     "enter_your_message": "Enter your message",
     "send_message": "Send Message",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "filter_all": "Filter - All",
+    "expert": "Expert"
   },
   "MODULE": {
     "home": "home",

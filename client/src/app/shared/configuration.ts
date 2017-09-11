@@ -25,6 +25,7 @@ export class Configuration {
 	//======================== Static Option Or Variable =====================
 	public system_version = 'Version 2.0';
 	public upload_file_extension = ['jpg', 'jpeg', 'gif', 'png'];
+	public image_resize_square = 370;
 
 	//======================== Datatabe Configuration ========================
 	public DtbPageLength = 20;
