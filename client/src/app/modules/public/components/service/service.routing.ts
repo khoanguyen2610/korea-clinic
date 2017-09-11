@@ -8,7 +8,7 @@ const APP_ROUTES: Routes = [
 	{ path: '',
 		children: [
 			{path: '', component: ServiceListComponent},
-			{path: '/:category_id/:title', component: ServiceListComponent},
+			{path: ':item_key/:title', component: ServiceListComponent},
 		]
 	},
 	{ path: 'detail/:item_key/:title', component: ServiceDetailComponent },

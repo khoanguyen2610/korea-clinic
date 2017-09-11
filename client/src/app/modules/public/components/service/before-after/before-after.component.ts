@@ -37,9 +37,10 @@ export class BeforeAfterComponent implements OnInit {
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
 
-		this._ServiceCategoryService.getListData(params).subscribe(res => {
+		this._ServiceCategoryService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.categories = res.data;
+				console.log(res.data);
 			}
 		});
 
