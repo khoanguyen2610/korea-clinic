@@ -4,7 +4,7 @@ export class Staff {
 	public item_key: string;
 	public fullname: string;
 	public position: string;
-	public description: string;
-	public content: string;
+	public description: string = '';
+	public content: string = '';
 	public image: any;
 }

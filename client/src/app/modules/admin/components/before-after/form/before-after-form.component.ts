@@ -7,6 +7,7 @@ import { BeforeAfterFormContentComponent } from './content/before-after-form-con
 import { BeforeAfter } from '../../../../../models';
 import { AuthService, BeforeAfterService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
@@ -80,7 +81,7 @@ export class BeforeAfterFormComponent implements OnInit {
 											break;
 									}
 								});
-							}, 500);
+							}, 400);
 						}
 					}else{
 						this._Router.navigate(['/admin/before-after/list']);
@@ -150,9 +151,7 @@ export class BeforeAfterFormComponent implements OnInit {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
-							form.reset();
-							Item = new BeforeAfter();
-							Item['language_code'] = lang;
+							this.onReset(lang);
 							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
@@ -165,6 +164,7 @@ export class BeforeAfterFormComponent implements OnInit {
 
 		});
 
+		this.is_validated = true;
 	}
 
 	onSetImage(obj){
@@ -174,6 +174,21 @@ export class BeforeAfterFormComponent implements OnInit {
 				break;
 			case 'en':
 				this.Item_en.image = obj;
+				break;
+		}
+	}
+
+	onReset(lang: string){
+		switch (lang) {
+			case 'vi':
+				this.Item_vi = new BeforeAfter();
+				this.Item_vi.language_code = lang;
+				this.Item_vi.image = new FileUploader({});
+				break;
+			case 'en':
+				this.Item_en = new BeforeAfter();
+				this.Item_en.language_code = lang;
+				this.Item_en.image = new FileUploader({});
 				break;
 		}
 	}
