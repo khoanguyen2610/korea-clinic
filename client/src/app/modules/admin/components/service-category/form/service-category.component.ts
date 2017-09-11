@@ -7,6 +7,7 @@ import { ServiceCategoryFormContentComponent } from './content/service-category-
 import { ServiceCategory } from '../../../../../models';
 import { AuthService, ServiceCategoryService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
@@ -81,7 +82,7 @@ export class ServiceCategoryFormComponent implements OnInit {
 											break;
 									}
 								});
-							}, 500);
+							}, 400);
 						}
 					} else {
 						this._Router.navigate(['/admin/service-category/list']);
@@ -152,9 +153,7 @@ export class ServiceCategoryFormComponent implements OnInit {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
-							form.reset();
-							Item = new ServiceCategory();
-							Item['language_code'] = lang;
+							this.onReset(lang);
 							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
@@ -167,6 +166,7 @@ export class ServiceCategoryFormComponent implements OnInit {
 
 		});
 
+		this.is_validated = true;
 	}
 
 	initData() {
@@ -179,6 +179,24 @@ export class ServiceCategoryFormComponent implements OnInit {
 		this.is_validated = true;
 
 		this.generateItemKey();
+	}
+
+	onReset(lang: string){
+		switch (lang) {
+			case 'vi':
+				this.Item_vi = new ServiceCategory();
+				this.Item_vi.language_code = lang;
+				this.Item_vi.image = new FileUploader({});
+				this.Item_vi.parent = 0;
+				break;
+
+			case 'en':
+				this.Item_en = new ServiceCategory();
+				this.Item_en.language_code = lang;
+				this.Item_en.image = new FileUploader({});
+				this.Item_vi.parent = 0;
+				break;
+		}
 	}
 
 	onSetImage(obj){

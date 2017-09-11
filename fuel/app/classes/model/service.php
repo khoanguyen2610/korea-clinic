@@ -33,11 +33,12 @@ class Model_Service extends \Orm\Model {
      * Get all record
      *============================================*/
     public static function getAll($params = null, $option = null){
-        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name')];
+        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('SC.title as service_category_title')];
 
         $query = \DB::select_array($select)
                         ->from([self::$_table_name, 'SM'])
                         ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+						->join(['service_category', 'SC'], 'left')->on('SM.service_category_id', '=', 'SC.id')
                         ->and_where('SM.item_status', '=', 'active')
                         ->order_by('SM.created_at', 'DESC');
 
@@ -112,6 +113,7 @@ class Model_Service extends \Orm\Model {
                                         'filename' => isset($image->filename)? base64_encode($image->filename): null,
                                         'width' => 300,
                                         ];
+						isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];
                         $result[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
                     }
                 }
@@ -123,6 +125,7 @@ class Model_Service extends \Orm\Model {
                                     'filename' => isset($image->filename)? base64_encode($image->filename): null,
                                     'width' => 300,
                                     ];
+									isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];
                     $result->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
                 }
             }

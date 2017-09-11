@@ -44,7 +44,7 @@ export class EquipmentFormContentComponent implements OnInit {
 		this.files_type = this._Configuration.upload_file_extension;
 	}
 
-	ngOnInit(){ console.log('here') }
+	ngOnInit(){ }
 
 	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
 		if(this.Item.image){

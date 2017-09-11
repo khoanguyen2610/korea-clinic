@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Renderer, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -22,6 +22,7 @@ export class ServiceListComponent implements OnInit {
 	private hashtagSubscription: Subscription;
 
 	controller: string = 'dich-vu';
+	action_detail: string = 'chi-tiet';
 	categories: Array<any> = [];
 	items: Array<any> = [];
 	_params: any;
@@ -37,7 +38,9 @@ export class ServiceListComponent implements OnInit {
 		private _ServiceService: ServiceService,
 		private _ServiceCategoryService: ServiceCategoryService,
 		private _Configuration: Configuration,
-		private _LocalStorageService: LocalStorageService
+		private _LocalStorageService: LocalStorageService,
+		private _ElementRef: ElementRef,
+		private _Renderer: Renderer
 	) {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
@@ -60,6 +63,7 @@ export class ServiceListComponent implements OnInit {
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){
 			this.controller = 'service';
+			this.action_detail = 'detail';
 		}
 
 	}
@@ -79,10 +83,6 @@ export class ServiceListComponent implements OnInit {
 			}
 		});
 
-		if(this._params.category_id){
-			params.set('service_category_id',this._params.category_id);
-		}
-
 		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				let items = res.data;
@@ -96,6 +96,32 @@ export class ServiceListComponent implements OnInit {
 				this.items = items;
 			}
 		});
+	}
+
+	ngAfterViewInit(){
+		setTimeout(() => {
+			let data = this.categories;
+			for(let i in data){
+				/* item_key of service_category*/
+				if(this._params.item_key){
+					let item_key = this._params.item_key;
+					if(item_key == data[i]['item_key'] && data[i]['language_code'] == this.language_code){
+						let category_id = data[i]['id'];
+						this.onFireClickFilter(category_id);
+					}
+				}
+			}
+		}, 500);
+	}
+
+	onFireClickFilter(filter_id){
+		let self = this;
+		this._ElementRef.nativeElement.querySelectorAll('.esg-filterbutton').forEach(function(elm){
+			self._Renderer.setElementClass(elm, 'selected', false);
+		});
+
+		let ele = this._ElementRef.nativeElement.querySelector('[data-filter="filter-category-'+ filter_id +'"]');
+		this._Renderer.setElementClass(ele, 'selected', true);
 	}
 
 	getAction(){

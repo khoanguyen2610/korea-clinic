@@ -28,6 +28,7 @@ class Controller_Slide extends \Controller_API {
             $param_img = ['filepath' => isset($image->filepath)? base64_encode(SLIDE_DIR . $image->filepath): null,
                             'filename' => isset($image->filename)? base64_encode($image->filename): null
                             ];
+			isset($param['image_resize_square']) && !empty($param['image_resize_square'])	&& $param_img['square'] = $param['image_resize_square'];
             $data[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
         }
 
@@ -59,6 +60,7 @@ class Controller_Slide extends \Controller_API {
                             'filename' => isset($image->filename)? base64_encode($image->filename): null,
                             'width' => 300,
                             ];
+			isset($param['image_resize_square']) && !empty($param['image_resize_square'])	&& $param_img['square'] = $param['image_resize_square'];				
             $items[$k]['image_url'] = \Uri::create('api/v1/system_general/image', [], $param_img);
         }
 

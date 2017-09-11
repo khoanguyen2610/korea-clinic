@@ -123,9 +123,7 @@ export class NewsCategoryFormComponent implements OnInit {
 					if (res.status == 'success') {
 						if (this._params.method == 'create') {
 							let lang = Item['language_code'];
-							form.reset();
-							Item = new NewsCategory();
-							Item['language_code'] = lang;
+							this.onReset(lang);
 							this.initData();
 						}
 						this._ToastrService.success('Record has been saved successfully.');
@@ -134,7 +132,7 @@ export class NewsCategoryFormComponent implements OnInit {
 				});
 			});
 
-
+			this.is_validated = true;
 		}
 
 	}
@@ -149,6 +147,20 @@ export class NewsCategoryFormComponent implements OnInit {
 		this.is_validated = true;
 
 		this.generateItemKey();
+	}
+
+	onReset(lang: string){
+		switch (lang) {
+			case 'vi':
+				this.Item_vi = new NewsCategory();
+				this.Item_vi.language_code = lang;
+				break;
+
+			case 'en':
+				this.Item_en = new NewsCategory();
+				this.Item_en.language_code = lang;
+				break;
+		}
 	}
 
 

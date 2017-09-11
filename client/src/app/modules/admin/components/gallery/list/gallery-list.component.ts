@@ -69,7 +69,7 @@ export class GalleryListComponent implements OnInit {
 			},
 			columns: [
 				{ 'data' : null },
-				{ 'data' : 'image_url' },
+				{ 'data' : 'total_image', class: 'text-center' },
 				{ 'data' : 'title' },
 				{ 'data' : null },
 			],
@@ -78,15 +78,6 @@ export class GalleryListComponent implements OnInit {
 					searchable: false,
 					bSortable: false,
 					targets: [0]
-				},
-				{
-					render: function (data, type, full) {
-						var	html = '<img src="' + data + '" height="80">';
-						return html;
-					},
-					bSortable: false,
-					className: 'text-center',
-					targets: [1]
 				},
 				{
 					render: function (data, type, full) {

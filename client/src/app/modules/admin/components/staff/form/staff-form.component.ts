@@ -7,6 +7,7 @@ import { StaffFormContentComponent } from './content/staff-form-content.componen
 import { Staff } from '../../../../../models';
 import { AuthService, StaffService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
@@ -80,7 +81,7 @@ export class StaffFormComponent implements OnInit {
 											break;
 									}
 								});
-							}, 500);
+							}, 400);
 						}
 					}else{
 						this._Router.navigate(['/admin/news/list']);
@@ -150,11 +151,11 @@ export class StaffFormComponent implements OnInit {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
-							form.reset();
-							Item = new Staff();
-							Item['language_code'] = lang;
+							this.onReset(lang);
+
 							this.generateItemKey();
 						}
+
 						this._ToastrService.success('Record has been saved successfully');
 					}
 
@@ -165,6 +166,8 @@ export class StaffFormComponent implements OnInit {
 
 		});
 
+		this.is_validated = true;
+
 	}
 
 	onSetImage(obj){
@@ -174,6 +177,22 @@ export class StaffFormComponent implements OnInit {
 				break;
 			case 'en':
 				this.Item_en.image = obj;
+				break;
+		}
+	}
+
+	onReset(lang: string){
+		switch (lang) {
+			case 'vi':
+				this.Item_vi = new Staff();
+				this.Item_vi.language_code = lang;
+				this.Item_vi.image = new FileUploader({});
+				break;
+
+			case 'en':
+				this.Item_en = new Staff();
+				this.Item_en.language_code = lang;
+				this.Item_en.image = new FileUploader({});
 				break;
 		}
 	}

@@ -7,6 +7,7 @@ import { NewsFormContentComponent } from './content/news-form-content.component'
 import { News } from '../../../../../models';
 import { AuthService, NewsService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
@@ -80,7 +81,7 @@ export class NewsFormComponent implements OnInit {
 											break;
 									}
 								});
-							}, 500);
+							}, 400);
 						}
 					}else{
 						this._Router.navigate(['/admin/news/list']);
@@ -151,9 +152,7 @@ export class NewsFormComponent implements OnInit {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
-							form.reset();
-							Item = new News();
-							Item['language_code'] = lang;
+							this.onReset(lang);
 							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
@@ -166,6 +165,7 @@ export class NewsFormComponent implements OnInit {
 
 		});
 
+		this.is_validated = true;
 	}
 
 	onSetImage(obj){
@@ -175,6 +175,22 @@ export class NewsFormComponent implements OnInit {
 				break;
 			case 'en':
 				this.Item_en.image = obj;
+				break;
+		}
+	}
+
+	onReset(lang: string){
+		switch (lang) {
+			case 'vi':
+				this.Item_vi = new News();
+				this.Item_vi.language_code = lang;
+				this.Item_vi.image = new FileUploader({});
+				break;
+
+			case 'en':
+				this.Item_en = new News();
+				this.Item_en.language_code = lang;
+				this.Item_en.image = new FileUploader({});
 				break;
 		}
 	}
