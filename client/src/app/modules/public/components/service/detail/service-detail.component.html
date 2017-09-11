@@ -3,7 +3,7 @@
 	<img alt="" [src]="Item['image_url']" width="100%">
 	<div class="top_panel_image_hover"></div>
 	<div class="top_panel_image_header">
-		<!-- <h1 class="top_panel_image_title">{{ module_name }}</h1> -->
+		<h1 class="top_panel_image_title">{{ Item['title'] }}</h1>
 	</div>
 </section>
 <!-- Background Header -->
@@ -84,9 +84,16 @@
 															</div>
 															<div class="sc_accordion_item">
 					                                            <h5 class="sc_accordion_title">
+					                                                <a [routerLink]="['/faq']"><span class="sc_accordion_icon "></span>
+					                                                {{ 'PUBLIC.faq' | translate }}</a>
+					                                            </h5>
+					                                        </div>
+															<div class="sc_accordion_item">
+					                                            <h5 class="sc_accordion_title">
 					                                                <a [routerLink]="['/'+ controller + '/' + action_before_after]">
 					                                                	<span class="sc_accordion_icon"></span>
-					                                                	Hình Ảnh Trước & Sau
+					                                                	{{ 'PUBLIC.before_after' | translate }}
+
 					                                                </a>
 					                                            </h5>
 					                                        </div>
