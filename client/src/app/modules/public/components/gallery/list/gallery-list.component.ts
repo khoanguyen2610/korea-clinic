@@ -19,8 +19,9 @@ import { GalleryService } from '../../../../../services';
 
 export class GalleryListComponent implements OnInit {
 
-	items: Array<any> = [];
+	Items: Array<any> = [];
 	language_code: string;
+	module_name: string = 'gallery';
 
 	constructor(
 		private _Configuration: Configuration,
@@ -36,7 +37,21 @@ export class GalleryListComponent implements OnInit {
 		params.set('item_status', 'active');
 		this._GalleryService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
-				this.items = res.data;
+				var items = res.data;
+				items.forEach(item => {
+					var images = JSON.parse(item.image);
+					var preview_images = [];
+					if (images) {
+						images.forEach(image => {
+							var preview_image = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
+							preview_images.push(preview_image);
+						});
+						item['preview_images'] = preview_images;
+					}
+
+				});
+				console.log(items)
+				this.Items = items;
 			}
 		});
 	}

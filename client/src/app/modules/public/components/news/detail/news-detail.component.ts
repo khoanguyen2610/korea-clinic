@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit,  ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -58,7 +58,7 @@ export class NewsDetailComponent implements OnInit {
 			if(res.status == 'success'){
 				this.news_categories = res.data;
 			}
-		})
+		});
 	}
 
 	ngOnInit() {
@@ -82,7 +82,6 @@ export class NewsDetailComponent implements OnInit {
 	getAction(){
 		return 'detail';
 	}
-
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();

@@ -36,8 +36,8 @@
 						<div class="sc_section_content_wrap">
                             <div id="sc_team_332_wrap" class="sc_team_wrap">
                                 <div id="sc_team_332" class="sc_team sc_team_style_team-3 aligncenter">
-                                    <div class="sc_columns columns_wrap" *ngFor="let item of items">
-                                        <div class="column-1_4 column_padding_bottom" *ngFor="let i of item.items">
+                                    <div class="sc_columns columns_wrap" *ngFor="let item of Items">
+                                        <div class="column-1_4 column_padding_bottom" *ngFor="let i of item; let k=index">
                                             <div id="sc_team_332_1" class="sc_team_item">
                                                 <div class="sc_team_item_avatar">
                                                     <img alt="" [src]="i.image_url">

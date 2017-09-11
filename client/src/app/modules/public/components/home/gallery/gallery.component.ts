@@ -51,7 +51,27 @@ export class GalleryComponent implements OnInit {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
+<<<<<<< HEAD
 					this.Items = res.data;
+=======
+					// this.Items = res.data;
+					// console.log(this.Items)
+
+					var items = res.data;
+					items.forEach(item => {
+						var images = JSON.parse(item.image);
+						var preview_images = [];
+						if(images) {
+							images.forEach(image => {
+								var preview_image = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
+								preview_images.push(preview_image);
+							});
+							item['preview_images'] = preview_images;
+						}
+
+					});
+					this.Items = items;
+>>>>>>> 824b258cc4d06a6fa1f4e12a92b7af5ac16f05c6
 				}
 
 			}

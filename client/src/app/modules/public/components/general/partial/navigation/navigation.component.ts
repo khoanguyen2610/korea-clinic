@@ -69,8 +69,7 @@ export class NavigationComponent implements OnInit {
 
 	getListNewsCategories() {
 		let params: URLSearchParams = new URLSearchParams();
-
-		params.set('language_code', this.language_code);
+		params.set('language_code', this.modules['lang']);
 		params.set('item_status', 'active');
 
 		this._NewsCategoryService.getListData(params).subscribe(res => {
