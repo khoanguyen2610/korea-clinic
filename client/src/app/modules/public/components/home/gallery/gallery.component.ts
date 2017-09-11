@@ -64,12 +64,9 @@ export class GalleryComponent implements OnInit {
 							});
 							item['preview_images'] = preview_images;
 						}
-						
+
 					});
 					this.Items = items;
-
-
-					console.log(this.Items)
 				}
 
 			}
