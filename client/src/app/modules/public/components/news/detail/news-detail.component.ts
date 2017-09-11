@@ -25,6 +25,9 @@ export class NewsDetailComponent implements OnInit {
 	service_categories:Array<any> = [];
 	Item:Array<any> = [];
 	controller: string = 'tin-tuc';
+	service_controller: string = 'dich-vu';
+	action_detail: string = 'chi-tiet';
+	action_before_after: string = 'truoc-sau';
 	language_code: string;
 	news_format_date: string = this._Configuration.news_format_date;
 
@@ -43,29 +46,30 @@ export class NewsDetailComponent implements OnInit {
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){
 			this.controller = 'news';
+			this.service_controller = 'service';
+			this.action_detail = 'detail';
+			this.action_before_after = 'before-after';
 		}
 
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('recursive','true');
 		params.set('language_code', this.language_code);
-		_ServiceCategoryService.getListData(params).subscribe(res => {
-			if(res.status == 'success'){
-				this.service_categories = res.data;
-			}
-		});
+		params.set('item_status', 'active');
 
 		_NewsCategoryService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.news_categories = res.data;
 			}
 		});
+
+		params.set('get_list_services', 'true');
+		_ServiceCategoryService.getListData(params).subscribe(res => {
+			if(res.status == 'success'){
+				this.service_categories = res.data;
+			}
+		});
 	}
 
 	ngOnInit() {
-		if(this._params.language_code){
-			this.language_code = this._params.language_code;
-		}
-
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);
