@@ -110,6 +110,7 @@ class Model_News extends \Orm\Model {
                                         'filename' => isset($image->filename)? base64_encode($image->filename): null,
                                         'width' => 300,
                                         ];
+						isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];				
                         $result[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
                     }
                 }
@@ -121,6 +122,7 @@ class Model_News extends \Orm\Model {
                                     'filename' => isset($image->filename)? base64_encode($image->filename): null,
                                     'width' => 300,
                                     ];
+					isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];
                     $result->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
                 }
             }
