@@ -90,7 +90,8 @@ export class PublicComponent  {
 				if (jQuery(".rev_slider").length > 0) { initRevSlider() };
 				if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
 				itemsmenu();
-			}, 1000)
+				jQuery(window).resize();
+			}, 600)
 
 
 
