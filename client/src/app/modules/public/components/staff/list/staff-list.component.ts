@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { TranslateService } from 'ng2-translate';
 import { AuthService, StaffService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
@@ -25,12 +26,14 @@ export class StaffListComponent implements OnInit {
 	_params: any;
 	queryParams: any;
 	language_code: string;
+	modules: any;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _StaffService: StaffService,
 		private _Configuration: Configuration,
-		private _LocalStorageService: LocalStorageService
+		private _LocalStorageService: LocalStorageService,
+		private _TranslateService: TranslateService
 	) {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
@@ -84,6 +87,11 @@ export class StaffListComponent implements OnInit {
 				console.log(this.items)
 
 			}
+		});
+
+		// Translate Module Service
+		this._TranslateService.get('MODULE').subscribe((res: string) => {
+			this.modules = res;
 		});
 	}
 
