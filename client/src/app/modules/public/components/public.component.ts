@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ScriptService } from './../../../services';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
+import { HttpInterceptorService } from 'ng-http-interceptor';
 import { TranslateService } from 'ng2-translate';
 import { Configuration } from './../../../shared';
 import { LocalStorageService } from 'angular-2-local-storage';
@@ -29,6 +30,8 @@ export class PublicComponent  {
 	template:string;
 	template_home: Array<any> = ['', 'home', 'trang-chu'];
 	module_name: string;
+	activeRoute: boolean = false;
+	is_last: boolean = false;
 
 	page_content_wrap: string = 'page_content_wrap page_paddings_no';
 
@@ -39,9 +42,30 @@ export class PublicComponent  {
 		private _TranslateService: TranslateService,
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService,
-		private _ActivatedRoute: ActivatedRoute
+		private _ActivatedRoute: ActivatedRoute,
+		private _HttpInterceptorService: HttpInterceptorService
 	) {
 		JACQUELINE_STORAGE['theme_init_counter'] = 0;
+
+		_HttpInterceptorService.request().addInterceptor((data, method) => {
+			this.is_last = false;
+			jQuery('.loading').show();
+			// this._LoadingAnimateService.setValue(true);
+
+			setTimeout(() => {
+				if (this.is_last) {
+					setTimeout(() => {
+						jQuery('.loading').hide();
+					}, 500);
+				}
+			}, 1500);
+			return data;
+		});
+
+		_HttpInterceptorService.response().addInterceptor((res, method) => {
+			this.is_last = true;
+			return res;
+		});
 
 	}
 
