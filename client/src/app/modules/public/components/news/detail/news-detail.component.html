@@ -41,61 +41,33 @@
                                                                 </a>
                                                             </div>
                                                         </div> -->
-                                                        <div class="post_content clearfix">
-                                                            <h1 class="post_title entry-title">
-                                                                <span class="post_icon icon-book-open"></span>
-                                                                {{ Item['title'] }}
-                                                                <div class="post_info">
-                                                                    <span class="post_info_item post_info_posted">
-                                                                        <a href="single-post.html" class="post_info_date date updated" [attr.content]="Item['created_at']">{{ Item['created_format_date'] }}</a>
-                                                                    </span>
-                                                                </div>
-                                                                <div [innerHTML]="Item['content']"></div>
-                                                            </h1>
-                                                        </div>
+														<div class="post_content clearfix">
+															<h1 class="post_title entry-title">
+															    <span class="post_icon icon-book-open"></span>
+															    {{ Item['title'] }}
+															    <div class="post_info">
+															        <span class="post_info_item post_info_posted">
+															            <a href="single-post.html" class="post_info_date date updated" [attr.content]="Item['created_at']">{{ Item['created_format_date'] }}</a>
+															        </span>
+															    </div>
+															    <div [innerHTML]="Item['content']"></div>
+															</h1>
+														</div>
                                                     </article>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="column sc_column_container sc_col-sm-3">
-                                    <div class="sc_column-inner">
-                                        <div class="wrapper">
+								<div class="column sc_column_container sc_col-sm-3">
+									<div class="sc_column-inner">
+										<div class="wrapper">
                                             <div class="widgetised_column content_element sidebar">
                                                 <div class="wrapper">
                                                     <aside class="widget widget_categories">
-														<h5 class="widget_title">Categories</h5>
+														<!--<h5 class="widget_title">{{ 'PUBLIC.news' | translate }}</h5>-->
 														<div class="sc_accordion" data-active="0">
-															<div class="sc_accordion_item" [ngClass]="{ 'odd first': i == 0 }" *ngFor="let item of service_categories; let i = index">
-																<ng-template [ngIf]="item.list_services.length">
-																	<h5 class="sc_accordion_title">
-																		<span class="sc_accordion_icon sc_accordion_icon_closed icon-plus"></span>
-																		<span class="sc_accordion_icon sc_accordion_icon_opened icon-minus"></span>
-																		{{ item.title }}
-																	</h5>
-																    <div class="sc_accordion_content">
-																        <div class="text_column content_element ">
-																            <div class="wrapper">
-																                <ul>
-																                    <li class="cat-item" *ngFor="let subitem of item.list_services">
-																                        <a [routerLink]="['/'+ service_controller + '/' + action_detail, subitem.item_key, subitem.title | niceurl]">{{ subitem.title }}</a>
-																                    </li>
-																                </ul>
-																            </div>
-																        </div>
-																    </div>
-																</ng-template>
-																<ng-template [ngIf]="!item.list_services.length">
-																	<h5 class="sc_accordion_title">
-																		<a [routerLink]="['/'+ service_controller, item.item_key, item.title | niceurl]">
-																			<span class="sc_accordion_icon "></span>
-																			{{ item.title }}
-																		</a>
-																	</h5>
-																</ng-template>
-															</div>
-															<div class="sc_accordion_item">
+															<div class="sc_accordion_item odd first">
 																<h5 class="sc_accordion_title">
 																	<span class="sc_accordion_icon sc_accordion_icon_closed icon-plus"></span>
 																	<span class="sc_accordion_icon sc_accordion_icon_opened icon-minus"></span>
@@ -105,22 +77,14 @@
 																	<div class="text_column content_element">
 																		<div class="wrapper">
 																			<ul>
-																				<li class="cat-item" *ngFor="let item of news_categories">
-																					<a [routerLink]="['/'+ controller, language_code, item.item_key, item.title | niceurl]">{{ item.title }}</a>
+																				<li class="cat-item" *ngFor="let item of categories">
+																					<a [routerLink]="['/'+ controller, item.item_key, item.title | niceurl]">{{ item.title }}</a>
 																				</li>
 																			</ul>
 																		</div>
 																	</div>
 																</div>
 															</div>
-					                                        <div class="sc_accordion_item">
-					                                            <h5 class="sc_accordion_title">
-					                                                <a [routerLink]="['/'+ service_controller + '/' + action_before_after]">
-					                                                	<span class="sc_accordion_icon"></span>
-					                                                	Hình Ảnh Trước & Sau
-					                                                </a>
-					                                            </h5>
-					                                        </div>
 					                                        <div class="sc_accordion_item">
 					                                            <h5 class="sc_accordion_title">
 					                                                <a [routerLink]="['/faq']"><span class="sc_accordion_icon "></span>
@@ -144,18 +108,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="sc_row row sc_row-fluid">
-                                <div class="column sc_column_container sc_col-sm-12">
-                                    <div class="sc_column-inner">
-                                        <div class="wrapper">
-                                            <div class="sc_empty_space em_height_2">
-                                                <span class="sc_empty_space_inner"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- Footer -->
-                            <div class="sc_row-full-width"></div>
+							<div class="sc_row row sc_row-fluid">
+								<div class="column sc_column_container sc_col-sm-12">
+									<div class="sc_column-inner">
+										<div class="wrapper">
+											<div class="sc_empty_space em_height_2">
+												<span class="sc_empty_space_inner"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- Footer -->
+							<div class="sc_row-full-width"></div>
 
                         </section>
                     </article>

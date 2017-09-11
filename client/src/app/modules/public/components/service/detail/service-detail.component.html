@@ -1,16 +1,125 @@
-<article class="post_item_excerpt post_item post">
-	<div class="post_featured">
-		<div class="post_thumb" data-image="images/image-1.jpg" data-title="Massage Therapy for Managing Workplace Stress">
-			<a class="hover_icon hover_icon_link" href="single-post.html">
-				<img alt="" [src]="Item['image_url']">
-			</a>
+<!-- Background Header -->
+<section class="top_panel_image">
+	<img alt="" [src]="Item['image_url']" width="100%">
+	<div class="top_panel_image_hover"></div>
+	<div class="top_panel_image_header">
+		<!-- <h1 class="top_panel_image_title">{{ module_name }}</h1> -->
+	</div>
+</section>
+<!-- Background Header -->
+
+<div [ngClass]="page_content_wrap">
+	<div class="content_wrap">
+		<div class="content">
+			<article class="post_item post_item_single page">
+				<section class="post_content">
+					<article class="post_item post_item_single post-643 page">
+						<section class="post_content">
+							<div class="sc_row row sc_row-fluid">
+								<div class="column sc_column_container sc_col-sm-12">
+									<div class="sc_column-inner">
+										<div class="wrapper">
+											<div class="sc_empty_space em_height_7-7">
+												<span class="sc_empty_space_inner"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sc_row row sc_row-fluid">
+								<div class="column sc_column_container sc_col-sm-9">
+									<div class="sc_column-inner sc_custom_1459857781965">
+										<div class="wrapper">
+											<div class="sc_accordion" data-active="0">
+												<div class="sc_accordion_item first">
+													<article class="post_item_excerpt post_item post">
+														<div class="post_content clearfix">
+															<h1 class="post_title entry-title">
+																<span class="post_icon icon-book-open"></span>
+																{{ Item['title'] }}
+																<div [innerHTML]="Item['content']"></div>
+															</h1>
+														</div>
+													</article>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="column sc_column_container sc_col-sm-3">
+									<div class="sc_column-inner">
+										<div class="wrapper">
+											<div class="widgetised_column content_element sidebar">
+												<div class="wrapper">
+													<aside class="widget widget_categories">
+														<h5 class="widget_title">{{ 'PUBLIC.category' | translate }}</h5>
+														<div class="sc_accordion" data-active="0">
+															<div class="sc_accordion_item" [ngClass]="{ 'odd first': i == 0 }" *ngFor="let item of categories; let i = index">
+																<ng-template [ngIf]="item.list_services.length">
+																	<h5 class="sc_accordion_title">
+																		<span class="sc_accordion_icon sc_accordion_icon_closed icon-plus"></span>
+																		<span class="sc_accordion_icon sc_accordion_icon_opened icon-minus"></span>
+																		{{ item.title }}
+																	</h5>
+																	<div class="sc_accordion_content">
+																		<div class="text_column content_element ">
+																			<div class="wrapper">
+																				<ul>
+																			    	<li class="cat-item" *ngFor="let subitem of item.list_services">
+																			        	<a [routerLink]="['/'+ controller + '/' + action_detail, subitem.item_key, subitem.title | niceurl]">{{ subitem.title }}</a>
+																			    	</li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</ng-template>
+																<ng-template [ngIf]="!item.list_services.length">
+																	<h5 class="sc_accordion_title">
+																		<a [routerLink]="['/'+ controller, item.item_key, item.title | niceurl]">
+																			<span class="sc_accordion_icon "></span>
+																			{{ item.title }}
+																		</a>
+																	</h5>
+																</ng-template>
+															</div>
+															<div class="sc_accordion_item">
+					                                            <h5 class="sc_accordion_title">
+					                                                <a [routerLink]="['/'+ controller + '/' + action_before_after]">
+					                                                	<span class="sc_accordion_icon"></span>
+					                                                	Hình Ảnh Trước & Sau
+					                                                </a>
+					                                            </h5>
+					                                        </div>
+														</div>
+													</aside>
+												</div>
+											</div>
+											<div class="sc_empty_space em_height_5">
+												<span class="sc_empty_space_inner"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sc_row row sc_row-fluid">
+								<div class="column sc_column_container sc_col-sm-12">
+									<div class="sc_column-inner">
+										<div class="wrapper">
+											<div class="sc_empty_space em_height_2">
+												<span class="sc_empty_space_inner"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- Footer -->
+							<div class="sc_row-full-width"></div>
+
+						</section>
+					</article>
+					<section class="related_wrap related_wrap_empty"></section>
+
+				</section>
+			</article>
 		</div>
 	</div>
-	<div class="post_content clearfix">
-		<h1 class="post_title entry-title">
-			<span class="post_icon icon-book-open"></span>
-			{{ Item['title'] }}
-			<div [innerHTML]="Item['content']"></div>
-		</h1>
-	</div>
-</article>
+</div>
