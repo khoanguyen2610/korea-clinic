@@ -151,6 +151,7 @@ export class NewsFormComponent implements OnInit {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
+							form.reset();
 							Item = new News();
 							Item['language_code'] = lang;
 							this.generateItemKey();

@@ -20,16 +20,16 @@
 		<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_vi">
-					<app-news-category-form-content [Item]="Items[0]" [language_code]="language_code" [is_validated]="is_validated"></app-news-category-form-content>
+					<app-news-category-form-content *ngIf="language_code == 'vi'" [Item]="Item_vi" [language_code]="language_code" [is_validated]="is_validated"></app-news-category-form-content>
 				</div>
 				<div class="tab-pane" id="tab_en">
-					<app-news-category-form-content [Item]="Items[1]" [language_code]="language_code" [is_validated]="is_validated"></app-news-category-form-content>
+					<app-news-category-form-content *ngIf="language_code == 'en'" [Item]="Item_en" [language_code]="language_code" [is_validated]="is_validated"></app-news-category-form-content>
 				</div>
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-md-offset-5 col-md-7">
-							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i>{{ 'ADMIN.save' | translate }}</button>
-							<a class="btn default" [routerLink]="['/admin/news-category/list']"><i class="fa fa-arrow-left"></i>{{ 'ADMIN.back' | translate }}</a>
+							<button class="btn green" [disabled]="!f.valid" type="submit"><i class="fa fa-save"></i> {{ 'ADMIN.save' | translate }}</button>
+							<a class="btn default" [routerLink]="['/admin/news-category/list']"><i class="fa fa-arrow-left"></i> {{ 'ADMIN.back' | translate }}</a>
 						</div>
 					</div>
 				</div>

@@ -4,8 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { AuthService, NewsService, ServiceCategoryService } from '../../../../../services';
+import { AuthService, NewsService, NewsCategoryService, ServiceCategoryService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
+import * as moment from 'moment';
 
 // declare let $: any;
 // declare let moment: any;
@@ -13,21 +14,24 @@ import { Configuration } from '../../../../../shared';
 @Component({
 	selector: 'app-public-news-detail',
 	templateUrl: './news-detail.component.html',
-	providers: [ NewsService, ServiceCategoryService ]
+	providers: [ NewsService, NewsCategoryService, ServiceCategoryService ]
 })
 
 export class NewsDetailComponent implements OnInit {
 	private subscription: Subscription;
 
 	_params: any
-	categories:Array<any> = [];
+	news_categories:Array<any> = [];
+	service_categories:Array<any> = [];
 	Item:Array<any> = [];
 	controller: string = 'tin-tuc';
 	language_code: string;
+	news_format_date: string = this._Configuration.news_format_date;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _ServiceCategoryService: ServiceCategoryService,
+		private _NewsCategoryService: NewsCategoryService,
 		private _NewsService: NewsService,
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService
@@ -46,11 +50,15 @@ export class NewsDetailComponent implements OnInit {
 		params.set('language_code', this.language_code);
 		_ServiceCategoryService.getListData(params).subscribe(res => {
 			if(res.status == 'success'){
-				this.categories = res.data;
+				this.service_categories = res.data;
 			}
 		});
 
-
+		_NewsCategoryService.getListAll(params).subscribe(res => {
+			if(res.status == 'success'){
+				this.news_categories = res.data;
+			}
+		})
 	}
 
 	ngOnInit() {
@@ -63,7 +71,9 @@ export class NewsDetailComponent implements OnInit {
 		params.set('language_code', this.language_code);
 		this._NewsService.getByID(undefined, params).subscribe(res => {
 			if(res.status == 'success'){
-				this.Item = res.data;
+				let item = res.data;
+				item['created_format_date'] = moment(item['created_at']).format(this.news_format_date);
+				this.Item = item;
 			}
 		});
 		console.log('NewsDetailComponent');

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { Configuration } from '../../../../../shared';
 import { AuthService, BeforeAfterService, ServiceCategoryService } from '../../../../../services';
 
 // declare let $: any;
@@ -19,9 +20,11 @@ export class BeforeAfterComponent implements OnInit {
 	items: Array<any> = [];
 	categories: Array<any> = [];
 	language_code: string;
+	module_name: string = 'beforeafter';
 
 	constructor(
 		private _BeforeAfterService: BeforeAfterService,
+		private _Configuration: Configuration,
 		private _ServiceCategoryService: ServiceCategoryService,
 		private _LocalStorageService: LocalStorageService
 	) {
@@ -42,7 +45,15 @@ export class BeforeAfterComponent implements OnInit {
 
 		this._BeforeAfterService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				this.items = res.data;
+				let items = res.data;
+				items.forEach(item => {
+					var image = JSON.parse(item.image);
+					if(image) {
+						item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
+					}
+
+				});
+				this.items = items;
 			}
 		});
 	}
