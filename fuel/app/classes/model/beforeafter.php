@@ -109,10 +109,13 @@ class Model_BeforeAfter extends \Orm\Model {
                     if(!empty($v->image) || (isset($params['image_url_placeholder']) && $params['image_url_placeholder'] == true)){
                         $image = json_decode($v->image);
                         $param_img = ['filepath' => isset($image->filepath)? base64_encode(BEFORE_AFTER_DIR . $image->filepath): null,
-                                        'filename' => isset($image->filename)? base64_encode($image->filename): null,
-                                        'width' => 300,
+                                        'filename' => isset($image->filename)? base64_encode($image->filename): null
                                         ];
+						isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];
 						isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];
+
+						//Last param
+						$param_img['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
                         $result[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
                     }
                 }
@@ -121,10 +124,13 @@ class Model_BeforeAfter extends \Orm\Model {
                 if(!empty($result->image) || (isset($params['image_url_placeholder']) && $params['image_url_placeholder'] == true)){
                     $image = json_decode($result->image);
                     $param_img = ['filepath' => isset($image->filepath)? base64_encode(BEFORE_AFTER_DIR . $image->filepath): null,
-                                    'filename' => isset($image->filename)? base64_encode($image->filename): null,
-                                    'width' => 300,
+                                    'filename' => isset($image->filename)? base64_encode($image->filename): null
                                     ];
-					isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];				
+					isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];				
+					isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];
+
+					//Last param
+					$param_img['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
                     $result->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
                 }
             }

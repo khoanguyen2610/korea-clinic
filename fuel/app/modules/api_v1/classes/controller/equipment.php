@@ -28,10 +28,13 @@ class Controller_Equipment extends \Controller_API {
             //generate image url
             $image = json_decode($v->image);
             $param_img = ['filepath' => isset($image->filepath)? base64_encode(EQUIPMENT_DIR . $image->filepath): null,
-                            'filename' => isset($image->filename)? base64_encode($image->filename): null,
-                            'width' => 300,
+                            'filename' => isset($image->filename)? base64_encode($image->filename): null
                             ];
-			isset($param['image_resize_square']) && !empty($param['image_resize_square'])	&& $param_img['square'] = $param['image_resize_square'];				
+			isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
+			isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
+
+			//Last param
+			$param['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
             $data[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
         }
 
@@ -62,9 +65,13 @@ class Controller_Equipment extends \Controller_API {
             //generate image url
             $image = json_decode($v['image']);
             $param_img = ['filepath' => isset($image->filepath)? base64_encode(EQUIPMENT_DIR . $image->filepath): null,
-                            'filename' => isset($image->filename)? base64_encode($image->filename): null,
-                            'width' => 300,
+                            'filename' => isset($image->filename)? base64_encode($image->filename): null
                             ];
+
+			isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
+			isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
+			//Last param
+			$param['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
             $items[$k]['image_url'] = \Uri::create('api/v1/system_general/image', [], $param_img);
         }
 

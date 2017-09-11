@@ -57,13 +57,13 @@ export class SlideComponent implements OnInit {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
 					var items = res.data;
-					items.forEach(item => {
-						var image = JSON.parse(item.image);
-						if(image) {
-							item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
-						}
-						
-					});
+					// items.forEach(item => {
+					// 	var image = JSON.parse(item.image);
+					// 	if(image) {
+					// 		item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
+					// 	}
+					//
+					// });
 					this.Items = items;
 				}
 

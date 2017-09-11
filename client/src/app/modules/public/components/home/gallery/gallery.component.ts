@@ -7,8 +7,9 @@ import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
 import { GalleryService } from '../../../../../services';
 
-declare let $: any;
+declare let jQuery: any;
 declare let moment: any;
+declare let initEssGrid: any;
 
 @Component({
 	selector: 'app-public-home-gallery',
@@ -38,8 +39,8 @@ export class GalleryComponent implements OnInit {
 		this.getListData();
 	}
 
-	ngAfterViewInit() {
-
+	ngAfterContentChecked() {
+	
 	}
 
 	getListData() {
@@ -50,26 +51,7 @@ export class GalleryComponent implements OnInit {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
-					// this.Items = res.data;
-					// console.log(this.Items)
-
-					var items = res.data;
-					items.forEach(item => {
-						var images = JSON.parse(item.image);
-						var preview_images = [];
-						if(images) {
-							images.forEach(image => {
-								var preview_image = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
-								preview_images.push(preview_image);
-							});
-							item['preview_images'] = preview_images;
-						}
-						
-					});
-					this.Items = items;
-
-
-					console.log(this.Items)
+					this.Items = res.data;
 				}
 
 			}
