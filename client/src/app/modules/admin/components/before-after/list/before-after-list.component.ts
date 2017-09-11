@@ -37,7 +37,7 @@ export class BeforeAfterListComponent implements OnInit {
 
 		});
 
-		this.url_list_data = this._BeforeAfterService._list_data_URL + '?language_code=vi';
+		this.url_list_data = this._BeforeAfterService._list_data_URL + '?language_code=vi&image_resize_width=300';
 	}
 
 	ngOnInit(){

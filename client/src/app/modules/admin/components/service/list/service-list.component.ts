@@ -37,7 +37,7 @@ export class ServiceListComponent implements OnInit {
 
 		});
 
-		this.url_list_data = this._ServiceService._list_data_URL + '?language_code=vi';
+		this.url_list_data = this._ServiceService._list_data_URL + '?language_code=vi&image_resize_width=300';
 	}
 
 	ngOnInit(){

@@ -42,7 +42,7 @@
                                             <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
                                             <div class="esg-center eg-post-332 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
                                                 <!-- <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" href="/assets/public/images/21714921_original.jpg"><i class="eg-icon-search"></i></a> -->
-                                                <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" [href]="image_url"><i class="eg-icon-search"></i></a>
+                                                <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" rel="filter-gallery" [href]="image_url"><i class="eg-icon-search"></i></a>
                                             </div>
                                         </div>
 
@@ -156,10 +156,13 @@
                 <div class="clear"></div>
                 <div class="sc_empty_space em_height_2">
                     <span class="sc_empty_space_inner"></span>
-                </div><a class="sc_button sc_button_square sc_button_style_filled sc_button_size_base aligncenter" href="#">
-                <div>
-                    <span class="first">{{ 'PUBLIC.read_more' | translate }}</span> <span class="second">{{ 'PUBLIC.read_more' | translate }}</span>
-                </div></a>
+                </div>
+                <a class="sc_button sc_button_square sc_button_style_filled sc_button_size_base aligncenter" [routerLink]="[ '/' + modules.gallery]">
+                    <div>
+                        <span class="first" >{{ 'PUBLIC.read_more' | translate }}</span>
+                        <span class="second">{{ 'PUBLIC.read_more' | translate }}</span>
+                    </div>
+                </a>
                 <div class="sc_empty_space em_height_4">
                     <span class="sc_empty_space_inner"></span>
                 </div>
