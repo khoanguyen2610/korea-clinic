@@ -7,6 +7,7 @@ import { EquipmentFormContentComponent } from './content/equipment-form-content.
 import { Equipment } from '../../../../../models';
 import { AuthService, EquipmentService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
@@ -69,18 +70,16 @@ export class EquipmentFormComponent implements OnInit {
 							this._Router.navigate(['/admin/equipment/list']);
 						}else{
 							let items = res.data;
-							setTimeout(() => {
-								items.forEach(item => {
-									switch(item['language_code']){
-										case 'vi':
-											this.Item_vi = item;
-											break;
-										case 'en':
-											this.Item_en = item;
-											break;
-									}
-								});
-							}, 500);
+							items.forEach(item => {
+								switch(item['language_code']){
+									case 'vi':
+										this.Item_vi = item;
+										break;
+									case 'en':
+										this.Item_en = item;
+										break;
+								}
+							});
 						}
 					}else{
 						this._Router.navigate(['/admin/equipment/list']);
@@ -149,9 +148,7 @@ export class EquipmentFormComponent implements OnInit {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
-							form.reset();
-							Item = new Equipment();
-							Item['language_code'] = lang;
+							this.onReset(lang);
 							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
@@ -164,6 +161,7 @@ export class EquipmentFormComponent implements OnInit {
 
 		});
 
+		this.is_validated = true;
 	}
 
 	onSetImage(obj){
@@ -173,6 +171,22 @@ export class EquipmentFormComponent implements OnInit {
 				break;
 			case 'en':
 				this.Item_en.image = obj;
+				break;
+		}
+	}
+
+	onReset(lang: string){
+		switch (lang) {
+			case 'vi':
+				this.Item_vi = new Equipment();
+				this.Item_vi.language_code = lang;
+				this.Item_vi.image = new FileUploader({});
+				break;
+
+			case 'en':
+				this.Item_en = new Equipment();
+				this.Item_en.language_code = lang;
+				this.Item_en.image = new FileUploader({});
 				break;
 		}
 	}
