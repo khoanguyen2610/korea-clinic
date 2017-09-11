@@ -7,7 +7,7 @@
                 </div>
                 <div class="sc_section sc_section_block">
                     <div class="sc_section_inner">
-                        <h6 class="sc_item_title sc_section_subtitle sc_item_subtitle">{{ 'PUBLIC.equipments' | translate }}</h6>
+                        <h6 class="sc_item_title sc_section_subtitle sc_item_subtitle">{{ 'PUBLIC.equipment' | translate }}</h6>
                         <div class="sc_section_content_wrap">
                             <div class="sc_empty_space em_height_2">
                                 <span class="sc_empty_space_inner"></span>
@@ -22,7 +22,7 @@
                                                     <div class="esg-entry-cover">
                                                         <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
                                                         <div class="esg-center eg-post-332 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
-                                                            <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" href="images/3473311504060-hd.jpg"><i class="eg-icon-search"></i></a>
+                                                            <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" [href]="item.preview_image"><i class="eg-icon-search"></i></a>
                                                         </div>
                                                         <div class="esg-center eg-post-332 eg-eisenhower-massage-element-3-a esg-rollleft" data-delay="0.18">
                                                             <a class="eg-eisenhower-massage-element-3 eg-post-332" href="single-product.html" target="_self"><i class="eg-icon-forward"></i></a>
@@ -32,7 +32,7 @@
                                                         <div class="esg-content eg-post-332 eg-eisenhower-massage-element-6-a">
                                                             <a [routerLink]="[getModuleNameByLang(), language_code, item.item_key, item.title]" class="eg-eisenhower-massage-element-6 eg-post-332"  rel="category tag" title="View all posts in simple">{{ item.description }}</a>
                                                         </div>
-                                                        <div class="esg-content eg-post-332 eg-eisenhower-massage-element-0">
+                                                        <div class="esg-content eg-post-332 eg-eisenhower-massage-element-0" >
                                                             {{ item.title }}
                                                         </div>
                                                         <div class="esg-content eg-eisenhower-massage-element-2 esg-none esg-clear"></div>

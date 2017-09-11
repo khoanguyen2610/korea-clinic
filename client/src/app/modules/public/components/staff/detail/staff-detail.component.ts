@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { AuthService, StaffService } from '../../../../../services';
+import { Configuration } from '../../../../../shared';
 
 
 // declare let $: any;
@@ -19,6 +20,7 @@ import { AuthService, StaffService } from '../../../../../services';
 export class StaffDetailComponent implements OnInit {
 	private subscription: Subscription;
 
+	Item:Array<any> = [];
 	_params: any;
 	controller: string = 'nhan-vien';
 	language_code: string;
@@ -26,7 +28,8 @@ export class StaffDetailComponent implements OnInit {
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _StaffService: StaffService,
-		private _LocalStorageService: LocalStorageService
+		private _LocalStorageService: LocalStorageService,
+		private _Configuration: Configuration
 	) {
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
@@ -46,6 +49,18 @@ export class StaffDetailComponent implements OnInit {
 
 	getAction(){
 		return 'detail';
+	}
+
+	getDetailData() {
+		console.log(this._Configuration.language_code);
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('item_key', this._params.item_key);
+		params.set('language_code', this.language_code);
+		this._StaffService.getByID(undefined, params).subscribe(res => {
+			if(res.status == 'success'){
+				this.Item = res.data;
+			}
+		});
 	}
 
 	ngOnDestroy() {

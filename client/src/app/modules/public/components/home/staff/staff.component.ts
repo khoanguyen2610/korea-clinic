@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -17,7 +17,7 @@ declare let moment: any;
 })
 
 export class StaffComponent implements OnInit {
-
+	@Input() modules: any;
 	Items: Array<any> = [];
 	language_code: string;
 	number_item: number = 4;
@@ -65,6 +65,8 @@ export class StaffComponent implements OnInit {
 							next = 0;
 							this.Items.push(arr_item_four);
 						}
+
+						console.log(this.Items)
 					}
 
 				}

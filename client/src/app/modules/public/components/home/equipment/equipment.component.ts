@@ -51,7 +51,15 @@ export class EquipmentComponent implements OnInit {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
-					this.Items = res.data;
+					var items = res.data;
+					items.forEach(item => {
+						var image = JSON.parse(item.image);
+						if(image) {
+							item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
+						}
+						
+					});
+					this.Items = items;
 				}
 
 			}
