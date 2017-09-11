@@ -48,7 +48,8 @@
     "drag_and_drop_files": "Drag and drop files",
     "choose_file": "Choose file",
     "before_after": "Before After",
-    "before_after_management": "Before After Management"
+    "before_after_management": "Before After Management",
+    "total_image": "Total Image"
   },
   "PUBLIC": {
     "equipment": "Equipment",
@@ -97,7 +98,9 @@
     "enter_your_subject": "Enter your subject",
     "enter_your_message": "Enter your message",
     "send_message": "Send Message",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "filter_all": "Filter - All",
+    "expert": "Expert"
   },
   "MODULE": {
     "home": "home",

@@ -45,14 +45,16 @@ export class StaffComponent implements OnInit {
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this._Configuration.language_code);;
+		params.set('language_code', this.language_code);
+		params.set('image_resize_square', String(this._Configuration.image_resize_square));
 		this._StaffService.getListAll(params).subscribe(res => {
+			console.log(res)
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
-				if(res.data.length) {
-					var items = res.data;
+				var items = res.data;
 
-					var next = 0;
+				var next = 0;
+				if (items.length <= this.number_item) {
 					for (let i = 0; i < items.length; i++) {
 
 						if (next < this.number_item) {
@@ -60,15 +62,28 @@ export class StaffComponent implements OnInit {
 								var arr_item_four = [];
 							}
 							arr_item_four.push(items[i]);
+
+							next++;
+						}
+					}
+					this.Items.push(arr_item_four);
+				} else {
+					for (let i = 0; i < items.length; i++) {
+
+						if (next < this.number_item) {
+							if (!next) {
+								var arr_item_four = [];
+							}
+							arr_item_four.push(items[i]);
+
 							next++;
 						} else {
 							next = 0;
 							this.Items.push(arr_item_four);
 						}
 
-						console.log(this.Items)
-					}
 
+					}
 				}
 
 			}

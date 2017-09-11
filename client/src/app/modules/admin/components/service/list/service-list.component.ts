@@ -67,6 +67,7 @@ export class ServiceListComponent implements OnInit {
 			},
 			columns: [
 				{ 'data' : null },
+				{ 'data' : 'service_category_title' },
 				{ 'data' : 'image_url' },
 				{ 'data' : 'title' },
 				{ 'data' : 'language_name' },
@@ -88,7 +89,7 @@ export class ServiceListComponent implements OnInit {
 					},
 					bSortable: false,
 					className: 'text-center',
-					targets: [1]
+					targets: [2]
 				},
 				{
 					render: function (data, type, full) {
@@ -100,7 +101,7 @@ export class ServiceListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [4]
+					targets: [5]
 				},
 			]
 		});

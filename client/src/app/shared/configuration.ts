@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Configuration {
 	//======================== API Config Variable ===============================
-	public server: string = "http://clinic.laptrinhaz.com/api/public/";
+	public server: string = "http://whiteclinic.com.vn/api/public/";
 	// public server: string = "http://192.168.153.27/korea-clinic/public/";
 	public apiUrl: string = this.server + "api/v1/";
 	public apiAuthUsername: string = "visionvn";
@@ -25,6 +25,7 @@ export class Configuration {
 	//======================== Static Option Or Variable =====================
 	public system_version = 'Version 2.0';
 	public upload_file_extension = ['jpg', 'jpeg', 'gif', 'png'];
+	public image_resize_square = 370;
 
 	//======================== Datatabe Configuration ========================
 	public DtbPageLength = 20;

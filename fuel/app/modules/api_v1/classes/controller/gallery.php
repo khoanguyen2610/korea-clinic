@@ -32,6 +32,7 @@ class Controller_Gallery extends \Controller_API {
 		                            'filename' => isset($img->filename)? base64_encode($img->filename): null,
 		                            'width' => 300,
 		                            ];
+					isset($param['image_resize_square']) && !empty($param['image_resize_square'])	&& $param_img['square'] = $param['image_resize_square'];
 					$arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);
 				}
 			}
@@ -60,6 +61,12 @@ class Controller_Gallery extends \Controller_API {
     public function get_list_data(){
         $result     = \Model_Gallery::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
         $items      = $result['data'];
+
+		foreach($items as $k => $v){
+            $image = json_decode($v['image']);
+            $items[$k]['total_image'] = count($image);
+        }
+
 
         $response = ["sEcho" => intval(@$this->_arrParam['sEcho']),
                         "iTotalRecords" => $result['total'],

@@ -42,9 +42,7 @@ export class StaffDetailComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this.language_code);
-		console.log('StaffDetailComponent');
+		this.getDetailData();
 	}
 
 	getAction(){
@@ -59,6 +57,7 @@ export class StaffDetailComponent implements OnInit {
 		this._StaffService.getByID(undefined, params).subscribe(res => {
 			if(res.status == 'success'){
 				this.Item = res.data;
+				console.log(this.Item)
 			}
 		});
 	}
