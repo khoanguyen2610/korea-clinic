@@ -101,7 +101,8 @@
     "send_message": "Send Message",
     "faq": "FAQ",
     "filter_all": "Filter - All",
-    "expert": "Expert"
+    "expert": "Expert",
+    "partner": "Partner"
   },
   "MODULE": {
     "home": "home",
