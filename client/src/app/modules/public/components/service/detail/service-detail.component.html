@@ -61,9 +61,9 @@
 																		<div class="text_column content_element ">
 																			<div class="wrapper">
 																				<ul>
-																			    	<li class="cat-item" *ngFor="let subitem of item.list_services">
-																			        	<a [routerLink]="['/'+ controller + '/' + action_detail, subitem.item_key, subitem.title | niceurl]">{{ subitem.title }}</a>
-																			    	</li>
+																					<li class="cat-item" *ngFor="let subitem of item.list_services">
+																						<a [routerLink]="['/'+ controller + '/' + action_detail, subitem.item_key, subitem.title | niceurl]">{{ subitem.title }}</a>
+																					</li>
 																				</ul>
 																			</div>
 																		</div>
@@ -79,20 +79,19 @@
 																</ng-template>
 															</div>
 															<div class="sc_accordion_item">
-					                                            <h5 class="sc_accordion_title">
-					                                                <a [routerLink]="['/faq']"><span class="sc_accordion_icon "></span>
-					                                                {{ 'PUBLIC.faq' | translate }}</a>
-					                                            </h5>
-					                                        </div>
+																<h5 class="sc_accordion_title">
+																	<a [routerLink]="['/faq']"><span class="sc_accordion_icon "></span>
+																	{{ 'PUBLIC.faq' | translate }}</a>
+																</h5>
+															</div>
 															<div class="sc_accordion_item">
-					                                            <h5 class="sc_accordion_title">
-					                                                <a [routerLink]="['/'+ controller + '/' + action_before_after]">
-					                                                	<span class="sc_accordion_icon"></span>
-					                                                	{{ 'PUBLIC.before_after' | translate }}
-
-					                                                </a>
-					                                            </h5>
-					                                        </div>
+																<h5 class="sc_accordion_title">
+																	<a [routerLink]="['/'+ controller + '/' + action_before_after]">
+																		<span class="sc_accordion_icon"></span>
+																		{{ 'PUBLIC.before_after' | translate }}
+																	</a>
+																</h5>
+															</div>
 														</div>
 													</aside>
 												</div>
