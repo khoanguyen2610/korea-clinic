@@ -11,3 +11,11 @@
     display: block;
     font-size: 15px;
 }
+
+
+/* Media iphone */
+@media screen and (max-width: 414px){
+    img[_ngcontent-c0]{max-width: 140px}
+    .login[_ngcontent-c0] .content[_ngcontent-c0] { width: 300px !important;}
+    .login[_ngcontent-c0] .content[_ngcontent-c0] h3[_ngcontent-c0]{ font-size: 14px; text-align: center;}
+}
