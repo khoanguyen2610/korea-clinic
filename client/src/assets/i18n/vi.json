@@ -7,7 +7,7 @@
     "max_length": "Please enter no more than :param:1 characters."
   },
   "ADMIN": {
-    "equipment": "Trang Thiết Bị",
+    "equipment": "Equipment",
     "service_category": "Service Category",
     "service": "Service",
     "news_category": "News Category",
@@ -30,6 +30,7 @@
     "back": "Back",
     "yes": "Yes",
     "no": "No",
+    "confirmation": "Confirmation",
     "are_you_sure_you_want_to_delete_this_item": "Are your sure you want to delete this item",
     "equipment_management": "Equipment Management",
     "service_category_management": "Service Category Management",
@@ -46,7 +47,21 @@
     "url": "Url",
     "feature": "Feature",
     "drag_and_drop_files": "Drag and drop files",
-    "choose_file": "Choose file"
+    "choose_file": "Choose file",
+    "before_after": "Before After",
+    "before_after_management": "Before After Management",
+    "total_image": "Total Image",
+    "search": "Search",
+    "clear": "Clear",
+    "change_password": "Change Password",
+    "log_out": "Log out",
+    "current_password": "Current Password",
+    "enter_your_current_password": "Enter your current password",
+    "new_password": "New Password",
+    "enter_new_password": "Enter new Password",
+    "re_password": "Re-password",
+    "enter_re_password": "Enter re-password",
+    "cancel": "Cancel"
   },
   "PUBLIC": {
     "equipment": "Trang Thiết Bị",
@@ -105,7 +120,9 @@
     "chuyen-gia": "Chuyên Gia",
     "truoc-sau": "Trước & Sau",
     "lien-he": "Liên Hệ",
-    "ve-chung-toi": "Về Chúng Tôi"
+    "ve-chung-toi": "Về Chúng Tôi",
+    "service_description": "",
+    "partner": "Đối tác"
   },
   "MODULE": {
     "home": "trang-chu",
