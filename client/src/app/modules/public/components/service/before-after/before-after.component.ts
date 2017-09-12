@@ -32,7 +32,7 @@ export class BeforeAfterComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('BeforeAfterComponent');
+
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');

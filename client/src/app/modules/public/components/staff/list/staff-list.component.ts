@@ -20,6 +20,7 @@ declare let moment: any;
 export class StaffListComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
+	private translateSubscription: Subscription;
 
 	controller: string = 'chuyen-gia';
 	Items: Array<any> = [];
@@ -60,32 +61,6 @@ export class StaffListComponent implements OnInit {
 		this._StaffService.getListAll(params).subscribe(res => {
 			console.log(res)
 			if(res.status == 'success'){
-				// let data = res.data;
-				// let temp = {
-				// 	'items': [],
-				// 	'timestamp': 0
-				// };
-
-				// let j = 0;
-				// let c = res.data.length;
-				// for(let i = 0; i < data.length; i++){
-				// 	if(i && (i % 4 == 0)){
-				// 		this.items.push(temp);
-				// 		temp = {
-				// 			'items': [],
-				// 			'timestamp': 0
-				// 		};
-				// 	}
-
-				// 	temp.items.push(data[i]);
-				// 	temp.timestamp = new Date().getTime();
-
-				// 	j = i + 1;
-				// 	if((c == j) && (j % 4 != 0)){
-				// 		this.items.push(temp);
-				// 	}
-
-				// }
 
 				// Process Array include many array with 4 elements
 				var items = res.data;
@@ -127,7 +102,7 @@ export class StaffListComponent implements OnInit {
 		});
 
 		// Translate Module Service
-		this._TranslateService.get('MODULE').subscribe((res: string) => {
+		this.translateSubscription = this._TranslateService.get('MODULE').subscribe((res: string) => {
 			this.modules = res;
 		});
 	}
@@ -139,5 +114,6 @@ export class StaffListComponent implements OnInit {
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
 		this.querySubscription.unsubscribe();
+		this.translateSubscription.unsubscribe();
 	}
 }

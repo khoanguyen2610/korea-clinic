@@ -69,7 +69,6 @@ export class ServiceDetailComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.loadPage();
 	}
 
 	loadPage(){

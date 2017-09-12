@@ -42,6 +42,12 @@ export class NewsListComponent implements OnInit {
 		private _ElementRef: ElementRef,
 		private _Renderer: Renderer
 	) {
+		this.language_code = String(_LocalStorageService.get('language_code'));
+		if(this.language_code == 'en'){
+			this.controller = 'news';
+			this.action_detail = 'detail';
+		}
+
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
 		);
@@ -50,24 +56,13 @@ export class NewsListComponent implements OnInit {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
 				this.curRouting = routing;
-				this.loadPage();
+				this.loadEffectPage();
 			}
 		});
-
-		this.language_code = String(_LocalStorageService.get('language_code'));
-		if(this.language_code == 'en'){
-			this.controller = 'news';
-			this.action_detail = 'detail';
-		}
 	}
 
 	ngOnInit() {
-		// this.loadPage();
-	}
-
-	loadPage(){
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('image_resize_width', '320');
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
 
@@ -77,6 +72,7 @@ export class NewsListComponent implements OnInit {
 			}
 		});
 
+		params.set('image_resize_width', '320');
 		this._NewsService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;
@@ -84,7 +80,7 @@ export class NewsListComponent implements OnInit {
 		});
 	}
 
-	ngAfterViewInit(){
+	loadEffectPage(){
 		setTimeout(() => {
 			let data = this.categories;
 			for(let i in data){
