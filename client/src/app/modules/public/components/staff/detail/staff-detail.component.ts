@@ -50,7 +50,7 @@ export class StaffDetailComponent implements OnInit {
 	}
 
 	getDetailData() {
-		console.log(this._Configuration.language_code);
+
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);

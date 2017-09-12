@@ -24,7 +24,7 @@ declare var document: any;
 })
 
 export class PublicComponent  {
-	private subscription: Subscription;
+	private translateSubscription: Subscription;
 
 	curRouting?: string;
 	template:string;
@@ -97,7 +97,7 @@ export class PublicComponent  {
 			}
 
 			if (translateEl) {
-				this.subscription = this._TranslateService.get('PUBLIC').subscribe((res: string) => {
+				this.translateSubscription = this._TranslateService.get('PUBLIC').subscribe((res: string) => {
 					this.module_name = res[translateEl];
 				});
 			}
@@ -146,7 +146,7 @@ export class PublicComponent  {
     }
 
 	ngOnDestroy() {
-		this.subscription.unsubscribe();
+		this.translateSubscription.unsubscribe();
 	}
 
 }
