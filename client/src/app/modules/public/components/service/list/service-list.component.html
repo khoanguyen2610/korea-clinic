@@ -9,7 +9,7 @@
 								<article class="esg-filters esg-singlefilters">
 									<div class="esg-filter-wrapper esg-fgc-5">
 										<div class="esg-filterbutton selected esg-allfilter" data-filter="filterall" data-fid="-1">
-											<span>Filter - All</span>
+											<span>{{ 'PUBLIC.filter_all' | translate }}</span>
 										</div>
 										<div class="esg-filterbutton" data-fid="49" data-pid="34" id="skin" [attr.data-filter]="'filter-category-' + item.id" *ngFor="let item of categories">
 											<span>{{ item.title }}</span>
