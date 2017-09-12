@@ -5691,7 +5691,7 @@ footer.twitter_wrap .sc_section_overlay {
     background: #fff;
     border: 1px solid #ddd;
     cursor: pointer;
-    z-index: 100001;
+    z-index: 100;
     -webkit-transition: all ease 1.5s;
     -moz-transition: all ease 1.5s;
     -ms-transition: all ease 1.5s;

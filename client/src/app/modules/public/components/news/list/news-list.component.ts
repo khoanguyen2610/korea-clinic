@@ -52,6 +52,7 @@ export class NewsListComponent implements OnInit {
 			(param: any) => this._params = param
 		);
 
+
 		this.subscriptionEvents = this._Router.events.subscribe((val) => {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {

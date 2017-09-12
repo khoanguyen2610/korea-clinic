@@ -219,7 +219,13 @@ function jacqueline_ready_actions() {
 				jQuery(this).parents('li').siblings('li').find('ul:visible').slideUp().parent().removeClass('opened');
 				$a.siblings('ul').slideDown().parent().addClass('opened');
 			}
+		}else{
+			//Close panel
+			jQuery('.header_mobile .side_wrap').removeClass('open');
 		}
+
+
+
 		// Ignore link for parent menu items
 		if (jQuery(this).hasClass('open_child_menu') || $a.attr('href')=='#') {
 			e.preventDefault();

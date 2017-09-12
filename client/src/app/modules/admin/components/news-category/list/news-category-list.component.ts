@@ -23,6 +23,13 @@ export class NewsCategoryListComponent implements OnInit {
 
 	delete_id: number;
 	url_list_data: String;
+	filter = { language_code: 'vi' };
+
+	public language_options = [
+		{'id':'all', 'text':'All'},
+		{'id':'vi', 'text':'Vietnam'},
+		{'id':'en', 'text':'English'}
+	];
 
 	constructor(
 		private _AuthService: AuthService,
@@ -34,11 +41,21 @@ export class NewsCategoryListComponent implements OnInit {
 		private _Router: Router,
 
 	) {
-		this.subscription = _ActivatedRoute.queryParams.subscribe((params:any) => {
 
+		// subscribe to router event
+		let url_params: URLSearchParams = new URLSearchParams();
+		this.subscription = _ActivatedRoute.queryParams.subscribe((param:any) => {
+			for(var k in param){
+				url_params.set(k,param[k]);
+				this.filter[k] = param[k];
+			}
 		});
 
-		this.url_list_data = this._NewsCategoryService._list_data_URL + '?language_code=vi&recursive=true';
+		if(!url_params.get('language_code')){
+			url_params.set('language_code','vi');
+		}
+
+		this.url_list_data = this._NewsCategoryService._list_data_URL + '?recursive=true&image_resize_width=300&' + url_params.toString();
 	}
 
 	ngOnInit(){
@@ -137,6 +154,31 @@ export class NewsCategoryListComponent implements OnInit {
 				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
+	}
+
+	onSearch(){
+		/*====================================
+		 * Change URL when submit
+		 *====================================*/
+		this._Router.navigate(['/admin/news-category/list'], { queryParams: this.filter });
+		/*====================================
+		 * Reload Datatable
+		 *====================================*/
+		let _list_data_URL = this._NewsCategoryService._list_data_URL + '?recursive=true&image_resize_width=300&' + $.param(this.filter);
+		this.DTList.ajax.url(_list_data_URL).load();
+	}
+
+	onReset() {
+		this.filter = { language_code : 'vi' };
+		/*====================================
+		 * Change URL when submit
+		 *====================================*/
+		this._Router.navigate(['/admin/news-category/list']);
+		/*====================================
+		 * Reload Datatable
+		 *====================================*/
+		let _list_data_URL = this._NewsCategoryService._list_data_URL + '?recursive=true&image_resize_width=300&' + $.param(this.filter);
+		this.DTList.ajax.url(_list_data_URL).load();
 	}
 
 	ngOnDestroy(){

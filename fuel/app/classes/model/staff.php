@@ -43,6 +43,7 @@ class Model_Staff extends \Orm\Model {
 
         //Query by params
 		if(isset($params['fullname']) && !empty($params['fullname'])) $query->where('SM.fullname', 'like', '%' . $params['fullname'] . '%');
+		if(isset($params['position']) && !empty($params['position'])) $query->where('SM.position', 'like', '%' . $params['position'] . '%');
         if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
@@ -71,6 +72,7 @@ class Model_Staff extends \Orm\Model {
 
 			//Query by params
  			if(isset($params['fullname']) && !empty($params['fullname'])) $query->where('SM.fullname', 'like', '%' . $params['fullname'] . '%');
+			if(isset($params['position']) && !empty($params['position'])) $query->where('SM.position', 'like', '%' . $params['position'] . '%');
  	        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);

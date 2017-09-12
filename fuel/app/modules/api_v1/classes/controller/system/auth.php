@@ -145,4 +145,55 @@ class Controller_System_Auth extends \Controller_API {
         return $this->response($response);
     }
 
+	/*=============================================================
+     * Author: Nguyen Anh Khoa
+     * Function change password
+     * Method POST
+     * Input: password, new_password, re_password
+     *=============================================================*/
+    public function post_change_password(){
+        $param = \Input::param();
+        $validation = \Validation::forge();
+        $validation->add_callable('MyRules');
+        $validation->add_field('password',__('Password', [], 'Password'),'required');
+        $validation->add_field('new_password',__('New Password', [], 'New Password'),'required');
+        $validation->add_field('re_password',__('Re Password', [], 'Re Password'),'required');
+
+        if($validation->run()){
+            //check current password
+            $password = \Auth::hash_password($param['password']);
+            $user = \Model_System_VsvnUser::find('first', ['where' => ['id' => $param['id'], 'password' => $password]]);
+            if(!empty($user)){
+                $new_password = \Auth::hash_password($param['new_password']);
+                $user->set(['password' => $new_password])->save();
+
+                /*==================================================
+                 * Response Data
+                 *==================================================*/
+                $response = ['status' => 'success',
+                            'code' => Exception::E_ACCEPTED,
+                            'message' => Exception::getMessage(Exception::E_ACCEPTED)];
+
+            }else{
+                $validation_errors = ['password' => 'Password do not match.'];
+                /*==================================================
+                 * Response Data
+                 *==================================================*/
+                $response = ['status' => 'error',
+                            'code' => Exception::E_VALIDATE_ERR,
+                            'message' => Exception::getMessage(Exception::E_VALIDATE_ERR),
+                            'error' => $validation_errors];
+            }
+        }else{
+            /*==================================================
+             * Response Data
+             *==================================================*/
+            $response = ['status' => 'error',
+                        'code' => Exception::E_VALIDATE_ERR,
+                        'message' => Exception::getMessage(Exception::E_VALIDATE_ERR),
+                        'error' => $validation->error_message()];
+        }
+        return $this->response($response);
+    }
+
 }

@@ -21,14 +21,19 @@
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
+                        <!-- <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" /> -->
                         <span class="username username-hide-on-mobile"> Administrator </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
+                            <a (click)="onOpenChangePassword()">
+                                <i class="icon-key"></i> {{'ADMIN.change_password' | translate}}
+                            </a>
+                        </li>
+                        <li>
                             <a (click)="logout()">
-                                <i class="icon-key"></i> Log Out
+                                <i class="icon-logout"></i> {{'ADMIN.log_out' | translate}}
                             </a>
                         </li>
                     </ul>
@@ -43,3 +48,40 @@
 <!-- BEGIN HEADER & CONTENT DIVIDER -->
 <div class="clearfix"> </div>
 <!-- END HEADER & CONTENT DIVIDER -->
+
+<modal #modalchangepassword>
+	<modal-header [show-close]="true">
+		<h4 class="modal-title">{{ 'ADMIN.change_password' | translate }}</h4>
+	</modal-header>
+	<modal-body>
+        <form class="auth-form change-pw-form" #f="ngForm" (ngSubmit)="onChangePassword(f)">
+        	<div class="form-body">
+        		<div class="form-group form-md-line-input" [ngClass]="{'has-error': (password?.dirty && password?.errors?.required) || (validateErrors?.password | json)}">
+        			<input class="form-control" name="password" [(ngModel)]="info.password" #password="ngModel" placeholder="{{'ADMIN.enter_your_current_password' | translate}}..." type="password" required>
+                    <label for="form_control_1">{{'ADMIN.current_password' | translate}} <span aria-required="true" class="required">*</span></label>
+                    <span class="help-block" *ngIf="password?.dirty && password?.errors?.required" style="display: block; opacity: 1" >{{ 'VALIDATE.required' | translate }}</span>
+                    <span class="help-block" *ngIf="validateErrors?.password | json" style="display: block; opacity: 1">{{validateErrors?.password | json}}</span>
+        		</div>
+        	<div class="form-body">
+        		<div class="form-group form-md-line-input" [ngClass]="{'has-error': new_password?.dirty && new_password?.errors?.required}">
+        			<input class="form-control" name="new_password" [(ngModel)]="info.new_password" #new_password="ngModel" placeholder="{{'ADMIN.enter_new_password' | translate}}..." type="password" required validateEqual="re_password" reverse="true">
+                    <label for="form_control_1">{{'ADMIN.new_password' | translate}} <span aria-required="true" class="required">*</span></label>
+                    <span class="help-block" *ngIf="new_password?.dirty && new_password?.errors?.required" style="display: block; opacity: 1" >{{ 'VALIDATE.required' | translate }}</span>
+        		</div>
+        	</div>
+        		</div>
+        	<div class="form-body">
+        		<div class="form-group form-md-line-input" [ngClass]="{'has-error': re_password?.dirty && (re_password?.errors?.required || re_password?.errors?.validateEqual == false)}">
+        			<input class="form-control" name="re_password" [(ngModel)]="info.re_password" #re_password="ngModel" placeholder="{{'ADMIN.enter_re_password' | translate}}..." type="password" required validateEqual="new_password" reverse="false">
+                    <label for="form_control_1">{{'ADMIN.re_password' | translate}} <span aria-required="true" class="required">*</span></label>
+                    <span class="help-block" *ngIf="re_password?.dirty && re_password?.errors?.required" style="display: block; opacity: 1" >{{ 'VALIDATE.required' | translate }}</span>
+                    <span class="help-block" *ngIf="re_password?.dirty && re_password?.errors?.validateEqual == false" style="display: block; opacity: 1" >{{ 'VALIDATE.invalid_equal_password' | translate }}</span>
+        		</div>
+        	</div>
+        </form>
+	</modal-body>
+	<modal-footer>
+		<button class="btn default" type="button" (click)="modalchangepassword.close()"> {{ 'ADMIN.cancel'| translate }}</button>
+		<button class="btn green" type="submit" id="btn_submit_form" [disabled]="!f.valid" (click)="onChangePassword(f)"><i class="fa fa-check"></i> {{ 'ADMIN.save'| translate }} </button>
+	</modal-footer>
+</modal>

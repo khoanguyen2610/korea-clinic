@@ -129,11 +129,11 @@ class Controller_News extends \Controller_API {
             $arrData = [];
             foreach ($param as $key => $value) {
             	if(!in_array($key, $this->table_field)) continue;
-                $value = (!is_null($value) && $value != '' && $value != 'undefined')?trim($value):null;
+                $value = (!is_null($value) && $value != '' && $value != 'undefined' && $value != 'null')?trim($value):null;
 
 				switch ($key) {
                     case 'date':
-                        $value = (!is_null($value) && $value != '' && $value != 'undefined')?date('Y-m-d H:i:s', strtotime($value)):null;
+                        $value = (!is_null($value) && $value != '' && $value != 'undefined' && $value != 'null')?date('Y-m-d H:i:s', strtotime($value)):null;
                         break;
                 }
 
