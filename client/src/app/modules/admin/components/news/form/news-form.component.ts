@@ -64,7 +64,7 @@ export class NewsFormComponent implements OnInit {
 				let params: URLSearchParams = new URLSearchParams();
 				params.set('item_key',this.queryParams.item_key);
 				params.set('response_quantity','all');
-				this._NewsService.getByID(undefined, params).subscribe(res => {
+				this._NewsService.getByID(null, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
 							this._Router.navigate(['/admin/news/list']);

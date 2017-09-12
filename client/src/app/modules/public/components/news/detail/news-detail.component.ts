@@ -59,7 +59,7 @@ export class NewsDetailComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);
-		this._NewsService.getByID(undefined, params).subscribe(res => {
+		this._NewsService.getByID(null, params).subscribe(res => {
 			if(res.status == 'success'){
 				let item = res.data;
 				item['created_format_date'] = moment(item['created_at']).format(this.news_format_date);

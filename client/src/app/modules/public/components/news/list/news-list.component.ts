@@ -81,18 +81,11 @@ export class NewsListComponent implements OnInit {
 			params.set('item_key',this._params.item_key);
 		}
 
+
+		params.set('image_resize_width','1280');
 		this._NewsService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				let items = res.data;
-				items.forEach(item => {
-					item['created_format_date'] = moment(item['created_at']).format(this.news_format_date);
-					var image = JSON.parse(item.image);
-					if(image) {
-						item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
-					}
-
-				});
-				this.items = items;
+				this.items = res.data;
 			}
 		});
 	}

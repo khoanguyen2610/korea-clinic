@@ -63,7 +63,7 @@ export class ServiceCategoryFormComponent implements OnInit {
 				params.set('item_key', this.queryParams.item_key);
 				params.set('response_quantity', 'all');
 
-				this._ServiceCategoryService.getByID(undefined, params).subscribe(res => {
+				this._ServiceCategoryService.getByID(null, params).subscribe(res => {
 					if (res.status == 'success') {
 						if (res.data == null) {
 							this._Router.navigate(['/admin/service-category/list']);

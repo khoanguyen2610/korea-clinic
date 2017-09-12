@@ -54,7 +54,7 @@ export class StaffDetailComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);
-		this._StaffService.getByID(undefined, params).subscribe(res => {
+		this._StaffService.getByID(null, params).subscribe(res => {
 			if(res.status == 'success'){
 				this.Item = res.data;
 				console.log(this.Item)
