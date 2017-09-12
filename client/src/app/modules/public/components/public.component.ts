@@ -47,25 +47,25 @@ export class PublicComponent  {
 	) {
 		JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
-		_HttpInterceptorService.request().addInterceptor((data, method) => {
-			this.is_last = false;
-			jQuery('.loading').show();
-			// this._LoadingAnimateService.setValue(true);
+		// _HttpInterceptorService.request().addInterceptor((data, method) => {
+		// 	this.is_last = false;
+		// 	jQuery('.loading').show();
+		// 	// this._LoadingAnimateService.setValue(true);
 
-			setTimeout(() => {
-				if (this.is_last) {
-					setTimeout(() => {
-						jQuery('.loading').hide();
-					}, 500);
-				}
-			}, 1500);
-			return data;
-		});
+		// 	setTimeout(() => {
+		// 		if (this.is_last) {
+		// 			setTimeout(() => {
+		// 				jQuery('.loading').hide();
+		// 			}, 500);
+		// 		}
+		// 	}, 1500);
+		// 	return data;
+		// });
 
-		_HttpInterceptorService.response().addInterceptor((res, method) => {
-			this.is_last = true;
-			return res;
-		});
+		// _HttpInterceptorService.response().addInterceptor((res, method) => {
+		// 	this.is_last = true;
+		// 	return res;
+		// });
 
 	}
 

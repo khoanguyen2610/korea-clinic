@@ -14,9 +14,12 @@
                     <div class="column-3_4 sc_column_item">
                         <h4 class="sc_title sc_title_regular">{{ Item.fullname }}</h4>
                         <div class="text_column content_element sc_custom_1457948826201">
+                            <div class="sc_team_item_position" style="color: #9a9a9a">
+                                {{ Item.position }}
+                            </div>
                             <div class="wrapper">
-                                <p [innerHTML]="Item.content">
-                                </p>
+                                <div [innerHTML]="Item.content">
+                                </div>
 
                             </div>
                         </div>
