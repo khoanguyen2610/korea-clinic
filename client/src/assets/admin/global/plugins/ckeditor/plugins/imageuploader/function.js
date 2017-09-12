@@ -23,13 +23,13 @@ function showEditBar(imgSrc, imgStyle, imgID, imgName) {
 
     $("#editbar").slideUp(100);
     $("#editbar").slideDown(100);
-    
+
     $(".fileDiv,.fullWidthFileDiv").removeClass( "selected" );
     $("div[data-imgid='" + imgID +"']").addClass( "selected" );
-    
-    $("#updates").css("visibility", "hidden"); 
+
+    $("#updates").css("visibility", "hidden");
     $("#updates").slideUp(150);
-    
+
     $("#editbarDelete").attr("onclick","deleteImg('" + imgName + "', '" + imgID + "');");
     $("#editbarUse").attr("onclick","useImage('" + imgSrc + "')");
     $("#editbarView").attr("onclick","showImage('" + imgSrc + "','" + imgStyle + "')");
@@ -50,13 +50,13 @@ $(document).mouseup(function (e) {
 // hide editbar function
 function hideEditBar() {
     $("#editbar").slideUp(100);
-    
+
     $(".fileDiv,.fullWidthFileDiv").removeClass( "selected" );
-    
-    if (currentpluginver != pluginversion) {
-        $("#updates").slideDown(150);
-        $("#updates").css("visibility", "visible"); 
-    };
+
+    // if (currentpluginver != pluginversion) {
+    //     $("#updates").slideDown(150);
+    //     $("#updates").css("visibility", "visible");
+    // };
 }
 
 // Use image and overgive image src to ckeditor
@@ -92,16 +92,16 @@ function pluginSettings() {
 
 // check if new version is available
 $( document ).ready(function() {
-    if (currentpluginver != pluginversion) {
-        $("#updates").show();
-        $('#updates').html("A new version of "+ pluginname +" ("+ pluginversion +") is available. <a target=\"_blank\" href=\""+ plugindwonload +"\">Download it now!</a>");
-    };
+    // if (currentpluginver != pluginversion) {
+    //     $("#updates").show();
+    //     $('#updates').html("A new version of "+ pluginname +" ("+ pluginversion +") is available. <a target=\"_blank\" href=\""+ plugindwonload +"\">Download it now!</a>");
+    // };
 });
 
 // call jquery lazy load
 $(function() {
     $("img.lazy").lazyload();
-}); 
+});
 
 $( document ).ready(function() {
     var elem = '#uploadpathEditable';
@@ -161,7 +161,7 @@ function extensionSettings(setting){
     $.ajax({
       method: "POST",
       url: "pluginconfig.php",
-      data: { 
+      data: {
           extension: setting,
       }
     }).done(function( msg ) {
@@ -208,18 +208,18 @@ $( document ).ready(function() {
 // drag n' drop
 function drop(e) {
     e.preventDefault();
-    
+
     var file = e.dataTransfer.files[0];
-    
+
     if(file && file.type.match("image/*")) {
-                    
+
         var formdata = new FormData();
         formdata.append('upload', file);
-            
+
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'imgupload.php');
         xhr.send(formdata);
-        
+
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 hideEditBar();
@@ -286,10 +286,10 @@ function reloadImages() {
 // select language
 function selectLang(lang) {
     Cookies.set('sy_lang', lang, { expires: 1095 });
-    
+
     $('#setLangDiv').hide();
     $('#background4').slideUp(250, 'swing');
-    
+
     setTimeout(function(){
         location.reload();
     }, 250);
@@ -299,7 +299,7 @@ function selectLang(lang) {
 function openLangPanel() {
     $('#settingsDiv').hide();
     $('#background3').slideUp(250, 'swing');
-    
+
     setTimeout(function(){
         $("#setLangDiv").show();
         $("#background4").slideDown(250, "swing");
@@ -309,10 +309,10 @@ function openLangPanel() {
 // enable news
 function enableNews() {
     Cookies.remove('show_news');
-    
+
     $('#settingsDiv').hide();
     $('#background3').slideUp(250, 'swing');
-    
+
     setTimeout(function(){
         location.reload();
     }, 250);
@@ -321,10 +321,10 @@ function enableNews() {
 // disable news
 function disableNews() {
     Cookies.set('show_news', 'no', { expires: 7 });
-    
+
     $('#settingsDiv').hide();
     $('#background3').slideUp(250, 'swing');
-    
+
     setTimeout(function(){
         location.reload();
     }, 250);

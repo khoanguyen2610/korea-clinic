@@ -3,6 +3,7 @@
 
 CKEDITOR.plugins.add( 'imageuploader', {
     init: function( editor ) {
-        editor.config.filebrowserBrowseUrl = 'ckeditor/plugins/imageuploader/imgbrowser.php';
+        // editor.config.filebrowserBrowseUrl = 'http://localhost/korea-clinic/client/src/assets/admin/global/plugins/ckeditor/plugins/imageuploader/imgbrowser.php';
+        editor.config.filebrowserBrowseUrl = 'assets/admin/global/plugins/ckeditor/plugins/imageuploader/imgbrowser.php';
     }
 });

@@ -22,7 +22,18 @@
 		<div class="col-md-11">
 			<ckeditor name="description"
 				[(ngModel)]="Item.description"
-
+				[config]= "{
+					toolbarGroups : [
+						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
+						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
+						{ name: 'tools', groups: [ 'Maximize' ] },
+						'/',
+						{ name: 'basicstyles', groups: ['basicstyles'] },
+						{ name: 'styles' },
+						{ name: 'links' },
+						{ name: 'insert' }
+					]}"
 				debounce="500">
 			</ckeditor>
 		</div>

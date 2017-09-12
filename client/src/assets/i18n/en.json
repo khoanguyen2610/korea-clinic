@@ -55,6 +55,7 @@
     "equipment": "Equipment",
     "service_category": "Service Category",
     "service": "Service",
+    "service_description": "",
     "news_category": "News Category",
     "news": "News",
     "staff": "Staff",

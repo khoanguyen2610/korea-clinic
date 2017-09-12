@@ -39,12 +39,12 @@ require(__DIR__ . '/check_permission.php');
 if ($username == "" and $password == "") {
     if(!isset($_SESSION['username'])){
         include(__DIR__ . '/new.php');
-        exit;	
+        exit;
     }
 } else {
     if(!isset($_SESSION['username'])){
         include(__DIR__ . '/loginindex.php');
-        exit;	
+        exit;
     }
 }
 
@@ -55,49 +55,33 @@ if ($username == "" and $password == "") {
       ondragover="toggleDropzone('show')"
       ondragleave="toggleDropzone('hide')">
 <head>
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title><?php echo $imagebrowser1; ?> :: Fujana Solutions</title>
     <meta name="author" content="Moritz Maleck">
     <link rel="icon" href="img/cd-ico-browser.ico">
-    
+
     <link rel="stylesheet" href="styles.css">
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://www.maleck.org/imageuploader/plugininfo.js"></script>
     <script src="dist/jquery.lazyload.min.js"></script>
     <script src="dist/js.cookie-2.0.3.min.js"></script>
-    
+
     <script src="dist/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
-    
+
     <script src="function.js"></script>
-    
-    <script> 
-        // Plugin version
-        var currentpluginver = "<?php echo $currentpluginver; ?>";
-        // ajax request to register the plugin for better support
-        $.ajax({
-          method: "POST",
-          url: "http://ibm.bplaced.com/imageuploader/register.php",
-          data: { root: "<?php echo $root; ?>", link: "<?php echo $link; ?>", ver: ""+ currentpluginver +"" }
-        })
-    </script>
-    
+
 </head>
 <body ontouchstart="">
-    
+
 <div id="header">
-    <a class="" href="http://imageuploaderforckeditor.altervista.org/" target="_blank"><img src="img/cd-icon-image.png" class="headerIconLogo"></a>
     <img onclick="Cookies.remove('qEditMode');window.close();" src="img/cd-icon-close-grey.png" class="headerIconRight iconHover">
     <img onclick="reloadImages();" src="img/cd-icon-refresh.png" class="headerIconRight iconHover">
     <img onclick="uploadImg();" src="img/cd-icon-upload-grey.png" class="headerIconCenter iconHover">
-    <?php if($show_settings): ?>
-    <img onclick="pluginSettings();" src="img/cd-icon-settings.png" class="headerIconRight iconHover">
-    <?php endif; ?>
 </div>
-    
+
 <div id="editbar">
     <div id="editbarView" onclick="#" class="editbarDiv"><img src="img/cd-icon-images.png" class="editbarIcon editbarIconLeft"><p class="editbarText"><?php echo $buttons1; ?></p></div>
     <a href="#" id="editbarDownload" download><div class="editbarDiv"><img src="img/cd-icon-download.png" class="editbarIcon editbarIconLeft"><p class="editbarText"><?php echo $buttons2; ?></p></div></a>
@@ -105,10 +89,10 @@ if ($username == "" and $password == "") {
     <div id="editbarDelete" onclick="#" class="editbarDiv"><img src="img/cd-icon-qtrash.png" class="editbarIcon editbarIconLeft"><p class="editbarText"><?php echo $buttons4; ?></p></div>
     <img onclick="hideEditBar();" src="img/cd-icon-close-black.png" class="editbarIcon editbarIconRight">
 </div>
-    
+
 <div id="updates" class="popout"></div>
-    
-<div id="dropzone" class="dropzone" 
+
+<div id="dropzone" class="dropzone"
      ondragenter="return false;"
      ondragover="return false;"
      ondrop="drop(event)">
@@ -134,23 +118,7 @@ if ($username == "" and $password == "") {
     ?>
 </div>
 
-    
-<?php if($file_style == "block") { ?>
-    <div class="fileDiv" onclick="window.location.href = 'http://imageuploaderforckeditor.altervista.org';">
-        <div class="imgDiv">Image Uploader for CKEditor</div>
-        <p class="fileDescription">&copy; 2016 by Moritz Maleck</p>
-        <p class="fileTime">imageuploaderforckeditor.altervista.org</p>
-        <p class="fileTime">180 KB</p>
-    </div>
-<?php } elseif($file_style == "list") { ?>
-    <div class="fullWidthFileDiv" onclick="window.location.href = 'http://imageuploaderforckeditor.altervista.org';">
-        <div class="fullWidthimgDiv"><img class="fullWidthfileImg lazy" data-original="img/cd-icon-credits.png"></div>
-        <p class="fullWidthfileDescription">Image Uploader for CKEditor</p>
-        <p class="fullWidthfileTime fullWidthfileMime">png</p>
-        <p class="fullWidthfileTime">180 KB</p>
-        <p class="fullWidthfileTime fullWidth30percent">imageuploaderforckeditor.altervista.org</p>
-    </div>
-<?php } ?>
+
 
 <div id="imageFullSreen" class="lightbox popout">
     <div class="buttonBar">
@@ -160,7 +128,7 @@ if ($username == "" and $password == "") {
     </div><br><br>
     <img id="imageFSimg" src="#" style="#"><br>
 </div>
-    
+
 <div id="uploadImgDiv" class="lightbox popout">
     <div class="buttonBar">
         <button class="headerBtn" onclick="$('#uploadImgDiv').hide(); $('#background2').slideUp(250, 'swing');"><img src="img/cd-icon-close.png" class="headerIcon"></button>
@@ -231,8 +199,6 @@ if ($username == "" and $password == "") {
         <p class="uploadP" onclick="window.open('http://ibm.bplaced.com/contact/index.php?cdproject=Image%20Uploader%20and%20Browser%20for%20CKEditor&cdlink=<?php echo $link; ?>&cdver='+currentpluginver,'_blank');"><img src="img/cd-icon-bug.png" class="headerIcon"> <?php echo $panelsettings14; ?></p>
 
         <br><h3 class="settingsh3"><?php echo $panelsettings15; ?></h3>
-        <!--current version-->
-        <p class="uploadP"><img src="img/cd-icon-version.png" class="headerIcon"> <?php echo $currentpluginver; ?></p>
 
         <br><h3 class="settingsh3"><?php echo $panelsettings16; ?></h3>
         <!--credits-->
@@ -245,21 +211,10 @@ if ($username == "" and $password == "") {
         <br>
     </div>
 <?php } ?>
-    
-<form id="donate" target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="BTEL7F2ZLR3T6">
-</form> 
-    
-<div id="background" class="background" onclick="$('#imageFullSreenClose').trigger('click');"></div>
-<div id="background2" class="background" onclick="$('#uploadImgDiv').hide(); $('#background2').slideUp(250, 'swing');"></div>
-<div id="background3" class="background" onclick="$('#settingsDiv').hide(); $('#background3').slideUp(250, 'swing');"></div>
-<div id="background4" class="background" onclick="$('#setLangDiv').hide(); $('#background4').slideUp(250, 'swing');"></div>
 
 <!--Noscript part if js is disabled-->
-<noscript> <div class="noscript"> <div id="folderError" class="noscriptContainer popout"> <b><?php echo $alerts1; ?></b><br><br><?php echo $alerts5; ?> <a href="http://www.enable-javascript.com/" target="_blank"><?php echo $alerts6; ?></a><br><br><?php echo $alerts4; ?> </div></div></noscript>
-    
-<?php   
+
+<?php
 // Including the language file, don't delete the following row!
 require(__DIR__ . '/lang/lang.php');
 ?>

@@ -9,16 +9,21 @@
   <div class="form-group">
     <label class="control-label col-md-1">{{ 'ADMIN.description' | translate }}</label>
     <div class="col-md-11">
-      <ckeditor name="description" [(ngModel)]="Item.description" [config]="{
-								toolbarGroups : [
-									{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
-									{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
-									{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
-									'/',
-									{ name: 'basicstyles', groups: ['basicstyles'] },
-									{ name: 'styles' },
-									{ name: 'links' }
-								]}" debounce="500">
+        <ckeditor name="description"
+            [(ngModel)]="Item.description"
+            [config]= "{
+                toolbarGroups : [
+                    { name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
+                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+                    { name: 'document', groups: [ 'mode', 'document', 'doctools'] },
+                    { name: 'tools', groups: [ 'Maximize' ] },
+                    '/',
+                    { name: 'basicstyles', groups: ['basicstyles'] },
+                    { name: 'styles' },
+                    { name: 'links' },
+                    { name: 'insert' }
+                ]}" 
+            debounce="500">
       </ckeditor>
     </div>
   </div>
@@ -28,7 +33,7 @@
       <div class="uploader-files">
         <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
           <div class="no-file" *ngIf="!uploader.queue.length">
-            <span>Drag and drop files…</span>
+            <span>{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
             <span></span>
             <!-- drag & drop file example-->
           </div>

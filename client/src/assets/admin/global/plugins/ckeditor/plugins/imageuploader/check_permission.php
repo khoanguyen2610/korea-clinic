@@ -41,7 +41,7 @@ if(!$check_permission):
     <body ontouchstart="">
 
     <div id="header">
-        <a class="headerA" href="http://imageuploaderforckeditor.altervista.org/" target="_blank"><?php echo $imagebrowser1; ?></a><br> 
+        <a class="headerA" href="http://imageuploaderforckeditor.altervista.org/" target="_blank"><?php echo $imagebrowser1; ?></a><br>
     </div>
 
     <div id="folderError">

@@ -22,7 +22,7 @@ if(isset($_POST["newpath"]) or isset($_POST["extension"]) or isset($_GET["file_s
 }
 
 if(isset($_SESSION['username'])){
-    
+
     if(isset($_POST["newpath"])){
         $newpath = filter_input(INPUT_POST, 'newpath', FILTER_SANITIZE_STRING);
         $root = $_SERVER['DOCUMENT_ROOT'];
@@ -34,7 +34,7 @@ if(isset($_SESSION['username'])){
         $fp = fopen(__DIR__ . '/pluginconfig.php', 'a');
         fwrite($fp, $data);
     }
-    
+
     if(isset($_POST["extension"])){
         $extension_setting = filter_input(INPUT_POST, 'extension', FILTER_SANITIZE_STRING);
         if($extension_setting == "no" or $extension_setting == "yes"){
@@ -51,7 +51,7 @@ if(isset($_SESSION['username'])){
                 </script>
             ';
         }
-    } 
+    }
     if(isset($_GET["file_style"])){
         $file_style = filter_input(INPUT_GET, 'file_style', FILTER_SANITIZE_STRING);
         if($file_style == "block" or $file_style == "list"){
@@ -69,8 +69,8 @@ if(isset($_SESSION['username'])){
                 </script>
             ';
         }
-    } 
-    
+    }
+
 }
 
 // Version of the plugin
@@ -84,7 +84,7 @@ $username = "";
 $password = "";
 
 // ststem icons
-$sy_icons = array( 
+$sy_icons = array(
     "cd-ico-browser.ico",
     "cd-icon-block.png",
     "cd-icon-browser.png",
@@ -153,8 +153,8 @@ $useruploadroot = "http://$_SERVER[HTTP_HOST]";
 $browserfolder = pathinfo("$_SERVER[REQUEST_URI]");
 $browserfolder = ltrim($browserfolder["dirname"], '/');
 $usersiteroot = substr($_SERVER["SCRIPT_FILENAME"], 0, (stripos($_SERVER["SCRIPT_FILENAME"], $_SERVER["SCRIPT_NAME"])+1));
-
 $useruploadfolder = "$browserfolder/uploads";
 $useruploadpath = $usersiteroot."$useruploadfolder/";
 $foldershistory[] = $useruploadfolder;
 
+$username = "admin"; $password = 'd86c219dc33a1cd45c5d87982f5af8b7';
