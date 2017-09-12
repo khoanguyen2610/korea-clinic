@@ -77,7 +77,7 @@ export class ServiceDetailComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);
-		this._ServiceService.getByID(undefined, params).subscribe(res => {
+		this._ServiceService.getByID(null, params).subscribe(res => {
 			if(res.status == 'success'){
 				this.Item = res.data;
 			}
