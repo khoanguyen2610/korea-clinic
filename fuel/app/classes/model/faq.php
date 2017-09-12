@@ -44,8 +44,8 @@ class Model_Faq extends \Orm\Model {
 
         //Query by params
 		if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
-        if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
-        if(isset($params['service_id']) && !empty($params['service_id'])) $query->where('SM.service_id', '=', $params['service_id']);
+        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
+        if(isset($params['service_id']) && !empty($params['service_id']) && $params['service_id'] != 'all') $query->where('SM.service_id', '=', $params['service_id']);
         if(isset($params['service_title']) && !empty($params['service_title'])) $query->where('S.title', 'like', '%' . $params['service_title'] . '%');
 
         $result = $query->as_object()->execute()->as_array();
@@ -72,10 +72,10 @@ class Model_Faq extends \Orm\Model {
                          ->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
                          ->where('SM.item_status', '!=', 'delete');
 
-			//Query by params			 
+			//Query by params
 			if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
- 	        if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
- 	        if(isset($params['service_id']) && !empty($params['service_id'])) $query->where('SM.service_id', '=', $params['service_id']);
+ 	        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
+ 	        if(isset($params['service_id']) && !empty($params['service_id']) && $params['service_id'] != 'all') $query->where('SM.service_id', '=', $params['service_id']);
  	        if(isset($params['service_title']) && !empty($params['service_title'])) $query->where('S.title', 'like', '%' . $params['service_title'] . '%');
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);

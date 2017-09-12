@@ -45,7 +45,7 @@ class Model_Equipment extends \Orm\Model {
 
         //Query by params
 		if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
-        if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
         $result = $query->as_object()->execute()->as_array();
@@ -73,7 +73,7 @@ class Model_Equipment extends \Orm\Model {
 
 			//Query by params
  			if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
- 	        if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+ 	        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);
         }
