@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { Configuration } from '../../../../../../shared';
-import { ServiceService } from '../../../../../../services';
+import { ServiceCategoryService } from '../../../../../../services';
 import { BeforeAfter } from '../../../../../../models';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
@@ -14,7 +14,7 @@ declare let $: any;
 @Component({
 	selector: 'app-before-after-form-content',
 	templateUrl: './before-after-form-content.component.html',
-	providers: [ ServiceService ]
+	providers: [ ServiceCategoryService ]
 })
 
 export class BeforeAfterFormContentComponent implements OnInit {
@@ -37,7 +37,7 @@ export class BeforeAfterFormContentComponent implements OnInit {
 	constructor(
 		private _Configuration: Configuration,
 		private _ToastrService: ToastrService,
-		private _ServiceService: ServiceService,
+		private _ServiceCategoryService: ServiceCategoryService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 	) {
@@ -52,7 +52,7 @@ export class BeforeAfterFormContentComponent implements OnInit {
 	ngOnInit(){
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
-		this._ServiceService.getListAll(params).subscribe(res => {
+		this._ServiceCategoryService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				let items = res.data;
 				for(let i in items){

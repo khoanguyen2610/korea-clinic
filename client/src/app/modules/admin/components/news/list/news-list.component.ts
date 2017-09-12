@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-
+import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
-import { AuthService, NewsService } from '../../../../../services';
+import { AuthService, NewsService, NewsCategoryService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { BreadcrumbComponent, FooterComponent, HeaderComponent, MainNavComponent } from '../../general';
@@ -13,7 +13,7 @@ declare var $: any;
 @Component({
 	selector: 'app-news-list',
 	templateUrl: './news-list.component.html',
-	providers: [ NewsService ]
+	providers: [ NewsService, NewsCategoryService ]
 })
 
 export class NewsListComponent implements OnInit {
@@ -22,26 +22,66 @@ export class NewsListComponent implements OnInit {
 	@ViewChild('modal') modal: ModalComponent;
 
 	delete_item_key: string;
-	url_list_data: String;
+	url_list_data: string;
+	filter = { language_code: 'vi' };
+
+	public language_options = [
+		{'id':'all', 'text':'All'},
+		{'id':'vi', 'text':'Vietnam'},
+		{'id':'en', 'text':'English'}
+	];
+	news_options: Array<any> = [];
 
 	constructor(
 		private _AuthService: AuthService,
 		private _Configuration: Configuration,
 		private _NewsService: NewsService,
+		private _NewsCategoryService: NewsCategoryService,
 		private _ToastrService: ToastrService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 
 	) {
-		this.subscription = _ActivatedRoute.queryParams.subscribe((params:any) => {
-
+		// subscribe to router event
+		let url_params: URLSearchParams = new URLSearchParams();
+		this.subscription = _ActivatedRoute.queryParams.subscribe((param:any) => {
+			for(var k in param){
+				url_params.set(k,param[k]);
+				this.filter[k] = param[k];
+			}
 		});
 
-		this.url_list_data = this._NewsService._list_data_URL + '?language_code=vi&image_resize_width=300';
+		if(!url_params.get('language_code')){
+			url_params.set('language_code','vi');
+		}
+
+		this.url_list_data = this._NewsService._list_data_URL + '?image_resize_width=300&' + url_params.toString();
 	}
 
 	ngOnInit(){
+		this.loadNewsCategory(this.filter.language_code, false);
+	}
 
+	loadNewsCategory(language_code: string, reload: boolean){
+		if(reload){
+			this.filter.language_code = language_code;
+		}
+
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', language_code);
+		params.set('item_status','active');
+		this._NewsCategoryService.getListData(params).subscribe(res => {
+			if(res.status == 'success'){
+				let options = [];
+				let items = res.data;
+				for(let i in items){
+					options.push({
+						'id': items[i].id, 'text': items[i].title
+					});
+				}
+				this.news_options = options;
+			}
+		});
 	}
 
 	ngAfterViewInit(){
@@ -150,6 +190,31 @@ export class NewsListComponent implements OnInit {
 				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
+	}
+
+	onSearch(){
+		/*====================================
+		 * Change URL when submit
+		 *====================================*/
+		this._Router.navigate(['/admin/news/list'], { queryParams: this.filter });
+		/*====================================
+		 * Reload Datatable
+		 *====================================*/
+		let _list_data_URL = this._NewsService._list_data_URL + '?image_resize_width=300&' + $.param(this.filter);
+		this.DTList.ajax.url(_list_data_URL).load();
+	}
+
+	onReset() {
+		this.filter = { language_code : 'vi' };
+		/*====================================
+		 * Change URL when submit
+		 *====================================*/
+		this._Router.navigate(['/admin/news/list']);
+		/*====================================
+		 * Reload Datatable
+		 *====================================*/
+		let _list_data_URL = this._NewsService._list_data_URL + '?image_resize_width=300&' + $.param(this.filter);
+		this.DTList.ajax.url(_list_data_URL).load();
 	}
 
 	ngOnDestroy(){

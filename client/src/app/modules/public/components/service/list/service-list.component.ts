@@ -54,11 +54,6 @@ export class ServiceListComponent implements OnInit {
 			}
 		});
 
-		this.hashtagSubscription = _ActivatedRoute.fragment.subscribe(
-			(param: any) => {
-				this.hashtagParams = param;
-			}
-		);
 
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){
@@ -72,6 +67,7 @@ export class ServiceListComponent implements OnInit {
 
 	loadPage(){
 		let params: URLSearchParams = new URLSearchParams();
+		params.set('image_resize_width', '480');
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
 		params.set('image_resize_width','1280');

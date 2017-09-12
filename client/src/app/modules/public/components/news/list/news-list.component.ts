@@ -67,7 +67,7 @@ export class NewsListComponent implements OnInit {
 
 	loadPage(){
 		let params: URLSearchParams = new URLSearchParams();
-
+		params.set('image_resize_width', '320');
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
 
@@ -76,11 +76,6 @@ export class NewsListComponent implements OnInit {
 				this.categories = res.data;
 			}
 		});
-
-		if(this._params.category_id){
-			params.set('item_key',this._params.item_key);
-		}
-
 
 		params.set('image_resize_width','1280');
 		this._NewsService.getListAll(params).subscribe(res => {
