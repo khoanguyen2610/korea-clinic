@@ -37,23 +37,52 @@
 					<div class="wrapper">
 						<div class="widgetised_column content_element sidebar">
 							<div class="wrapper">
-								<!--
-								<aside class="widget widget_text">
-                                    <div class="textwidget">
-                                        <form role="search" method="get" class="search_form" action="#">
-                                            <input type="text" class="search_field" placeholder="Search …" value="" name="s" title="Search for:">
-                                            <button type="submit" class="search_button icon-search-1" href="#"></button>
-                                        </form>
-                                    </div>
-                                </aside>
-                                -->
 								<aside class="widget widget_categories">
-									<h5 class="widget_title">{{'PUBLIC.service_category' | translate}}</h5>
-									<ul>
-										<li class="cat-item" *ngFor="let item of serviceCategories">
-											<a href="#">{{item.title}}</a>
-										</li>
-									</ul>
+									<h5 class="widget_title">{{'PUBLIC.category' | translate}}</h5>
+									<div class="sc_accordion" data-active="0">
+										<div class="sc_accordion_item" [ngClass]="{ 'odd first': i == 0 }" *ngFor="let item of categories; let i = index">
+											<ng-template [ngIf]="item.list_services.length">
+												<h5 class="sc_accordion_title">
+													<span class="sc_accordion_icon sc_accordion_icon_closed icon-plus"></span>
+													<span class="sc_accordion_icon sc_accordion_icon_opened icon-minus"></span>
+													{{ item.title }}
+												</h5>
+												<div class="sc_accordion_content">
+													<div class="text_column content_element ">
+														<div class="wrapper">
+															<ul>
+																<li class="cat-item" *ngFor="let subitem of item.list_services">
+																	<a [routerLink]="['/'+ controller + '/' + action_detail, subitem.item_key, subitem.title | niceurl]">{{ subitem.title }}</a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</ng-template>
+											<ng-template [ngIf]="!item.list_services.length">
+												<h5 class="sc_accordion_title">
+													<a [routerLink]="['/'+ controller, item.item_key, item.title | niceurl]">
+														<span class="sc_accordion_icon "></span>
+														{{ item.title }}
+													</a>
+												</h5>
+											</ng-template>
+										</div>
+										<div class="sc_accordion_item">
+											<h5 class="sc_accordion_title">
+												<a [routerLink]="['/faq']"><span class="sc_accordion_icon "></span>
+												{{ 'PUBLIC.faq' | translate }}</a>
+											</h5>
+										</div>
+										<div class="sc_accordion_item">
+											<h5 class="sc_accordion_title">
+												<a [routerLink]="['/'+ controller + '/' + action_before_after]">
+													<span class="sc_accordion_icon"></span>
+													{{ 'PUBLIC.before_after' | translate }}
+												</a>
+											</h5>
+										</div>
+									</div>
 								</aside>
 							</div>
 						</div>
