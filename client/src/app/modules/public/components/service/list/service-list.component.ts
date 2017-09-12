@@ -46,14 +46,6 @@ export class ServiceListComponent implements OnInit {
 			(param: any) => this._params = param
 		);
 
-		this.subscriptionEvents = this._Router.events.subscribe((val) => {
-			let routing = this._Router.url;
-			if (this.curRouting != routing) {
-				this.curRouting = routing;
-				this.loadPage();
-			}
-		});
-
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){
 			this.controller = 'service';
