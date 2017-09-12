@@ -69,7 +69,7 @@ export class ServiceDetailComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('ServiceDetailComponent');
+		this.loadPage();
 	}
 
 	loadPage(){
@@ -79,7 +79,7 @@ export class ServiceDetailComponent implements OnInit {
 		params.set('language_code', this.language_code);
 		this._ServiceService.getByID(null, params).subscribe(res => {
 			if(res.status == 'success'){
-				this.Item = res.data;console.log(this.Item);
+				this.Item = res.data;
 			}
 		});
 	}
