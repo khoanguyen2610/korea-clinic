@@ -81,7 +81,7 @@ class Controller_NewsCategory extends \Controller_API {
             $arrData = [];
             foreach ($param as $key => $value) {
             	if(!in_array($key, $this->table_field)) continue;
-                $value = (!is_null($value) && $value != '' && $value != 'undefined')?trim($value):null;
+                $value = (!is_null($value) && $value != '' && $value != 'undefined' && $value != 'null')?trim($value):null;
 				$key == 'parent'?($value = !is_null($value)?(int)$value:0):null;
 
                 $arrData[$key] = $value;

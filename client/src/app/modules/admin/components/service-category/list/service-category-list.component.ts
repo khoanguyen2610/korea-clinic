@@ -188,7 +188,7 @@ export class ServiceCategoryListComponent implements OnInit {
 		/*====================================
 		 * Reload Datatable
 		 *====================================*/
-		let _list_data_URL = this._ServiceCategoryService._list_data_URL + '?image_resize_width=300&' + $.param(this.filter);
+		let _list_data_URL = this._ServiceCategoryService._list_data_URL + '?recursive=true&image_resize_width=300&' + $.param(this.filter);
 		this.DTList.ajax.url(_list_data_URL).load();
 	}
 

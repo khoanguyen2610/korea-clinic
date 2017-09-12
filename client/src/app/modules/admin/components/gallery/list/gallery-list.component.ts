@@ -24,6 +24,13 @@ export class GalleryListComponent implements OnInit {
 	delete_item_key: string;
 	url_list_data: String;
 	delete_id:number;
+	filter = { language_code: 'vi' };
+
+	public language_options = [
+		{'id':'all', 'text':'All'},
+		{'id':'vi', 'text':'Vietnam'},
+		{'id':'en', 'text':'English'}
+	];
 
 
 	constructor(
@@ -35,11 +42,20 @@ export class GalleryListComponent implements OnInit {
 		private _Router: Router,
 
 	) {
-		this.subscription = _ActivatedRoute.queryParams.subscribe((params:any) => {
-
+		// subscribe to router event
+		let url_params: URLSearchParams = new URLSearchParams();
+		this.subscription = _ActivatedRoute.queryParams.subscribe((param:any) => {
+			for(var k in param){
+				url_params.set(k,param[k]);
+				this.filter[k] = param[k];
+			}
 		});
 
-		this.url_list_data = this._GalleryService._list_data_URL + '?language_code=vi';
+		if(!url_params.get('language_code')){
+			url_params.set('language_code','vi');
+		}
+
+		this.url_list_data = this._GalleryService._list_data_URL + '?' + url_params.toString();
 	}
 
 	ngOnInit(){
@@ -71,6 +87,7 @@ export class GalleryListComponent implements OnInit {
 				{ 'data' : null },
 				{ 'data' : 'total_image', class: 'text-center' },
 				{ 'data' : 'title' },
+				{ 'data' : 'language_name' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -89,7 +106,7 @@ export class GalleryListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [3]
+					targets: [4]
 				},
 			]
 		});
@@ -132,6 +149,31 @@ export class GalleryListComponent implements OnInit {
 				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
+	}
+
+	onSearch(){
+		/*====================================
+		 * Change URL when submit
+		 *====================================*/
+		this._Router.navigate(['/admin/gallery/list'], { queryParams: this.filter });
+		/*====================================
+		 * Reload Datatable
+		 *====================================*/
+		let _list_data_URL = this._GalleryService._list_data_URL + '?' + $.param(this.filter);
+		this.DTList.ajax.url(_list_data_URL).load();
+	}
+
+	onReset() {
+		this.filter = { language_code : 'vi' };
+		/*====================================
+		 * Change URL when submit
+		 *====================================*/
+		this._Router.navigate(['/admin/gallery/list']);
+		/*====================================
+		 * Reload Datatable
+		 *====================================*/
+		let _list_data_URL = this._GalleryService._list_data_URL + '?' + $.param(this.filter);
+		this.DTList.ajax.url(_list_data_URL).load();
 	}
 
 	ngOnDestroy(){
