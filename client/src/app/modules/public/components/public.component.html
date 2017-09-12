@@ -49,9 +49,17 @@
             <!-- Blog Layout -->
             <div *ngIf="template == 'blog'">
                 <router-outlet (activate)=onActivate($event)></router-outlet>
-                <!-- Footer -->
-                <app-public-general-footer></app-public-general-footer>
-                <!-- Footer -->
+
+
+                <footer class="footer_wrap widget_area scheme_original">
+                    <div class="widget_area_inner">
+                        <div class="content_wrap">
+                            <!-- Footer -->
+                            <app-public-general-footer></app-public-general-footer>
+                            <!-- Footer -->
+                        </div>
+                    </div>
+                </footer>
             </div>
 
         </div>

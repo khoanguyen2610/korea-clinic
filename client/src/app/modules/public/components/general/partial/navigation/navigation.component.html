@@ -24,7 +24,7 @@
           <a [routerLink]="[ '/' + modules.service, sCategory.item_key, sCategory.title | niceurl]">{{ sCategory.title }}</a>
           <ul class="sub-menu" *ngIf="sCategory['list_services'].length">
             <li class="menu-item" *ngFor="let s of sCategory['list_services']">
-              <a [routerLink]="[ '/' + modules.service,  modules.detail, s.item_key, sCategory.title | niceurl ]" [routerLinkActive]="['active']">{{ s.title }}</a>
+              <a [routerLink]="[ '/' + modules.service,  modules.detail, s.item_key, s.title | niceurl ]" [routerLinkActive]="['active']">{{ s.title }}</a>
             </li>
           </ul>
         </li>

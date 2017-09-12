@@ -32,7 +32,6 @@ export class BeforeAfterComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
@@ -40,7 +39,6 @@ export class BeforeAfterComponent implements OnInit {
 		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.services = res.data;
-				console.log(res.data);
 			}
 		});
 

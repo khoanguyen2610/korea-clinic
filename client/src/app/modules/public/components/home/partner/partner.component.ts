@@ -22,7 +22,6 @@ export class PartnerComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Partner Homepage');
 	}
 
 

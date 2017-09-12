@@ -45,10 +45,8 @@ export class EquipmentListComponent implements OnInit {
 		this._EquipmentService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;
-				console.log(this.items)
 			}
 		});
-		console.log('EquipmentListComponent');
 	}
 
 	getAction(){

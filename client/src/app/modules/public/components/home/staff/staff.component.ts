@@ -49,7 +49,6 @@ export class StaffComponent implements OnInit {
 		params.set('image_resize_square', '370');
 		params.set('item_status', 'active');
 		this._StaffService.getListAll(params).subscribe(res => {
-			console.log(res)
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				var items = res.data;

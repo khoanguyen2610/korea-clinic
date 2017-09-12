@@ -33,7 +33,6 @@ export class ContactComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Public Header');
 	}
 
 	getAction(){
@@ -48,7 +47,6 @@ export class ContactComponent implements OnInit {
 	onSubmit(form: NgForm){
 		if(form.valid){
 			let paramData: URLSearchParams = new URLSearchParams();
-			console.log(this.Item);
 			paramData.set('fullname', this.Item['fullname']);
 			paramData.set('email', this.Item['email']);
 			paramData.set('subject', this.Item['subject']);

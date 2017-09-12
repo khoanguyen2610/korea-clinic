@@ -57,7 +57,6 @@ export class StaffDetailComponent implements OnInit {
 		this._StaffService.getByID(null, params).subscribe(res => {
 			if(res.status == 'success'){
 				this.Item = res.data;
-				console.log(this.Item)
 			}
 		});
 	}
