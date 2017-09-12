@@ -20,9 +20,12 @@ export class FaqListComponent implements OnInit {
 	private querySubscription: Subscription;
 
 	Items: Array<any> = [];
-	serviceCategories: Array<any> = [];
+	categories: Array<any> = [];
 	_params: any;
 	queryParams: any;
+	controller: string = 'dich-vu';
+	action_detail: string = 'chi-tiet';
+	action_before_after: string = 'truoc-sau';
 	language_code: string;
 
 	constructor(
@@ -48,16 +51,21 @@ export class FaqListComponent implements OnInit {
         }).catch(error => console.log(error));
 
         this.language_code = String(_LocalStorageService.get('language_code'));
+        if(this.language_code == 'en'){
+			this.controller = 'service';
+			this.action_detail = 'detail';
+			this.action_before_after = 'before-after';
+		}
 	}
 
 	ngOnInit() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
-
+		params.set('get_list_services', 'true');
 		this._ServiceCategoryService.getListData(params).subscribe(res => {
 			if(res.status == 'success'){
-				this.serviceCategories = res.data;
+				this.categories = res.data;
 			}
 		});
 
