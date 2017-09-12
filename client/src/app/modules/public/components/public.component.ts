@@ -91,10 +91,9 @@ export class PublicComponent  {
 			}
 
 			var str_matches = str.match(/([a-z|\-]+)\//);
-			var translateEl = '';
+			var translateEl = str;
 			if(str_matches) {
 				translateEl = str_matches[1];
-
 			}
 
 			if (translateEl) {
@@ -102,8 +101,6 @@ export class PublicComponent  {
 					this.module_name = res[translateEl];
 				});
 			}
-
-
 			this._Configuration.language_code = String(this._LocalStorageService.get('language_code'));
 
 			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {

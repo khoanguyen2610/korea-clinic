@@ -43,14 +43,6 @@ export class ServiceDetailComponent implements OnInit {
 			(param: any) => this._params = param
 		);
 
-		this.subscriptionEvents = this._Router.events.subscribe((val) => {
-			let routing = this._Router.url;
-			if (this.curRouting != routing) {
-				this.curRouting = routing;
-				this.loadPage();
-			}
-		});
-
 		if(this.language_code == 'en'){
 			this.controller = 'service';
 			this.action_detail = 'detail';
@@ -69,8 +61,8 @@ export class ServiceDetailComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
-		console.log('ServiceDetailComponent');
+console.log('ẻ')
+		this.loadPage();
 	}
 
 	loadPage(){
