@@ -43,13 +43,13 @@ export class ServiceDetailComponent implements OnInit {
 			(param: any) => this._params = param
 		);
 
-		// this.subscriptionEvents = this._Router.events.subscribe((val) => {
-		// 	let routing = this._Router.url;
-		// 	if (this.curRouting != routing) {
-		// 		this.curRouting = routing;
-		// 		this.loadPage();
-		// 	}
-		// });
+		this.subscriptionEvents = this._Router.events.subscribe((val) => {
+			let routing = this._Router.url;
+			if (this.curRouting != routing) {
+				this.curRouting = routing;
+				this.loadPage();
+			}
+		});
 
 		if(this.language_code == 'en'){
 			this.controller = 'service';
@@ -90,6 +90,6 @@ export class ServiceDetailComponent implements OnInit {
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
-		// this.subscriptionEvents.unsubscribe();
+		this.subscriptionEvents.unsubscribe();
 	}
 }
