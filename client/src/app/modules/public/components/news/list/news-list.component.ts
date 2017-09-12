@@ -62,7 +62,7 @@ export class NewsListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.loadPage();
+		// this.loadPage();
 	}
 
 	loadPage(){
@@ -77,7 +77,6 @@ export class NewsListComponent implements OnInit {
 			}
 		});
 
-		params.set('image_resize_width','1280');
 		this._NewsService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;
