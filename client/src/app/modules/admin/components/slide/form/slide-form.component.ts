@@ -134,7 +134,6 @@ export class SlideFormComponent implements OnInit {
 				formData.append("current_image", JSON.stringify(current_image));
 
 			if(this._params.method == 'create'){
-				console.log(this.item_key);
 				formData.append('item_key', this.item_key);
 			}
 

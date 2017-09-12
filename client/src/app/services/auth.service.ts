@@ -138,7 +138,6 @@ export class AuthService {
     public change_password(params){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        console.log('change password');
         return this._Http.post(this._Configuration.apiUrl + this.serviceUrl + 'change_password', params, {
             headers: headers,
             withCredentials: true

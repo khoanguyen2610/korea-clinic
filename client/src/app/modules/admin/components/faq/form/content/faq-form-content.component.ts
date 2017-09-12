@@ -50,13 +50,11 @@ export class FaqFormContentComponent implements OnInit {
 	}
 
 	ngOnInit(){
-		console.log(this.language_code);
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				let items = res.data;
-				console.log(items);
 				for(let i in items){
 					this.service_options.push({
 						'id': items[i].id, 'text': items[i].title

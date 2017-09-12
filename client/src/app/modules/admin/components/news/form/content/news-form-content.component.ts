@@ -49,7 +49,6 @@ export class NewsFormContentComponent implements OnInit {
 	}
 
 	ngOnInit(){
-		console.log(this.language_code);
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		this._NewsCategoryService.getListData(params).subscribe(res => {

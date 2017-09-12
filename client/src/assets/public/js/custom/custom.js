@@ -119,7 +119,6 @@ function initRevSlider() {
 					content = ret.data;
 			},
 			error: function(e) {
-				console.log(e);
 			}
 		});
 
@@ -193,7 +192,6 @@ function initRevSlider() {
 			})
 
 		} catch (d) {
-			console.log("Failure at Presize of Slider:" + d)
 		}
 	};
 
@@ -310,7 +308,6 @@ function initRevSlider() {
 			})
 
 		} catch (d) {
-			console.log("Failure at Presize of Slider:" + d)
 		}
 	};
 
@@ -427,7 +424,6 @@ function initRevSlider() {
 			})
 
 		} catch (d) {
-			console.log("Failure at Presize of Slider:" + d)
 		}
 	};
 

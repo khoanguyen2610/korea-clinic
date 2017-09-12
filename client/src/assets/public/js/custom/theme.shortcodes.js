@@ -225,7 +225,6 @@ function jacqueline_sc_init(container) {
 									rez = JSON.parse(response);
 								} catch (e) {
 									rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-									console.log(response);
 								}
 								if (rez.error === '') {
 									jacqueline_message_info(JACQUELINE_STORAGE['strings']['email_confirm'].replace('%s', email));
@@ -317,7 +316,6 @@ function jacqueline_sc_init(container) {
 						rez = JSON.parse(response);
 					} catch (e) {
 						rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-						console.log(response);
 					}
 					if (rez.error === '') {
 						jQuery(table).find('.sc_table').remove();
@@ -449,7 +447,6 @@ function jacqueline_sc_init(container) {
 									rez = JSON.parse(response);
 								} catch (e) {
 									rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-									console.log(response);
 								}
 								if (rez.error === '') {
 									search_field.parents('.search_ajax').find('.search_results_content').empty().append(rez.data);
@@ -1186,7 +1183,6 @@ function jacqueline_menuitems_init() {
 	});
 
 	jQuery('body').on('click', '.close_menuitem', function(e) {
-		console.log('close click');
 		jQuery(".popup_menuitem").remove();
 
 		e.preventDefault();
@@ -1196,7 +1192,6 @@ function jacqueline_menuitems_init() {
 		if (e.target !== this)
 		return;
 
-		console.log('close click');
 		jQuery(".popup_menuitem").remove();
 
 		e.preventDefault();
