@@ -75,7 +75,6 @@ export class NavigationComponent implements OnInit {
 		this._NewsCategoryService.getListData(params).subscribe(res => {
 			if (res.status == 'success') {
 				this.newsCategories = res.data;
-				console.log(this.newsCategories)
 			}
 		});
 

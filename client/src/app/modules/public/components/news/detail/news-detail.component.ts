@@ -69,7 +69,6 @@ export class NewsDetailComponent implements OnInit {
 				this.Item = item;
 			}
 		});
-		console.log('NewsDetailComponent');
 	}
 
 	getAction(){

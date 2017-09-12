@@ -22,7 +22,6 @@ export class AboutUsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('AboutUsComponent');
 	}
 
 

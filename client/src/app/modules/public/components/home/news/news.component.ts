@@ -44,7 +44,6 @@ export class NewsComponent implements OnInit {
 	}
 
 	getListData() {
-		console.log(this._Configuration.language_code);
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		params.set('limit', String(this.number_item));
