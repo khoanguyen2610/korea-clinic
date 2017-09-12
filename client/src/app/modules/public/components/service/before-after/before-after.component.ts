@@ -44,6 +44,7 @@ export class BeforeAfterComponent implements OnInit {
 			}
 		});
 
+		params.set('image_resize_width', '1024');
 		this._BeforeAfterService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;

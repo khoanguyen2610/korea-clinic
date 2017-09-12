@@ -24,7 +24,8 @@ export class NewsDetailComponent implements OnInit {
 	categories: Array<any> = [];
 	Item: Array<any> = [];
 	controller: string = 'tin-tuc';
-
+	service_controller: string = 'dich-vu';
+	action_before_after: string = 'truoc-sau';
 	language_code: string;
 	news_format_date: string = this._Configuration.news_format_date;
 
@@ -42,6 +43,8 @@ export class NewsDetailComponent implements OnInit {
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){
 			this.controller = 'news';
+			this.service_controller = 'service';
+			this.action_before_after = 'before-after';
 		}
 
 		let params: URLSearchParams = new URLSearchParams();

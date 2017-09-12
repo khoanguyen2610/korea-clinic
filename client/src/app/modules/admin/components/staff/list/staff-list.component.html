@@ -2,23 +2,64 @@
 	<div class="col-md-12">
 		<div class="portlet light bordered">
 			<div class="portlet-title">
-		        <div class="caption">
-		          <i class=" icon-layers font-red"></i>
-		          <span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.staff_management' | translate }}</span>
-		        </div>
-	      	</div>
-			<div class="portlet-body">
-				<!-- table-toolbar -->
-				<div class="table-toolbar">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="btn-group pull-right">
-							<a class="btn green" [routerLink]="['/admin/staff/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
+				<div class="caption">
+					<i class=" icon-layers font-red"></i>
+					<span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.staff_management' | translate }}</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<form autocomplete="off" class="form-horizontal" role="form">
+					<div class="form-body">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-2 control-label">{{ 'ADMIN.fullname' | translate }}</label>
+									<div class="col-md-8">
+										<input type="text" name="fullname" [(ngModel)]="filter.fullname" class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-2 control-label">{{ 'ADMIN.position' | translate }}</label>
+									<div class="col-md-8">
+										<input type="text" name="position" [(ngModel)]="filter.position" class="form-control">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-2 control-label">{{ 'ADMIN.language' | translate }}</label>
+									<div class="col-md-8">
+										<select class="form-control" name="language_code" [(ngModel)]="filter.language_code">
+											<option *ngFor="let option of language_options" [value]="option.id">{{ option.text }}</option>
+										</select>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- end table-toolbar -->
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<a class="btn green" [routerLink]="['/admin/staff/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
+								<button class="btn blue" (click)="onSearch()"><i class="fa fa-save"></i> {{ 'ADMIN.search' | translate }}</button>
+								<a class="btn default" (click)="onReset()"><i class="fa fa-refresh"></i> {{ 'ADMIN.clear' | translate }}</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-body">
 				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-data">
 					<thead>
 						<tr>

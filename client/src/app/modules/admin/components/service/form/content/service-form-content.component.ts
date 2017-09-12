@@ -49,7 +49,6 @@ export class ServiceFormContentComponent implements OnInit {
 	}
 
 	ngOnInit(){
-		console.log(this.language_code);
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		this._ServiceCategoryService.getListData(params).subscribe(res => {
@@ -61,7 +60,7 @@ export class ServiceFormContentComponent implements OnInit {
 					});
 				}
 			}
-		})
+		});
 	}
 
 	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {

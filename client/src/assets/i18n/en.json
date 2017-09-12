@@ -49,7 +49,9 @@
     "choose_file": "Choose file",
     "before_after": "Before After",
     "before_after_management": "Before After Management",
-    "total_image": "Total Image"
+    "total_image": "Total Image",
+    "search": "Search",
+    "clear": "Clear"
   },
   "PUBLIC": {
     "equipment": "Equipment",

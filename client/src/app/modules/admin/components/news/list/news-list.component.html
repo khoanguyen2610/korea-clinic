@@ -2,23 +2,84 @@
 	<div class="col-md-12">
 		<div class="portlet light bordered">
 			<div class="portlet-title">
-		        <div class="caption">
-		          <i class=" icon-layers font-red"></i>
-		          <span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.news_management' | translate }}</span>
-		        </div>
-	      	</div>
-			<div class="portlet-body">
-				<!-- table-toolbar -->
-				<div class="table-toolbar">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="btn-group pull-right">
-							<a class="btn green" [routerLink]="['/admin/news/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
+				<div class="caption">
+					<i class=" icon-layers font-red"></i>
+					<span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.news_management' | translate }}</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<form autocomplete="off" class="form-horizontal" role="form">
+					<div class="form-body">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-2 control-label">{{ 'ADMIN.title' | translate }}</label>
+									<div class="col-md-8">
+										<input type="text" name="title" [(ngModel)]="filter.title" class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-2 control-label">{{ 'ADMIN.language' | translate }}</label>
+									<div class="col-md-8">
+										<select class="form-control" name="language_code" [value]="filter.language_code" (change)="loadNewsCategory($event.target.value,true)">
+											<option *ngFor="let option of language_options" [value]="option.id">{{ option.text }}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-2 control-label">{{ 'ADMIN.category' | translate }}</label>
+									<div class="col-md-8">
+										<select class="form-control" name="news_category_id" [(ngModel)]="filter.news_category_id">
+											<option></option>
+											<option *ngFor="let option of news_options" [value]="option.id">{{ option.text }}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label col-md-2">{{ 'ADMIN.feature' | translate }} </label>
+									<div class="col-md-8">
+										<div class="md-radio-inline">
+											<label class="mt-radio">
+												<input type="radio" name="feature_flag" value="0" [(ngModel)]="filter.feature_flag" /> {{ 'ADMIN.no' | translate }}
+												<span></span>
+											</label>
+											<label class="mt-radio">
+												<input type="radio" name="feature_flag" value="1" [(ngModel)]="filter.feature_flag" /> {{ 'ADMIN.yes' | translate }}
+												<span></span>
+											</label>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- end table-toolbar -->
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<a class="btn green" [routerLink]="['/admin/news/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
+								<button class="btn blue" (click)="onSearch()"><i class="fa fa-save"></i> {{ 'ADMIN.search' | translate }}</button>
+								<a class="btn default" (click)="onReset()"><i class="fa fa-refresh"></i> {{ 'ADMIN.clear' | translate }}</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-body">
 				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-data">
 					<thead>
 						<tr>
