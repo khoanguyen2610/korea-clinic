@@ -18,11 +18,11 @@
                                                     <div class="sc_team_item_avatar">
                                                         <img alt="" [src]="i.image_url">
                                                         <div class="sc_team_item_hover">
-                                                            <a class="sc_team_item_icon" [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]">&nbsp;</a>
+                                                            <a class="sc_team_item_icon" [routerLink]="[ '/' + modules.expert, modules.detail, i.item_key, i.fullname | niceurl]">&nbsp;</a>
                                                         </div>
                                                     </div>
                                                     <div class="sc_team_item_info">
-                                                        <h5 class="sc_team_item_title"><a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]">{{ i.fullname }}</a></h5>
+                                                        <h5 class="sc_team_item_title"><a [routerLink]="[ '/' + modules.expert, modules.detail, i.item_key, i.fullname | niceurl]">{{ i.fullname }}</a></h5>
                                                         <div class="sc_team_item_position">
                                                             {{ i.position }}
                                                         </div>

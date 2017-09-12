@@ -129,21 +129,21 @@ export class PublicComponent  {
 		}
     }
 
-    onActivate(componentRef){
-		let action = componentRef.getAction();
-		switch (action) {
-			case 'list':
-				this.page_content_wrap = 'page_content_wrap';
-				break;
-			case 'contact':
-			case 'detail':
-				this.page_content_wrap = 'page_content_wrap page_paddings_yes';
-				break;
-			default:
-				// code...
-				break;
-		}
-    }
+    // onActivate(componentRef){
+	// 	let action = componentRef.getAction();
+	// 	switch (action) {
+	// 		case 'list':
+	// 			this.page_content_wrap = 'page_content_wrap';
+	// 			break;
+	// 		case 'contact':
+	// 		case 'detail':
+	// 			this.page_content_wrap = 'page_content_wrap page_paddings_yes';
+	// 			break;
+	// 		default:
+	// 			// code...
+	// 			break;
+	// 	}
+    // }
 
 	ngOnDestroy() {
 		this.translateSubscription.unsubscribe();
