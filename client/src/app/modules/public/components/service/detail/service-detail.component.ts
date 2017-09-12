@@ -69,17 +69,17 @@ export class ServiceDetailComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		console.log('ServiceDetailComponent');
 	}
 
 	loadPage(){
 		let params: URLSearchParams = new URLSearchParams();
+		params.set('image_resize_width', '480');
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);
-		this._ServiceService.getByID(undefined, params).subscribe(res => {
+		this._ServiceService.getByID(null, params).subscribe(res => {
 			if(res.status == 'success'){
-				this.Item = res.data;
+				this.Item = res.data;console.log(this.Item);
 			}
 		});
 	}
@@ -90,5 +90,6 @@ export class ServiceDetailComponent implements OnInit {
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
+		this.subscriptionEvents.unsubscribe();
 	}
 }

@@ -44,17 +44,10 @@ export class BeforeAfterComponent implements OnInit {
 			}
 		});
 
+		params.set('image_resize_width', '1024');
 		this._BeforeAfterService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				let items = res.data;
-				items.forEach(item => {
-					var image = JSON.parse(item.image);
-					if(image) {
-						item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
-					}
-
-				});
-				this.items = items;
+				this.items = res.data;
 			}
 		});
 	}

@@ -74,6 +74,7 @@ export class ServiceListComponent implements OnInit {
 
 	loadPage(){
 		let params: URLSearchParams = new URLSearchParams();
+		params.set('image_resize_width', '480');
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
 
@@ -85,15 +86,7 @@ export class ServiceListComponent implements OnInit {
 
 		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				let items = res.data;
-				items.forEach(item => {
-					var image = JSON.parse(item.image);
-					if(image) {
-						item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
-					}
-
-				});
-				this.items = items;
+				this.items = res.data;
 			}
 		});
 	}
