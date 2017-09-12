@@ -107,7 +107,6 @@ function jacqueline_ready_actions() {
 				rez = JSON.parse(response);
 			} catch (e) {
 				rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-				console.log(response);
 			}
 			if (rez.error === '') {
 				calendar.parent().fadeOut(200, function() {
@@ -309,7 +308,6 @@ function jacqueline_ready_actions() {
 					rez = JSON.parse(response);
 				} catch (e) {
 					rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-					console.log(response);
 				}
 				jQuery('#viewmore_link').parent().removeClass('loading');
 				JACQUELINE_STORAGE['viewmore_busy'] = false;
@@ -1397,7 +1395,6 @@ function jacqueline_init_post_formats() {
 						rez = JSON.parse(response);
 					} catch (e) {
 						rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-						console.log(response);
 					}
 					if (rez.error === '') {
 						if (inc == 1) {
@@ -1637,7 +1634,6 @@ function jacqueline_login_validate(form) {
 				rez = JSON.parse(response);
 			} catch (e) {
 				rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-				console.log(response);
 			}
 			var result_box = form.find('.result');
 			if (result_box.length==0) result_box = form.siblings('.result');
@@ -1704,7 +1700,6 @@ function jacqueline_registration_validate(form) {
 				rez = JSON.parse(response);
 			} catch (e) {
 				rez = { error: JACQUELINE_STORAGE['ajax_error'] };
-				console.log(response);
 			}
 			var result_box = form.find('.result');
 			if (result_box.length==0) result_box = form.siblings('.result');

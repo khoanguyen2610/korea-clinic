@@ -19,7 +19,6 @@ export class NiceUrl implements PipeTransform {
 	urlify(a) {
 		var newStr = a.toLowerCase().trim();
         newStr = newStr.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
-		console.log(newStr);
         newStr = newStr.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
         newStr = newStr.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
         newStr = newStr.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');

@@ -56,7 +56,6 @@ export class GalleryFormContentComponent implements OnInit {
 		if (this.Item.image instanceof Object) {
 			this.uploader = this.Item.image;
 		} else {
-			console.log(this.Item)
 			let arrImages = JSON.parse(this.Item.image);
 
 			for(let i in arrImages) {
@@ -96,9 +95,7 @@ export class GalleryFormContentComponent implements OnInit {
 		this.uploader['error_limit_files'] = false;
 		setTimeout(() => {
 			let after_upload_files = +this.uploader.queue.length; // after drag upload files
-			console.log(after_upload_files <= this._Configuration.limit_files)
 			if (after_upload_files <= this._Configuration.limit_files) {
-				console.log(after_upload_files != this.files_upload);
 				if (after_upload_files != this.files_upload) {
 					let uploader = [];
 					for (let key in this.uploader.queue) {
@@ -138,7 +135,6 @@ export class GalleryFormContentComponent implements OnInit {
 					}
 					this.uploader.queue = uploader;
 					this.files_upload = this.uploader.queue.length;
-					console.log(this.uploader)
 					this.fileOutput.emit(this.uploader);
 				}
 			}

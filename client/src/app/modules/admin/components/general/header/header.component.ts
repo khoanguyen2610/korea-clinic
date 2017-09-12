@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit {
 	}
 
 	onChangePassword(form: NgForm){
-		console.log('onChangePassword');
 		let paramsData: URLSearchParams = new URLSearchParams();
   		paramsData.set('id', this.current_user_info['id']);
   		paramsData.set('password', this.info['password']);

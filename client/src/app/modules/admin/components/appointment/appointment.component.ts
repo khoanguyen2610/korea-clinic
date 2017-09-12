@@ -23,7 +23,6 @@ export class AppointmentComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Admin Appointment');
 	}
 
 

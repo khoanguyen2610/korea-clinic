@@ -21,7 +21,6 @@ export class MainNavComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('Admin Main Nav');
 	}
 
 	ngOnDestroy() {
