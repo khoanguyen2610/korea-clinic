@@ -40,7 +40,9 @@
 										</div>
 									</div>
 									<div class="esg-entry-content eg-cleveland-massage-content">
-										<div class="esg-content eg-post-209 eg-cleveland-massage-element-0">{{ item.title }}</div>
+										<div class="esg-content eg-post-209 eg-cleveland-massage-element-0">
+											<a [routerLink]="['/'+ controller + '/' + action_detail, item.item_key, item.title | niceurl ]" style="color: #f2f2f2">{{ item.title }}</a>
+										</div>
 										<!--<div class="esg-content eg-post-209 eg-cleveland-massage-element-3">March 29, 2016</div>
 										<div class="esg-content eg-cleveland-massage-element-22 esg-none esg-clear"></div>
 										<div class="esg-content eg-post-209 eg-cleveland-massage-element-6">Personalized Massage</div>-->
