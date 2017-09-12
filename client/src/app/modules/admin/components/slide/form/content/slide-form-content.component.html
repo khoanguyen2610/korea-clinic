@@ -16,10 +16,12 @@
 						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
 						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
 						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
+						{ name: 'tools', groups: [ 'Maximize' ] },
 						'/',
 						{ name: 'basicstyles', groups: ['basicstyles'] },
 						{ name: 'styles' },
-						{ name: 'links' }
+						{ name: 'links' },
+						{ name: 'insert' }
 					]}"
 				debounce="500">
 			</ckeditor>
@@ -37,7 +39,7 @@
 			<div class="uploader-files">
 				<div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
 					<div class="no-file" *ngIf="!uploader.queue.length">
-						<span>Drag and drop files…</span>
+						<span>{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
 						<span></span>
 						<!-- drag & drop file example-->
 					</div>

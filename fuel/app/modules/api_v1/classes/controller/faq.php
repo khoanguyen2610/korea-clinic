@@ -41,6 +41,7 @@ class Controller_faq extends \Controller_API {
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function get_list_data(){
+		$param = \Input::param();
         $result     = \Model_Faq::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
         $items      = $result['data'];
 

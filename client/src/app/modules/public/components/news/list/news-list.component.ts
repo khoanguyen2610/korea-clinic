@@ -46,14 +46,6 @@ export class NewsListComponent implements OnInit {
 			(param: any) => this._params = param
 		);
 
-		this.subscriptionEvents = this._Router.events.subscribe((val) => {
-			let routing = this._Router.url;
-			if (this.curRouting != routing) {
-				this.curRouting = routing;
-				this.loadPage();
-			}
-		});
-
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){
 			this.controller = 'news';
@@ -62,6 +54,7 @@ export class NewsListComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.loadPage();
 	}
 
 	loadPage(){
@@ -76,6 +69,7 @@ export class NewsListComponent implements OnInit {
 			}
 		});
 
+		params.set('image_resize_width','1280');
 		this._NewsService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;
@@ -115,6 +109,5 @@ export class NewsListComponent implements OnInit {
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
-		this.subscriptionEvents.unsubscribe();
 	}
 }

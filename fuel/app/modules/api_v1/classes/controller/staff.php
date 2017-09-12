@@ -55,6 +55,7 @@ class Controller_Staff extends \Controller_API {
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function get_list_data(){
+		$param = \Input::param();
         $result     = \Model_Staff::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
         $items      = $result['data'];
 

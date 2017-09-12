@@ -38,10 +38,10 @@ function jacqueline_init_actions() {
 
 	// Add resize handlers after VC row stretch handlers on('resize.vcRowBehaviour', ...)
 	setTimeout(function() {
-		// jQuery(window).on('resize.jacqueline', function() {
-		// 	jacqueline_resize_actions();
-		// 	jacqueline_scroll_actions()
-		// }).trigger('resize.jacqueline');
+		jQuery(window).on('resize.jacqueline', function() {
+			jacqueline_resize_actions();
+			jacqueline_scroll_actions()
+		}).trigger('resize.jacqueline');
 	}, 10);
 
 	// Scroll handlers
@@ -158,6 +158,7 @@ function jacqueline_ready_actions() {
 	}
 	if (jQuery('.header_mobile').length > 0) {
 		jQuery('.header_mobile .menu_main_nav_area ul.menu_main_nav').removeAttr('id');
+		jQuery('.header_mobile .menu_button').unbind('click');
 		jQuery('.header_mobile .menu_button').on('click', function(){
 			jQuery('.header_mobile .side_wrap').toggleClass('open');
 			jQuery('.header_mobile .mask').toggleClass('show');
@@ -167,6 +168,7 @@ function jacqueline_ready_actions() {
 				jQuery('body').toggleClass('ios_fixed');
 			}
 		});
+		jQuery('.header_mobile .mask, .header_mobile .side_wrap .close').unbind('click');
 		jQuery('.header_mobile .mask, .header_mobile .side_wrap .close').on('click', function(){
 			jQuery('.header_mobile .side_wrap').removeClass('open');
 			jQuery('.header_mobile .mask').removeClass('show');
@@ -205,6 +207,7 @@ function jacqueline_ready_actions() {
 	jQuery('.header_mobile ul.menu_main_nav .menu-item-has-children > a, .menu_side_responsive .menu-item-has-children > a, .menu_pushy_nav_area .menu-item-has-children > a, body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories .has_children > a').prepend('<span class="open_child_menu"></span>');
 
 	// Submenu click handler for the responsive menu
+	jQuery('.header_mobile ul.menu_main_nav, .menu_side_responsive, .menu_pushy_nav_area, body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories').unbind('click');
 	jQuery('.header_mobile ul.menu_main_nav, .menu_side_responsive, .menu_pushy_nav_area, body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories').on('click', 'li a,li a .open_child_menu, ul.product-categories.plain li a .open_child_menu', function(e) {
 		"use strict";
 		var is_menu_main = jQuery(this).parents('ul.menu_main_nav').length > 0;

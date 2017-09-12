@@ -55,6 +55,7 @@ class Controller_News extends \Controller_API {
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function get_list_data(){
+		$param = \Input::param();
         $result     = \Model_News::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
         $items      = $result['data'];
 

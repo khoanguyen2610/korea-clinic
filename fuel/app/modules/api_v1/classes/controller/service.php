@@ -29,7 +29,7 @@ class Controller_Service extends \Controller_API {
                             'filename' => isset($image->filename)? base64_encode($image->filename): null
                             ];
 			isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
-			isset($param['image_resize_square']) && !empty($param['image_resize_square'])	&& $param_img['square'] = $param['image_resize_square'];
+			isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
 			//Last param
 			$param_img['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
             $data[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
@@ -54,6 +54,7 @@ class Controller_Service extends \Controller_API {
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function get_list_data(){
+		$param = \Input::param();
         $result     = \Model_Service::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
         $items      = $result['data'];
 
@@ -64,7 +65,7 @@ class Controller_Service extends \Controller_API {
                             'filename' => isset($image->filename)? base64_encode($image->filename): null
                             ];
 			isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
-			isset($param['image_resize_square']) && !empty($param['image_resize_square'])	&& $param_img['square'] = $param['image_resize_square'];
+			isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
 
 			//Last param
 			$param_img['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';

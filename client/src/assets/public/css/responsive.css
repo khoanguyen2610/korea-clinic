@@ -3040,6 +3040,9 @@
 	}
 }
 @media (max-width: 480px) {
+    #cfacebook, #cfacebook a.chat_fb{
+        width: 190px;
+    }
     .header_mobile .mask {
         display: none!important;
     }
@@ -3064,7 +3067,7 @@
     }
     .header_mobile .side_wrap {
         width: 100%;
-        top: 97px;
+        top: 65px;
         left: -100%;
     }
     .admin-bar .header_mobile .side_wrap {

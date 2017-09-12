@@ -42,7 +42,8 @@ class Model_Gallery extends \Orm\Model {
                         ->order_by('SM.created_at', 'DESC');
 
         //Query by params
-        if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+		if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
+        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
         $result = $query->as_object()->execute()->as_array();
@@ -65,6 +66,10 @@ class Model_Gallery extends \Orm\Model {
                          ->from([static::$_table_name, 'SM'])
 						 ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
                          ->where('SM.item_status', '!=', 'delete');
+
+			//Query by params
+ 			if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
+  	        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);
         }
@@ -108,7 +113,7 @@ class Model_Gallery extends \Orm\Model {
 								$param_img = ['filepath' => isset($va->filepath)? base64_encode(GALLERY_DIR . $va->filepath): null,
 		                                        'filename' => isset($va->filename)? base64_encode($va->filename): null
 		                                        ];
-								isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];				
+								isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];
 								//Last param
 								$param_img['file_extentsion'] = isset($va->filepath)? '.' . pathinfo($va->filepath, PATHINFO_EXTENSION): '.jpg';
 		                        $arrImageUrl[] = \Uri::create('api/v1/system_general/image', [], $param_img);

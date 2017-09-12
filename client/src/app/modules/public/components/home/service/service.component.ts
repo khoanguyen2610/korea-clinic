@@ -46,6 +46,8 @@ export class ServiceComponent implements OnInit {
 		params.set('recursive', 'false');
 		params.set('language_code', this.language_code);
 		params.set('image_resize_width', '480');
+		params.set('item_status', 'active');
+		params.set('limit', '3');
 		this._ServiceCategoryService.getListAll(params).subscribe(res => {
 
 			if(res.status == 'success'){

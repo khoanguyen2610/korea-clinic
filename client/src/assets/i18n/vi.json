@@ -96,7 +96,16 @@
     "send_message": "Gửi",
     "faq": "FAQ",
     "filter_all": "Lọc - Tất cả",
-    "expert": "Chuyên Gia"
+    "expert": "Chuyên Gia",
+    "trang-chu": "Tranh Chủ",
+    "trang-thiet-bi": "Tranh Thiết Bị",
+    "thu-vien-anh": "Thư Viện Ảnh",
+    "dich-vu": "Dịch Vụ",
+    "tin-tuc": "Tin Tức",
+    "chuyen-gia": "Chuyên Gia",
+    "truoc-sau": "Trước & Sau",
+    "lien-he": "Liên Hệ",
+    "ve-chung-toi": "Về Chúng Tôi"
   },
   "MODULE": {
     "home": "trang-chu",

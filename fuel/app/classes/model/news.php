@@ -32,16 +32,20 @@ class Model_News extends \Orm\Model {
      * Get all record
      *============================================*/
     public static function getAll($params = null, $option = null){
-        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name')];
+        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('NC.title as news_category_title')];
 
         $query = \DB::select_array($select)
                         ->from([self::$_table_name, 'SM'])
                         ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
+						->join(['news_category', 'NC'], 'left')->on('SM.news_category_id', '=', 'NC.id')
                         ->and_where('SM.item_status', '=', 'active')
                         ->order_by('SM.created_at', 'DESC');
 
         //Query by params
-        if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+		if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
+		if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
+		if(isset($params['news_category_id']) && !empty($params['news_category_id']) && $params['news_category_id'] != 'all') $query->where('SM.news_category_id', '=', $params['news_category_id']);
+		if(isset($params['news_category_title']) && !empty($params['news_category_title'])) $query->where('NC.title', 'like', '%' . $params['news_category_title'] . '%');
         if(isset($params['feature_flag']) && !empty($params['feature_flag'])) $query->where('SM.feature_flag', '=', $params['feature_flag']);
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
@@ -70,6 +74,13 @@ class Model_News extends \Orm\Model {
 						 ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
 						 ->join(['news_category', 'NC'], 'left')->on('SM.news_category_id', '=', 'NC.id')
                          ->where('SM.item_status', '!=', 'delete');
+
+			//Query by params
+			if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
+			if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
+			if(isset($params['news_category_id']) && !empty($params['news_category_id']) && $params['news_category_id'] != 'all') $query->where('SM.news_category_id', '=', $params['news_category_id']);
+			if(isset($params['news_category_title']) && !empty($params['news_category_title'])) $query->where('NC.title', 'like', '%' . $params['news_category_title'] . '%');
+	        if(isset($params['feature_flag']) && !empty($params['feature_flag'])) $query->where('SM.feature_flag', '=', $params['feature_flag']);
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);
         }

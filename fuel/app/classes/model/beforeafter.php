@@ -43,7 +43,10 @@ class Model_BeforeAfter extends \Orm\Model {
                         ->order_by('SM.created_at', 'DESC');
 
         //Query by params
-        if(isset($params['language_code']) && !empty($params['language_code'])) $query->where('SM.language_code', '=', $params['language_code']);
+        if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
+        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
+        if(isset($params['service_id']) && !empty($params['service_id']) && $params['service_id'] != 'all') $query->where('SM.service_id', '=', $params['service_id']);
+        if(isset($params['service_title']) && !empty($params['service_title'])) $query->where('S.title', 'like', '%' . $params['service_title'] . '%');
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
         $result = $query->as_object()->execute()->as_array();
@@ -70,6 +73,11 @@ class Model_BeforeAfter extends \Orm\Model {
 						 ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
                          ->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
                          ->where('SM.item_status', '!=', 'delete');
+
+			//Filter params
+ 	        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
+ 	        if(isset($params['service_id']) && !empty($params['service_id']) && $params['service_id'] != 'all') $query->where('SM.service_id', '=', $params['service_id']);
+ 	        if(isset($params['service_title']) && !empty($params['service_title'])) $query->where('S.title', 'like', '%' . $params['service_title'] . '%');
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);
         }
@@ -126,7 +134,7 @@ class Model_BeforeAfter extends \Orm\Model {
                     $param_img = ['filepath' => isset($image->filepath)? base64_encode(BEFORE_AFTER_DIR . $image->filepath): null,
                                     'filename' => isset($image->filename)? base64_encode($image->filename): null
                                     ];
-					isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];				
+					isset($params['image_resize_width']) && !empty($params['image_resize_width'])	&& $param_img['width'] = $params['image_resize_width'];
 					isset($params['image_resize_square']) && !empty($params['image_resize_square'])	&& $param_img['square'] = $params['image_resize_square'];
 
 					//Last param

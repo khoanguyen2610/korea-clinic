@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
-import { AuthService, BeforeAfterService, ServiceCategoryService } from '../../../../../services';
+import { AuthService, BeforeAfterService, ServiceService } from '../../../../../services';
 
 // declare let $: any;
 // declare let moment: any;
@@ -13,19 +13,19 @@ import { AuthService, BeforeAfterService, ServiceCategoryService } from '../../.
 @Component({
 	selector: 'app-public-before-after',
 	templateUrl: './before-after.component.html',
-	providers: [ BeforeAfterService, ServiceCategoryService ]
+	providers: [ BeforeAfterService, ServiceService ]
 })
 
 export class BeforeAfterComponent implements OnInit {
 	items: Array<any> = [];
-	categories: Array<any> = [];
+	services: Array<any> = [];
 	language_code: string;
 	module_name: string = 'beforeafter';
 
 	constructor(
 		private _BeforeAfterService: BeforeAfterService,
 		private _Configuration: Configuration,
-		private _ServiceCategoryService: ServiceCategoryService,
+		private _ServiceService: ServiceService,
 		private _LocalStorageService: LocalStorageService
 	) {
 		this.language_code = String(_LocalStorageService.get('language_code'));
@@ -37,9 +37,9 @@ export class BeforeAfterComponent implements OnInit {
 		params.set('language_code', this.language_code);
 		params.set('item_status','active');
 
-		this._ServiceCategoryService.getListAll(params).subscribe(res => {
+		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
-				this.categories = res.data;
+				this.services = res.data;
 				console.log(res.data);
 			}
 		});
