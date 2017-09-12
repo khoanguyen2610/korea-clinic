@@ -6558,3 +6558,6 @@ body .body_wrap table.booked-calendar tr.days th,
 .mejs-container * {
     font-family: Helvetica, Arial, sans-serif !important;
 }
+.no_slider .page_content_wrap {
+    padding-bottom: 0;
+}
