@@ -47,6 +47,7 @@ export class StaffComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
 		params.set('image_resize_square', '370');
+		params.set('item_status', 'active');
 		this._StaffService.getListAll(params).subscribe(res => {
 			console.log(res)
 			if (res.status == 'success') {

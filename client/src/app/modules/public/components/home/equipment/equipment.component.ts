@@ -48,6 +48,7 @@ export class EquipmentComponent implements OnInit {
 		params.set('language_code', this._Configuration.language_code);
 		params.set('limit', String(this.number_item));
 		params.set('image_resize_width', '1280');
+		params.set('item_status', 'active');
 		this._EquipmentService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
