@@ -16,6 +16,7 @@
     "slide": "Slide",
     "gallery": "Gallery",
     "faq": "FAQ",
+    "partner": "Partner",
     "seq_no": "No.",
     "title": "Title",
     "description": "Description",
@@ -40,6 +41,7 @@
     "staff_management": "Staff Management",
     "slide_management": "Slide Management",
     "gallery_management": "Gallery Management",
+    "partner_management": "Partner Management",
     "faq_management": "FAQ Management",
     "language": "Language",
     "parent": "Parent",
@@ -61,7 +63,12 @@
     "enter_new_password": "Enter new Password",
     "re_password": "Re-password",
     "enter_re_password": "Enter re-password",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "order": "Order",
+    "meta_title": "Meta Title",
+    "meta_description": "Meta Description",
+    "meta_keyword": "Meta Keyword",
+    "meta_tag": "Meta Tag"
   },
   "PUBLIC": {
     "equipment": "Trang Thiết Bị",

@@ -3,20 +3,20 @@ import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { Equipment } from '../../../../../models';
-import { AuthService, EquipmentService, GeneralService } from '../../../../../services';
+import { Partner } from '../../../../../models';
+import { AuthService, PartnerService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
 @Component({
-	selector: 'app-equipment-form',
-	templateUrl: './equipment-form.component.html',
-	providers: [ EquipmentService, GeneralService ]
+	selector: 'app-partner-form',
+	templateUrl: './partner-form.component.html',
+	providers: [ PartnerService, GeneralService ]
 })
 
-export class EquipmentFormComponent implements OnInit {
+export class PartnerFormComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
 
@@ -25,14 +25,14 @@ export class EquipmentFormComponent implements OnInit {
 	language_code: string;
 	is_validated: boolean = true;
 	item_key: string;
-	Item_vi = new Equipment();
-	Item_en = new Equipment();
+	Item_vi = new Partner();
+	Item_en = new Partner();
 	Items: Array<any> = [];
 	uploadProgress: any;
 
 	constructor(
 		private _AuthService: AuthService,
-		private _EquipmentService: EquipmentService,
+		private _PartnerService: PartnerService,
 		private _GeneralService: GeneralService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -63,25 +63,27 @@ export class EquipmentFormComponent implements OnInit {
 				let params: URLSearchParams = new URLSearchParams();
 				params.set('item_key',this.queryParams.item_key);
 				params.set('response_quantity','all');
-				this._EquipmentService.getByID(null, params).subscribe(res => {
+				this._PartnerService.getByID(null, params).subscribe(res => {
 					if (res.status == 'success') {
 						if(res.data == null){
-							this._Router.navigate(['/admin/equipment/list']);
+							this._Router.navigate(['/admin/partner/list']);
 						}else{
 							let items = res.data;
-							items.forEach(item => {
-								switch(item['language_code']){
-									case 'vi':
-										this.Item_vi = item;
-										break;
-									case 'en':
-										this.Item_en = item;
-										break;
-								}
-							});
+							setTimeout(() => {
+								items.forEach(item => {
+									switch(item['language_code']){
+										case 'vi':
+											this.Item_vi = item;
+											break;
+										case 'en':
+											this.Item_en = item;
+											break;
+									}
+								});
+							}, 400);
 						}
 					}else{
-						this._Router.navigate(['/admin/equipment/list']);
+						this._Router.navigate(['/admin/partner/list']);
 					}
 				});
 			}else{
@@ -109,26 +111,26 @@ export class EquipmentFormComponent implements OnInit {
 			let formData: FormData = new FormData();
 
 			let uploader = Item['image'];
-				var current_image = [];
-				if (!(uploader instanceof Object) && typeof uploader != 'undefined') {
-					current_image = JSON.parse(Item['image']);
-				}
+			var current_image = [];
+			if (!(uploader instanceof Object) && typeof uploader != 'undefined') {
+				current_image = JSON.parse(Item['image']);
+			}
 
-				if (uploader instanceof Object && uploader.queue.length) {
-					for (let key in uploader.queue) {
-						var upload = uploader.queue[key]._file;
-						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
-						var objUpload = new Blob([upload]);
+			if (uploader instanceof Object && uploader.queue.length) {
+				for (let key in uploader.queue) {
+					var upload = uploader.queue[key]._file;
+					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+					var objUpload = new Blob([upload]);
 
-						if (upload['id']) {
-						} else {
-							formData.append("image[]", objUpload, upload.name);
-						}
-						current_image.push(upload);
+					if (upload['id']) {
+					} else {
+						formData.append("image[]", objUpload, upload.name);
 					}
+					current_image.push(upload);
 				}
-				// current_image for check to remove existing image
-				formData.append("current_image", JSON.stringify(current_image));
+			}
+			// current_image for check to remove existing image
+			formData.append("current_image", JSON.stringify(current_image));
 
 			if(this._params.method == 'create'){
 				formData.append('item_key', this.item_key);
@@ -136,14 +138,15 @@ export class EquipmentFormComponent implements OnInit {
 
 			formData.append('language_code', Item['language_code']);
 			formData.append('title', Item['title']);
+			formData.append('position', Item['position']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 
-			this._EquipmentService.getObserver().subscribe(progress => {
+			this._PartnerService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;
 			});
 			try {
-				this._EquipmentService.upload(formData, Item['id']).then((res) => {
+				this._PartnerService.upload(formData, Item['id']).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
@@ -177,13 +180,13 @@ export class EquipmentFormComponent implements OnInit {
 	onReset(lang: string){
 		switch (lang) {
 			case 'vi':
-				this.Item_vi = new Equipment();
+				this.Item_vi = new Partner();
 				this.Item_vi.language_code = lang;
 				this.Item_vi.image = new FileUploader({});
 				break;
 
 			case 'en':
-				this.Item_en = new Equipment();
+				this.Item_en = new Partner();
 				this.Item_en.language_code = lang;
 				this.Item_en.image = new FileUploader({});
 				break;
@@ -211,7 +214,6 @@ export class EquipmentFormComponent implements OnInit {
 				$('div#tab_' + Item['language_code']).addClass('active');
 				return;
 			}
-
 		});
 
 		return valid;

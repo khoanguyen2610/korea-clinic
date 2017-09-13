@@ -4,7 +4,7 @@
 			<div class="portlet-title">
 				<div class="caption">
 					<i class=" icon-layers font-red"></i>
-					<span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.service_management' | translate }}</span>
+					<span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.partner_management' | translate }}</span>
 				</div>
 			</div>
 			<div class="portlet-body form">
@@ -23,21 +23,8 @@
 								<div class="form-group">
 									<label class="col-md-2 control-label">{{ 'ADMIN.language' | translate }}</label>
 									<div class="col-md-8">
-										<select class="form-control" name="language_code" [value]="filter.language_code" (change)="loadServiceCategory($event.target.value,true)">
+										<select class="form-control" name="language_code" [(ngModel)]="filter.language_code">
 											<option *ngFor="let option of language_options" [value]="option.id">{{ option.text }}</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-2 control-label">{{ 'ADMIN.category' | translate }}</label>
-									<div class="col-md-8">
-										<select class="form-control" name="service_category_id" [(ngModel)]="filter.service_category_id">
-											<option></option>
-											<option *ngFor="let option of category_options" [value]="option.id">{{ option.text }}</option>
 										</select>
 									</div>
 								</div>
@@ -47,7 +34,7 @@
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<a class="btn green" [routerLink]="['/admin/service/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
+								<a class="btn green" [routerLink]="['/admin/partner/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
 								<button class="btn blue" (click)="onSearch()"><i class="fa fa-save"></i> {{ 'ADMIN.search' | translate }}</button>
 								<a class="btn default" (click)="onReset()"><i class="fa fa-refresh"></i> {{ 'ADMIN.clear' | translate }}</a>
 							</div>
@@ -67,11 +54,9 @@
 					<thead>
 						<tr>
 							<th>{{ 'ADMIN.seq_no' | translate }}</th>
-							<th>{{ 'ADMIN.service_category' | translate }}</th>
 							<th>{{ 'ADMIN.image' | translate }}</th>
 							<th>{{ 'ADMIN.title' | translate }}</th>
 							<th>{{ 'ADMIN.language' | translate }}</th>
-							<th>{{ 'ADMIN.order' | translate }}</th>
 							<th>Actions</th>
 						</tr>
 					</thead>

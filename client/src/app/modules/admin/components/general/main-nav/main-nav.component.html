@@ -63,6 +63,12 @@
 					<span class="title">{{'ADMIN.staff' | translate}}</span>
 				</a>
 			</li>
+            <li class="nav-item  " [routerLinkActive]="['active']">
+                <a [routerLink]="['/admin/partner/list']" class="nav-link">
+                    <i class="icon-users"></i>
+                    <span class="title">{{'ADMIN.partner' | translate}}</span>
+                </a>
+            </li>
 			<li class="nav-item  " [routerLinkActive]="['active']">
 				<a [routerLink]="['/admin/slide/list']" class="nav-link">
 					<i class="icon-picture"></i>

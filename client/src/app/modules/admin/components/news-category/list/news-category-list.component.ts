@@ -87,6 +87,7 @@ export class NewsCategoryListComponent implements OnInit {
 				{ 'data': null },
 				{ 'data': 'title' },
 				{ 'data': 'language_name' },
+				{ 'data': 'order' },
 				{ 'data': null },
 			],
 			columnDefs: [
@@ -101,6 +102,10 @@ export class NewsCategoryListComponent implements OnInit {
 					targets: [1]
 				},
 				{
+					className: 'text-center',
+					targets: [2,3]
+				},
+				{
 					render: function(data, type, full) {
 						var html = '<a class="btn btn-xs purple edit-record" id="btn_edit"><i class="fa fa-pencil"></i></a>'
 							+ '&nbsp;'
@@ -111,7 +116,7 @@ export class NewsCategoryListComponent implements OnInit {
 					bSortable: false,
 					orderable: false,
 					className: 'text-center',
-					targets: [3]
+					targets: [4]
 				},
 			]
 		});
