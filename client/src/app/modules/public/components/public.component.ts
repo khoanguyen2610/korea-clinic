@@ -89,6 +89,7 @@ export class PublicComponent  {
 					}
 				}
 			}
+			console.log(this.template);
 
 			var str_matches = str.match(/([a-z|\-]+)\//);
 			var translateEl = str;
