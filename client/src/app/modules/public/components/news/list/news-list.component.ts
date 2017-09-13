@@ -93,7 +93,7 @@ export class NewsListComponent implements OnInit {
 					}
 				}
 			}
-		}, 500);
+		}, 100);
 	}
 
 	onFireClickFilter(filter_id){

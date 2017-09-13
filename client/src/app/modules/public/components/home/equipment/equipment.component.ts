@@ -22,6 +22,9 @@ export class EquipmentComponent implements OnInit {
 	language_code: string = this._Configuration.defaultLang;
 	number_item: number = 4;
 	module_name: string = 'equipment';
+	width: string = '480';
+	width_preview = 'width=1280';
+	width_default = 'width=' + this.width;
 
 	constructor(
 		private _AuthService: AuthService,
@@ -47,7 +50,7 @@ export class EquipmentComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this._Configuration.language_code);
 		params.set('limit', String(this.number_item));
-		params.set('image_resize_width', '1280');
+		params.set('image_resize_width', this.width);
 		params.set('item_status', 'active');
 		this._EquipmentService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
@@ -55,10 +58,8 @@ export class EquipmentComponent implements OnInit {
 				if (res.data.length) {
 					var items = res.data;
 					items.forEach(item => {
-						var image = JSON.parse(item.image);
-						if(image) {
-							item['preview_image'] = this._Configuration.base_url_image + this.module_name + '/' + image.filepath;
-						}
+						var preview_image = item.image_url.replace(this.width_default, this.width_preview);
+						item['preview_image'] = preview_image;
 
 					});
 					this.Items = items;
