@@ -58,6 +58,8 @@ define('SERVICE_DIR', 'service/');
 define('SLIDE_DIR', 'slide/');
 define('STAFF_DIR', 'staff/');
 define('BEFORE_AFTER_DIR', 'before_after/');
+define('PARTNER_DIR', 'partner/');
+define('OPTIONS_DIR', 'partner/');
 
 /*==========================================
  * Khoa Nguyen

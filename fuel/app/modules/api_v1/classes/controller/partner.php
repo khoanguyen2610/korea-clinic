@@ -2,10 +2,10 @@
 namespace Api_v1;
 use \Controller\Exception;
 
-class Controller_BeforeAfter extends \Controller_API {
+class Controller_Partner extends \Controller_API {
 	public function before() {
         parent::before();
-        $this->main_table = 'before_after';
+        $this->main_table = 'partner';
         $columns = \DB::list_columns($this->main_table);
         $this->table_field = array_keys($columns);
 
@@ -15,17 +15,17 @@ class Controller_BeforeAfter extends \Controller_API {
      * Author: Nguyen Anh Khoa
      * Function get all data
      * Method GET
-     * Table before_after
+     * Table partner
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function get_list_all(){
         $param = \Input::param();
-        $data     = \Model_BeforeAfter::getAll($param);
+        $data     = \Model_Partner::getAll($param);
 
         foreach($data as $k => $v){
             //generate image url
             $image = json_decode($v->image);
-            $param_img = ['filepath' => isset($image->filepath)? base64_encode(BEFORE_AFTER_DIR . $image->filepath): null,
+            $param_img = ['filepath' => isset($image->filepath)? base64_encode(PARTNER_DIR . $image->filepath): null,
                             'filename' => isset($image->filename)? base64_encode($image->filename): null
                             ];
 			isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
@@ -46,23 +46,22 @@ class Controller_BeforeAfter extends \Controller_API {
                     'data' => $data];
         return $this->response($response);
     }
-
 	/*=============================================================
      * Author: Nguyen Anh Khoa
      * Function get data for datatable
      * Method GET
-     * Table before_after
+     * Table partner
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function get_list_data(){
 		$param = \Input::param();
-        $result     = \Model_BeforeAfter::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
+        $result     = \Model_Partner::listData($this->_arrParam['post_params'], array('task'=>'list-dbtable'));
         $items      = $result['data'];
 
         foreach($items as $k => $v){
             //generate image url
             $image = json_decode($v['image']);
-            $param_img = ['filepath' => isset($image->filepath)? base64_encode(NEWS_DIR . $image->filepath): null,
+            $param_img = ['filepath' => isset($image->filepath)? base64_encode(PARTNER_DIR . $image->filepath): null,
                             'filename' => isset($image->filename)? base64_encode($image->filename): null
                             ];
 			isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
@@ -85,7 +84,7 @@ class Controller_BeforeAfter extends \Controller_API {
      * Author: Nguyen Anh Khoa
      * Function get detail form information
      * Method GET
-     * Table before_after
+     * Table partner
      * Single data
      * Input $pk - primary key
      * Response data: status[success|error], total[total_record], data[single|array]
@@ -94,7 +93,7 @@ class Controller_BeforeAfter extends \Controller_API {
         $pk = intval($pk);
         $param = \Input::param();
 
-        $data = \Model_BeforeAfter::getDetail($pk, $param);
+        $data = \Model_Partner::getDetail($pk, $param);
 
         /*==================================================
          * Response Data
@@ -110,7 +109,7 @@ class Controller_BeforeAfter extends \Controller_API {
      * Author: Nguyen Anh Khoa
      * Function insert record into table
      * Method POST
-     * Table before_after
+     * Table partner
      * fullname, phone, date have to require|unique
      * Response data: status[success|error], message[Created OK|Validation]
      *=============================================================*/
@@ -122,7 +121,6 @@ class Controller_BeforeAfter extends \Controller_API {
         $validation->add_callable('MyRules');
         $validation->add_field('title',__('Title', [], 'Title'),'required');
         $validation->add_field('language_code',__('Language', [], 'Language'),'required');
-        $validation->add_field('service_category_id',__('Service Category', [], 'Service Category'),'required');
 
 
         if($validation->run()){
@@ -130,13 +128,14 @@ class Controller_BeforeAfter extends \Controller_API {
             foreach ($param as $key => $value) {
             	if(!in_array($key, $this->table_field)) continue;
                 $value = (!is_null($value) && $value != '' && $value != 'undefined' && $value != 'null')?trim($value):null;
+
                 $arrData[$key] = $value;
             }
 
             //======================== Default Data =================
 			try{
 				\DB::start_transaction();
-	            $obj = empty($pk)?\Model_BeforeAfter::forge():\Model_BeforeAfter::find($pk);
+	            $obj = empty($pk)?\Model_Partner::forge():\Model_Partner::find($pk);
 
 				//Generate random item key
 				empty($pk) && !isset($arrData['item_key']) && $arrData['item_key'] = \Vision_Common::randomItemKey();
@@ -145,7 +144,7 @@ class Controller_BeforeAfter extends \Controller_API {
                  * Config Upload File
                  *============================================*/
                 $today_dir = date('Ymd');
-                $folder_name = BEFORE_AFTER_DIR;
+                $folder_name = PARTNER_DIR;
                 if(\Input::file()){
                     $has_upload = true;
 
@@ -254,14 +253,14 @@ class Controller_BeforeAfter extends \Controller_API {
      * Function delete a record
      * Update status record to 'delete'
      * Method DELETE
-     * Table before_after
+     * Table partner
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function delete_index($pk = null){
         if(!empty($pk)){
 			try{
 				\DB::start_transaction();
-	            $result = \Model_BeforeAfter::softDelete($pk, array('item_status' => 'delete'));
+	            $result = \Model_Partner::softDelete($pk, array('item_status' => 'delete'));
 				\DB::commit_transaction();
 			} catch (\Exception $e) {
 		      	\DB::rollback_transaction();
@@ -298,14 +297,12 @@ class Controller_BeforeAfter extends \Controller_API {
         return $this->response($response);
     }
 
-
-
     /*=============================================================
      * Author: Nguyen Anh Khoa
      * Function delete a record based on item_key
      * Update status record to 'delete'
      * Method DELETE
-     * Table before_after
+     * Table partner
      * Response data: status[success|error], message[notification]
      *=============================================================*/
     public function delete_item_key($item_key = null){
@@ -314,12 +311,12 @@ class Controller_BeforeAfter extends \Controller_API {
             try{
                 \DB::start_transaction();
 
-                $items = \Model_BeforeAfter::find('all', ['select' => ['id'], 'where' => ['item_key' => $item_key]]);
+                $items = \Model_Partner::find('all', ['select' => ['id'], 'where' => ['item_key' => $item_key]]);
 
                 if(!empty($items)){
                     foreach ($items as $val) {
                         $Ids[] = $val->id;
-                        $result = \Model_BeforeAfter::softDelete($val->id, array('item_status' => 'delete'));
+                        $result = \Model_Partner::softDelete($val->id, array('item_status' => 'delete'));
                     }
                 }
                 \DB::commit_transaction();
@@ -357,5 +354,4 @@ class Controller_BeforeAfter extends \Controller_API {
                     'record_id' => $Ids];
         return $this->response($response);
     }
-
 }
