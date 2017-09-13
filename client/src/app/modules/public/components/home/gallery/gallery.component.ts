@@ -63,7 +63,6 @@ export class GalleryComponent implements OnInit {
 						if (images) {
 							images.forEach(image => {
 								var preview_image = image.replace(this.width_default, this.width_preview);
-								console.log(preview_image)
 								preview_images.push(preview_image);
 							});
 							item['preview_images'] = preview_images;

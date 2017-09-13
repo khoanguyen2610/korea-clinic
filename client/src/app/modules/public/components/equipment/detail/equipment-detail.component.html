@@ -1,0 +1,108 @@
+
+<!-- Background Header -->
+<section class="top_panel_image">
+    <img alt="" [src]="Item['image_url']" width="100%">
+    <div class="top_panel_image_hover"></div>
+    <div class="top_panel_image_header">
+        <h1 class="top_panel_image_title">{{ Item['title'] }}</h1>
+    </div>
+</section>
+<!-- Background Header -->
+
+<div [ngClass]="page_content_wrap">
+    <div class="content_wrap">
+        <div class="content">
+            <article class="post_item post_item_single page">
+                <section class="post_content">
+                    <article class="post_item post_item_single post-643 page">
+                        <section class="post_content">
+                            <div class="sc_row row sc_row-fluid">
+                                <div class="column sc_column_container sc_col-sm-12">
+                                    <div class="sc_column-inner">
+                                        <div class="wrapper">
+                                            <div class="sc_empty_space em_height_7-7">
+                                                <span class="sc_empty_space_inner"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc_row row sc_row-fluid">
+                                <div class="column sc_column_container sc_col-sm-9">
+                                    <div class="sc_column-inner sc_custom_1459857781965">
+                                        <div class="wrapper">
+                                            <div class="sc_accordion" data-active="0">
+                                                <div class="sc_accordion_item first">
+                                                    <article class="post_item_excerpt post_item post">
+                                                        <!-- <div class="post_featured">
+                                                            <div class="post_thumb" [attr.data-image]="Item['image_url']" [attr.data-title]="Item['title']">
+                                                                <a class="hover_icon hover_icon_link" href="single-post.html">
+                                                                    <img alt="" [src]="Item['image_url']">
+                                                                </a>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="post_content clearfix">
+                                                            <h1 class="post_title entry-title">
+                                                                <!-- <span class="post_icon icon-book-open"></span>
+                                                                {{ Item['title'] }}-->
+                                                            </h1>
+                                                            <!-- <div class="post_info">
+                                                                <span class="post_info_item post_info_posted">
+                                                                    <a href="single-post.html" class="post_info_date date updated" [attr.content]="Item['created_at']">{{ Item['created_format_date'] }}</a>
+                                                                </span>
+                                                            </div> -->
+                                                            <div [innerHTML]="Item['content']"></div>
+                                                        </div>
+                                                    </article>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column sc_column_container sc_col-sm-3">
+                                    <div class="sc_column-inner">
+                                        <div class="wrapper">
+                                            <div class="widgetised_column content_element sidebar">
+                                                <div class="wrapper">
+                                                    <aside class="widget widget_categories">
+                                                        <h5 class="widget_title">{{'PUBLIC.equipment' | translate}}</h5>
+                                                        <ul>
+                                                            <li class="cat-item" *ngFor="let item of equipments">
+                                                                <a [routerLink]="[ '/' + modules.equipment, modules.detail, item.item_key, item.title | niceurl]">{{item.title}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </aside>
+                                                </div>
+                                            </div>
+                                            <div class="sc_empty_space em_height_5">
+                                                <span class="sc_empty_space_inner"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc_row row sc_row-fluid">
+                                <div class="column sc_column_container sc_col-sm-12">
+                                    <div class="sc_column-inner">
+                                        <div class="wrapper">
+                                            <div class="sc_empty_space em_height_2">
+                                                <span class="sc_empty_space_inner"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Footer -->
+                            <div class="sc_row-full-width"></div>
+
+                        </section>
+                    </article>
+                    <section class="related_wrap related_wrap_empty"></section>
+
+
+                </section>
+            </article>
+        </div>
+    </div>
+</div>
+
+

@@ -83,7 +83,7 @@ export class PublicComponent  {
 				let arr_split_routing = routing.split('/');
 
 				if (arr_split_routing.length > 1) {
-					var matches = routing.match(/service\/detail|dich-vu\/chi-tiet|news\/detail|tin-tuc\/chi-tiet/g);
+					var matches = routing.match(/service\/detail|dich-vu\/chi-tiet|news\/detail|tin-tuc\/chi-tiet|equipment\/detail|trang-thiet-bi\/chi-tiet/g);
 					if (matches) {
 						this.template = 'blog';
 					}

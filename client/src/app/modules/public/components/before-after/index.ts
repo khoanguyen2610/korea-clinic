@@ -1,1 +1,0 @@
-export * from './list/before-after-list.component';

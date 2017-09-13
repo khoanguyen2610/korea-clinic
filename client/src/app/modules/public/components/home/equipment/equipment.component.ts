@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -17,6 +17,7 @@ declare let moment: any;
 })
 
 export class EquipmentComponent implements OnInit {
+	@Input() modules: any;
 	Items: Array<any> = [];
 	controller: string = 'thiet-bi';
 	language_code: string = this._Configuration.defaultLang;
