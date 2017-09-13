@@ -8,4 +8,8 @@ export class Faq {
 	public description: string = '';
 	public content: string = '';
 	public image: any;
+	public meta_title: string;
+	public meta_description: string;
+	public meta_keyword: string;
+	public meta_tag: string;
 }
