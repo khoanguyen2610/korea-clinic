@@ -2,37 +2,8 @@
 	<div class="column sc_column_container sc_col-sm-12">
 		<div class="sc_column-inner ">
 			<div class="wrapper">
-				<!-- <div class="sc_empty_space em_height_7-5">
-					<span class="sc_empty_space_inner"></span>
-				</div> -->
 				<div class="sc_section sc_section_block">
 					<div class="sc_section_inner">
-						<!-- <h6 class="sc_item_title sc_services_subtitle sc_item_subtitle">Các chuyên gia của chúng tôi</h6> -->
-						<!-- <div class="sc_section_content_wrap">
-							<div id="sc_team_332_wrap" class="sc_team_wrap">
-                                <div id="sc_team_332" class="sc_team sc_team_style_team-3 aligncenter">
-                                    <div class="sc_columns columns_wrap">
-										<div class="column-1_4 column_padding_bottom" *ngFor="let item of employees">
-											<div id="sc_team_332_1" class="sc_team_item">
-											    <div class="sc_team_item_avatar">
-											        <img alt="" [src]="item.image_url">
-											        <div class="sc_team_item_hover">
-											            <a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]" class="sc_team_item_icon icon-email19"></a>
-											        </div>
-											    </div>
-											    <div class="sc_team_item_info">
-											        <h5 class="sc_team_item_title">
-											            <a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]">{{ item.fullname }}</a>
-											        </h5>
-											        <div class="sc_team_item_position">Massagist</div>
-											    </div>
-											</div>
-										</div>
-
-                                    </div>
-                                </div>
-                            </div>
-						</div> -->
 						<div class="sc_section_content_wrap">
                             <div id="sc_team_332_wrap" class="sc_team_wrap">
                                 <div id="sc_team_332" class="sc_team sc_team_style_team-3 aligncenter">
@@ -42,12 +13,12 @@
                                                 <div class="sc_team_item_avatar">
                                                     <img alt="" [src]="i.image_url">
                                                     <div class="sc_team_item_hover">
-                                                        <a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]" class="sc_team_item_icon"></a>
+                                                        <a [routerLink]="[ '/' + modules.expert, modules.detail, i.item_key, i.fullname | niceurl]" class="sc_team_item_icon"></a>
                                                     </div>
                                                 </div>
                                                 <div class="sc_team_item_info">
                                                     <h5 class="sc_team_item_title">
-                                                        <a [routerLink]="[ '/' + modules.staff, modules.detail, i.item_key, i.fullname | niceurl]">{{ i.fullname }}</a>
+                                                        <a [routerLink]="[ '/' + modules.expert, modules.detail, i.item_key, i.fullname | niceurl]">{{ i.fullname }}</a>
                                                     </h5>
                                                     <div class="sc_team_item_position">{{ i.position }}</div>
                                                 </div>

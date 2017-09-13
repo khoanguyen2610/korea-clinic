@@ -46,9 +46,9 @@ export class FaqListComponent implements OnInit {
 			}
 		);
 
-		_ScriptService.load('theme_shortcodes', 'widget', 'accordion').then(data => {
-            // jacqueline_init_actions();
-        }).catch(error => console.log(error));
+		// _ScriptService.load('theme_shortcodes', 'widget', 'accordion').then(data => {
+  //           // jacqueline_init_actions();
+  //       }).catch(error => console.log(error));
 
         this.language_code = String(_LocalStorageService.get('language_code'));
         if(this.language_code == 'en'){

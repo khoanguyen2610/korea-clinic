@@ -33,7 +33,8 @@
                         <div class="content">
                             <article class="post_item post_item_single page">
                                 <section class="post_content">
-                                    <router-outlet (activate)=onActivate($event)></router-outlet>
+                                    <!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
+                                    <router-outlet></router-outlet>
 
                                     <!-- Footer -->
                                     <app-public-general-footer></app-public-general-footer>
@@ -48,7 +49,8 @@
 
             <!-- Blog Layout -->
             <div *ngIf="template == 'blog'">
-                <router-outlet (activate)=onActivate($event)></router-outlet>
+                <!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
+                <router-outlet></router-outlet>
 
 
                 <footer class="footer_wrap widget_area scheme_original">

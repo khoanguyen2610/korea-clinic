@@ -19,7 +19,7 @@ const APP_ROUTES: Routes = [
 			{ path: 'tin-tuc', loadChildren: 'app/modules/public/components/news/news.module#NewsModule' },
 			{ path: 'service', loadChildren: 'app/modules/public/components/service/service.module#ServiceModule' },
 			{ path: 'dich-vu', loadChildren: 'app/modules/public/components/service/service.module#ServiceModule' },
-			{ path: 'staff', loadChildren: 'app/modules/public/components/staff/staff.module#StaffModule' },
+			{ path: 'expert', loadChildren: 'app/modules/public/components/staff/staff.module#StaffModule' },
 			{ path: 'chuyen-gia', loadChildren: 'app/modules/public/components/staff/staff.module#StaffModule' },
 		]
 	}

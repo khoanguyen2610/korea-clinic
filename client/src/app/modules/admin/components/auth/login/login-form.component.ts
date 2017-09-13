@@ -25,7 +25,7 @@ declare var $: any;
 		'../../../../../../assets/admin/css/custom.css'
 	],
 	providers: [AuthService],
-	encapsulation: ViewEncapsulation.Native
+	encapsulation: ViewEncapsulation.Emulated
 })
 
 export class LoginFormComponent  {
