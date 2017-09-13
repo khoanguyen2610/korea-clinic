@@ -8,7 +8,7 @@ return array(
             // 'dsn'        => 'mysql:host=103.68.68.151;dbname=khoanguyen_clinic',
             // 'username'   => 'khoanguyen_cl',
             // 'password'   => 'bEUNVWOr16',
-            'dsn'        => "mysql:host=45.117.169.226;dbname=white_clinic",
+            'dsn'        => "mysql:host=45.117.169.226;dbname=white_clinic_dev",
             'username'   => 'root',
             'password'   => "@imRIm)')5jxV)Es"
         ),

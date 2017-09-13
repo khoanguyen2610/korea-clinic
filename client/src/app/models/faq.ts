@@ -4,6 +4,7 @@ export class Faq {
 	public item_key: string;
 	public title: string;
 	public service_id: number;
+	public order: number;
 	public description: string = '';
 	public content: string = '';
 	public image: any;

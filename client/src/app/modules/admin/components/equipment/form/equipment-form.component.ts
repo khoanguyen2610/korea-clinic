@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { EquipmentFormContentComponent } from './content/equipment-form-content.component';
 import { Equipment } from '../../../../../models';
 import { AuthService, EquipmentService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';

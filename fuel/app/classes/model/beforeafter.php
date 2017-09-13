@@ -33,20 +33,20 @@ class Model_BeforeAfter extends \Orm\Model {
      * Get all record
      *============================================*/
     public static function getAll($params = null, $option = null){
-        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('S.title as service_title')];
+        $select = [DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('SC.title as service_category_title')];
 
         $query = \DB::select_array($select)
                         ->from([self::$_table_name, 'SM'])
                         ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
-                        ->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
+                        ->join(['service_category', 'SC'], 'left')->on('SM.service_category_id', '=', 'SC.id')
                         ->and_where('SM.item_status', '=', 'active')
                         ->order_by('SM.created_at', 'DESC');
 
         //Query by params
         if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');
         if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
-        if(isset($params['service_id']) && !empty($params['service_id']) && $params['service_id'] != 'all') $query->where('SM.service_id', '=', $params['service_id']);
-        if(isset($params['service_title']) && !empty($params['service_title'])) $query->where('S.title', 'like', '%' . $params['service_title'] . '%');
+        if(isset($params['service_category_id']) && !empty($params['service_category_id']) && $params['service_category_id'] != 'all') $query->where('SM.service_category_id', '=', $params['service_category_id']);
+        if(isset($params['service_category_title']) && !empty($params['service_category_title'])) $query->where('SC.title', 'like', '%' . $params['service_category_title'] . '%');
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
         $result = $query->as_object()->execute()->as_array();
@@ -61,23 +61,23 @@ class Model_BeforeAfter extends \Orm\Model {
         if($options['task'] == 'list-dbtable'){
             $columns = [
                             ['db' => 'SM.image', 'dt' => 0],
-                            ['db' => 'S.title', 'dt' => 1],
+                            ['db' => 'SC.title', 'dt' => 1],
                             ['db' => 'SM.title', 'dt' => 2],
                             ['db' => 'SM.content', 'dt' => 3],
                             ['db' => 'SM.language_code', 'dt' => 4]
                         ];
-            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('S.title as service_title')];
+            $colums = [DB::expr('SQL_CALC_FOUND_ROWS `SM`.`id`'), DB::expr('SM.id AS DT_RowId'), 'SM.*', DB::expr('VL.name as language_name'), DB::expr('SC.title as service_category_title')];
 
             $query = DB::select_array($colums)
                          ->from([static::$_table_name, 'SM'])
 						 ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
-                         ->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
+                         ->join(['service_category', 'SC'], 'left')->on('SM.service_category_id', '=', 'SC.id')
                          ->where('SM.item_status', '!=', 'delete');
 
 			//Filter params
  	        if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
- 	        if(isset($params['service_id']) && !empty($params['service_id']) && $params['service_id'] != 'all') $query->where('SM.service_id', '=', $params['service_id']);
- 	        if(isset($params['service_title']) && !empty($params['service_title'])) $query->where('S.title', 'like', '%' . $params['service_title'] . '%');
+ 	        if(isset($params['service_category_id']) && !empty($params['service_category_id']) && $params['service_category_id'] != 'all') $query->where('SM.service_category_id', '=', $params['service_category_id']);
+ 	        if(isset($params['service_category_title']) && !empty($params['service_category_title'])) $query->where('SC.title', 'like', '%' . $params['service_category_title'] . '%');
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);
         }
@@ -88,12 +88,12 @@ class Model_BeforeAfter extends \Orm\Model {
      * Get detail informat based on primary key
      *============================================*/
 	public static function getDetail($pk = null, $params = null, $option = null){
-		$select = ['SM.*', DB::expr('VL.name as language_name'), DB::expr('S.title as service_title')];
+		$select = ['SM.*', DB::expr('VL.name as language_name'), DB::expr('SC.title as service_category_title')];
 
 		$query = \DB::select_array($select)
 			            ->from([self::$_table_name, 'SM'])
 						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
-						->join(['service', 'S'], 'left')->on('SM.service_id', '=', 'S.id')
+						->join(['service_category', 'SC'], 'left')->on('SM.service_category_id', '=', 'SC.id')
 			            ->where('SM.item_status', '=', 'active')
 						->as_object();
 

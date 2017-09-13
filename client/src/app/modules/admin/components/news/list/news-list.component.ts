@@ -111,6 +111,7 @@ export class NewsListComponent implements OnInit {
 				{ 'data' : 'title' },
 				{ 'data' : 'feature_flag' },
 				{ 'data' : 'language_name' },
+				{ 'data' : 'order' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -138,6 +139,10 @@ export class NewsListComponent implements OnInit {
 					targets: [3]
 				},
 				{
+					className: 'text-center',
+					targets: [4,5]
+				},
+				{
 					render: function (data, type, full) {
 						var html = '<a class="btn btn-xs purple edit-record" href="#" id="btn_edit"><i class="fa fa-pencil"></i></a>'
 								 + '&nbsp;'
@@ -147,7 +152,7 @@ export class NewsListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [5]
+					targets: [6]
 				},
 			]
 		});

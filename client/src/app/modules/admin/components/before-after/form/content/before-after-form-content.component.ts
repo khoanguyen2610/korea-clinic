@@ -28,7 +28,7 @@ export class BeforeAfterFormContentComponent implements OnInit {
 	_params: any;
 	files_type = [];
 	files_upload:number = 2;
-	service_options: Array<any> = [];
+	service_category_options: Array<any> = [];
 	public uploader: FileUploader = new FileUploader({});
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
@@ -56,7 +56,7 @@ export class BeforeAfterFormContentComponent implements OnInit {
 			if(res.status == 'success'){
 				let items = res.data;
 				for(let i in items){
-					this.service_options.push({
+					this.service_category_options.push({
 						'id': items[i].id, 'text': items[i].title
 					});
 				}

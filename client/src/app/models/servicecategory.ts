@@ -8,4 +8,8 @@ export class ServiceCategory {
 	public level: number;
 	public language_name: string;
 	public image: any;
+	public meta_title: string;
+	public meta_description: string;
+	public meta_keyword: string;
+	public meta_tag: string;
 }

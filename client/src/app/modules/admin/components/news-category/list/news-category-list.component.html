@@ -36,7 +36,7 @@
 						<div class="row">
 							<div class="col-md-12 text-center">
 								<a class="btn green" [routerLink]="['/admin/news-category/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
-								<button class="btn blue" (click)="onSearch()"><i class="fa fa-save"></i> {{ 'ADMIN.search' | translate }}</button>
+								<button class="btn blue" (click)="onSearch()"><i class="fa fa-search"></i> {{ 'ADMIN.search' | translate }}</button>
 								<a class="btn default" (click)="onReset()"><i class="fa fa-refresh"></i> {{ 'ADMIN.clear' | translate }}</a>
 							</div>
 						</div>
@@ -57,6 +57,7 @@
 							<th>{{ 'ADMIN.seq_no' | translate }}</th>
 							<th>{{ 'ADMIN.title' | translate }}</th>
 							<th>{{ 'ADMIN.language' | translate }}</th>
+							<th>{{ 'ADMIN.order' | translate }}</th>
 							<th>{{ 'ADMIN.actions' | translate }}</th>
 						</tr>
 					</thead>

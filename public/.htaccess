@@ -17,7 +17,7 @@
 
 	#Header always set Access-Control-Allow-Origin "http://localhost:4200"
 
-    SetEnvIf Origin "^http(s)?://(www\.)?(admin.whiteclinic.com.vn|whiteclinic.com.vn|localhost|localhost:4200)$" ORIGIN=$0
+    SetEnvIf Origin "^http(s)?://(www\.)?(admin.whiteclinic.com.vn|whiteclinic.com.vn|thammyvienkorea.vn|localhost|localhost:4200)$" ORIGIN=$0
 	Header always set Access-Control-Allow-Origin %{ORIGIN}e
 
 	Header always set Access-Control-Max-Age "86400"

@@ -86,6 +86,7 @@ export class ServiceCategoryListComponent implements OnInit {
 				{ 'data': 'image_url' },
 				{ 'data': 'title' },
 				{ 'data': 'language_name' },
+				{ 'data': 'order' },
 				{ 'data': null },
 			],
 			columnDefs: [
@@ -112,6 +113,10 @@ export class ServiceCategoryListComponent implements OnInit {
 					targets: [2]
 				},
 				{
+					className: 'text-center',
+					targets: [3,4]
+				},
+				{
 					render: function(data, type, full) {
 						var html = '<a class="btn btn-xs purple edit-record" id="btn_edit"><i class="fa fa-pencil"></i></a>'
 							+ '&nbsp;'
@@ -122,7 +127,7 @@ export class ServiceCategoryListComponent implements OnInit {
 					bSortable: false,
 					orderable: false,
 					className: 'text-center',
-					targets: [4]
+					targets: [5]
 				},
 			]
 		});

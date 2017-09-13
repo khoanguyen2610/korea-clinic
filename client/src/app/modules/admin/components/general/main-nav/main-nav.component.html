@@ -28,6 +28,12 @@
 			</li>
             -->
 			<li class="nav-item  " [routerLinkActive]="['active']">
+				<a [routerLink]="['/admin/options/about-us']" class="nav-link">
+					<i class="icon-info"></i>
+					<span class="title">{{'ADMIN.about_us' | translate}}</span>
+				</a>
+			</li>
+			<li class="nav-item  " [routerLinkActive]="['active']">
 				<a [routerLink]="['/admin/equipment/list']" class="nav-link">
 					<i class="icon-briefcase"></i>
 					<span class="title">{{'ADMIN.equipment' | translate}}</span>
@@ -63,6 +69,12 @@
 					<span class="title">{{'ADMIN.staff' | translate}}</span>
 				</a>
 			</li>
+            <li class="nav-item  " [routerLinkActive]="['active']">
+                <a [routerLink]="['/admin/partner/list']" class="nav-link">
+                    <i class="icon-users"></i>
+                    <span class="title">{{'ADMIN.partner' | translate}}</span>
+                </a>
+            </li>
 			<li class="nav-item  " [routerLinkActive]="['active']">
 				<a [routerLink]="['/admin/slide/list']" class="nav-link">
 					<i class="icon-picture"></i>
@@ -87,6 +99,13 @@
                     <span class="title">{{'ADMIN.faq' | translate}}</span>
                 </a>
             </li>
+
+			<li class="nav-item  " [routerLinkActive]="['active']">
+				<a [routerLink]="['/admin/equipment/list']" class="nav-link">
+					<i class="icon-settings"></i>
+					<span class="title">{{'ADMIN.general' | translate}}</span>
+				</a>
+			</li>
         </ul>
         <!-- END SIDEBAR MENU -->
         <!-- END SIDEBAR MENU -->

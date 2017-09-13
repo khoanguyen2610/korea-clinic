@@ -6,34 +6,13 @@
 			<span *ngIf="(title?.dirty || !is_validated) && !title.value" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
-	<div class="form-group" [class.has-error]="!service_id.value">
-		<label class="control-label col-md-1">{{ 'ADMIN.service' | translate }} <span class="required">*</span></label>
+	<div class="form-group" [class.has-error]="!service_category_id.value">
+		<label class="control-label col-md-1">{{ 'ADMIN.service_category' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
-			<select class="form-control" name="service_id" [(ngModel)]="Item.service_id" #service_id="ngModel">
-				<option *ngFor="let option of service_options" [value]="option.id">{{ option.text }}</option>
+			<select class="form-control" name="service_category_id" [(ngModel)]="Item.service_category_id" #service_category_id="ngModel">
+				<option *ngFor="let option of service_category_options" [value]="option.id">{{ option.text }}</option>
 			</select>
-			<span *ngIf="(!service_id.value && !Item.service_id) && !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.description' | translate }}</label>
-		<div class="col-md-11">
-			<ckeditor name="description"
-				[(ngModel)]="Item.description"
-				[config]= "{
-					toolbarGroups : [
-						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
-						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
-						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
-						{ name: 'tools', groups: [ 'Maximize' ] },
-						'/',
-						{ name: 'basicstyles', groups: ['basicstyles'] },
-						{ name: 'styles' },
-						{ name: 'links' },
-						{ name: 'insert' }
-					]}"
-				debounce="500">
-			</ckeditor>
+			<span *ngIf="(!service_category_id.value && !Item.service_category_id) && !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
 	<div class="form-group">

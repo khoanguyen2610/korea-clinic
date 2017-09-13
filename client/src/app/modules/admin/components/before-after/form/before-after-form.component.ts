@@ -138,7 +138,7 @@ export class BeforeAfterFormComponent implements OnInit {
 			}
 
 			formData.append('language_code', Item['language_code']);
-			formData.append('service_id', Item['service_id']);
+			formData.append('service_category_id', Item['service_category_id']);
 			formData.append('title', Item['title']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
@@ -212,7 +212,7 @@ export class BeforeAfterFormComponent implements OnInit {
 				ctab = Item['language_code'];
 			}
 
-			if(!Item['service_id']){
+			if(!Item['service_category_id']){
 				valid = false;
 				ctab = Item['language_code'];
 			}

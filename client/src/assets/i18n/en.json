@@ -8,6 +8,9 @@
     "invalid_equal_password": "Re-password is not equal password"
   },
   "ADMIN": {
+    "about_us": "About Us",
+    "about_us_management": "About Us Management",
+    "general": "General",
     "equipment": "Equipment",
     "service_category": "Service Category",
     "service": "Service",
@@ -17,6 +20,7 @@
     "slide": "Slide",
     "gallery": "Gallery",
     "faq": "FAQ",
+    "partner": "Partner",
     "seq_no": "No.",
     "title": "Title",
     "description": "Description",
@@ -42,6 +46,7 @@
     "slide_management": "Slide Management",
     "gallery_management": "Gallery Management",
     "faq_management": "FAQ Management",
+    "partner_management": "Partner Management",
     "language": "Language",
     "parent": "Parent",
     "parent_category": "Parent Category",
@@ -62,7 +67,12 @@
     "enter_new_password": "Enter new Password",
     "re_password": "Re-password",
     "enter_re_password": "Enter re-password",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "order": "Order",
+    "meta_title": "Meta Title",
+    "meta_description": "Meta Description",
+    "meta_keyword": "Meta Keyword",
+    "meta_tag": "Meta Tag"
   },
   "PUBLIC": {
     "equipment": "Equipment",
@@ -113,7 +123,7 @@
     "enter_your_message": "Enter your message",
     "send_message": "Send Message",
     "faq": "FAQ",
-    "filter_all": "Filter - All",
+    "filter_all": "All",
     "expert": "Expert",
     "partner": "Partner"
   },
