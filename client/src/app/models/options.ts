@@ -3,4 +3,5 @@ export class Options {
 	public language_code: string;
 	public key: string = '';
 	public value: string = '';
+	public logo: any;
 }

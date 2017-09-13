@@ -131,6 +131,10 @@ export class AboutUsFormComponent implements OnInit {
 			}
 
 			formData.append('language_code', Item['language_code']);
+			formData.append('meta_title', Item['meta_title']);
+			formData.append('meta_description', Item['meta_description']);
+			formData.append('meta_keyword', Item['meta_keyword']);
+			formData.append('meta_tag', Item['meta_tag']);
 			formData.append('options[about_us]', Item['about_us']);
 
 			this._OptionsService.getObserver().subscribe(progress => {

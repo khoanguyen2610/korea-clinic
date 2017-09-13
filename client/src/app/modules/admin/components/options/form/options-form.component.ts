@@ -5,16 +5,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { OptionsFormContentComponent } from './content/options-form-content.component';
 import { Options } from '../../../../../models';
-import { AuthService, EquipmentService, GeneralService } from '../../../../../services';
+import { AuthService, OptionsService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
 @Component({
-	selector: 'app-options-form',
+	selector: 'app-about-us-form',
 	templateUrl: './options-form.component.html',
-	providers: [ EquipmentService, GeneralService ]
+	providers: [ OptionsService, GeneralService ]
 })
 
 export class OptionsFormComponent implements OnInit {
@@ -33,7 +33,7 @@ export class OptionsFormComponent implements OnInit {
 
 	constructor(
 		private _AuthService: AuthService,
-		private _EquipmentService: EquipmentService,
+		private _OptionsService: OptionsService,
 		private _GeneralService: GeneralService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -53,42 +53,38 @@ export class OptionsFormComponent implements OnInit {
 
 		this.Item_vi.language_code = 'vi';
 		this.Item_en.language_code = 'en';
-
-		this.generateItemKey();
 	}
 
 	ngOnInit(){
 		this.language_code = 'vi';
-		if(this._params.method == 'update'){
-			if(this._params.id != null){
-				let params: URLSearchParams = new URLSearchParams();
-				params.set('item_key',this.queryParams.item_key);
-				params.set('response_quantity','all');
-				this._EquipmentService.getByID(null, params).subscribe(res => {
-					if (res.status == 'success') {
-						if(res.data == null){
-							this._Router.navigate(['/admin/equipment/list']);
-						}else{
-							let items = res.data;
-							items.forEach(item => {
-								switch(item['language_code']){
-									case 'vi':
-										this.Item_vi = item;
-										break;
-									case 'en':
-										this.Item_en = item;
-										break;
-								}
-							});
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('response_quantity','all');
+		this._OptionsService.getListAll(params).subscribe(res => {
+			if (res.status == 'success') {
+				let items = res.data;
+
+
+				var repeat:number = 0;
+		        var loadInterval = setInterval(() => {
+					items.forEach(item => {
+						switch(item['language_code']){
+							case 'vi':
+								this.Item_vi[item.key] = item.value;
+								if(item.key == 'logo') this.Item_vi['logo_url'] = item.logo_url;
+								break;
+							case 'en':
+								this.Item_en[item.key] = item.value;
+								if(item.key == 'logo') this.Item_en['logo_url'] = item.logo_url;
+								break;
 						}
-					}else{
-						this._Router.navigate(['/admin/equipment/list']);
+					});
+					repeat++;
+					if(repeat >= 1){
+						clearInterval(loadInterval);
 					}
-				});
-			}else{
-				this._Router.navigate(['/']);
+				}, 200);
 			}
-		}
+		});
 	}
 
 	ngAfterViewInit(){
@@ -109,47 +105,54 @@ export class OptionsFormComponent implements OnInit {
 		this.Items.forEach(Item => {
 			let formData: FormData = new FormData();
 
-			let uploader = Item['image'];
-				var current_image = [];
-				if (!(uploader instanceof Object) && typeof uploader != 'undefined') {
-					current_image = JSON.parse(Item['image']);
-				}
-
-				if (uploader instanceof Object && uploader.queue.length) {
-					for (let key in uploader.queue) {
-						var upload = uploader.queue[key]._file;
-						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
-						var objUpload = new Blob([upload]);
-
-						if (upload['id']) {
-						} else {
-							formData.append("image[]", objUpload, upload.name);
-						}
-						current_image.push(upload);
-					}
-				}
-				// current_image for check to remove existing image
-				formData.append("current_image", JSON.stringify(current_image));
-
-			if(this._params.method == 'create'){
-				formData.append('item_key', this.item_key);
+			let uploader = Item['logo'];
+			var current_logo = [];
+			if (!(uploader instanceof Object) && typeof uploader != 'undefined') {
+				current_logo = JSON.parse(Item['logo']);
 			}
 
-			formData.append('language_code', Item['language_code']);
-			formData.append('title', Item['title']);
-			formData.append('content', Item['content']);
-			formData.append('description', Item['description']);
+			if (uploader instanceof Object && uploader.queue.length) {
+				for (let key in uploader.queue) {
+					var upload = uploader.queue[key]._file;
+					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+					var objUpload = new Blob([upload]);
 
-			this._EquipmentService.getObserver().subscribe(progress => {
+					if (upload['id']) {
+					} else {
+						formData.append("logo[]", objUpload, upload.name);
+					}
+					current_logo.push(upload);
+				}
+			}
+			// current_logo for check to remove existing image
+			formData.append("current_logo", JSON.stringify(current_logo));
+
+
+			formData.append('language_code', Item['language_code']);
+			formData.append('options[logo]', Item['logo']);
+			formData.append('options[address]', Item['address']);
+			formData.append('options[phone]', Item['phone']);
+			formData.append('options[facebook]', Item['facebook']);
+			formData.append('options[twitter]', Item['twitter']);
+			formData.append('options[google_plus]', Item['google_plus']);
+			formData.append('options[instagram]', Item['instagram']);
+			formData.append('options[home_about_us]', Item['home_about_us']);
+			formData.append('options[working_hour]', Item['working_hour']);
+			formData.append('options[home_contact]', Item['home_contact']);
+			formData.append('options[meta_title]', Item['meta_title']);
+			formData.append('options[meta_description]', Item['meta_description']);
+			formData.append('options[meta_keyword]', Item['meta_keyword']);
+			formData.append('options[meta_tag]', Item['meta_tag']);
+
+			this._OptionsService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;
 			});
 			try {
-				this._EquipmentService.upload(formData, Item['id']).then((res) => {
+				this._OptionsService.upload(formData).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
 							this.onReset(lang);
-							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}
@@ -178,30 +181,20 @@ export class OptionsFormComponent implements OnInit {
 		}
 	}
 
-	generateItemKey() {
-		this._GeneralService.getItemKey().subscribe(res => {
-			if (res.status == 'success') {
-				this.item_key = res.data.item_key;
-			}
-		});
+	onSetImage(obj){
+		switch(this.language_code){
+			case 'vi':
+				this.Item_vi.logo = obj;
+				break;
+			case 'en':
+				this.Item_en.logo = obj;
+				break;
+		}
 	}
 
 	validateRequiredField(){
 		let valid = true;
 		this.Items = [this.Item_vi, this.Item_en];
-
-		this.Items.forEach(Item => {
-			if(!Item['title']){
-				valid = false;
-				this.language_code = Item['language_code'];
-				$('a[href="#tab_' + Item['language_code'] + '"]').click();
-				$('div[id^="tab_"]').removeClass('active');
-				$('div#tab_' + Item['language_code']).addClass('active');
-				return;
-			}
-
-		});
-
 		return valid;
 	}
 

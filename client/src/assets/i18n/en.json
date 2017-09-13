@@ -11,6 +11,7 @@
     "about_us": "About Us",
     "about_us_management": "About Us Management",
     "general": "General",
+    "general_management": "General Management",
     "equipment": "Equipment",
     "service_category": "Service Category",
     "service": "Service",
@@ -72,7 +73,18 @@
     "meta_title": "Meta Title",
     "meta_description": "Meta Description",
     "meta_keyword": "Meta Keyword",
-    "meta_tag": "Meta Tag"
+    "meta_tag": "Meta Tag",
+    "logo": "Logo",
+    "favicon": "Favicon",
+    "address": "Address",
+    "phone": "Phone",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "google_plus": "Google Plus",
+    "instagram": "Instagram",
+    "home_about_us": "Home About Us",
+    "working_hour": "Working Hour",
+    "home_contact": "Home Contact"
   },
   "PUBLIC": {
     "equipment": "Equipment",

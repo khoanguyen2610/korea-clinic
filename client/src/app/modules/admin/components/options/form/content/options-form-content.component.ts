@@ -44,7 +44,120 @@ export class OptionsFormContentComponent implements OnInit {
 		this.files_type = this._Configuration.upload_file_extension;
 	}
 
-	ngOnInit(){ }
+	ngOnInit(){
+		var repeat:number = 0;
+		var loadInterval = setInterval(() => {
+			if(this.Item.logo) this.onGetImage();
+			repeat++;
+			if(repeat >= 5){
+				clearInterval(loadInterval);
+			}
+		}, 200);
+	}
+
+	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+		if(this.Item.logo){
+			this.onGetImage();
+		}
+	}
+
+	onGetImage() {
+		this.uploader = new FileUploader({});
+		if (this.Item.logo instanceof Object) {
+			this.uploader = this.Item.logo;
+		} else {
+			let image = JSON.parse(this.Item.logo);
+			let filename = image.filename;
+			let filepath = image.filepath;
+			var file_type = '';
+			if (filename) {
+				file_type = filename.split('.');
+			}
+
+			let logo_url = '';
+			if (filename) {
+				logo_url = this.Item['logo_url'];
+			}
+
+			let item: any = { file: { name: filename, filename: filename, filepath: filepath, type: file_type[1], is_download: true }, src: logo_url, _file: { id: 1, name: filename, filename: filename, filepath: filepath, type: file_type[1], is_keeping: true }, edited: true };
+			this.uploader.queue.push(item);
+		}
+	}
+
+	/*==============================================
+	 * Remove file on stack
+	 *==============================================*/
+	onRemoveFile(index, file_id) {
+		if (this.uploader.queue.length) {
+			this.uploader.queue.splice(index, 1);
+			this.fileOutput.emit(this.uploader);
+		}
+	}
+
+	/*====================================
+	 * Validate Form File Type
+	 *====================================*/
+	onValidateFormFileType() {
+		var last = this.uploader.queue.length - 1;
+		this.uploader.queue = [this.uploader.queue[last]];
+		this.uploader['error_limit_files'] = false;
+		setTimeout(() => {
+			let after_upload_files = +this.uploader.queue.length; // after drag upload files
+			if (after_upload_files <= this._Configuration.limit_files) {
+				if (after_upload_files != this.files_upload) {
+					let uploader = [];
+					for (let key in this.uploader.queue) {
+						var checked = false;
+						var ext = this.uploader.queue[key]._file.name.split('.').pop();
+						ext = ext.toLowerCase();
+
+						for (let k in this.files_type) {
+
+							if (ext.indexOf(this.files_type[k]) > -1) {
+								checked = true;
+								break;
+							}
+						}
+
+						if (!checked) {
+							var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
+							this._ToastrService.error(msgInvalidFileType);
+							checked = false;
+						}
+
+						if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
+							var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
+							this._ToastrService.error(msgSizeTooLarge);
+							checked = false;
+						}
+
+						if (!checked) {
+							// this.uploader.queue.splice(+key, 1);
+							this.uploader.queue[key].isError = true;
+						} else {
+							this.uploader.queue[key]._file['is_keeping'] = true;
+							uploader.push(this.uploader.queue[key]);
+						}
+
+
+					}
+					this.uploader.queue = uploader;
+					this.files_upload = this.uploader.queue.length;
+					this.fileOutput.emit(this.uploader);
+				}
+			}
+
+		}, 500);
+	}
+
+	public fileOverBase(e: any): void {
+		this.hasBaseDropZoneOver = e;
+	}
+
+	public fileOverAnother(e: any): void {
+		this.onValidateFormFileType();
+		this.hasAnotherDropZoneOver = e;
+	}
 
 	ngOnDestroy(){
 		this.subscription.unsubscribe();

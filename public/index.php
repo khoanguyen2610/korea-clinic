@@ -46,6 +46,7 @@ defined('FUEL_START_MEM') or define('FUEL_START_MEM', memory_get_usage());
 
 
 define('FILESPATH',realpath(__DIR__.'/../public/files/').DIRECTORY_SEPARATOR);
+define('FILESURL', 'files/');
 define('MAILTEMPLATE_PATH',realpath(__DIR__.'/../public/files/system/mail_template/').DIRECTORY_SEPARATOR);
 
 
@@ -59,7 +60,7 @@ define('SLIDE_DIR', 'slide/');
 define('STAFF_DIR', 'staff/');
 define('BEFORE_AFTER_DIR', 'before_after/');
 define('PARTNER_DIR', 'partner/');
-define('OPTIONS_DIR', 'partner/');
+define('OPTIONS_DIR', 'options/');
 
 /*==========================================
  * Khoa Nguyen

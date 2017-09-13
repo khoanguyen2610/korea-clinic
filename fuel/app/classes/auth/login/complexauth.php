@@ -58,8 +58,8 @@ class Auth_Login_ComplexAuth extends \Auth_Login_Driver {
             if ($this->user) {
                 return true;
             }
-        }elseif (static::$remember_me and $user_id = static::$remember_me->get('user_id', null)) {
-            return $this->force_login($user_id);
+        }elseif (static::$remember_me and $username = static::$remember_me->get('user_id', null)) {
+            return $this->force_login($username);
         }
         \Session::delete(\Config::get('complexauth.username_post_key'));
         return false;
@@ -107,12 +107,12 @@ class Auth_Login_ComplexAuth extends \Auth_Login_Driver {
         return true;
     }
 
-    public function force_login($user_id = '') {
-        if (empty($user_id)) {
+    public function force_login($username = '') {
+        if (empty($username)) {
             return false;
         }
 
-        $this->user = \Model_MUser::getDetailUserInfo(['m_user_id' => $user_id]);
+        $this->user = \Model_System_VsvnUser::getDetailUserInfo(['username' => $username]);
         Auth::_register_verified($this);
         \Session::set(\Config::get('complexauth.username_post_key'), $this->user[\Config::get('complexauth.username_post_key')]);
         \Session::instance()->rotate();

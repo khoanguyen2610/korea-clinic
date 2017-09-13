@@ -23,17 +23,12 @@ class Controller_Options extends \Controller_API {
         $data     = \Model_Options::getAll($param);
 
         foreach($data as $k => $v){
-            //generate image url
-            $image = json_decode($v->image);
-            $param_img = ['filepath' => isset($image->filepath)? base64_encode(OPTIONS_DIR . $image->filepath): null,
-                            'filename' => isset($image->filename)? base64_encode($image->filename): null
-                            ];
-			isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
-			isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
+            // //generate image url
+			if($v->key == 'logo'){
+	            $logo = json_decode($v->value);
+	            $data[$k]->logo_url = isset($logo->filepath)? \Uri::create(FILESURL . OPTIONS_DIR . $logo->filepath):null;
+			}
 
-			//Last param
-			$param_img['file_extentsion'] = isset($image->filepath)? '.' . pathinfo($image->filepath, PATHINFO_EXTENSION): '.jpg';
-            $data[$k]->image_url = \Uri::create('api/v1/system_general/image', [], $param_img);
         }
 
         /*==================================================
@@ -87,7 +82,6 @@ class Controller_Options extends \Controller_API {
         $validation = \Validation::forge();
         $validation->add_callable('MyRules');
 
-
         if($validation->run()){
             $arrData = [];
             foreach ($param as $key => $value) {
@@ -104,6 +98,73 @@ class Controller_Options extends \Controller_API {
 						\DB::start_transaction();
 			            $obj = \Model_Options::find('first', ['where' => ['key' => $key, 'language_code' => $param['language_code']]]);
 						$arrData['value'] = $value = (!is_null($value) && $value != '' && $value != 'undefined' && $value != 'null')?trim($value):null;
+
+
+						if($key == 'logo'){
+							/*============================================
+			                 * Config Upload File
+			                 *============================================*/
+			                $today_dir = date('Ymd');
+			                $folder_name = OPTIONS_DIR;
+
+			                if(\Input::file()){
+			                    $has_upload = true;
+
+			                    if(empty($errors)){
+			                        try{
+			                            \File::read_dir(FILESPATH . $folder_name . $today_dir, 0, null);
+			                        }catch(\FileAccessException $e){
+			                            \File::create_dir(FILESPATH  . $folder_name, $today_dir, 0777);
+			                        }
+			                        \Upload::process([
+			                            'path' => FILESPATH . $folder_name . $today_dir . '/',
+			                            'max_size' => '10485760',
+			                            'ext_whitelist' => ['jpg', 'jpeg', 'gif', 'png'],
+			                            'suffix' => '_'.strtotime('now'). rand(0, 999),
+			                            'normalize' => true
+			                        ]);
+			                        $upload_valid = \Upload::is_valid();
+			                    }else{
+			                        $upload_valid = !$has_upload;
+			                    }
+			                }else{
+			                    $upload_valid = !($has_upload = false);
+			                }
+
+			                /*============================================
+			                 * Upload file
+			                 *============================================*/
+							$arrUploadImage = [];
+			                if($has_upload){
+			                    \Upload::save();
+			                    foreach(\Upload::get_files() as $file) {
+			                        //==== Save into database
+			                        $arrFiles = ['filename' => $file['name'],
+			                                     'filepath' => $today_dir . '/' . $file['saved_as']];
+			                        break;
+			                    }
+			 					//Now just save first image
+			 					$arrUploadImage = $arrFiles;
+			                }
+
+							if(!empty($param['current_logo']) && $param['current_logo'] != 'null'){
+								$current_logos = json_decode($param['current_logo']);
+								$arr_current_logos = [];
+								// foreach ($current_logos as $k => $v) {
+									if(isset($current_logos->filename) && isset($current_logos->filepath)){
+										$arr_current_logos = ['filename' => $current_logos->filename,
+				                                    			'filepath' => $current_logos->filepath];
+									}
+								// }
+								if(!empty($arr_current_logos)){
+									$arrUploadImage = $arr_current_logos;
+								}
+								// $arrUploadImage = array_values($arrUploadImage);
+							}
+							$arrData['value'] = json_encode($arrUploadImage);
+						}
+
+
 						!empty($obj) && $obj->set($arrData)->save();
 						\DB::commit_transaction();
 					} catch (\Exception $e) {

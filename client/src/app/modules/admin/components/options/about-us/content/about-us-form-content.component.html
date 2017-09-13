@@ -1,7 +1,31 @@
 <div class="form-body">
 	<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.content' | translate }}</label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_title' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_title" [(ngModel)]="Item.meta_title" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_description' | translate }}</label>
+		<div class="col-md-10">
+			<textarea name="meta_description" [(ngModel)]="Item.meta_description" class="form-control"></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_keyword' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_keyword" [(ngModel)]="Item.meta_keyword" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_tag' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_tag" [(ngModel)]="Item.meta_tag" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.content' | translate }}</label>
+		<div class="col-md-10">
 			<ckeditor name="about_us"
 				[(ngModel)]="Item.about_us"
 				[config]= "{
@@ -17,7 +41,7 @@
 						{ name: 'links' },
 						{ name: 'insert' }
 					]}"
-				debounce="500">
+				debounce="200">
 			</ckeditor>
 		</div>
 	</div>

@@ -37,6 +37,7 @@ class Model_Options extends \Orm\Model {
 
         $query = \DB::select_array($select)
                         ->from([self::$_table_name, 'SM'])
+						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
                         ->and_where('SM.item_status', '=', 'active')
                         ->order_by('SM.created_at', 'DESC');
 
