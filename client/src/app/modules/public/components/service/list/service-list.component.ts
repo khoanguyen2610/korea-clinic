@@ -82,7 +82,6 @@ export class ServiceListComponent implements OnInit {
 	}
 
 	loadEffectPage(){
-		console.log('loaded');
 		setTimeout(() => {
 			let data = this.categories;
 			for(let i in data){
