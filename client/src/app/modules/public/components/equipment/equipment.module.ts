@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routing } from './equipment.routing';
 import { CoreModule } from "../../../../shared/modules/core.module";
 
-import { EquipmentListComponent } from './';
+import { EquipmentListComponent, EquipmentDetailComponent } from './';
 
 @NgModule({
     declarations: [
-       EquipmentListComponent
+		EquipmentListComponent, EquipmentDetailComponent
     ],
     imports: [ CoreModule, Routing ]
 })

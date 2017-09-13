@@ -94,7 +94,7 @@ export class ServiceListComponent implements OnInit {
 					}
 				}
 			}
-		}, 500);
+		}, 100);
 	}
 
 	onFireClickFilter(filter_id){

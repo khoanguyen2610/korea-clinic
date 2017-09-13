@@ -22,17 +22,12 @@
                                                     <div class="esg-entry-cover">
                                                         <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
                                                         <div class="esg-center eg-post-332 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
-                                                            <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" [href]="item.image_url"><i class="eg-icon-search"></i></a>
+                                                            <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" [href]="item.preview_image"><i class="eg-icon-search"></i></a>
                                                         </div>
-                                                        <!--
-                                                        <div class="esg-center eg-post-332 eg-eisenhower-massage-element-3-a esg-rollleft" data-delay="0.18">
-                                                            <a class="eg-eisenhower-massage-element-3 eg-post-332" href="single-product.html" target="_self"><i class="eg-icon-forward"></i></a>
-                                                        </div>
-                                                    -->
                                                     </div>
                                                     <div class="esg-entry-content eg-eisenhower-massage-content">
                                                         <div class="esg-content eg-post-332 eg-eisenhower-massage-element-6-a">
-                                                            <a [routerLink]="[getModuleNameByLang(), language_code, item.item_key, item.title]" class="eg-eisenhower-massage-element-6 eg-post-332"  rel="category tag" title="View all posts in simple">{{ item.title }}</a>
+                                                            <a [routerLink]="[ '/' + modules.equipment, modules.detail, item.item_key, item.title | niceurl]" class="eg-eisenhower-massage-element-6 eg-post-332"  rel="category tag" title="View all posts in simple">{{ item.title }}</a>
                                                         </div>
                                                         <!--
                                                         <div class="esg-content eg-post-332 eg-eisenhower-massage-element-0" >
@@ -43,72 +38,6 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <!-- <li class="filterall filter-simple filter-skincare eg-eisenhower-massage-wrapper eg-post-id-337" data-date="1459258606">
-                                                <div class="esg-media-cover-wrapper">
-                                                    <div class="esg-entry-media"><img alt="" src="./assets/public/images/3473311421005_95.jpg"></div>
-                                                    <div class="esg-entry-cover">
-                                                        <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
-                                                        <div class="esg-center eg-post-337 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
-                                                            <a class="eg-eisenhower-massage-element-1 eg-post-337 esgbox" href="images/3473311421005_95.jpg"><i class="eg-icon-search"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="esg-entry-content eg-eisenhower-massage-content">
-                                                        <div class="esg-content eg-post-337 eg-eisenhower-massage-element-6-a">
-                                                            <a class="eg-eisenhower-massage-element-6 eg-post-337" href="shop.html" rel="category tag" title="View all posts in simple">simple</a>, <a class="eg-eisenhower-massage-element-6 eg-post-337" href="shop.html" rel="category tag" title="View all posts in Skincare">Skincare</a>
-                                                        </div>
-                                                        <div class="esg-content eg-post-337 eg-eisenhower-massage-element-0">
-                                                            Masque Contour des Yeux
-                                                        </div>
-                                                        <div class="esg-content eg-eisenhower-massage-element-2 esg-none esg-clear"></div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="filterall filter-simple filter-skincare eg-eisenhower-massage-wrapper eg-post-id-339" data-date="1459258628">
-                                                <div class="esg-media-cover-wrapper">
-                                                    <div class="esg-entry-media"><img alt="" src="./assets/public/images/3473311970015_94.jpg"></div>
-                                                    <div class="esg-entry-cover">
-                                                        <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
-                                                        <div class="esg-center eg-post-339 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
-                                                            <a class="eg-eisenhower-massage-element-1 eg-post-339 esgbox" href="images/3473311970015_94.jpg"><i class="eg-icon-search"></i></a>
-                                                        </div>
-                                                        <div class="esg-center eg-post-339 eg-eisenhower-massage-element-3-a esg-rollleft" data-delay="0.18">
-                                                            <a class="eg-eisenhower-massage-element-3 eg-post-339" href="single-product.html" target="_self"><i class="eg-icon-forward"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="esg-entry-content eg-eisenhower-massage-content">
-                                                        <div class="esg-content eg-post-339 eg-eisenhower-massage-element-6-a">
-                                                            <a class="eg-eisenhower-massage-element-6 eg-post-339" href="shop.html" rel="category tag" title="View all posts in simple">simple</a>, <a class="eg-eisenhower-massage-element-6 eg-post-339" href="shop.html" rel="category tag" title="View all posts in Skincare">Skincare</a>
-                                                        </div>
-                                                        <div class="esg-content eg-post-339 eg-eisenhower-massage-element-0">
-                                                            EAU DU SOIR SCENTED SOAP
-                                                        </div>
-                                                        <div class="esg-content eg-eisenhower-massage-element-2 esg-none esg-clear"></div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="filterall filter-simple filter-skincare eg-eisenhower-massage-wrapper eg-post-id-342" data-date="1459258761">
-                                                <div class="esg-media-cover-wrapper">
-                                                    <div class="esg-entry-media"><img alt="" src="./assets/public/images/huile_pr_cieuse_-_beaut_stars_2015_-_zoom_fiche.jpg"></div>
-                                                    <div class="esg-entry-cover">
-                                                        <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
-                                                        <div class="esg-center eg-post-342 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
-                                                            <a class="eg-eisenhower-massage-element-1 eg-post-342 esgbox" href="images/huile_pr_cieuse_-_beaut_stars_2015_-_zoom_fiche.jpg"><i class="eg-icon-search"></i></a>
-                                                        </div>
-                                                        <div class="esg-center eg-post-342 eg-eisenhower-massage-element-3-a esg-rollleft" data-delay="0.18">
-                                                            <a class="eg-eisenhower-massage-element-3 eg-post-342" href="single-product.html" target="_self"><i class="eg-icon-forward"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="esg-entry-content eg-eisenhower-massage-content">
-                                                        <div class="esg-content eg-post-342 eg-eisenhower-massage-element-6-a">
-                                                            <a class="eg-eisenhower-massage-element-6 eg-post-342" href="shop.html" rel="category tag" title="View all posts in simple">simple</a>, <a class="eg-eisenhower-massage-element-6 eg-post-342" href="shop.html" rel="category tag" title="View all posts in Skincare">Skincare</a>
-                                                        </div>
-                                                        <div class="esg-content eg-post-342 eg-eisenhower-massage-element-0">
-                                                            BLACK ROSE FACE OIL
-                                                        </div>
-                                                        <div class="esg-content eg-eisenhower-massage-element-2 esg-none esg-clear"></div>
-                                                    </div>
-                                                </div>
-                                            </li> -->
                                         </ul>
                                     </div>
                                 </div>

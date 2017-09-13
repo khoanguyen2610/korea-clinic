@@ -33,7 +33,7 @@
                         <div id="esg-grid-1-1" class="esg-grid">
                             <ul>
                                 <ng-template ngFor let-item [ngForOf]="Items">
-                                <li *ngFor="let image_url of item.image_url" class="filterall filter-gallery eg-washington-massage-wrapper eg-post-id-209" data-cobblesh="1" data-cobblesw="1" data-date="1459261695" [ngClass]="'filter-gallery-' + item.id">
+                                <li *ngFor="let image_url of item.image_url; let i = index" class="filterall filter-gallery eg-washington-massage-wrapper eg-post-id-209" data-cobblesh="1" data-cobblesw="1" data-date="1459261695" [ngClass]="'filter-gallery-' + item.id">
                                     <div class="esg-media-cover-wrapper">
                                         <div class="esg-entry-media">
                                             <img alt="" [src]="image_url">
@@ -42,7 +42,7 @@
                                             <div class="esg-overlay esg-fade eg-eisenhower-massage-container" data-delay="0"></div>
                                             <div class="esg-center eg-post-332 eg-eisenhower-massage-element-1-a esg-rollright" data-delay="0.1">
                                                 <!-- <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" href="/assets/public/images/21714921_original.jpg"><i class="eg-icon-search"></i></a> -->
-                                                <a class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" rel="filter-gallery" [href]="image_url"><i class="eg-icon-search"></i></a>
+                                                <a *ngIf="item.preview_images[i]" class="eg-eisenhower-massage-element-1 eg-post-332 esgbox" rel="filter-gallery" [href]="item.preview_images[i]"><i class="eg-icon-search"></i></a>
                                             </div>
                                         </div>
 

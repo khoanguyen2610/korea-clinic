@@ -35,4 +35,10 @@ export class Configuration {
 	//======================== Route State Change ========================
 	public allow_change_page = true;
 
+	//======================== SEO ========================
+	public metas = ['meta_title', 'meta_description', 'meta_keyword', 'meta_tag'];
+	public meta_title = '';
+	public meta_description = '';
+	public meta_keyword = '';
+	public meta_tag = '';
 }
