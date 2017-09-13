@@ -4,6 +4,7 @@ export * from './faq';
 export * from './gallery';
 export * from './news';
 export * from './newscategory';
+export * from './partner';
 export * from './service';
 export * from './servicecategory';
 export * from './staff';

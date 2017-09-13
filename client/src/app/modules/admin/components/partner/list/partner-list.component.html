@@ -4,7 +4,7 @@
 			<div class="portlet-title">
 				<div class="caption">
 					<i class=" icon-layers font-red"></i>
-					<span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.news_management' | translate }}</span>
+					<span class="caption-subject font-red sbold uppercase">{{ 'ADMIN.partner_management' | translate }}</span>
 				</div>
 			</div>
 			<div class="portlet-body form">
@@ -23,39 +23,9 @@
 								<div class="form-group">
 									<label class="col-md-2 control-label">{{ 'ADMIN.language' | translate }}</label>
 									<div class="col-md-8">
-										<select class="form-control" name="language_code" [value]="filter.language_code" (change)="loadNewsCategory($event.target.value,true)">
+										<select class="form-control" name="language_code" [(ngModel)]="filter.language_code">
 											<option *ngFor="let option of language_options" [value]="option.id">{{ option.text }}</option>
 										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-2 control-label">{{ 'ADMIN.category' | translate }}</label>
-									<div class="col-md-8">
-										<select class="form-control" name="news_category_id" [(ngModel)]="filter.news_category_id">
-											<option></option>
-											<option *ngFor="let option of news_options" [value]="option.id">{{ option.text }}</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="control-label col-md-2">{{ 'ADMIN.feature' | translate }} </label>
-									<div class="col-md-8">
-										<div class="md-radio-inline">
-											<label class="mt-radio">
-												<input type="radio" name="feature_flag" value="0" [(ngModel)]="filter.feature_flag" /> {{ 'ADMIN.no' | translate }}
-												<span></span>
-											</label>
-											<label class="mt-radio">
-												<input type="radio" name="feature_flag" value="1" [(ngModel)]="filter.feature_flag" /> {{ 'ADMIN.yes' | translate }}
-												<span></span>
-											</label>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -64,8 +34,8 @@
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<a class="btn green" [routerLink]="['/admin/news/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
-								<button class="btn blue" (click)="onSearch()"><i class="fa fa-search"></i> {{ 'ADMIN.search' | translate }}</button>
+								<a class="btn green" [routerLink]="['/admin/partner/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
+								<button class="btn blue" (click)="onSearch()"><i class="fa fa-save"></i> {{ 'ADMIN.search' | translate }}</button>
 								<a class="btn default" (click)="onReset()"><i class="fa fa-refresh"></i> {{ 'ADMIN.clear' | translate }}</a>
 							</div>
 						</div>
@@ -86,9 +56,7 @@
 							<th>{{ 'ADMIN.seq_no' | translate }}</th>
 							<th>{{ 'ADMIN.image' | translate }}</th>
 							<th>{{ 'ADMIN.title' | translate }}</th>
-							<th>{{ 'ADMIN.feature' | translate }}</th>
 							<th>{{ 'ADMIN.language' | translate }}</th>
-							<th>{{ 'ADMIN.order' | translate }}</th>
 							<th>Actions</th>
 						</tr>
 					</thead>

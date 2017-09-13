@@ -3,24 +3,25 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { Configuration } from '../../../../../shared';
-import { AuthService, ServiceCategoryService } from '../../../../../services';
+import { AuthService, PartnerService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-declare let $:any;
+import { BreadcrumbComponent, FooterComponent, HeaderComponent, MainNavComponent } from '../../general';
+
+declare var $: any;
 
 @Component({
-	selector: 'app-service-category-list',
-	templateUrl: './service-category-list.component.html',
-	providers: [ ServiceCategoryService ]
+	selector: 'app-partner-list',
+	templateUrl: './partner-list.component.html',
+	providers: [ PartnerService ]
 })
 
-export class ServiceCategoryListComponent implements OnInit {
+export class PartnerListComponent implements OnInit {
 	private subscription: Subscription;
-	// private subscriptionEvents: Subscription;
 	private DTList;
 	@ViewChild('modal') modal: ModalComponent;
 
-	delete_id: number;
+	delete_item_key: string;
 	url_list_data: string;
 	filter = { language_code: 'vi' };
 
@@ -33,8 +34,7 @@ export class ServiceCategoryListComponent implements OnInit {
 	constructor(
 		private _AuthService: AuthService,
 		private _Configuration: Configuration,
-		private _ServiceCategoryService: ServiceCategoryService,
-
+		private _PartnerService: PartnerService,
 		private _ToastrService: ToastrService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -53,54 +53,50 @@ export class ServiceCategoryListComponent implements OnInit {
 			url_params.set('language_code','vi');
 		}
 
-		this.url_list_data = this._ServiceCategoryService._list_data_URL + '?recursive=true&image_resize_width=300&' + url_params.toString();
+		this.url_list_data = this._PartnerService._list_data_URL + '?image_resize_width=300&' + url_params.toString();
 	}
 
 	ngOnInit(){
 
 	}
 
-	ngAfterViewInit() {
+	ngAfterViewInit(){
 		//load datatables
 		let self = this,
 			_list_data_URL = this.url_list_data,
 			Configuration = this._Configuration;
-		var datatable = this.DTList = $('#tbl-data').DataTable({
+		let datatable = this.DTList = $('#tbl-data').DataTable({
 			autoWidth: false,
 			pageLength: Configuration.DtbPageLength,
 			lengthChange: false,
 			searching: false,
-			// order: [[1, 'asc']],
+			order: [],
 			ajax: {
 				'url': _list_data_URL,
 				'type': 'GET',
-				'beforeSend': function(request) {
-					request.setRequestHeader('Authorization', 'Basic ' + self._Configuration.apiAuth);
+				'beforeSend': function (request) {
+					request.setRequestHeader('Authorization','Basic ' + self._Configuration.apiAuth);
 				},
 				xhrFields: {
 					withCredentials: true
 				}
 			},
 			columns: [
-				{ 'data': null },
-				{ 'data': 'image_url' },
-				{ 'data': 'title' },
-				{ 'data': 'language_name' },
-				{ 'data': 'order' },
-				{ 'data': null },
+				{ 'data' : null },
+				{ 'data' : 'image_url' },
+				{ 'data' : 'title' },
+				{ 'data' : 'language_name' },
+				{ 'data' : null },
 			],
 			columnDefs: [
 				{
 					searchable: false,
-					orderable: false,
+					bSortable: false,
 					targets: [0]
 				},
 				{
 					render: function (data, type, full) {
-						var html = '<img src="assets/admin/global/img/file.png" height="80">';
-						if(data){
-							html = '<img src="' + data + '" height="80">';
-						}
+						var	html = '<img src="' + data + '" height="80">';
 						return html;
 					},
 					bSortable: false,
@@ -108,26 +104,16 @@ export class ServiceCategoryListComponent implements OnInit {
 					targets: [1]
 				},
 				{
-					className: 'text-left',
-					orderable: false,
-					targets: [2]
-				},
-				{
-					className: 'text-center',
-					targets: [3,4]
-				},
-				{
-					render: function(data, type, full) {
-						var html = '<a class="btn btn-xs purple edit-record" id="btn_edit"><i class="fa fa-pencil"></i></a>'
-							+ '&nbsp;'
-							+ '<a class="btn btn-xs red del-record" id="btn_delete" ><i class="fa fa-trash"></i></a>';
+					render: function (data, type, full) {
+						var html = '<a class="btn btn-xs purple edit-record" href="#" id="btn_edit"><i class="fa fa-pencil"></i></a>'
+								 + '&nbsp;'
+								 + '<a class="btn btn-xs red del-record" href="#" id="btn_delete" ><i class="fa fa-trash"></i></a>';
 						return html;
 					},
 					data: null,
 					bSortable: false,
-					orderable: false,
 					className: 'text-center',
-					targets: [5]
+					targets: [4]
 				},
 			]
 		});
@@ -138,7 +124,6 @@ export class ServiceCategoryListComponent implements OnInit {
 			});
 		}).draw();
 
-
 		$('#tbl-data tbody').on( 'click', '#btn_edit', function () {
 			let tr = $(this).parents('tr');
 			let obj = self.DTList.row(tr).data();
@@ -147,26 +132,27 @@ export class ServiceCategoryListComponent implements OnInit {
 		});
 
 		$('#tbl-data tbody').on( 'click', '#btn_delete', function () {
-			let id: number = $(this).parents('tr').attr('id');
-			self.onOpenConfirm(id);
+			let tr = $(this).parents('tr');
+			let obj = self.DTList.row(tr).data();
+			self.onOpenConfirm(obj.item_key);
 			return false;
 		});
 	}
 
 	onRoutingUpdate(id: number, item_key: string){
-		this._Router.navigate(['/admin/service-category/form/update/' + id], {queryParams: { item_key: item_key }} );
+		this._Router.navigate(['/admin/partner/form/update/' + id], {queryParams: { item_key: item_key }} );
 	}
 
-	onOpenConfirm(id: number){
-		this.delete_id = id;
+	onOpenConfirm(item_key: string){
+		this.delete_item_key = item_key;
 		this.modal.open();
 	}
 
 	onConfirmDelete(){
 		this.modal.close();
-		this._ServiceCategoryService.delete(this.delete_id).subscribe(res => {
+		this._PartnerService.deleteItemKey(this.delete_item_key).subscribe(res => {
 			if(res.status == 'success'){
-				this._ToastrService.success('Record has been deleted successfully.');
+				this._ToastrService.success('Deleted!');
 				this.DTList.ajax.url(this.url_list_data).load();
 			}
 		})
@@ -176,11 +162,11 @@ export class ServiceCategoryListComponent implements OnInit {
 		/*====================================
 		 * Change URL when submit
 		 *====================================*/
-		this._Router.navigate(['/admin/service-category/list'], { queryParams: this.filter });
+		this._Router.navigate(['/admin/partner/list'], { queryParams: this.filter });
 		/*====================================
 		 * Reload Datatable
 		 *====================================*/
-		let _list_data_URL = this._ServiceCategoryService._list_data_URL + '?recursive=true&image_resize_width=300&' + $.param(this.filter);
+		let _list_data_URL = this._PartnerService._list_data_URL + '?image_resize_width=300&' + $.param(this.filter);
 		this.DTList.ajax.url(_list_data_URL).load();
 	}
 
@@ -189,11 +175,11 @@ export class ServiceCategoryListComponent implements OnInit {
 		/*====================================
 		 * Change URL when submit
 		 *====================================*/
-		this._Router.navigate(['/admin/service-category/list']);
+		this._Router.navigate(['/admin/partner/list']);
 		/*====================================
 		 * Reload Datatable
 		 *====================================*/
-		let _list_data_URL = this._ServiceCategoryService._list_data_URL + '?recursive=true&image_resize_width=300&' + $.param(this.filter);
+		let _list_data_URL = this._PartnerService._list_data_URL + '?image_resize_width=300&' + $.param(this.filter);
 		this.DTList.ajax.url(_list_data_URL).load();
 	}
 
@@ -201,5 +187,4 @@ export class ServiceCategoryListComponent implements OnInit {
 		this.subscription.unsubscribe();
 		this.modal.ngOnDestroy();
 	}
-
 }

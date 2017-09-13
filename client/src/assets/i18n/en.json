@@ -20,6 +20,7 @@
     "slide": "Slide",
     "gallery": "Gallery",
     "faq": "FAQ",
+    "partner": "Partner",
     "seq_no": "No.",
     "title": "Title",
     "description": "Description",
@@ -45,6 +46,7 @@
     "slide_management": "Slide Management",
     "gallery_management": "Gallery Management",
     "faq_management": "FAQ Management",
+    "partner_management": "Partner Management",
     "language": "Language",
     "parent": "Parent",
     "parent_category": "Parent Category",
@@ -65,7 +67,12 @@
     "enter_new_password": "Enter new Password",
     "re_password": "Re-password",
     "enter_re_password": "Enter re-password",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "order": "Order",
+    "meta_title": "Meta Title",
+    "meta_description": "Meta Description",
+    "meta_keyword": "Meta Keyword",
+    "meta_tag": "Meta Tag"
   },
   "PUBLIC": {
     "equipment": "Equipment",

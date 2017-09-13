@@ -112,6 +112,7 @@ export class ServiceListComponent implements OnInit {
 				{ 'data' : 'image_url' },
 				{ 'data' : 'title' },
 				{ 'data' : 'language_name' },
+				{ 'data' : 'order' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -133,6 +134,10 @@ export class ServiceListComponent implements OnInit {
 					targets: [2]
 				},
 				{
+					className: 'text-center',
+					targets: [4,5]
+				},
+				{
 					render: function (data, type, full) {
 						var html = '<a class="btn btn-xs purple edit-record" href="#" id="btn_edit"><i class="fa fa-pencil"></i></a>'
 								 + '&nbsp;'
@@ -142,7 +147,7 @@ export class ServiceListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [5]
+					targets: [6]
 				},
 			]
 		});

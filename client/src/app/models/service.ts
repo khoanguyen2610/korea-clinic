@@ -4,6 +4,7 @@ export class Service {
 	public language_code: string;
 	public item_key: string;
 	public title: string;
+	public order: number;
 	public description: string = '';
 	public content: string = '';
 	public image: any;
