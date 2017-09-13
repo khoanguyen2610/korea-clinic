@@ -116,7 +116,11 @@ export class NewsCategoryFormComponent implements OnInit {
 				paramData.set('item_key', this.item_key);
 				paramData.set('language_code', Item['language_code']);
 				paramData.set('title', Item['title']);
-				paramData.set('description', Item['description']);
+				paramData.set('order', Item['order']);
+				paramData.set('meta_title', Item['meta_title']);
+				paramData.set('meta_description', Item['meta_description']);
+				paramData.set('meta_keyword', Item['meta_keyword']);
+				paramData.set('meta_tag', Item['meta_tag']);
 				paramData.set('parent', Item['parent']);
 
 				this._NewsCategoryService.save(paramData, Item['id']).subscribe(res => {

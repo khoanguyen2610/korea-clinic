@@ -142,7 +142,11 @@ export class ServiceFormComponent implements OnInit {
 			formData.append('title', Item['title']);
 			formData.append('service_category_id', Item['service_category_id']);
 			formData.append('content', Item['content']);
-			formData.append('description', Item['description']);
+			formData.append('order', Item['order']);
+			formData.append('meta_title', Item['meta_title']);
+			formData.append('meta_description', Item['meta_description']);
+			formData.append('meta_keyword', Item['meta_keyword']);
+			formData.append('meta_tag', Item['meta_tag']);
 
 			this._ServiceService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;

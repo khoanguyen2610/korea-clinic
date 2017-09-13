@@ -70,7 +70,7 @@ export class EquipmentListComponent implements OnInit {
 			pageLength: Configuration.DtbPageLength,
 			lengthChange: false,
 			searching: false,
-			order: [],
+			order: [[ 4, 'asc' ]],
 			ajax: {
 				'url': _list_data_URL,
 				'type': 'GET',

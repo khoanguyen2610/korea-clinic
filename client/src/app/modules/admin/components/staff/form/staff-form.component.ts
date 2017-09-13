@@ -141,7 +141,11 @@ export class StaffFormComponent implements OnInit {
 			formData.append('fullname', Item['fullname']);
 			formData.append('position', Item['position']);
 			formData.append('content', Item['content']);
-			formData.append('description', Item['description']);
+			formData.append('order', Item['order']);
+			formData.append('meta_title', Item['meta_title']);
+			formData.append('meta_description', Item['meta_description']);
+			formData.append('meta_keyword', Item['meta_keyword']);
+			formData.append('meta_tag', Item['meta_tag']);
 
 			this._StaffService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;

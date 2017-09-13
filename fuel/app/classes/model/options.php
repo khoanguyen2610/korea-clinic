@@ -39,7 +39,7 @@ class Model_Options extends \Orm\Model {
                         ->from([self::$_table_name, 'SM'])
 						->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
                         ->and_where('SM.item_status', '=', 'active')
-                        ->order_by('SM.created_at', 'DESC');
+                        ->order_by('SM.order', 'ASC');
 
         //Query by params
         if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);

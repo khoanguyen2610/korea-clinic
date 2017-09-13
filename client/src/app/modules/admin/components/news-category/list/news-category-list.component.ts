@@ -72,7 +72,7 @@ export class NewsCategoryListComponent implements OnInit {
 			pageLength: Configuration.DtbPageLength,
 			lengthChange: false,
 			searching: false,
-			// order: [[1, 'asc']],
+			order: [[4, 'asc']],
 			ajax: {
 				'url': _list_data_URL,
 				'type': 'GET',

@@ -95,7 +95,7 @@ export class ServiceListComponent implements OnInit {
 			pageLength: Configuration.DtbPageLength,
 			lengthChange: false,
 			searching: false,
-			order: [],
+			order: [[ 5, 'asc' ]],
 			ajax: {
 				'url': _list_data_URL,
 				'type': 'GET',

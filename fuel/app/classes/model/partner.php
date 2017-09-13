@@ -39,7 +39,7 @@ class Model_Partner extends \Orm\Model {
                         ->from([self::$_table_name, 'SM'])
                         ->join(['vsvn_language', 'VL'], 'left')->on('SM.language_code', '=', 'VL.code')
                         ->and_where('SM.item_status', '=', 'active')
-                        ->order_by('SM.created_at', 'DESC');
+                        ->order_by('SM.order', 'ASC');
 
         //Query by params
 		if(isset($params['title']) && !empty($params['title'])) $query->where('SM.title', 'like', '%' . $params['title'] . '%');

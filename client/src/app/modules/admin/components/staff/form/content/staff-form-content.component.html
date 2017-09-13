@@ -1,40 +1,27 @@
 <div class="form-body">
 	<div class="form-group" [class.has-error]="!fullname.value">
-		<label class="control-label col-md-1">{{ 'ADMIN.fullname' | translate }} <span class="required">*</span></label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.fullname' | translate }} <span class="required">*</span></label>
+		<div class="col-md-10">
 			<input type="text" name="fullname" [(ngModel)]="Item.fullname" #fullname="ngModel" class="form-control" required>
 			<span *ngIf="(fullname?.dirty && !Item.fullname) || !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
 	<div class="form-group" [class.has-error]="!position.value">
-		<label class="control-label col-md-1">{{ 'ADMIN.position' | translate }} <span class="required">*</span></label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.position' | translate }} <span class="required">*</span></label>
+		<div class="col-md-10">
 			<input type="text" name="position" [(ngModel)]="Item.position" #position="ngModel" class="form-control" required>
 			<span *ngIf="(position?.dirty && !Item.position) || !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
-	<!--<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.description' | translate }}</label>
-		<div class="col-md-11">
-			<ckeditor name="description"
-				[(ngModel)]="Item.description"
-				[config]= "{
-					toolbarGroups : [
-						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
-						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
-						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
-						'/',
-						{ name: 'basicstyles', groups: ['basicstyles'] },
-						{ name: 'styles' },
-						{ name: 'links' }
-					]}"
-				debounce="200">
-			</ckeditor>
-		</div>
-	</div>-->
 	<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.content' | translate }}</label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.order' | translate }}</label>
+		<div class="col-md-10">
+			<input type="number" name="order" [(ngModel)]="Item.order" class="form-control" min="0" [ngStyle]="{ 'width': '10%' }">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.content' | translate }}</label>
+		<div class="col-md-10">
 			<ckeditor name="content"
 				[(ngModel)]="Item.content"
 				[config]= "{
@@ -54,8 +41,32 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.image' | translate }}</label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_title' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_title" [(ngModel)]="Item.meta_title" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_description' | translate }}</label>
+		<div class="col-md-10">
+			<textarea name="meta_description" [(ngModel)]="Item.meta_description" class="form-control"></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_keyword' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_keyword" [(ngModel)]="Item.meta_keyword" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_tag' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_tag" [(ngModel)]="Item.meta_tag" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.image' | translate }}</label>
+		<div class="col-md-10">
 			<div class="uploader-files">
 				<div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="my-drop-zone">
 					<div class="no-file" *ngIf="!uploader.queue.length">
@@ -75,7 +86,6 @@
 								    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
 								</div>
 							</div>
-
 						</li>
 					</ul>
 				</div>
@@ -83,7 +93,7 @@
 			<div class="uploader">
 				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
 				<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
-							<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
+				<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
 			</div>
 		</div>
 	</div>

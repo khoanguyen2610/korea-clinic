@@ -70,7 +70,7 @@ export class SlideListComponent implements OnInit {
 			pageLength: Configuration.DtbPageLength,
 			lengthChange: false,
 			searching: false,
-			order: [],
+			order: [[ 4, 'asc' ]],
 			ajax: {
 				'url': _list_data_URL,
 				'type': 'GET',
@@ -86,6 +86,7 @@ export class SlideListComponent implements OnInit {
 				{ 'data' : 'image_url' },
 				{ 'data' : 'title' },
 				{ 'data' : 'language_name' },
+				{ 'data' : 'order' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -113,7 +114,7 @@ export class SlideListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [4]
+					targets: [5]
 				},
 			]
 		});

@@ -138,6 +138,11 @@ export class GalleryFormComponent implements OnInit {
 				formData.append('language_code', Item['language_code']);
 				formData.append('title', Item['title']);
 				formData.append('description', Item['description']);
+				formData.append('order', Item['order']);
+				formData.append('meta_title', Item['meta_title']);
+				formData.append('meta_description', Item['meta_description']);
+				formData.append('meta_keyword', Item['meta_keyword']);
+				formData.append('meta_tag', Item['meta_tag']);
 
 				this._GalleryService.getObserver().subscribe(progress => {
 					this.uploadProgress = progress;
