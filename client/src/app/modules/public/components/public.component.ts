@@ -115,7 +115,12 @@ export class PublicComponent  {
 				if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
 				itemsmenu();
 				jQuery(window).resize();
-			}, 600)
+
+				var metas = this._Configuration.metas;
+				metas.forEach(meta => {
+					jQuery('#' + meta).attr("content", this._Configuration[meta]);
+				});
+			}, 600);
 
 
 
