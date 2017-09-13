@@ -11,4 +11,5 @@ export * from './slide.service';
 export * from './staff.service';
 export * from './news-category.service';
 export * from './system-general.service';
+export * from './options.service';
 export * from './core/script.service';

@@ -3,16 +3,7 @@
 		<label class="control-label col-md-1">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
 		<div class="col-md-11">
 			<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
-			<span *ngIf="(title?.dirty || !is_validated) && !title.value" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
-		</div>
-	</div>
-	<div class="form-group" [class.has-error]="!service_category_id.value">
-		<label class="control-label col-md-1">{{ 'ADMIN.service_category' | translate }} <span class="required">*</span></label>
-		<div class="col-md-11">
-			<select class="form-control" name="service_category_id" [(ngModel)]="Item.service_category_id" #service_category_id="ngModel">
-				<option *ngFor="let option of service_category_options" [value]="option.id">{{ option.text }}</option>
-			</select>
-			<span *ngIf="(!service_category_id.value && !Item.service_category_id) && !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
+			<span *ngIf="(title?.dirty && !Item.title) || !is_validated" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
 	<div class="form-group">
@@ -32,7 +23,7 @@
 						{ name: 'links' },
 						{ name: 'insert' }
 					]}"
-				debounce="500">
+				debounce="1000">
 			</ckeditor>
 		</div>
 	</div>
@@ -87,7 +78,10 @@
 			<div class="uploader">
 				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
 				<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
-				<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
+							<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
 			</div>
+
+			<!-- <img src="" imgPreview [image]="item?.file" class="media-object" /> -->
 		</div>
+	</div>
 </div>

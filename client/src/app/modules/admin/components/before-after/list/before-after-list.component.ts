@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
-import { AuthService, BeforeAfterService, ServiceService } from '../../../../../services';
+import { AuthService, BeforeAfterService, ServiceCategoryService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { BreadcrumbComponent, FooterComponent, HeaderComponent, MainNavComponent } from '../../general';
@@ -13,7 +13,7 @@ declare var $: any;
 @Component({
 	selector: 'app-before-after-list',
 	templateUrl: './before-after-list.component.html',
-	providers: [ BeforeAfterService, ServiceService ]
+	providers: [ BeforeAfterService, ServiceCategoryService ]
 })
 
 export class BeforeAfterListComponent implements OnInit {
@@ -30,13 +30,13 @@ export class BeforeAfterListComponent implements OnInit {
 		{'id':'vi', 'text':'Vietnam'},
 		{'id':'en', 'text':'English'}
 	];
-	service_options: Array<any> = [];
+	service_category_options: Array<any> = [];
 
 	constructor(
 		private _AuthService: AuthService,
 		private _Configuration: Configuration,
 		private _BeforeAfterService: BeforeAfterService,
-		private _ServiceService: ServiceService,
+		private _ServiceCategoryService: ServiceCategoryService,
 		private _ToastrService: ToastrService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -70,7 +70,7 @@ export class BeforeAfterListComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', language_code);
 		params.set('item_status','active');
-		this._ServiceService.getListAll(params).subscribe(res => {
+		this._ServiceCategoryService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				let options = [];
 				let items = res.data;
@@ -79,7 +79,7 @@ export class BeforeAfterListComponent implements OnInit {
 						'id': items[i].id, 'text': items[i].title
 					});
 				}
-				this.service_options = options;
+				this.service_category_options = options;
 			}
 		});
 	}
@@ -107,7 +107,7 @@ export class BeforeAfterListComponent implements OnInit {
 			},
 			columns: [
 				{ 'data' : null },
-				{ 'data' : 'service_title' },
+				{ 'data' : 'service_category_title' },
 				{ 'data' : 'title' },
 				{ 'data' : 'content' },
 				{ 'data' : 'language_name' },

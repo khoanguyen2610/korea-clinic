@@ -1,0 +1,24 @@
+<div class="form-body">
+	<div class="form-group">
+		<label class="control-label col-md-1">{{ 'ADMIN.content' | translate }}</label>
+		<div class="col-md-11">
+			<ckeditor name="about_us"
+				[(ngModel)]="Item.about_us"
+				[config]= "{
+					height: 480,
+					toolbarGroups : [
+						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
+						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
+						{ name: 'tools', groups: [ 'Maximize' ] },
+						'/',
+						{ name: 'basicstyles', groups: ['basicstyles'] },
+						{ name: 'styles' },
+						{ name: 'links' },
+						{ name: 'insert' }
+					]}"
+				debounce="500">
+			</ckeditor>
+		</div>
+	</div>
+</div>

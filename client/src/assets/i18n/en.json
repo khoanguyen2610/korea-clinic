@@ -8,6 +8,9 @@
     "invalid_equal_password": "Re-password is not equal password"
   },
   "ADMIN": {
+    "about_us": "About Us",
+    "about_us_management": "About Us Management",
+    "general": "General",
     "equipment": "Equipment",
     "service_category": "Service Category",
     "service": "Service",
@@ -113,7 +116,7 @@
     "enter_your_message": "Enter your message",
     "send_message": "Send Message",
     "faq": "FAQ",
-    "filter_all": "Filter - All",
+    "filter_all": "All",
     "expert": "Expert",
     "partner": "Partner"
   },

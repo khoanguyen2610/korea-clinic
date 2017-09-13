@@ -18,6 +18,7 @@ const APP_ROUTES: Routes = [
 			{ path: 'news-category', loadChildren: 'app/modules/admin/components/news-category/news-category.module#NewsCategoryModule' },
 			{ path: 'staff', loadChildren: 'app/modules/admin/components/staff/staff.module#StaffModule' },
 			{ path: 'slide', loadChildren: 'app/modules/admin/components/slide/slide.module#SlideModule' },
+			{ path: 'options', loadChildren: 'app/modules/admin/components/options/options.module#OptionsModule' },
 			// { path: 'auth', loadChildren: 'app/modules/admin/components/auth/auth.module#AuthModule' },
 		]
 	},

@@ -7,6 +7,9 @@
     "max_length": "Please enter no more than :param:1 characters."
   },
   "ADMIN": {
+    "about_us": "About Us",
+    "about_us_management": "About Us Management",
+    "general": "General",
     "equipment": "Equipment",
     "service_category": "Service Category",
     "service": "Service",
@@ -110,7 +113,7 @@
     "enter_your_message": "Nội Dung",
     "send_message": "Gửi",
     "faq": "FAQ",
-    "filter_all": "Lọc - Tất cả",
+    "filter_all": "Tất cả",
     "expert": "Chuyên Gia",
     "trang-chu": "Trang Chủ",
     "trang-thiet-bi": "Trang Thiết Bị",

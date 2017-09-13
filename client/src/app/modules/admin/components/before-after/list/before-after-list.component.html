@@ -35,9 +35,9 @@
 								<div class="form-group">
 									<label class="col-md-2 control-label">{{ 'ADMIN.category' | translate }}</label>
 									<div class="col-md-8">
-										<select class="form-control" name="service_id" [(ngModel)]="filter.service_id">
+										<select class="form-control" name="service_category_id" [(ngModel)]="filter.service_category_id">
 											<option></option>
-											<option *ngFor="let option of service_options" [value]="option.id">{{ option.text }}</option>
+											<option *ngFor="let option of service_category_options" [value]="option.id">{{ option.text }}</option>
 										</select>
 									</div>
 								</div>
@@ -48,7 +48,7 @@
 						<div class="row">
 							<div class="col-md-12 text-center">
 								<a class="btn green" [routerLink]="['/admin/before-after/form/create']"><i class="fa fa-plus"></i> {{ 'ADMIN.create' | translate }}</a>
-								<button class="btn blue" (click)="onSearch()"><i class="fa fa-save"></i> {{ 'ADMIN.search' | translate }}</button>
+								<button class="btn blue" (click)="onSearch()"><i class="fa fa-search"></i> {{ 'ADMIN.search' | translate }}</button>
 								<a class="btn default" (click)="onReset()"><i class="fa fa-refresh"></i> {{ 'ADMIN.clear' | translate }}</a>
 							</div>
 						</div>
@@ -67,7 +67,7 @@
 					<thead>
 						<tr>
 							<th>{{ 'ADMIN.seq_no' | translate }}</th>
-							<th>{{ 'ADMIN.service' | translate }}</th>
+							<th>{{ 'ADMIN.service_category' | translate }}</th>
 							<th>{{ 'ADMIN.title' | translate }}</th>
 							<th>{{ 'ADMIN.content' | translate }}</th>
 							<th>{{ 'ADMIN.language' | translate }}</th>

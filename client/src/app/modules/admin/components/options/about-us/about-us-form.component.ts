@@ -3,21 +3,21 @@ import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { BeforeAfterFormContentComponent } from './content/before-after-form-content.component';
-import { BeforeAfter } from '../../../../../models';
-import { AuthService, BeforeAfterService, GeneralService } from '../../../../../services';
+import { AboutUsFormContentComponent } from './content/about-us-form-content.component';
+import { Options } from '../../../../../models';
+import { AuthService, OptionsService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 declare let $: any;
 
 @Component({
-	selector: 'app-before-after-form',
-	templateUrl: './before-after-form.component.html',
-	providers: [ BeforeAfterService, GeneralService ]
+	selector: 'app-about-us-form',
+	templateUrl: './about-us-form.component.html',
+	providers: [ OptionsService, GeneralService ]
 })
 
-export class BeforeAfterFormComponent implements OnInit {
+export class AboutUsFormComponent implements OnInit {
 	private subscription: Subscription;
 	private querySubscription: Subscription;
 
@@ -26,14 +26,14 @@ export class BeforeAfterFormComponent implements OnInit {
 	language_code: string;
 	is_validated: boolean = true;
 	item_key: string;
-	Item_vi = new BeforeAfter();
-	Item_en = new BeforeAfter();
+	Item_vi = new Options();
+	Item_en = new Options();
 	Items: Array<any> = [];
 	uploadProgress: any;
 
 	constructor(
 		private _AuthService: AuthService,
-		private _BeforeAfterService: BeforeAfterService,
+		private _OptionsService: OptionsService,
 		private _GeneralService: GeneralService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
@@ -53,44 +53,37 @@ export class BeforeAfterFormComponent implements OnInit {
 
 		this.Item_vi.language_code = 'vi';
 		this.Item_en.language_code = 'en';
-
-		this.generateItemKey();
 	}
 
 	ngOnInit(){
 		this.language_code = 'vi';
-		if(this._params.method == 'update'){
-			if(this._params.id != null){
-				let params: URLSearchParams = new URLSearchParams();
-				params.set('item_key',this.queryParams.item_key);
-				params.set('response_quantity','all');
-				this._BeforeAfterService.getByID(null, params).subscribe(res => {
-					if (res.status == 'success') {
-						if(res.data == null){
-							this._Router.navigate(['/admin/before-after/list']);
-						}else{
-							let items = res.data;
-							setTimeout(() => {
-								items.forEach(item => {
-									switch(item['language_code']){
-										case 'vi':
-											this.Item_vi = item;
-											break;
-										case 'en':
-											this.Item_en = item;
-											break;
-									}
-								});
-							}, 400);
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('key', 'about_us');
+		params.set('response_quantity','all');
+		this._OptionsService.getByID(null, params).subscribe(res => {
+			if (res.status == 'success') {
+				let items = res.data;
+
+				var repeat:number = 0;
+		        var loadInterval = setInterval(() => {
+					items.forEach(item => {
+						item.about_us = item.value;
+						switch(item['language_code']){
+							case 'vi':
+								this.Item_vi = item;
+								break;
+							case 'en':
+								this.Item_en = item;
+								break;
 						}
-					}else{
-						this._Router.navigate(['/admin/before-after/list']);
+					});
+					repeat++;
+					if(repeat >= 1){
+						clearInterval(loadInterval);
 					}
-				});
-			}else{
-				this._Router.navigate(['/']);
+				}, 200);
 			}
-		}
+		});
 	}
 
 	ngAfterViewInit(){
@@ -138,21 +131,17 @@ export class BeforeAfterFormComponent implements OnInit {
 			}
 
 			formData.append('language_code', Item['language_code']);
-			formData.append('service_category_id', Item['service_category_id']);
-			formData.append('title', Item['title']);
-			formData.append('content', Item['content']);
-			formData.append('description', Item['description']);
+			formData.append('options[about_us]', Item['about_us']);
 
-			this._BeforeAfterService.getObserver().subscribe(progress => {
+			this._OptionsService.getObserver().subscribe(progress => {
 				this.uploadProgress = progress;
 			});
 			try {
-				this._BeforeAfterService.upload(formData, Item['id']).then((res) => {
+				this._OptionsService.upload(formData).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
 							let lang = Item['language_code'];
 							this.onReset(lang);
-							this.generateItemKey();
 						}
 						this._ToastrService.success('Record has been saved successfully');
 					}
@@ -167,64 +156,23 @@ export class BeforeAfterFormComponent implements OnInit {
 		this.is_validated = true;
 	}
 
-	onSetImage(obj){
-		switch(this.language_code){
-			case 'vi':
-				this.Item_vi.image = obj;
-				break;
-			case 'en':
-				this.Item_en.image = obj;
-				break;
-		}
-	}
-
 	onReset(lang: string){
 		switch (lang) {
 			case 'vi':
-				this.Item_vi = new BeforeAfter();
+				this.Item_vi = new Options();
 				this.Item_vi.language_code = lang;
-				this.Item_vi.image = new FileUploader({});
 				break;
+
 			case 'en':
-				this.Item_en = new BeforeAfter();
+				this.Item_en = new Options();
 				this.Item_en.language_code = lang;
-				this.Item_en.image = new FileUploader({});
 				break;
 		}
-	}
-
-	generateItemKey() {
-		this._GeneralService.getItemKey().subscribe(res => {
-			if (res.status == 'success') {
-				this.item_key = res.data.item_key;
-			}
-		});
 	}
 
 	validateRequiredField(){
 		let valid = true;
-		let ctab: string = '';
 		this.Items = [this.Item_vi, this.Item_en];
-
-		this.Items.forEach(Item => {
-			if(!Item['title']){
-				valid = false;
-				ctab = Item['language_code'];
-			}
-
-			if(!Item['service_category_id']){
-				valid = false;
-				ctab = Item['language_code'];
-			}
-		});
-
-		if(!valid){
-			this.language_code = ctab;
-			$('a[href="#tab_' + ctab + '"]').click();
-			$('div[id^="tab_"]').removeClass('active');
-			$('div#tab_' + ctab).addClass('active');
-		}
-
 		return valid;
 	}
 
