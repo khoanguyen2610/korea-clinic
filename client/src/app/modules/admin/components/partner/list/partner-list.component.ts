@@ -86,6 +86,7 @@ export class PartnerListComponent implements OnInit {
 				{ 'data' : 'image_url' },
 				{ 'data' : 'title' },
 				{ 'data' : 'language_name' },
+				{ 'data' : 'order' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -104,6 +105,10 @@ export class PartnerListComponent implements OnInit {
 					targets: [1]
 				},
 				{
+					className: 'text-center',
+					targets: [3,4]
+				},
+				{
 					render: function (data, type, full) {
 						var html = '<a class="btn btn-xs purple edit-record" href="#" id="btn_edit"><i class="fa fa-pencil"></i></a>'
 								 + '&nbsp;'
@@ -113,7 +118,7 @@ export class PartnerListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [4]
+					targets: [5]
 				},
 			]
 		});

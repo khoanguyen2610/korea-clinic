@@ -1,14 +1,14 @@
 <div class="form-body">
 	<div class="form-group" [class.has-error]="!title.value">
-		<label class="control-label col-md-1">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.title' | translate }} <span class="required">*</span></label>
+		<div class="col-md-10">
 			<input type="text" name="title" [(ngModel)]="Item.title" #title="ngModel" class="form-control" required>
 			<span *ngIf="(title?.dirty || !is_validated) && !title.value" class="help-block">{{ 'VALIDATE.required' | translate }}</span>
 		</div>
 	</div>
 	<div class="form-group" [class.has-error]="!service_category_id.value">
-		<label class="control-label col-md-1">{{ 'ADMIN.category' | translate }} <span class="required">*</span></label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.category' | translate }} <span class="required">*</span></label>
+		<div class="col-md-10">
 			<select class="form-control" name="service_category_id" [(ngModel)]="Item.service_category_id" #service_category_id="ngModel">
 				<option *ngFor="let option of category_options" [value]="option.id">{{ option.text }}</option>
 			</select>
@@ -16,14 +16,14 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.order' | translate }}</label>
-		<div class="col-md-11">
-			<input type="number" name="order" [(ngModel)]="Item.order" class="form-control" min="0" [ngStyle]="{ 'width': '20%' }">
+		<label class="control-label col-md-2">{{ 'ADMIN.order' | translate }}</label>
+		<div class="col-md-10">
+			<input type="number" name="order" [(ngModel)]="Item.order" class="form-control" min="0" [ngStyle]="{ 'width': '10%' }">
 		</div>
 	</div>
 	<!--<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.description' | translate }}</label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.description' | translate }}</label>
+		<div class="col-md-10">
 			<ckeditor name="description"
 				[(ngModel)]="Item.description"
 				[config]= "{
@@ -43,8 +43,8 @@
 		</div>
 	</div>-->
 	<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.content' | translate }}</label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.content' | translate }}</label>
+		<div class="col-md-10">
 			<ckeditor name="content"
 				[(ngModel)]="Item.content"
 				[config]= "{
@@ -64,8 +64,32 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-md-1">{{ 'ADMIN.image' | translate }}</label>
-		<div class="col-md-11">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_title' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_title" [(ngModel)]="Item.meta_title" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_description' | translate }}</label>
+		<div class="col-md-10">
+			<textarea name="meta_description" [(ngModel)]="Item.meta_description" class="form-control"></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_keyword' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_keyword" [(ngModel)]="Item.meta_keyword" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.meta_tag' | translate }}</label>
+		<div class="col-md-10">
+			<input type="text" name="meta_tag" [(ngModel)]="Item.meta_tag" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.image' | translate }}</label>
+		<div class="col-md-10">
 			<div class="uploader-files">
 				<div ng2FileDrop  [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" multiple class="my-drop-zone">
 					<div class="no-file" *ngIf="!uploader.queue.length">

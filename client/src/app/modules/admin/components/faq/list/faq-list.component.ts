@@ -111,6 +111,7 @@ export class FaqListComponent implements OnInit {
 				{ 'data' : 'title' },
 				{ 'data' : 'content' },
 				{ 'data' : 'language_name' },
+				{ 'data' : 'order' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -118,6 +119,10 @@ export class FaqListComponent implements OnInit {
 					searchable: false,
 					bSortable: false,
 					targets: [0]
+				},
+				{
+					className: 'text-center',
+					targets: [4,5]
 				},
 				{
 					render: function (data, type, full) {
@@ -129,7 +134,7 @@ export class FaqListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [5]
+					targets: [6]
 				},
 			]
 		});

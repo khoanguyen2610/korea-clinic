@@ -88,6 +88,7 @@ export class GalleryListComponent implements OnInit {
 				{ 'data' : 'total_image', class: 'text-center' },
 				{ 'data' : 'title' },
 				{ 'data' : 'language_name' },
+				{ 'data' : 'order' },
 				{ 'data' : null },
 			],
 			columnDefs: [
@@ -95,6 +96,10 @@ export class GalleryListComponent implements OnInit {
 					searchable: false,
 					bSortable: false,
 					targets: [0]
+				},
+				{
+					className: 'text-center',
+					targets: [3,4]
 				},
 				{
 					render: function (data, type, full) {
@@ -106,7 +111,7 @@ export class GalleryListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [4]
+					targets: [5]
 				},
 			]
 		});
