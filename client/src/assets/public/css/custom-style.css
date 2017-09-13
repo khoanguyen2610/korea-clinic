@@ -11,7 +11,7 @@
   bottom: 0px;
   right: 10px;
   z-index: 999999999999999;
-  width: 250px;
+  width: 200px;
   height: auto;
   box-shadow: 6px 6px 6px 10px rgba(0, 0, 0, 0.2);
   border-top-left-radius: 5px;
@@ -35,8 +35,8 @@
 
 #cfacebook a.chat_fb {
   float: left;
-  padding: 0 25px;
-  width: 250px;
+  padding: 0 20px;
+  width: 200px;
   color: #fff;
   text-decoration: none;
   height: 40px;
@@ -51,7 +51,7 @@
   border-bottom: 1px solid #133783;
   z-index: 9999999;
   margin-right: 12px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #cfacebook a.chat_fb:hover {
