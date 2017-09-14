@@ -7,16 +7,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
 import { AuthService, SlideService, ScriptService } from '../../../../../services';
 
-declare var jQuery: any;
-declare var JACQUELINE_STORAGE: any;
-declare var jacqueline_init_actions: any;
-declare var initRevSlider: any;
-declare var initRevSlider: any;
-declare var initEssGrid: any;
-declare var itemsmenu: any;
-
-declare let $: any;
-declare let moment: any;
+declare let jQuery: any;
+declare let initRevSlider: any;
 
 @Component({
 	selector: 'app-public-home-slide',
@@ -58,7 +50,7 @@ export class SlideComponent implements OnInit {
 			if (res.status == 'success') {
 				// Process Array include many array with 4 elements
 				if (res.data.length) {
-					var items = res.data;
+					this.Items = res.data;
 					// items.forEach(item => {
 					// 	var image = JSON.parse(item.image);
 					// 	if(image) {
@@ -66,7 +58,9 @@ export class SlideComponent implements OnInit {
 					// 	}
 					//
 					// });
-					this.Items = items;
+					setTimeout(() => {
+						if (jQuery(".rev_slider").length > 0) { initRevSlider() };
+					}, 200);
 				}
 
 

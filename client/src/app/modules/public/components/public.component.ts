@@ -89,7 +89,6 @@ export class PublicComponent  {
 					}
 				}
 			}
-			console.log(this.template);
 
 			var str_matches = str.match(/([a-z|\-]+)\//);
 			var translateEl = str;
@@ -112,8 +111,8 @@ export class PublicComponent  {
 			jQuery(window).resize();
 			setTimeout(() => {
 				jacqueline_init_actions();
-				if (jQuery(".rev_slider").length > 0) { initRevSlider() };
-				if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
+				// if (jQuery(".rev_slider").length > 0) { initRevSlider() };
+				// if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
 				itemsmenu();
 				jQuery(window).resize();
 

@@ -1,57 +1,4 @@
 @charset 'utf-8';
-/*
-Project:		Jacqueline HTML
-Version:		1.1
-Last change:	06/02/2017
-Assigned to:	ThemeREX
-Primary use:	Health & Beauty
-*/
-
-/* TABLE OF CONTENTS:
-
-1. Reset tags
-2. Default tag's settings
-3. Form fields settings
-4. WP styles and Screen readers
-5. Theme grid
-6. Page layouts
-7. Section's decorations
-   7.1 Header
-   7.2 Main Slider
-   7.3 Page top: page title and breadcrumbs
-   7.4 Main content wrapper
-   7.5 Post Formats
-   7.6 Post Layouts
-   7.7 Paginations
-8. Single page parts
-   8.1 Attachment and Portfolio post navigation
-   8.2 Reviews block
-   8.3 Post author
-   8.4 Comments
-   8.5 Page 404
-   8.8 Team member
-9. Sidebars
-10. Footer areas
-11. Utils
-12. Registration and Login popups
-13. Third part plugins
-14. Predefined classes for users
-15. Custom font-family
-
--------------------------------------------------------------- */
-
-
-/*------------------------------------------------------------------
-# [Color codes]
-
-# Text: #757575
-# Dark text: #323232
-# Link text: #f9a392
-# Hover text: #8ed4cc
-# */
-
-
-
 /* 1. Reset tags
 -------------------------------------------------------------- */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a,
@@ -2105,7 +2052,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 .top_panel_wrap .logo_main {
     max-height: 155px;
     width: auto;
-    margin-top: -19px;
+    margin-top: 25px;
 }
 .logo a {
     display: inline-block;
@@ -2127,13 +2074,12 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 }
 .top_panel_wrap .logo_fixed {
     display: none;
-    max-height: 90px;
+    max-height: 55px;
     width: auto;
-    margin-top: -10px;
+    margin-top: -4px;
 }
 .top_panel_fixed .top_panel_wrap .logo {
-    /*margin: 0.7em 0!important;*/
-    margin-top: -5px;
+    padding: 10px 0px;
 }
 .top_panel_fixed .top_panel_wrap .logo_fixed {
     display: block;
@@ -2795,10 +2741,13 @@ form.search_form .search_button:hover {
     text-align: center;
 }
 .header_mobile .logo {
-    padding-top: 35px;
-    padding-bottom: 20px;
+    padding: 0px;
 }
-.header_mobile .logo_main {}.header_mobile .menu_button {
+.header_mobile .logo_main {
+    max-height: 70px;
+    padding: 10px 0px;
+}
+.header_mobile .menu_button {
     position: absolute;
     left: 30px;
     top: 50%;

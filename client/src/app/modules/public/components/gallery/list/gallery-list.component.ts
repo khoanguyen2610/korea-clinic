@@ -8,8 +8,8 @@ import { Configuration } from '../../../../../shared';
 import { GalleryService } from '../../../../../services';
 
 
-// declare let $: any;
-// declare let moment: any;
+declare let jQuery: any;
+declare let initEssGrid: any;
 
 @Component({
 	selector: 'app-public-gallery-list',
@@ -56,6 +56,9 @@ export class GalleryListComponent implements OnInit {
 				});
 				this.Items = items;
 
+				setTimeout(() => {
+					if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
+				}, 200);
 			}
 		});
 	}

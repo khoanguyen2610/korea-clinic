@@ -70,6 +70,10 @@ export class GalleryComponent implements OnInit {
 
 					});
 					this.Items = items;
+
+					setTimeout(() => {
+						if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
+					}, 200);
 				}
 			}
 		});

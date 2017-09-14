@@ -1,20 +1,8 @@
 <div class="header_mobile">
     <div class="content_wrap">
         <div class="menu_button icon-menu"></div>
-        <div class="menu_button change_language_area">
-            <div class="sc_socials_item">
-                <a href="#" class="social_icons social_gplus" title="Tiếng Việt" [ngClass]="{'language_inactive' : default_language_code != 'vi'}" (click)="onChangeLanguageCode('vi')">
-                    <img src="/assets/public/images/flags/vi.png" />
-                </a>
-            </div>
-            <div class="sc_socials_item">
-                <a href="#" class="social_icons social_facebook" title="English" [ngClass]="{'language_inactive' : default_language_code != 'en'}" (click)="onChangeLanguageCode('en')">
-                    <img src="/assets/public/images/flags/en.png" />
-                </a>
-            </div>
-        </div>
         <div class="logo">
-            <a [routerLink]="['/']"><img alt="" class="logo_main" src="./assets/public/images/Logo_mobile.png"></a>
+            <a [routerLink]="['/']"><img alt="" class="logo_main" src="./assets/public/images/Logo.png"></a>
         </div>
     </div>
     <div class="side_wrap">
