@@ -184,6 +184,9 @@ class Controller_Staff extends \Controller_API {
 
                         //Now just save first image
                         // $arrData['image'] = json_encode($arrFiles);
+
+						//Resize image
+						\Vision_Common::resize_image(FILESPATH . STAFF_DIR . $today_dir . '/' . $file['saved_as']);
                         break;
                     }
  					//Now just save first image

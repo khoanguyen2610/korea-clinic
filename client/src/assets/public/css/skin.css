@@ -1710,15 +1710,15 @@ textarea {
 }
 
 .scheme_original .top_panel_image_hover {
-    background-color: rgba(142, 212, 204, 0.6);
+    background-color: rgba(142, 212, 204, 0.4);
 }
 
 .scheme_light .top_panel_image_hover {
-    background-color: rgba(24, 151, 153, 0.6);
+    background-color: rgba(24, 151, 153, 0.5);
 }
 
 .scheme_dark .top_panel_image_hover {
-    background-color: rgba(142, 212, 204, 0.6);
+    background-color: rgba(142, 212, 204, 0.5);
 }
 
 .scheme_original .top_panel_image_header,

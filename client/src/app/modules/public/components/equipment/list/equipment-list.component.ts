@@ -18,7 +18,8 @@ declare let initEssGrid: any;
 export class EquipmentListComponent implements OnInit {
 	private subscription: Subscription;
 
-	controller: string = 'thiet-bi';
+	controller: string = 'trang-thiet-bi';
+	action_detail: string = 'chi-tiet';
 	items: Array<any> = [];
 	_params: any;
 	queryParams: any;
@@ -36,6 +37,7 @@ export class EquipmentListComponent implements OnInit {
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){
 			this.controller = 'equipment';
+			this.action_detail = 'detail';
 		}
 	}
 

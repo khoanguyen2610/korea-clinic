@@ -1899,7 +1899,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
     border: 1px solid #ddd;
 }
 .menu_main_nav>li ul {
-    width: 180px;
+    width: 200px;
     box-sizing: border-box;
     padding: 0;
 }
@@ -1909,7 +1909,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
     padding: 1.25em;
 }
 .menu_main_nav>li>ul ul {
-    left: 165px;
+    left: 183px;
     top: -1.3em;
     padding: 1.25em;
 }

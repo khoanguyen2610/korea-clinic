@@ -138,7 +138,7 @@ export class PartnerFormComponent implements OnInit {
 
 			formData.append('language_code', Item['language_code']);
 			formData.append('title', Item['title']);
-			formData.append('position', Item['position']);
+			formData.append('url', Item['url']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 			formData.append('order', Item['order']);
@@ -151,6 +151,7 @@ export class PartnerFormComponent implements OnInit {
 				this.uploadProgress = progress;
 			});
 			try {
+				this._Router.navigate([this._Router.url], { queryParams: {t: Date.now()} });
 				this._PartnerService.upload(formData, Item['id']).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){

@@ -12,7 +12,10 @@
                 </div>
                 <div class="top_localtion_info_top content_wrap clearfix">
                     <div class="top_panel_top_socials">
-                        <span class="label"><span *ngIf="options.address">{{ options.address['value'] }}</span> | <span *ngIf="options.phone">{{ options.phone['value'] }}</span></span>
+                        <div class="label">
+                            <span *ngIf="options.address">{{ options.address['value'] }}</span> |
+                            <a *ngIf="options.phone" [href]="'tel:' + options.phone['value']">{{ options.phone['value'] }}</a>
+                        </div>
                         <div class="sc_socials sc_socials_type_icons sc_socials_shape_square sc_socials_size_tiny">
                             <div class="sc_socials_item">
                                 <a href="#" class="social_icons social_gplus" title="Tiếng Việt" [ngClass]="{'language_inactive' : default_language_code != 'vi'}" (click)="onChangeLanguageCode('vi')">

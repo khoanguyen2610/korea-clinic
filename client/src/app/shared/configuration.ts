@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Configuration {
 	//======================== API Config Variable ===============================
-	public server: string = "http://api-dev.whiteclinic.com.vn/public/";
+	public server: string = "http://api.whiteclinic.com.vn/public/";
 	// public server: string = "http://192.168.153.27/korea-clinic/public/";
 	public apiUrl: string = this.server + "api/v1/";
 	public apiAuthUsername: string = "visionvn";
@@ -29,7 +29,7 @@ export class Configuration {
 	//======================== Datatabe Configuration ========================
 	public DtbPageLength = 20;
 	public DtbLengthMenu = [10, 20, 50, 100];
-	public limit_file_size = 10*1024*1024; // 10Mb
+	public limit_file_size = 3*1024*1024; // 10Mb
 	public limit_files = 10;
 
 	//======================== Route State Change ========================

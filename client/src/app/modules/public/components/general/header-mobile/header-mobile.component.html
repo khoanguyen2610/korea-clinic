@@ -12,10 +12,12 @@
         </div>
         <div class="panel_middle">
             <div class="contact_field contact_phone">
-                <span class="contact_icon icon-icon_phone"></span> <span *ngIf="options.phone" class="contact_label contact_phone">{{ options.phone['value'] }}</span>
+                <span class="contact_icon icon-icon_phone"></span>
+                <a *ngIf="options.phone" [href]="'tel:' + options.phone['value']"><span class="contact_label contact_phone">{{ options.phone['value'] }}</span></a>
             </div>
             <div class="contact_field contact_mail">
-                <span class="contact_icon icon-mail"></span> <span  *ngIf="options.email" class="contact_email">{{ options.email['value'] }}></span>
+                <span class="contact_icon icon-mail"></span>
+                <a *ngIf="options.email" [href]="'mailto:' + options.email['value']"><span class="contact_email">{{ options.email['value'] }}</span></a>
             </div>
             <div class="top_panel_top_user_area">
                 <ul class="menu_user_nav"></ul>

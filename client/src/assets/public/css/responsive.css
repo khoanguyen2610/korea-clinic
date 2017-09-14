@@ -3055,6 +3055,7 @@
 	}
 }
 @media (max-width: 480px) {
+    .slide_partner{height: 100px !important}
     .header_mobile .mask {
         display: none!important;
     }

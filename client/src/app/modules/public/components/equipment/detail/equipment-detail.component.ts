@@ -63,6 +63,7 @@ export class EquipmentDetailComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);
+		params.set('image_resize_width', '1440');
 		this._EquipmentService.getByID(null, params).subscribe(res => {
 			if (res.status == 'success') {
 				let item = res.data;

@@ -123,6 +123,7 @@ export class NewsCategoryFormComponent implements OnInit {
 				paramData.set('meta_tag', Item['meta_tag']);
 				paramData.set('parent', Item['parent']);
 
+				this._Router.navigate([this._Router.url], { queryParams: {t: Date.now()} });
 				this._NewsCategoryService.save(paramData, Item['id']).subscribe(res => {
 					if (res.status == 'success') {
 						if (this._params.method == 'create') {

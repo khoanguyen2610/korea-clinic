@@ -168,7 +168,9 @@ class Controller_BeforeAfter extends \Controller_API {
                     }
                 }else{
                     $upload_valid = !($has_upload = false);
+
                 }
+
 
                 /*============================================
                  * Upload file
@@ -184,6 +186,9 @@ class Controller_BeforeAfter extends \Controller_API {
 
                         //Now just save first image
                         // $arrData['image'] = json_encode($arrFiles);
+
+						//Resize image
+						\Vision_Common::resize_image(FILESPATH . BEFORE_AFTER_DIR . $today_dir . '/' . $file['saved_as']);
                         break;
                     }
  					//Now just save first image
@@ -207,7 +212,6 @@ class Controller_BeforeAfter extends \Controller_API {
  					}
  				}
  				$arrData['image'] = json_encode($arrUploadImage);
-
 				!empty($obj) && $obj->set($arrData)->save();
 				\DB::commit_transaction();
 
