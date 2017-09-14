@@ -111,17 +111,9 @@ export class PublicComponent  {
 			}
 			this._Configuration.language_code = String(this._LocalStorageService.get('language_code'));
 
-			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {
-				//
-				// }).catch(error => console.log(error));
-
 			setTimeout(() => {
 				jacqueline_init_actions();
-				// if (jQuery(".rev_slider").length > 0) { initRevSlider() };
-				// if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
-				itemsmenu();
 				jQuery(window).resize();
-
 				var metas = this._Configuration.metas;
 				metas.forEach(meta => {
 					jQuery('#' + meta).attr("content", this._Configuration[meta]);

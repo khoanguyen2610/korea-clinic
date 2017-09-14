@@ -27,8 +27,8 @@ export class PartnerComponent implements OnInit {
 	ngOnInit() {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);
-		params.set('image_resize_width', '248');
-		params.set('image_resize_height', '124');
+		params.set('image_resize_width', '270');
+		params.set('image_resize_height', '161');
 		params.set('item_status', 'active');
 		this._PartnerService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){

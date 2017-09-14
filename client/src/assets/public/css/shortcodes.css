@@ -828,7 +828,8 @@ button.sc_button_size_large,
     padding: 3em 0;
 }
 .sc_call_to_action_style_1 .columns_wrap {
-    margin-right: -60px;
+    /*margin-right: -60px;*/
+    margin-right: 0px;
 }
 .sc_call_to_action_style_1 .columns_wrap>[class*="column-"] {
     padding-right: 60px;

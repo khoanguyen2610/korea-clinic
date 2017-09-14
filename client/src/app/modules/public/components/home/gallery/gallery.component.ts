@@ -1,13 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
 import { GalleryService } from '../../../../../services';
 
 declare let jQuery: any;
-declare let moment: any;
 declare let initEssGrid: any;
 
 @Component({
@@ -28,12 +26,8 @@ export class GalleryComponent implements OnInit {
 
 	constructor(
 		private _GalleryService: GalleryService,
-		private _Configuration: Configuration,
-		private _LocalStorageService: LocalStorageService
-
+		private _Configuration: Configuration
 	) {
-		//=============== Get Params On Url ===============
-		this.language_code = String(_LocalStorageService.get('language_code'));
 
 	}
 

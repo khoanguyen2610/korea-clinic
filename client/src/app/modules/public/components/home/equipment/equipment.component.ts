@@ -1,12 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
 import { EquipmentService } from '../../../../../services';
 
-declare let $: any;
-declare let moment: any;
+declare let jQuery: any;
+declare let initEssGrid: any;
 
 @Component({
 	selector: 'app-public-home-equipment',
@@ -17,8 +16,8 @@ declare let moment: any;
 export class EquipmentComponent implements OnInit {
 	@Input() modules: any;
 	Items: Array<any> = [];
-	controller: string = 'thiet-bi';
 	language_code: string = this._Configuration.defaultLang;
+	controller: string = 'thiet-bi';
 	number_item: number = 4;
 	module_name: string = 'equipment';
 	width: string = '480';
@@ -27,13 +26,8 @@ export class EquipmentComponent implements OnInit {
 
 	constructor(
 		private _EquipmentService: EquipmentService,
-		private _Configuration: Configuration,
-		private _LocalStorageService: LocalStorageService
+		private _Configuration: Configuration
 	) {
-		//=============== Get Params On Url ===============
-
-
-		this.language_code = String(_LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit() {
@@ -42,7 +36,7 @@ export class EquipmentComponent implements OnInit {
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this._Configuration.language_code);
+		params.set('language_code', this.language_code);
 		params.set('limit', String(this.number_item));
 		params.set('image_resize_width', this.width);
 		params.set('item_status', 'active');
@@ -57,6 +51,10 @@ export class EquipmentComponent implements OnInit {
 
 					});
 					this.Items = items;
+
+					// setTimeout(() => {
+					// 	if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
+					// }, 200);
 				}
 
 			}

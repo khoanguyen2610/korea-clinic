@@ -11,7 +11,7 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.about_us' | translate}}</h6>
 						<div class="text_column content_element">
-							<div *ngIf="options.home_about_us" class="wrapper" [innerHTML]="options.home_about_us['value']">
+							<div *ngIf="options.home_about_us" class="wrapper" style="text-align: center" [innerHTML]="options.home_about_us['value']">
 							</div>
 						</div>
 						<div class="sc_empty_space em_height_3">
@@ -21,7 +21,7 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.working_hours' | translate}}</h6>
 						<div class="text_column content_element">
-							<div *ngIf="options.working_hour" class="wrapper" [innerHTML]="options.working_hour['value']">
+							<div *ngIf="options.working_hour" class="wrapper" style="text-align: center" [innerHTML]="options.working_hour['value']">
 
 							</div>
 						</div>
@@ -32,7 +32,7 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.contact' | translate}}</h6>
 						<div class="text_column content_element">
-							<div *ngIf="options.home_contact" class="wrapper" [innerHTML]="options.home_contact['value']">
+							<div *ngIf="options.home_contact" class="wrapper" style="text-align: center" [innerHTML]="options.home_contact['value']">
 							</div>
 						</div>
 						<div class="sc_empty_space em_height_3">
@@ -43,16 +43,32 @@
 				<div class="sc_line sc_line_position_center_center sc_line_style_solid"></div>
 				<div class="sc_socials sc_socials_type_icons sc_socials_shape_square sc_socials_size_small cu_block_3">
 					<div class="sc_socials_item">
-						<a *ngIf="options.twitter" class="social_icons social_twitter" [href]="options.twitter['value']" target="_blank"><span class="icon-twitter"></span></a>
+						<a *ngIf="options.twitter" class="social_icons social_twitter" [href]="options.twitter['value']" target="_blank">
+							<span class="icon-ico-twitter">
+								<img src="/assets/public/images/icon/icon-twitter.png" />
+							</span>
+						</a>
 					</div>
 					<div class="sc_socials_item">
-						<a *ngIf="options.google_plus" class="social_icons social_gplus" [href]="options.google_plus['value']" target="_blank"><span class="icon-gplus"></span></a>
+						<a *ngIf="options.google_plus" class="social_icons social_gplus" [href]="options.google_plus['value']" target="_blank">
+							<span class="icon-ico-google-plus">
+								<img src="/assets/public/images/icon/icon-google-plus.png" />
+							</span>
+						</a>
 					</div>
 					<div class="sc_socials_item">
-						<a *ngIf="options.facebook" class="social_icons social_facebook" [href]="options.facebook['value']" target="_blank"><span class="icon-facebook"></span></a>
+						<a *ngIf="options.facebook" class="social_icons social_facebook" [href]="options.facebook['value']" target="_blank">
+							<span class="icon-ico-facebook">
+								<img src="/assets/public/images/icon/icon-facebook.png" />
+							</span>
+						</a>
 					</div>
 					<div class="sc_socials_item">
-						<a *ngIf="options.instagram" class="social_icons social_instagramm" [href]="options.instagram['value']" target="_blank"><span class="icon-instagramm"></span></a>
+						<a *ngIf="options.instagram" class="social_icons social_instagramm" [href]="options.instagram['value']" target="_blank">
+							<span class="icon-ico-instagram">
+								<img src="/assets/public/images/icon/icon-instagram.png" />
+							</span>
+						</a>
 					</div>
 				</div>
 				<p class="cu_text_c"><a href="#">White Clinic</a> &#169; 2017 All Rights Reserved <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></p>

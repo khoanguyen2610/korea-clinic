@@ -73,7 +73,7 @@ export class ServiceDetailComponent implements OnInit {
 
 	loadPage(){
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('image_resize_width', '480');
+		params.set('image_resize_width', '1440');
 		params.set('item_key', this._params.item_key);
 		params.set('language_code', this.language_code);
 		this._ServiceService.getByID(null, params).subscribe(res => {
