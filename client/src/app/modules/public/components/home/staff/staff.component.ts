@@ -1,11 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
-import { AuthService, StaffService } from '../../../../../services';
+import { StaffService } from '../../../../../services';
 
 declare let $: any;
 declare let moment: any;
@@ -24,7 +22,6 @@ export class StaffComponent implements OnInit {
 	module_name: string = 'staff';
 
 	constructor(
-		private _AuthService: AuthService,
 		private _LocalStorageService: LocalStorageService,
 		private _StaffService: StaffService,
 		private _Configuration: Configuration,
@@ -37,10 +34,6 @@ export class StaffComponent implements OnInit {
 
 	ngOnInit() {
 		this.getListData();
-	}
-
-	ngAfterViewInit() {
-
 	}
 
 	getListData() {

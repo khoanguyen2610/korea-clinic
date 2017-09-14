@@ -1,7 +1,6 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';
@@ -42,9 +41,6 @@ export class GalleryComponent implements OnInit {
 		this.getListData();
 	}
 
-	ngAfterContentChecked() {
-
-	}
 
 	getListData() {
 		let params: URLSearchParams = new URLSearchParams();
@@ -70,6 +66,10 @@ export class GalleryComponent implements OnInit {
 
 					});
 					this.Items = items;
+
+					setTimeout(() => {
+						initEssGrid();
+					}, 200);
 				}
 			}
 		});

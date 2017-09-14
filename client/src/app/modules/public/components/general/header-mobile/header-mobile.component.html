@@ -1,20 +1,8 @@
 <div class="header_mobile">
     <div class="content_wrap">
         <div class="menu_button icon-menu"></div>
-        <div class="menu_button change_language_area">
-            <div class="sc_socials_item">
-                <a href="#" class="social_icons social_gplus" title="Tiếng Việt" [ngClass]="{'language_inactive' : default_language_code != 'vi'}" (click)="onChangeLanguageCode('vi')">
-                    <img src="/assets/public/images/flags/vi.png" />
-                </a>
-            </div>
-            <div class="sc_socials_item">
-                <a href="#" class="social_icons social_facebook" title="English" [ngClass]="{'language_inactive' : default_language_code != 'en'}" (click)="onChangeLanguageCode('en')">
-                    <img src="/assets/public/images/flags/en.png" />
-                </a>
-            </div>
-        </div>
         <div class="logo">
-            <a [routerLink]="['/']"><img alt="" class="logo_main" src="./assets/public/images/Logo_mobile.png"></a>
+            <a [routerLink]="['/']"><img *ngIf="options.logo" alt="" class="logo_main" [src]="options.logo['logo_url']"></a>
         </div>
     </div>
     <div class="side_wrap">
@@ -24,10 +12,10 @@
         </div>
         <div class="panel_middle">
             <div class="contact_field contact_phone">
-                <span class="contact_icon icon-icon_phone"></span> <span class="contact_label contact_phone">028 3930 9393</span>
+                <span class="contact_icon icon-icon_phone"></span> <span *ngIf="options.phone" class="contact_label contact_phone">{{ options.phone['value'] }}</span>
             </div>
             <div class="contact_field contact_mail">
-                <span class="contact_icon icon-mail"></span> <span class="contact_email">info@yoursite.com</span>
+                <span class="contact_icon icon-mail"></span> <span  *ngIf="options.email" class="contact_email">{{ options.email['value'] }}></span>
             </div>
             <div class="top_panel_top_user_area">
                 <ul class="menu_user_nav"></ul>

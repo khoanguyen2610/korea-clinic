@@ -1,11 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
-import { AuthService, EquipmentService } from '../../../../../services';
+import { EquipmentService } from '../../../../../services';
 
 declare let $: any;
 declare let moment: any;
@@ -28,7 +26,6 @@ export class EquipmentComponent implements OnInit {
 	width_default = 'width=' + this.width;
 
 	constructor(
-		private _AuthService: AuthService,
 		private _EquipmentService: EquipmentService,
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService
@@ -41,10 +38,6 @@ export class EquipmentComponent implements OnInit {
 
 	ngOnInit() {
 		this.getListData();
-	}
-
-	ngAfterViewInit() {
-
 	}
 
 	getListData() {

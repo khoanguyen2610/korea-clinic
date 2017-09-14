@@ -3,11 +3,11 @@
         <div class="page_wrap" [ngSwitch]="template">
             <div class="top_panel_fixed_wrap"></div>
             <!-- Header -->
-            <app-public-general-header></app-public-general-header>
+            <app-public-general-header [options]="options"></app-public-general-header>
             <!-- Header -->
 
             <!-- Header Mobile -->
-            <app-public-general-header-mobile></app-public-general-header-mobile>
+            <app-public-general-header-mobile [options]="options"></app-public-general-header-mobile>
             <!-- Header Mobile -->
 
 
@@ -22,7 +22,7 @@
                     <div class="widget_area_inner">
                         <div class="content_wrap">
                             <!-- Footer -->
-                            <app-public-general-footer></app-public-general-footer>
+                            <app-public-general-footer [options]="options"></app-public-general-footer>
                             <!-- Footer -->
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                                     <router-outlet></router-outlet>
 
                                     <!-- Footer -->
-                                    <app-public-general-footer></app-public-general-footer>
+                                    <app-public-general-footer [options]="options"></app-public-general-footer>
                                     <!-- Footer -->
                                 </section>
                             </article>
@@ -78,7 +78,7 @@
                                     <router-outlet></router-outlet>
 
                                     <!-- Footer -->
-                                    <app-public-general-footer></app-public-general-footer>
+                                    <app-public-general-footer [options]="options"></app-public-general-footer>
                                     <!-- Footer -->
                                 </section>
                             </article>
@@ -91,7 +91,7 @@
         </div>
     </div>
      <!-- Chat - Connect With Us -->
-    <app-public-general-chat></app-public-general-chat>
+    <app-public-general-chat [options]="options"></app-public-general-chat>
     <!-- Chat - Connect With Us -->
 </div>
 

@@ -8,7 +8,7 @@ import { AuthService, ServiceService, ServiceCategoryService } from '../../../..
 import { Configuration } from '../../../../../shared';
 
 // declare let $: any;
-declare let moment: any;
+declare let initEssGrid: any;
 
 @Component({
 	selector: 'app-public-service-list',
@@ -77,6 +77,9 @@ export class ServiceListComponent implements OnInit {
 		this._ServiceService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;
+				setTimeout(() => {
+					initEssGrid();
+				}, 200);
 			}
 		});
 	}

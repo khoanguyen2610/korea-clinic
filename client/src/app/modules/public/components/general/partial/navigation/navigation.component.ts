@@ -1,44 +1,43 @@
-import { Component, OnInit, Input, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { TranslateService } from 'ng2-translate';7
+import { TranslateService } from 'ng2-translate';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 import { Configuration } from '../../../../../../shared';
-import { ToastrService } from 'ngx-toastr';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { AuthService, ServiceService, ServiceCategoryService, NewsCategoryService } from '../../../../../../services';
+import { ServiceCategoryService, NewsCategoryService } from '../../../../../../services';
 
 declare let $: any;
 
 @Component({
 	selector: 'app-public-general-partial-navigation',
 	templateUrl: './navigation.component.html',
-	providers: [ServiceService, ServiceCategoryService, NewsCategoryService]
+	providers: [ServiceCategoryService, NewsCategoryService]
 
 })
 
 export class NavigationComponent implements OnInit {
 	private subscription: Subscription;
-	language_code: string;
 	modules: any;
 	serviceCategories: Array<any>;
 	services: Array<any>;
 	newsCategories: Array<any>;
 	news: Array<any>;
 
+	default_language_code: string;
+
 	constructor(
 		private _Configuration: Configuration,
-		private _ToastrService: ToastrService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 		private _NewsCategoryService: NewsCategoryService,
 		private _ServiceCategoryService: ServiceCategoryService,
-		private _ServiceService: ServiceService,
-		private _TranslateService: TranslateService
+		private _TranslateService: TranslateService,
+		private _LocalStorageService: LocalStorageService
 	) {
 		//=============== Get Params On Url ===============
-		this.language_code = this._Configuration.language_code;
+		this.default_language_code = String(this._LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit() {
@@ -50,6 +49,13 @@ export class NavigationComponent implements OnInit {
 
 		this.getListNewsCategories();
 
+	}
+
+
+	onChangeLanguageCode(language_code: string){
+		this._LocalStorageService.set('language_code', language_code);
+		window.location.reload();
+		return false;
 	}
 
 

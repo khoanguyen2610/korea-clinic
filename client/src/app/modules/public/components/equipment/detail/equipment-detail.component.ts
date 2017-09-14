@@ -1,11 +1,10 @@
-import { Component, OnInit, AfterViewInit,  ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { TranslateService } from 'ng2-translate';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { AuthService, EquipmentService, NewsCategoryService  } from '../../../../../services';
+import { EquipmentService, NewsCategoryService  } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 import * as moment from 'moment';
 

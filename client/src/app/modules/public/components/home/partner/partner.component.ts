@@ -1,10 +1,8 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { AuthService, PartnerService } from '../../../../../services';
+import { PartnerService } from '../../../../../services';
 
 declare let $: any;
 declare let moment: any;

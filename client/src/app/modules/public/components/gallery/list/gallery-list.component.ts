@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
@@ -8,8 +7,8 @@ import { Configuration } from '../../../../../shared';
 import { GalleryService } from '../../../../../services';
 
 
-// declare let $: any;
-// declare let moment: any;
+declare let jQuery: any;
+declare let initEssGrid: any;
 
 @Component({
 	selector: 'app-public-gallery-list',
@@ -56,6 +55,9 @@ export class GalleryListComponent implements OnInit {
 				});
 				this.Items = items;
 
+				setTimeout(() => {
+					initEssGrid();
+				}, 200);
 			}
 		});
 	}

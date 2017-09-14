@@ -221,6 +221,7 @@ function jacqueline_ready_actions() {
 		}else{
 			//Close panel
 			jQuery('.header_mobile .side_wrap').removeClass('open');
+			jQuery('html').removeClass('menu_mobile_open');
 		}
 
 

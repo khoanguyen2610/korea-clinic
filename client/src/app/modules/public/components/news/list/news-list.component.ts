@@ -1,15 +1,14 @@
-import { Component, OnInit, AfterViewInit, Renderer, ElementRef, ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, Renderer, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { AuthService, NewsService, NewsCategoryService } from '../../../../../services';
+import { NewsService, NewsCategoryService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 import * as moment from 'moment';
 
 // declare let $: any;
-// declare let moment: any;
+declare let initEssGrid: any;
 
 @Component({
 	selector: 'app-public-news-list',
@@ -76,6 +75,9 @@ export class NewsListComponent implements OnInit {
 		this._NewsService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 				this.items = res.data;
+				setTimeout(() => {
+					initEssGrid();
+				}, 200);
 			}
 		});
 	}

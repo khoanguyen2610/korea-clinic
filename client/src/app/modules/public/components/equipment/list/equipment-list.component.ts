@@ -1,14 +1,13 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { AuthService, EquipmentService } from '../../../../../services';
+import { EquipmentService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
 // declare let $: any;
-// declare let moment: any;
+declare let initEssGrid: any;
 
 @Component({
 	selector: 'app-public-equipment-list',
@@ -54,6 +53,10 @@ export class EquipmentListComponent implements OnInit {
 
 				});
 				this.items = items;
+
+				setTimeout(() => {
+					initEssGrid();
+				}, 200);
 			}
 		});
 	}

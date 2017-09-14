@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ScriptService } from './../../../services';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
+import { URLSearchParams } from '@angular/http';
 import { HttpInterceptorService } from 'ng-http-interceptor';
 import { TranslateService } from 'ng2-translate';
 import { Configuration } from './../../../shared';
 import { LocalStorageService } from 'angular-2-local-storage';
+
+import { OptionsService } from './../../../services';
 
 declare var jQuery: any;
 declare var JACQUELINE_STORAGE: any;
@@ -21,6 +24,7 @@ declare var document: any;
 @Component({
 	selector: 'app-public-root',
 	templateUrl: './public.component.html',
+	providers: [OptionsService]
 })
 
 export class PublicComponent  {
@@ -32,6 +36,7 @@ export class PublicComponent  {
 	module_name: string;
 	activeRoute: boolean = false;
 	is_last: boolean = false;
+	options: Array<any> = [];
 
 	page_content_wrap: string = 'page_content_wrap page_paddings_no';
 
@@ -43,14 +48,14 @@ export class PublicComponent  {
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService,
 		private _ActivatedRoute: ActivatedRoute,
-		private _HttpInterceptorService: HttpInterceptorService
+		private _HttpInterceptorService: HttpInterceptorService,
+		private _OptionsService: OptionsService
 	) {
 		JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
 		_HttpInterceptorService.request().addInterceptor((data, method) => {
 			this.is_last = false;
 			jQuery('.loading').show();
-			// this._LoadingAnimateService.setValue(true);
 
 			setTimeout(() => {
 				if (this.is_last) {
@@ -66,6 +71,9 @@ export class PublicComponent  {
 			this.is_last = true;
 			return res;
 		});
+
+
+		this.getListOption();
 
 	}
 
@@ -89,7 +97,6 @@ export class PublicComponent  {
 					}
 				}
 			}
-			console.log(this.template);
 
 			var str_matches = str.match(/([a-z|\-]+)\//);
 			var translateEl = str;
@@ -106,14 +113,12 @@ export class PublicComponent  {
 
 			// this._ScriptService.load('theme_shortcodes', 'widget', 'accordion', 'custom', 'core_init', 'core_googlemap', 'grid_layout').then(data => {
 				//
+				// }).catch(error => console.log(error));
 
-			// this.initLayout();
-			// this.initFullRow();
-			jQuery(window).resize();
 			setTimeout(() => {
 				jacqueline_init_actions();
-				if (jQuery(".rev_slider").length > 0) { initRevSlider() };
-				if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
+				// if (jQuery(".rev_slider").length > 0) { initRevSlider() };
+				// if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
 				itemsmenu();
 				jQuery(window).resize();
 
@@ -123,33 +128,25 @@ export class PublicComponent  {
 				});
 			}, 600);
 
-
-
-	   //          //=========================
-	   //          if (jQuery(".rev_slider").length > 0) {initRevSlider()};
-				// if (jQuery(".esg-grid").length > 0) {initEssGrid()};
-				// itemsmenu();
-
-	        // }).catch(error => console.log(error));
-			// jacqueline_init_actions();
 		}
     }
 
-    // onActivate(componentRef){
-	// 	let action = componentRef.getAction();
-	// 	switch (action) {
-	// 		case 'list':
-	// 			this.page_content_wrap = 'page_content_wrap';
-	// 			break;
-	// 		case 'contact':
-	// 		case 'detail':
-	// 			this.page_content_wrap = 'page_content_wrap page_paddings_yes';
-	// 			break;
-	// 		default:
-	// 			// code...
-	// 			break;
-	// 	}
-    // }
+    getListOption() {
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this._Configuration.language_code);
+		params.set('item_status', 'active');
+
+		this._OptionsService.getListAll(params).subscribe(res => {
+			if (res.status == 'success') {
+				let items = res.data;
+				items.forEach(item => {
+					this.options[item.key] = item;
+				});
+				console.log(this.options)
+			}
+		});
+    }
+
 
 	ngOnDestroy() {
 		this.translateSubscription.unsubscribe();
