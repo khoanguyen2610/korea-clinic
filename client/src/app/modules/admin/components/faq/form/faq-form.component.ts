@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { FaqFormContentComponent } from './content/faq-form-content.component';
 import { Faq } from '../../../../../models';
 import { AuthService, FaqService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';

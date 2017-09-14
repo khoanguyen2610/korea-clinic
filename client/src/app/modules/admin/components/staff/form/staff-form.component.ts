@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { StaffFormContentComponent } from './content/staff-form-content.component';
 import { Staff } from '../../../../../models';
 import { AuthService, StaffService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
