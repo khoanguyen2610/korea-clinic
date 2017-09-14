@@ -68,6 +68,11 @@ export class EquipmentDetailComponent implements OnInit {
 			if (res.status == 'success') {
 				let item = res.data;
 				this.Item = item;
+
+				var metas = this._Configuration.metas;
+				metas.forEach(meta => {
+					this._Configuration[meta] = this.Item[meta];
+				});
 			}
 		});
 	}

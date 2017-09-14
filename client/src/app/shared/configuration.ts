@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Configuration {
 	//======================== API Config Variable ===============================
-	public server: string = "http://api-dev.whiteclinic.com.vn/public/";
+	public server: string = "http://api.whiteclinic.com.vn/public/";
 	// public server: string = "http://192.168.153.27/korea-clinic/public/";
 	public apiUrl: string = this.server + "api/v1/";
 	public apiAuthUsername: string = "visionvn";
@@ -14,7 +14,7 @@ export class Configuration {
 	public base_href = '';
 	public base_url_image = this.server +  'files/';
 	public session_expired = 8; //Session 8 hours
-	public defaultLang: string = 'en';
+	public defaultLang: string = 'vi';
 	public language_code: string;
 	public formatDate: string = "YYYY/MM/DD";
 	public formatDateTime: string = "YYYY/MM/DD HH:mm:ss";

@@ -1,6 +1,6 @@
 <!-- Background Header -->
 <section class="top_panel_image">
-	<img alt="" [src]="Item['image_url']" width="100%">
+	<img *ngIf="Item['image_url']" [src]="Item['image_url']" width="100%">
 	<div class="top_panel_image_hover"></div>
 	<div class="top_panel_image_header">
 		<h1 class="top_panel_image_title">{{ Item['title'] }}</h1>

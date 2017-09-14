@@ -2771,6 +2771,7 @@ form.search_form .search_button:hover {
     position: relative;
     z-index: 10003;
     display: none;
+    background: #150D0F;
 }
 .top_panel_image+.header_mobile {
     border-bottom: 1px solid rgb(248, 248, 248);

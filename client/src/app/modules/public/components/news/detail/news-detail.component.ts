@@ -67,6 +67,11 @@ export class NewsDetailComponent implements OnInit {
 				let item = res.data;
 				item['created_format_date'] = moment(item['created_at']).format(this.news_format_date);
 				this.Item = item;
+
+				var metas = this._Configuration.metas;
+				metas.forEach(meta => {
+					this._Configuration[meta] = this.Item[meta];
+				});
 			}
 		});
 	}

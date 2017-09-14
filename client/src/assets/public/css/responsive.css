@@ -3040,8 +3040,20 @@
 	}
 }
 @media (max-width: 480px) {
-    #cfacebook, #cfacebook a.chat_fb{
-        width: 190px;
+    .change_language_area{
+        padding-top: 4px !important;
+        width: 78px !important;
+        right: 70px !important;
+        height: 17px !important;
+        line-height: 17px !important;
+    }
+    .change_language_area .sc_socials_item {
+        width: 23px;
+        height: 15px;
+        overflow: hidden;
+        vertical-align: middle;
+        float: left;
+        margin-right: 15px;
     }
     .header_mobile .mask {
         display: none!important;

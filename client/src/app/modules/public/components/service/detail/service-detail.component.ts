@@ -80,6 +80,11 @@ export class ServiceDetailComponent implements OnInit {
 		this._ServiceService.getByID(null, params).subscribe(res => {
 			if(res.status == 'success'){
 				this.Item = res.data;
+
+				var metas = this._Configuration.metas;
+				metas.forEach(meta => {
+					this._Configuration[meta] = this.Item[meta];
+				});
 			}
 		});
 	}

@@ -58,7 +58,7 @@ export class AboutUsComponent implements OnInit {
 				var metas = this._Configuration.metas;
 				metas.forEach(meta => {
 					this._Configuration[meta] = this.Item[meta];
-				})
+				});
 
 			}
 		});

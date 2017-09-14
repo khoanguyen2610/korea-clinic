@@ -57,6 +57,11 @@ export class StaffDetailComponent implements OnInit {
 		this._StaffService.getByID(null, params).subscribe(res => {
 			if(res.status == 'success'){
 				this.Item = res.data;
+
+				var metas = this._Configuration.metas;
+				metas.forEach(meta => {
+					this._Configuration[meta] = this.Item[meta];
+				});
 			}
 		});
 	}

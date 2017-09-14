@@ -1777,7 +1777,7 @@ textarea {
 
 .menu_main_nav>li>a {
     padding: 0em 1.6em;
-    font-family: "Raleway", sans-serif;
+    font-family: 'fontello';
     font-size: 1em;
     line-height: 2.3em;
     font-weight: 600;
@@ -2879,7 +2879,7 @@ textarea {
 
 .scheme_original .header_mobile .menu_button,
 .scheme_original .header_mobile .menu_main_cart .top_panel_cart_button .contact_icon {
-    color: #323232;
+    color: #c6c4c4;
 }
 
 .scheme_light .header_mobile .menu_button,
