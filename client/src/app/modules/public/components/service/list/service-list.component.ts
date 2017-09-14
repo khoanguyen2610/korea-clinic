@@ -101,13 +101,13 @@ export class ServiceListComponent implements OnInit {
 	}
 
 	onFireClickFilter(filter_id){
-		let self = this;
-		this._ElementRef.nativeElement.querySelectorAll('.esg-filterbutton').forEach(function(elm){
-			self._Renderer.setElementClass(elm, 'selected', false);
-		});
+		// let self = this;
+		// this._ElementRef.nativeElement.querySelectorAll('.esg-filterbutton').forEach(function(elm){
+		// 	self._Renderer.setElementClass(elm, 'selected', false);
+		// });
 
-		let ele = this._ElementRef.nativeElement.querySelector('[data-filter="filter-category-'+ filter_id +'"]');
-		this._Renderer.setElementClass(ele, 'selected', true);
+		// let ele = this._ElementRef.nativeElement.querySelector('[data-filter="filter-category-'+ filter_id +'"]');
+		// this._Renderer.setElementClass(ele, 'selected', true);
 	}
 
 	getAction(){

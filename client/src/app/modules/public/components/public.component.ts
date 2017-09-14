@@ -8,7 +8,7 @@ import { TranslateService } from 'ng2-translate';
 import { Configuration } from './../../../shared';
 import { LocalStorageService } from 'angular-2-local-storage';
 
-import { OptionsService } from './../../../services';
+import { OptionsService, ServiceService, ServiceCategoryService, NewsCategoryService } from './../../../services';
 
 declare var jQuery: any;
 declare var JACQUELINE_STORAGE: any;
@@ -24,7 +24,7 @@ declare var document: any;
 @Component({
 	selector: 'app-public-root',
 	templateUrl: './public.component.html',
-	providers: [OptionsService]
+	providers: [OptionsService, ServiceCategoryService, NewsCategoryService]
 })
 
 export class PublicComponent  {
@@ -37,6 +37,9 @@ export class PublicComponent  {
 	activeRoute: boolean = false;
 	is_last: boolean = false;
 	options: Array<any> = [];
+	modules: any;
+	services: Array<any>;
+	news: Array<any>;
 
 	page_content_wrap: string = 'page_content_wrap page_paddings_no';
 
@@ -49,7 +52,9 @@ export class PublicComponent  {
 		private _LocalStorageService: LocalStorageService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _HttpInterceptorService: HttpInterceptorService,
-		private _OptionsService: OptionsService
+		private _OptionsService: OptionsService,
+		private _NewsCategoryService: NewsCategoryService,
+		private _ServiceCategoryService: ServiceCategoryService,
 	) {
 		JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
@@ -74,6 +79,13 @@ export class PublicComponent  {
 
 
 		this.getListOption();
+		// Translate Module Service
+		this._TranslateService.get('MODULE').subscribe((res: string) => {
+			this.modules = res;
+			this.getListServiceCategories();
+		});
+
+		this.getListNewsCategories();
 
 	}
 
@@ -142,10 +154,42 @@ export class PublicComponent  {
 				items.forEach(item => {
 					this.options[item.key] = item;
 				});
-				console.log(this.options)
 			}
 		});
     }
+
+	// ngOnInit() {
+
+
+	// }
+
+
+	getListServiceCategories() {
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this.modules['lang']);
+		params.set('item_status', 'active');
+		params.set('get_list_services', 'true');
+
+		this._ServiceCategoryService.getListData(params).subscribe(res => {
+			if (res.status == 'success') {
+				this.services = res.data;
+			}
+		});
+
+	}
+
+	getListNewsCategories() {
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this.modules['lang']);
+		params.set('item_status', 'active');
+
+		this._NewsCategoryService.getListData(params).subscribe(res => {
+			if (res.status == 'success') {
+				this.news = res.data;
+			}
+		});
+
+	}
 
 
 	ngOnDestroy() {
