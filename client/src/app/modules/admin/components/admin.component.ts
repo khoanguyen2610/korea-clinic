@@ -106,37 +106,24 @@ export class AdminComponent  {
   //           }
   //       });
 
-		_HttpInterceptorService.request().addInterceptor((data, method) => {
-			if(this.activeRoute){
-				this.is_last = false;
-				$('.loading').show();
-				// this._LoadingAnimateService.setValue(true);
+  	_HttpInterceptorService.request().addInterceptor((data, method) => {
+	  	this.is_last = false;
+	  	$('.loading').show();
 
-				setTimeout(() => {
-					if (this.is_last) {
-						setTimeout(() => {
-							this._SlimLoadingBarService.complete();
-							$('.loading').hide();
-						}, 500);
-					}
-				}, 1500);
-				return data;
-			}else{
-				return null;
-			}
-		});
+  		setTimeout(() => {
+		  	if (this.is_last) {
+			  	setTimeout(() => {
+				  	$('.loading').hide();
+			  	}, 500);
+		  	}
+  		}, 1500);
+	  	return data;
+  	});
 
-		_HttpInterceptorService.response().addInterceptor((res, method) => {
-			this.is_last = true;
-			setTimeout(() => {
-				// this._LoadingAnimateService.setValue(false);
-
-			}, 500)
-			if(this.activeRoute){
-				return res;
-			}
-			return null;
-		});
+  	_HttpInterceptorService.response().addInterceptor((res, method) => {
+	  	this.is_last = true;
+	  	return res;
+  	});
 
 
 

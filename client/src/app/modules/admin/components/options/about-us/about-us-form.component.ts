@@ -141,6 +141,7 @@ export class AboutUsFormComponent implements OnInit {
 				this.uploadProgress = progress;
 			});
 			try {
+				this._Router.navigate([this._Router.url], { queryParams: {t: Date.now()} });
 				this._OptionsService.upload(formData).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){

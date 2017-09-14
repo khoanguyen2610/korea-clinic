@@ -79,7 +79,7 @@ export class OptionsFormComponent implements OnInit {
 						}
 					});
 					repeat++;
-					if(repeat >= 1){
+					if(repeat >= 3){
 						clearInterval(loadInterval);
 					}
 				}, 200);
@@ -132,10 +132,16 @@ export class OptionsFormComponent implements OnInit {
 			formData.append('options[logo]', Item['logo']);
 			formData.append('options[address]', Item['address']);
 			formData.append('options[phone]', Item['phone']);
+			formData.append('options[email]', Item['email']);
 			formData.append('options[facebook]', Item['facebook']);
 			formData.append('options[twitter]', Item['twitter']);
 			formData.append('options[google_plus]', Item['google_plus']);
 			formData.append('options[instagram]', Item['instagram']);
+			formData.append('options[whatsapp]', Item['whatsapp']);
+			formData.append('options[kakaotalk]', Item['kakaotalk']);
+			formData.append('options[line]', Item['line']);
+			formData.append('options[skype]', Item['skype']);
+			formData.append('options[youtube]', Item['youtube']);
 			formData.append('options[home_about_us]', Item['home_about_us']);
 			formData.append('options[working_hour]', Item['working_hour']);
 			formData.append('options[home_contact]', Item['home_contact']);
@@ -148,6 +154,7 @@ export class OptionsFormComponent implements OnInit {
 				this.uploadProgress = progress;
 			});
 			try {
+				this._Router.navigate([this._Router.url], { queryParams: {t: Date.now()} });
 				this._OptionsService.upload(formData).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){

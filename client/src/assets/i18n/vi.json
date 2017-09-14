@@ -83,7 +83,13 @@
     "instagram": "Instagram",
     "home_about_us": "Home About Us",
     "working_hour": "Working Hour",
-    "home_contact": "Home Contact"
+    "home_contact": "Home Contact",
+    "email": "Email",
+    "whatsapp": "Whatsapp",
+    "kakaotalk": "KakaoTalk",
+    "line": "Line",
+    "skype": "Skype",
+    "youtube": "Youtube"
   },
   "PUBLIC": {
     "equipment": "Trang Thiết Bị",

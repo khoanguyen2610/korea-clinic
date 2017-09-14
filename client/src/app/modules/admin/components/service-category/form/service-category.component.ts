@@ -153,6 +153,7 @@ export class ServiceCategoryFormComponent implements OnInit {
 				this.uploadProgress = progress;
 			});
 			try {
+				this._Router.navigate([this._Router.url], { queryParams: {t: Date.now()} });
 				this._ServiceCategoryService.upload(formData, Item['id']).then((res) => {
 					if (res.status == 'success') {
 						if(this._params.method == 'create'){
