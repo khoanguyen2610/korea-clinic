@@ -8,10 +8,10 @@
 	            <div class="wrapper">
 	            	 <!-- data-style="greyscale" -->
 	                <div id="sc_googlemap_246" class="sc_googlemap" data-zoom="16">
-	                    <div id="sc_googlemap_246_1" class="sc_googlemap_marker"
-	                        data-title="93 Võ Văn Tần, phường 6, Quận 3, Hồ Chí Minh, Việt Nam"
-	                        data-description="93 Võ Văn Tần, phường 6, Quận 3, Hồ Chí Minh, Việt Nam"
-	                        data-address="93 Võ Văn Tần, phường 6, Quận 3, Hồ Chí Minh, Việt Nam"
+	                    <div *ngIf="address" id="sc_googlemap_246_1" class="sc_googlemap_marker"
+	                        [attr.data-title]="address['value']"
+	                        [attr.data-description]="address['value']"
+	                        [attr.data-address]="address['value']"
 	                        data-latlng=""
 	                        data-point="/assets/public/images/icon_pin.png"></div>
 	                </div>

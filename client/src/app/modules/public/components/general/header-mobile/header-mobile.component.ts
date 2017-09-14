@@ -13,6 +13,9 @@ declare let window: any;
 
 export class HeaderMobileComponent implements OnInit {
 	@Input() options: any;
+	@Input() serviceCategories: any;
+	@Input() newsCategories: any;
+	@Input() modules: any;
 	default_language_code: string;
 	constructor(
 		private _LocalStorageService: LocalStorageService,
