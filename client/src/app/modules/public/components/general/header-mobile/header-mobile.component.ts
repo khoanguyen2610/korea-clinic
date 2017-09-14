@@ -13,12 +13,24 @@ declare let window: any;
 
 export class HeaderMobileComponent implements OnInit {
 	@Input() options: any;
+	@Input() serviceCategories: any;
+	@Input() newsCategories: any;
+	@Input() modules: any;
+	default_language_code: string;
 	constructor(
+		private _LocalStorageService: LocalStorageService,
+		private _Configuration: Configuration
 	) {
-
+		this.default_language_code = String(this._LocalStorageService.get('language_code'));
 	}
 
 	ngOnInit() {
+	}
+
+	onChangeLanguageCode(language_code: string){
+		this._LocalStorageService.set('language_code', language_code);
+		window.location.reload();
+		return false;
 	}
 
 

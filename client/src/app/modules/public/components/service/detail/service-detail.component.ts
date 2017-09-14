@@ -65,6 +65,7 @@ export class ServiceDetailComponent implements OnInit {
 				this.categories = res.data;
 			}
 		});
+		console.log('dfdf')
 	}
 
 	ngOnInit() {

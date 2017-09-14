@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, ElementRef } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { TranslateService } from 'ng2-translate';
-import { LocalStorageService } from 'angular-2-local-storage';
 
 import { Configuration } from '../../../../../../shared';
+import { ToastrService } from 'ngx-toastr';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { ServiceCategoryService, NewsCategoryService } from '../../../../../../services';
 
 declare let $: any;
@@ -18,76 +19,68 @@ declare let $: any;
 })
 
 export class NavigationComponent implements OnInit {
+	@Input() serviceCategories: any;
+	@Input() newsCategories: any;
+	@Input() modules: any;
 	private subscription: Subscription;
-	modules: any;
-	serviceCategories: Array<any>;
-	services: Array<any>;
-	newsCategories: Array<any>;
-	news: Array<any>;
-
-	default_language_code: string;
+	language_code: string;
+	// serviceCategories: Array<any>;
+	// newsCategories: Array<any>;
 
 	constructor(
 		private _Configuration: Configuration,
+		private _ToastrService: ToastrService,
 		private _ActivatedRoute: ActivatedRoute,
 		private _Router: Router,
 		private _NewsCategoryService: NewsCategoryService,
 		private _ServiceCategoryService: ServiceCategoryService,
-		private _TranslateService: TranslateService,
-		private _LocalStorageService: LocalStorageService
+		private _TranslateService: TranslateService
 	) {
 		//=============== Get Params On Url ===============
-		this.default_language_code = String(this._LocalStorageService.get('language_code'));
+		this.language_code = this._Configuration.language_code;
 	}
 
 	ngOnInit() {
 		// Translate Module Service
-		this._TranslateService.get('MODULE').subscribe((res: string) => {
-			this.modules = res;
-			this.getListServiceCategories();
-		});
+		// this._TranslateService.get('MODULE').subscribe((res: string) => {
+		// 	this.modules = res;
+		// 	this.getListServiceCategories();
+		// });
 
-		this.getListNewsCategories();
-
-	}
-
-
-	onChangeLanguageCode(language_code: string){
-		this._LocalStorageService.set('language_code', language_code);
-		window.location.reload();
-		return false;
-	}
-
-
-	getListServiceCategories() {
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this.modules['lang']);
-		params.set('item_status', 'active');
-		params.set('get_list_services', 'true');
-
-		this._ServiceCategoryService.getListData(params).subscribe(res => {
-			if (res.status == 'success') {
-				this.serviceCategories = res.data;
-			}
-		});
-
-	}
-
-	getListNewsCategories() {
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('language_code', this.modules['lang']);
-		params.set('item_status', 'active');
-
-		this._NewsCategoryService.getListData(params).subscribe(res => {
-			if (res.status == 'success') {
-				this.newsCategories = res.data;
-			}
-		});
+		// this.getListNewsCategories();
 
 	}
 
 
-	ngOnDestroy(){
-		this.subscription.unsubscribe();
-	}
+	// getListServiceCategories() {
+	// 	let params: URLSearchParams = new URLSearchParams();
+	// 	params.set('language_code', this.modules['lang']);
+	// 	params.set('item_status', 'active');
+	// 	params.set('get_list_services', 'true');
+
+	// 	this._ServiceCategoryService.getListData(params).subscribe(res => {
+	// 		if (res.status == 'success') {
+	// 			this.serviceCategories = res.data;
+	// 		}
+	// 	});
+
+	// }
+
+	// getListNewsCategories() {
+	// 	let params: URLSearchParams = new URLSearchParams();
+	// 	params.set('language_code', this.modules['lang']);
+	// 	params.set('item_status', 'active');
+
+	// 	this._NewsCategoryService.getListData(params).subscribe(res => {
+	// 		if (res.status == 'success') {
+	// 			this.newsCategories = res.data;
+	// 		}
+	// 	});
+
+	// }
+
+
+	// ngOnDestroy(){
+	// 	this.subscription.unsubscribe();
+	// }
 }
