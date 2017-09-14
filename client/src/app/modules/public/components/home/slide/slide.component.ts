@@ -1,11 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
-import { AuthService, SlideService, ScriptService } from '../../../../../services';
+import { SlideService, ScriptService } from '../../../../../services';
 
 declare let jQuery: any;
 declare let initRevSlider: any;
@@ -24,7 +22,6 @@ export class SlideComponent implements OnInit {
 	module_name: string = 'slide';
 
 	constructor(
-		private _AuthService: AuthService,
 		private _SlideService: SlideService,
 		private _Configuration: Configuration,
 		private _ScriptService: ScriptService,

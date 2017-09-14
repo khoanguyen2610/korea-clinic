@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';

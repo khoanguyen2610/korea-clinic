@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
@@ -57,7 +56,7 @@ export class GalleryListComponent implements OnInit {
 				this.Items = items;
 
 				setTimeout(() => {
-					if (jQuery(".esg-grid").length > 0) { initEssGrid(); };
+					initEssGrid();
 				}, 200);
 			}
 		});

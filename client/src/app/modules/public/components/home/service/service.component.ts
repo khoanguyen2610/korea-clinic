@@ -1,11 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input} from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit, Input} from '@angular/core';
+import { Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
-import { AuthService, ServiceCategoryService } from '../../../../../services';
+import { ServiceCategoryService } from '../../../../../services';
 
 
 declare let $: any;
@@ -24,7 +22,6 @@ export class ServiceComponent implements OnInit {
 	language_code: string;
 
 	constructor(
-		private _AuthService: AuthService,
 		private _ServiceCategoryService: ServiceCategoryService,
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService
@@ -35,10 +32,6 @@ export class ServiceComponent implements OnInit {
 
 	ngOnInit(){
 		this.getListData();
-	}
-
-	ngAfterViewInit(){
-
 	}
 
 	getListData() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
