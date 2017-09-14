@@ -11,8 +11,7 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.about_us' | translate}}</h6>
 						<div class="text_column content_element">
-							<div class="wrapper">
-								<p class="cu_text_c">{{'PUBLIC.about_us_content' | translate}}</p>
+							<div *ngIf="options.home_about_us" class="wrapper" [innerHTML]="options.home_about_us['value']">
 							</div>
 						</div>
 						<div class="sc_empty_space em_height_3">
@@ -22,10 +21,8 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.working_hours' | translate}}</h6>
 						<div class="text_column content_element">
-							<div class="wrapper">
-								<p class="cu_text_c">Mon-Fri: 9 AM &#8211; 6 PM<br>
-								Saturday: 9 AM &#8211; 4 PM<br>
-								Sunday: Closed</p>
+							<div *ngIf="options.working_hour" class="wrapper" [innerHTML]="options.working_hour['value']">
+
 							</div>
 						</div>
 						<div class="sc_empty_space em_height_3">
@@ -35,10 +32,7 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.contact' | translate}}</h6>
 						<div class="text_column content_element">
-							<div class="wrapper">
-								<p class="cu_text_c">93 Võ Văn Tần, phường 6, Quận 3, TP. HCM<br>
-								Email: <a href="#">info@yoursite.com</a><br>
-								Telephone: 028 3930 9393</p>
+							<div *ngIf="options.home_contact" class="wrapper" [innerHTML]="options.home_contact['value']">
 							</div>
 						</div>
 						<div class="sc_empty_space em_height_3">
@@ -49,16 +43,16 @@
 				<div class="sc_line sc_line_position_center_center sc_line_style_solid"></div>
 				<div class="sc_socials sc_socials_type_icons sc_socials_shape_square sc_socials_size_small cu_block_3">
 					<div class="sc_socials_item">
-						<a class="social_icons social_twitter" href="#" target="_blank"><span class="icon-twitter"></span></a>
+						<a *ngIf="options.twitter" class="social_icons social_twitter" [href]="options.twitter['value']" target="_blank"><span class="icon-twitter"></span></a>
 					</div>
 					<div class="sc_socials_item">
-						<a class="social_icons social_gplus" href="#" target="_blank"><span class="icon-gplus"></span></a>
+						<a *ngIf="options.google_plus" class="social_icons social_gplus" [href]="options.google_plus['value']" target="_blank"><span class="icon-gplus"></span></a>
 					</div>
 					<div class="sc_socials_item">
-						<a class="social_icons social_facebook" href="#" target="_blank"><span class="icon-facebook"></span></a>
+						<a *ngIf="options.facebook" class="social_icons social_facebook" [href]="options.facebook['value']" target="_blank"><span class="icon-facebook"></span></a>
 					</div>
 					<div class="sc_socials_item">
-						<a class="social_icons social_instagramm" href="#" target="_blank"><span class="icon-instagramm"></span></a>
+						<a *ngIf="options.instagram" class="social_icons social_instagramm" [href]="options.instagram['value']" target="_blank"><span class="icon-instagramm"></span></a>
 					</div>
 				</div>
 				<p class="cu_text_c"><a href="#">White Clinic</a> &#169; 2017 All Rights Reserved <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></p>

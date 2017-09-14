@@ -5,14 +5,14 @@
                 <div class="contact_logo">
                     <div class="logo">
                         <a [routerLink]="['/']">
-                            <img alt="" class="logo_main" src="./assets/public/images/Logo.png">
-                            <img alt="" class="logo_fixed" height="56" src="./assets/public/images/Logo.png" width="238">
+                            <img *ngIf="options.logo" alt="" class="logo_main" [src]="options.logo['logo_url']">
+                            <img *ngIf="options.logo" alt="" class="logo_fixed" height="56" [src]="options.logo['logo_url']" width="238">
                         </a>
                     </div>
                 </div>
                 <div class="top_localtion_info_top content_wrap clearfix">
                     <div class="top_panel_top_socials">
-                        <span class="label">93 Võ Văn Tần, Quận 3, TP.HCM | 028 3933 9393</span>
+                        <span class="label"><span *ngIf="options.address">{{ options.address['value'] }}</span> | <span *ngIf="options.phone">{{ options.phone['value'] }}</span></span>
                         <div class="sc_socials sc_socials_type_icons sc_socials_shape_square sc_socials_size_tiny">
                             <div class="sc_socials_item">
                                 <a href="#" class="social_icons social_gplus" title="Tiếng Việt" [ngClass]="{'language_inactive' : default_language_code != 'vi'}" (click)="onChangeLanguageCode('vi')">
