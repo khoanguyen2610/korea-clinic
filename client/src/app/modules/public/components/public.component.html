@@ -97,3 +97,72 @@
         <div class="sk-cube3 sk-cube"></div>
     </div> -->
 </div>
+
+<div class="container-fluid">
+    <div class="col-xs-12">
+        <div class="div-scroll-warp">
+            <ul>
+                <ng-template ngFor let-app [ngForOf]="apps">
+                    <li class="bg-pink" *ngIf="options[app]">
+                        <a [href]="options[app].value" [ngClass]="'icon-qr-' + app">
+                            <figure class="opacity-9"> <img [src]="'./assets/public/images/social/' + app + '.png'" class="icon-wa-img"></figure>
+                            <h6>{{ app }}</h6>
+                        </a>
+                    </li>
+                </ng-template>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--<div class="site-footer">
+    <div class="div-bottom-fixed-quick hidden-lg-up">
+        <div class="container-fluid pl-0 pr-0">
+            <div class="row no-gutters-reset">
+                <div class="col-xs-12">
+                    <div class="swiper-container-bottom-quick sc_slider_swiper swiper-slider-container sc_slider_nopagination sc_slider_nocontrols">
+                        <div class="slides swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="javascript:goSns('whatsapp_m');">
+                                    <figure> <img src="http://eng.idhospital.com/wp-content/themes/zeein/assets/img/icon/idhospital_sns_whatsapp.svg"></figure>
+                                    <h6>Whatsapp</h6> </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="javascript:goSns('kakao_m');">
+                                    <figure> <img src="http://eng.idhospital.com/wp-content/themes/zeein/assets/img/icon/idhospital_sns_kakaotalk.svg"></figure>
+                                    <h6>KakaoTalk</h6> </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="javascript:goSns('line_m');">
+                                    <figure> <img src="http://eng.idhospital.com/wp-content/themes/zeein/assets/img/icon/idhospital_sns_line.svg"></figure>
+                                    <h6>Line</h6> </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="javascript:goSns('skype_m');">
+                                    <figure> <img src="http://eng.idhospital.com/wp-content/themes/zeein/assets/img/icon/idhospital_sns_skype.svg"></figure>
+                                    <h6>Skype</h6> </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="javascript:goSns('fb_m');">
+                                    <figure> <img src="http://eng.idhospital.com/wp-content/themes/zeein/assets/img/icon/idhospital_sns_facebook.svg"></figure>
+                                    <h6>Facebook</h6> </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="javascript:goSns('insta_m');">
+                                    <figure> <img src="http://eng.idhospital.com/wp-content/themes/zeein/assets/img/icon/idhospital_sns_insta.svg"></figure>
+                                    <h6>Instagram</h6> </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="javascript:goSns('yt_m');">
+                                    <figure> <img src="http://eng.idhospital.com/wp-content/themes/zeein/assets/img/icon/idhospital_sns_youtube.svg"></figure>
+                                    <h6>YouTube</h6> </a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev-bottom"></div>
+                        <div class="swiper-button-next-bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
