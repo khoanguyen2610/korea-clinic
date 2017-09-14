@@ -4,7 +4,7 @@
  * PHP Class
  *
  * LICENSE
- * 
+ *
  * @author Nguyen Anh Khoa-VISIONVN
  * @created Feb 08, 2016 01:01:01 AM
  */
@@ -16,7 +16,8 @@ class Controller_Common extends Controller_Template {
     public function before() {
         parent::before();
         set_time_limit(0);
-        
+        ini_set('memory_limit', '-1');
+
         $module = isset($this->request->module) ? $this->request->module : 'none';
         $controller = preg_match('#^(.*\\\)?Controller_(.*)#', $this->request->controller, $matches);
         $controller = strtolower($matches[2]);
@@ -32,10 +33,10 @@ class Controller_Common extends Controller_Template {
          *====================================*/
         $this->_arrParam['named_params'] = $this->request->named_params;
         $this->_arrParam['post_params'] = \Input::param();
-        
+
         $QUERY_STRING = !empty($_SERVER['QUERY_STRING'])?'?' . $_SERVER['QUERY_STRING']:'';
         $this->_arrParam['path_uri'] = \Uri::string() . $QUERY_STRING;
-        
+
         /*====================================
          * Set parameter of fuelphp pagination
          *====================================*/
@@ -74,10 +75,10 @@ class Controller_Common extends Controller_Template {
         $action     = empty($arrParam['action'])?$this->_arrParam['action']:$arrParam['action'];
 
         return \Auth::has_access('module_' . $module  . '.'
-                                 . $controller 
+                                 . $controller
                                  . '.[' . $action . ']');
     }
-    
+
     public function set_meta($meta = null) {
         echo Html::meta($meta);
     }
@@ -97,7 +98,7 @@ class Controller_Common extends Controller_Template {
         $fp = fsockopen($host, $port, $errno, $errstr, 30);
         if (!$fp) {
             // @file_put_contents($fileDir, "$errstr ($errno)<br />\n", FILE_APPEND | LOCK_EX);
-        }else { 
+        }else {
             $out = "GET ".$path." HTTP/1.1\r\n";
             $out .= "Host: ".$host."\r\n";
             $out .= "Connection: Close\r\n\r\n";
@@ -105,7 +106,7 @@ class Controller_Common extends Controller_Template {
             sleep(1); //delay 1s
             fclose($fp);
             return true;
-        } 
+        }
     }
 
     public function after($response) {
@@ -113,5 +114,5 @@ class Controller_Common extends Controller_Template {
             $response = \Response::forge(\Theme::instance()->render());
         }
         return parent::after($response);
-    }  
+    }
 }

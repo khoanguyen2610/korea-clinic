@@ -193,4 +193,19 @@ class Vision_Common {
         $image->output();
         return \Response::forge();
     }
+
+	public static function resize_image($filepath){
+		$filesize = \File::get_size($filepath);
+		//1.5mb => resize
+		if($filesize >= 1500000 && $filesize <= 2500000){
+			\Image::load($filepath)
+					->resize('50%', '50%')
+					->save($filepath);
+		}
+		if($filesize > 2500000){
+			\Image::load($filepath)
+					->resize('30%', '30%')
+					->save($filepath);
+		}
+	}
 }

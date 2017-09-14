@@ -17,6 +17,7 @@ class Controller_API extends Controller_Rest {
     public function before() {
         parent::before();
         set_time_limit(0);
+        ini_set('memory_limit', '-1');
         $module = isset($this->request->module) ? $this->request->module : 'none';
         $controller = preg_match('#^(.*\\\)?Controller_(.*)#', $this->request->controller, $matches);
         $controller = strtolower($matches[2]);

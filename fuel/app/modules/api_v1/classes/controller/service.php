@@ -185,6 +185,10 @@ class Controller_Service extends \Controller_API {
 
                         //Now just save first image
                         // $arrData['image'] = json_encode($arrFiles);
+
+
+						//Resize image
+						\Vision_Common::resize_image(FILESPATH . SERVICE_DIR . $today_dir . '/' . $file['saved_as']);
                         break;
                     }
  					//Now just save first image

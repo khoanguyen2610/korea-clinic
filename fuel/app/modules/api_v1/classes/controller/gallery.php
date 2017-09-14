@@ -182,6 +182,10 @@ class Controller_Gallery extends \Controller_API {
                         //==== Save into database
                         $arrFiles[] = ['filename' => $file['name'],
                                     'filepath' => $today_dir . '/' . $file['saved_as']];
+
+
+						//Resize image
+						\Vision_Common::resize_image(FILESPATH . GALLERY_DIR . $today_dir . '/' . $file['saved_as']);
                     }
 					//Now just save first image
 					$arrUploadImage = $arrFiles;
