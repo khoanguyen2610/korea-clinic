@@ -146,6 +146,11 @@ export class PublicComponent  {
 				items.forEach(item => {
 					this.options[item.key] = item;
 				});
+
+				var metas = this._Configuration.metas;
+				metas.forEach(meta => {
+					this._Configuration[meta] = this.options[meta].value;
+				});
 			}
 		});
     }
