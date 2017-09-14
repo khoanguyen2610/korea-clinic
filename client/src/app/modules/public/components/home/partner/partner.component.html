@@ -13,24 +13,10 @@
                             <div id="sc_clients_387" class="sc_clients sc_clients_style_clients-1 cu_fullwidth">
                                 <div class="sc_slider_swiper swiper-slider-container sc_slider_nopagination sc_slider_nocontrols" data-interval="9415" data-slides-per-view="3" data-slides-min-width="100">
                                     <div class="slides swiper-wrapper">
-                                        <div class="swiper-slide" data-style="width:100%;">
-                                            <div id="sc_clients_387_1" class="sc_clients_item">
+                                        <div class="swiper-slide" data-style="width:100%;" *ngFor="let item of Items; let i=index;">
+                                            <div id="'sc_clients_387_' + (i+1)" class="sc_clients_item">
                                                 <div class="sc_client_image">
-                                                    <img alt="" src="./assets/public/images/logo-4.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide" data-style="width:100%;">
-                                            <div id="sc_clients_387_2" class="sc_clients_item">
-                                                <div class="sc_client_image">
-                                                    <img alt="" src="./assets/public/images/logo-2.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide" data-style="width:100%;">
-                                            <div id="sc_clients_387_3" class="sc_clients_item">
-                                                <div class="sc_client_image">
-                                                    <img alt="" src="./assets/public/images/logo-1.png">
+                                                    <img alt="" [src]="item.image_url">
                                                 </div>
                                             </div>
                                         </div>
