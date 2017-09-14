@@ -1,11 +1,6 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
-import { URLSearchParams } from '@angular/http';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from 'ng2-translate';
 import { Configuration } from '../../../../shared';
-import { AuthService } from '../../../../services';
 
 
 declare let jQuery: any;
@@ -34,9 +29,5 @@ export class HomeComponent implements OnInit {
 
 	getAction(){
 		return 'home';
-	}
-
-	ngOnDestroy() {
-
 	}
 }

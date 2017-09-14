@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -7,7 +7,7 @@ import { TranslateService } from 'ng2-translate';7
 import { Configuration } from '../../../../../../shared';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { AuthService, ServiceService, ServiceCategoryService, NewsCategoryService } from '../../../../../../services';
+import { ServiceService, ServiceCategoryService, NewsCategoryService } from '../../../../../../services';
 
 declare let $: any;
 

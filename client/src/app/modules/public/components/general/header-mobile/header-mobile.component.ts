@@ -1,8 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
-import { URLSearchParams } from '@angular/http';
+import { Component, OnInit, Input } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 import { Configuration } from '../../../../../shared';
@@ -16,6 +12,7 @@ declare let window: any;
 })
 
 export class HeaderMobileComponent implements OnInit {
+	@Input() options: any;
 	default_language_code: string;
 	constructor(
 		private _LocalStorageService: LocalStorageService,

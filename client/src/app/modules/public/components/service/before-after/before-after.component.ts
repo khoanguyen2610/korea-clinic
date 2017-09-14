@@ -1,11 +1,8 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
-import { AuthService, BeforeAfterService, ServiceCategoryService } from '../../../../../services';
+import { BeforeAfterService, ServiceCategoryService } from '../../../../../services';
 
 // declare let $: any;
 // declare let moment: any;
@@ -64,7 +61,4 @@ export class BeforeAfterComponent implements OnInit {
 		return 'list';
 	}
 
-	ngOnDestroy() {
-
-	}
 }
