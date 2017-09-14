@@ -22,7 +22,7 @@
                     <div class="widget_area_inner">
                         <div class="content_wrap">
                             <!-- Footer -->
-                            <app-public-general-footer></app-public-general-footer>
+                            <app-public-general-footer [options]="options"></app-public-general-footer>
                             <!-- Footer -->
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                                     <router-outlet></router-outlet>
 
                                     <!-- Footer -->
-                                    <app-public-general-footer></app-public-general-footer>
+                                    <app-public-general-footer [options]="options"></app-public-general-footer>
                                     <!-- Footer -->
                                 </section>
                             </article>
@@ -78,7 +78,7 @@
                                     <router-outlet></router-outlet>
 
                                     <!-- Footer -->
-                                    <app-public-general-footer></app-public-general-footer>
+                                    <app-public-general-footer [options]="options"></app-public-general-footer>
                                     <!-- Footer -->
                                 </section>
                             </article>
@@ -91,7 +91,7 @@
         </div>
     </div>
      <!-- Chat - Connect With Us -->
-    <!-- <app-public-general-chat></app-public-general-chat> -->
+    <app-public-general-chat [options]="options"></app-public-general-chat>
     <!-- Chat - Connect With Us -->
 </div>
 

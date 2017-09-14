@@ -3,12 +3,12 @@
     <a class="chat_fb" href="javascript:void(0)" onclick="return:false;">
         <i class="fa fa-facebook-square"></i> {{'PUBLIC.connect_with_us' | translate}}
     </a>
-    <div class="fchat">
+    <div class="fchat" *ngIf="options.facebook">
         <div class="fb-page"
             data-adapt-container-width="true"
             data-height="400"
             data-hide-cover="false"
-            data-href="https://www.facebook.com/khoanguyenfotos/"
+            [attr.data-href]="options.facebook['value']"
             data-show-facepile="true"
             data-show-posts="false"
             data-small-header="false"

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
@@ -13,7 +13,7 @@ declare let moment: any;
 })
 
 export class ChatComponent implements OnInit {
-
+	@Input() options: any;
 	constructor(
 
 	) {
