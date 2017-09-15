@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { Configuration } from '../../../../../shared';
 import { BeforeAfterService, ServiceCategoryService } from '../../../../../services';
 
 // declare let $: any;
@@ -24,7 +23,6 @@ export class BeforeAfterComponent implements OnInit {
 
 	constructor(
 		private _BeforeAfterService: BeforeAfterService,
-		private _Configuration: Configuration,
 		private _ServiceCategoryService: ServiceCategoryService,
 		private _LocalStorageService: LocalStorageService
 	) {

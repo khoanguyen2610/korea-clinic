@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
 

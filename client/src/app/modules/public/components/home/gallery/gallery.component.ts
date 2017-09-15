@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { Configuration } from '../../../../../shared';

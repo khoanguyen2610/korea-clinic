@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { ScriptService, FaqService, ServiceCategoryService } from '../../../../../services';
+import { FaqService, ServiceCategoryService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
 // declare let moment: any;
@@ -30,7 +30,6 @@ export class FaqListComponent implements OnInit {
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
 		private _FaqService: FaqService,
-		private _ScriptService: ScriptService,
 		private _ServiceCategoryService: ServiceCategoryService,
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService
@@ -44,10 +43,6 @@ export class FaqListComponent implements OnInit {
 				this.queryParams = param;
 			}
 		);
-
-		// _ScriptService.load('theme_shortcodes', 'widget', 'accordion').then(data => {
-  //           // jacqueline_init_actions();
-  //       }).catch(error => console.log(error));
 
         this.language_code = String(_LocalStorageService.get('language_code'));
         if(this.language_code == 'en'){

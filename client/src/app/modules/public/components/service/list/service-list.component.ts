@@ -1,11 +1,10 @@
-import { Component, OnInit, AfterViewInit, ElementRef, Renderer, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { AuthService, ServiceService, ServiceCategoryService } from '../../../../../services';
-import { Configuration } from '../../../../../shared';
+import { ServiceService, ServiceCategoryService } from '../../../../../services';
 
 // declare let $: any;
 declare let initEssGrid: any;
@@ -19,7 +18,6 @@ declare let initEssGrid: any;
 export class ServiceListComponent implements OnInit {
 	private subscription: Subscription;
 	private subscriptionEvents: Subscription;
-	private hashtagSubscription: Subscription;
 
 	controller: string = 'dich-vu';
 	action_detail: string = 'chi-tiet';
@@ -37,10 +35,7 @@ export class ServiceListComponent implements OnInit {
 		private _Router: Router,
 		private _ServiceService: ServiceService,
 		private _ServiceCategoryService: ServiceCategoryService,
-		private _Configuration: Configuration,
-		private _LocalStorageService: LocalStorageService,
-		private _ElementRef: ElementRef,
-		private _Renderer: Renderer
+		private _LocalStorageService: LocalStorageService
 	) {
 		this.language_code = String(_LocalStorageService.get('language_code'));
 		if(this.language_code == 'en'){

@@ -1,5 +1,13 @@
 <nav class="menu_main_nav_area">
   <ul class="menu_main_nav">
+    <li class="menu-item change_language_area" style="display: none">
+        <a href="#" class="" title="Tiếng Việt" [ngClass]="{'language_inactive' : default_language_code != 'vi'}" (click)="onChangeLanguageCode('vi')">
+            <img src="/assets/public/images/flags/vi.png" />
+        </a>
+        <a href="#" class="" title="English" [ngClass]="{'language_inactive' : default_language_code != 'en'}" (click)="onChangeLanguageCode('en')">
+            <img src="/assets/public/images/flags/en.png" />
+        </a>
+    </li>
     <li class="menu-item current-menu-ancestor current-menu-parent menu-item-has-children">
       <a>{{'PUBLIC.about_us' | translate}}</a>
       <ul class="sub-menu">

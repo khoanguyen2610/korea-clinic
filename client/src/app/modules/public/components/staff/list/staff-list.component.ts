@@ -8,7 +8,6 @@ import { StaffService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
 // declare let $: any;
-declare let moment: any;
 
 @Component({
 	selector: 'app-public-general-staff-list',

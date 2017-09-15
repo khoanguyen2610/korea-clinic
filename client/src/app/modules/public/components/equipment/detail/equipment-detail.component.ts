@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { TranslateService } from 'ng2-translate';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { EquipmentService, NewsCategoryService  } from '../../../../../services';
+import { EquipmentService  } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 import * as moment from 'moment';
 
@@ -14,7 +14,7 @@ import * as moment from 'moment';
 @Component({
 	selector: 'app-public-equipment-detail',
 	templateUrl: './equipment-detail.component.html',
-	providers: [ EquipmentService, NewsCategoryService ]
+	providers: [ EquipmentService ]
 })
 
 export class EquipmentDetailComponent implements OnInit {
@@ -30,7 +30,6 @@ export class EquipmentDetailComponent implements OnInit {
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
-		private _NewsCategoryService: NewsCategoryService,
 		private _EquipmentService: EquipmentService,
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService,

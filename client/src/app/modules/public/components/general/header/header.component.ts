@@ -1,11 +1,7 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 
-import { Configuration } from '../../../../../shared';
-
-
 declare let window: any;
-// declare let moment: any;
 
 @Component({
 	selector: 'app-public-general-header',
@@ -19,8 +15,7 @@ export class HeaderComponent {
 	@Input() modules: any;
 	default_language_code: string;
 	constructor(
-		private _LocalStorageService: LocalStorageService,
-		private _Configuration: Configuration
+		private _LocalStorageService: LocalStorageService
 	) {
 		this.default_language_code = String(this._LocalStorageService.get('language_code'));
 

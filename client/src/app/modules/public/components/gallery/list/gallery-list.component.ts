@@ -1,9 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { Configuration } from '../../../../../shared';
 import { GalleryService } from '../../../../../services';
 
 
@@ -26,7 +23,6 @@ export class GalleryListComponent implements OnInit {
 	width_default = 'width=' + this.width;
 
 	constructor(
-		private _Configuration: Configuration,
 		private _GalleryService: GalleryService,
 		private _LocalStorageService: LocalStorageService
 	) {
