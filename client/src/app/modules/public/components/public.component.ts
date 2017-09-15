@@ -40,7 +40,7 @@ export class PublicComponent  {
 	modules: any;
 	services: Array<any>;
 	news: Array<any>;
-
+	apps = ['whatsapp','kakaoTalk','line','skype','facebook','instagram'];
 	page_content_wrap: string = 'page_content_wrap page_paddings_no';
 
 	// template_pic
