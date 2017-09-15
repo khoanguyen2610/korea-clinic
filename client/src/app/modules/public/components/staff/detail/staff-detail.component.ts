@@ -7,7 +7,7 @@ import { StaffService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
 
-// declare let $: any;
+declare let initMeta: any;
 // declare let moment: any;
 
 @Component({
@@ -59,7 +59,8 @@ export class StaffDetailComponent implements OnInit {
 
 				var metas = this._Configuration.metas;
 				metas.forEach(meta => {
-					this._Configuration[meta] = this.Item[meta];
+					this._Configuration[meta] = this.Item[meta];//set meta data
+					initMeta(meta, this.Item[meta]);
 				});
 			}
 		});

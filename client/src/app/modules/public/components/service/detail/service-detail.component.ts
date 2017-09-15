@@ -6,7 +6,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { ServiceService, ServiceCategoryService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 
-// declare let $: any;
+declare let initMeta: any;
 // declare let moment: any;
 
 @Component({
@@ -65,7 +65,6 @@ export class ServiceDetailComponent implements OnInit {
 				this.categories = res.data;
 			}
 		});
-		console.log('dfdf')
 	}
 
 	ngOnInit() {
@@ -84,6 +83,8 @@ export class ServiceDetailComponent implements OnInit {
 				var metas = this._Configuration.metas;
 				metas.forEach(meta => {
 					this._Configuration[meta] = this.Item[meta];
+					//set meta data
+					initMeta(meta, this.Item[meta]);
 				});
 			}
 		});

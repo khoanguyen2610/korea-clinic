@@ -922,6 +922,7 @@
 	}
 	}
 @media (min-width: 480px) and (max-width: 767px) {
+    #cfacebook{ display: none}
     .body_style_boxed .page_wrap {
         width: 100%;
     }
@@ -3055,6 +3056,8 @@
 	}
 }
 @media (max-width: 480px) {
+
+    #cfacebook{ display: none}
     .slide_partner{height: 100px !important}
     .header_mobile .mask {
         display: none!important;

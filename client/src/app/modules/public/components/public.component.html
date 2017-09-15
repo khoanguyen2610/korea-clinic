@@ -104,7 +104,7 @@
             <ul>
                 <ng-template ngFor let-app [ngForOf]="apps">
                     <li class="bg-pink" *ngIf="options[app]">
-                        <a [href]="options[app].value" [ngClass]="'icon-qr-' + app">
+                        <a [href]="(app == 'whatsapp')? 'tel:' +  options[app].value: options[app].value" [ngClass]="'icon-qr-' + app" target="_blank">
                             <figure class="opacity-9"> <img [src]="'./assets/public/images/social/' + app + '.png'" class="icon-wa-img"></figure>
                             <h6>{{ app }}</h6>
                         </a>
@@ -122,15 +122,15 @@
             <div class="col-xs-12">
                 <div class="swiper-container-bottom-quick sc_slider_swiper swiper-slider-container sc_slider_nopagination sc_slider_nocontrols" data-interval="9415" data-slides-per-view="6" data-slides-min-width="60">
                     <div class="slides swiper-wrapper">
-                        <div *ngIf="options['phone']" class="swiper-slide">
-                            <a [href]="options['phone'].value" class="mode-mobile">
+                        <!-- <div *ngIf="options['phone']" class="swiper-slide">
+                            <a [href]="'tel:' + options['phone'].value" class="mode-mobile">
                                 <figure class="opacity-9"> <img width="41px" src="./assets/public/images/social/phone.svg" class="icon-wa-img"></figure>
                                 <h6>Phone</h6>
                             </a>
-                        </div>
+                        </div> -->
                         <ng-template ngFor let-app [ngForOf]="apps">
                             <div class="swiper-slide" *ngIf="options[app]">
-                                <a [href]="options[app].value" [ngClass]="'icon-qr-' + app">
+                                <a [href]="(app == 'whatsapp')? 'tel:' +  options[app].value: options[app].value" [ngClass]="'icon-qr-' + app" target="_blank">
                                     <figure class="opacity-9"> <img [src]="'./assets/public/images/social/' + app + '.png'" class="icon-wa-img"></figure>
                                     <h6>{{ app }}</h6>
                                 </a>

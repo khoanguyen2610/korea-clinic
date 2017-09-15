@@ -7,8 +7,7 @@ import { NewsService, NewsCategoryService  } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
 import * as moment from 'moment';
 
-// declare let $: any;
-// declare let moment: any;
+declare let initMeta: any;
 
 @Component({
 	selector: 'app-public-news-detail',
@@ -71,6 +70,8 @@ export class NewsDetailComponent implements OnInit {
 				var metas = this._Configuration.metas;
 				metas.forEach(meta => {
 					this._Configuration[meta] = this.Item[meta];
+					//set meta data
+					initMeta(meta, this.Item[meta]);
 				});
 			}
 		});

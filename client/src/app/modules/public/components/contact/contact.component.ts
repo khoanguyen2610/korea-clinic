@@ -53,12 +53,6 @@ export class ContactComponent implements OnInit {
 		this._OptionsService.getByID(null, params).subscribe(res => {
 			if (res.status == 'success') {
 				this.address = res.data;
-
-				var metas = this._Configuration.metas;
-				metas.forEach(meta => {
-					this._Configuration[meta] = this.Item[meta];
-				});
-
 			}
 		});
 	}

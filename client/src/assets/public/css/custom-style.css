@@ -173,7 +173,7 @@
 .swiper-container-bottom-quick .swiper-wrapper .swiper-slide:nth-child(2n) { background-color: #eaeff3; }
 .swiper-container-bottom-quick .swiper-wrapper .swiper-slide a { text-align: center; }
 .swiper-container-bottom-quick .swiper-wrapper .swiper-slide a figure { opacity: 1; }
-.swiper-container-bottom-quick .swiper-wrapper .swiper-slide a h6 { color: #9fa69f; }
+.swiper-container-bottom-quick .swiper-wrapper .swiper-slide a h6 { color: #9fa69f; font-family: 'fontello'}
 .swiper-container-bottom-quick .swiper-button-next-bottom, .swiper-container-bottom-quick .swiper-button-prev-bottom {top:35%;}
 
 .div-bottom-fixed-quick{

@@ -123,17 +123,23 @@ export class PublicComponent  {
 			}
 			this._Configuration.language_code = String(this._LocalStorageService.get('language_code'));
 
+
 			setTimeout(() => {
 				jacqueline_init_actions();
 				jQuery(window).resize();
-				var metas = this._Configuration.metas;
-				metas.forEach(meta => {
-					jQuery('#' + meta).attr("content", this._Configuration[meta]);
-				});
 			}, 600);
+
+			this.setMetaData();
 
 		}
     }
+
+	setMetaData(){
+		var metas = this._Configuration.metas;
+		metas.forEach(meta => {
+			jQuery('#' + meta).attr("content", this._Configuration[meta]);
+		});
+	}
 
     getListOption() {
 		let params: URLSearchParams = new URLSearchParams();
@@ -151,6 +157,7 @@ export class PublicComponent  {
 				metas.forEach(meta => {
 					this._Configuration[meta] = this.options[meta].value;
 				});
+				this.setMetaData();
 			}
 		});
     }

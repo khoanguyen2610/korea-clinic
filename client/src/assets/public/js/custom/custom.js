@@ -94,6 +94,16 @@ JACQUELINE_STORAGE["strings"] = {
 // 	itemsmenu();
 // });
 
+
+//set meta
+function initMeta(meta_id, content) {
+    console.log(meta_id);
+    console.log(content);
+    setTimeout(() => {
+        jQuery('#' + meta_id).attr("content", content);
+    }, 500);
+}
+
 function initRevSlider() {
 	"use strict";
 	var ajaxRevslider = function(obj) {
