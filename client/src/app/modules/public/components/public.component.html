@@ -120,8 +120,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
-                <div class="swiper-container-bottom-quick sc_slider_swiper swiper-slider-container sc_slider_nopagination sc_slider_nocontrols" data-interval="9415" data-slides-per-view="4" data-slides-min-width="100">
+                <div class="swiper-container-bottom-quick sc_slider_swiper swiper-slider-container sc_slider_nopagination sc_slider_nocontrols" data-interval="9415" data-slides-per-view="6" data-slides-min-width="60">
                     <div class="slides swiper-wrapper">
+                        <div *ngIf="options['phone']" class="swiper-slide">
+                            <a [href]="options['phone'].value" class="mode-mobile">
+                                <figure class="opacity-9"> <img width="41px" src="./assets/public/images/social/phone.svg" class="icon-wa-img"></figure>
+                                <h6>Phone</h6>
+                            </a>
+                        </div>
                         <ng-template ngFor let-app [ngForOf]="apps">
                             <div class="swiper-slide" *ngIf="options[app]">
                                 <a [href]="options[app].value" [ngClass]="'icon-qr-' + app">

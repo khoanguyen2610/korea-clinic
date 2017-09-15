@@ -166,7 +166,7 @@
 
 .swiper-container-bottom-quick {
   position: relative;
-  height: 7.5rem; !important;
+  height: 5.5rem; !important;
 }
 
 .swiper-container-bottom-quick .swiper-wrapper .swiper-slide { height: 90px; padding: 10px; }

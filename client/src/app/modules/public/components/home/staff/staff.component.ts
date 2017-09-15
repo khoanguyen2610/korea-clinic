@@ -5,8 +5,9 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from '../../../../../shared';
 import { StaffService } from '../../../../../services';
 
-declare let $: any;
+declare let jQuery: any;
 declare let moment: any;
+declare var jacqueline_init_actions: any;
 
 @Component({
 	selector: 'app-public-home-staff',
@@ -78,6 +79,11 @@ export class StaffComponent implements OnInit {
 
 					}
 				}
+
+				setTimeout(() => {
+					jacqueline_init_actions();
+					jQuery(window).resize();
+				}, 200);
 
 			}
 		});
