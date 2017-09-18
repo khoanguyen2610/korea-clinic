@@ -9,7 +9,7 @@ declare let jQuery: any;
 
 export class SocialAppComponent implements OnInit {
 	@Input() options: any;
-	apps = ['whatsapp','kakaoTalk','line','skype','facebook','instagram'];
+	apps = ['facebook', 'instagram', 'viber', 'zalo', 'kakaotalk', 'whatsap', 'line',  'pinterest', 'twitter'];
 
 	constructor() { }
 
@@ -19,6 +19,7 @@ export class SocialAppComponent implements OnInit {
 
 	loadCarousel(){
 		var jcarousel = jQuery('.jcarousel');
+		var jcarousel_vertical = jQuery('.jcarousel-vertical');
 
 		jcarousel
 			.on('jcarousel:reload jcarousel:create', function () {
@@ -37,12 +38,17 @@ export class SocialAppComponent implements OnInit {
 				wrap: 'circular'
 			});
 
-		jQuery('.jcarousel-control-prev')
+		jcarousel_vertical.jcarousel({
+			 vertical: true
+		});
+
+
+		jQuery('.jcarousel-control-prev.vertical')
 			.jcarouselControl({
 				target: '-=1'
 			});
 
-		jQuery('.jcarousel-control-next')
+		jQuery('.jcarousel-control-next.vertical')
 			.jcarouselControl({
 				target: '+=1'
 			});
@@ -66,4 +72,3 @@ export class SocialAppComponent implements OnInit {
 	}
 
 }
-

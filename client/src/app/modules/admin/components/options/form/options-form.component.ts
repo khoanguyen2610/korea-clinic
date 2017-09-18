@@ -140,7 +140,9 @@ export class OptionsFormComponent implements OnInit {
 			formData.append('options[whatsapp]', Item['whatsapp']);
 			formData.append('options[kakaotalk]', Item['kakaotalk']);
 			formData.append('options[line]', Item['line']);
-			formData.append('options[skype]', Item['skype']);
+			formData.append('options[viber]', Item['viber']);
+			formData.append('options[zalo]', Item['zalo']);
+			formData.append('options[pinterest]', Item['pinterest']);
 			formData.append('options[youtube]', Item['youtube']);
 			formData.append('options[home_about_us]', Item['home_about_us']);
 			formData.append('options[working_hour]', Item['working_hour']);

@@ -89,7 +89,10 @@
     "kakaotalk": "KakaoTalk",
     "line": "Line",
     "skype": "Skype",
-    "youtube": "Youtube"
+    "youtube": "Youtube",
+    "viber": "Viber",
+    "zalo": "zalo",
+    "pinterest": "pinterest"
   },
   "PUBLIC": {
     "equipment": "Trang Thiết Bị",

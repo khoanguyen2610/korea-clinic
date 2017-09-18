@@ -163,7 +163,7 @@ body{font-family: 'fontello'}
 
 .div-scroll-warp { position:fixed; top:330px; z-index: 1000; }
 
-.div-scroll-warp ul {padding:7px 5px 7px 5px; width:60px; border-radius:30px; border:1px solid #b6bdc6; background-color:rgba(255,255,255,0.79); list-style: none; }
+.div-scroll-warp ul {padding:7px 5px 7px 5px; width:60px; border:1px solid #b6bdc6; background-color:rgba(255,255,255,0.79); list-style: none; }
 .div-scroll-warp ul li.bg-pink {padding:7px 0 7px 0; background:none; border-bottom:1px dashed #b6bdc6;}
 .div-scroll-warp ul li.bg-pinks {padding:7px 0 7px 0; background:none; }
 .div-scroll-warp ul li a { color: #9fa69f; }
@@ -213,7 +213,8 @@ body{font-family: 'fontello'}
 .jcarousel {
     position: relative;
     overflow: hidden;
-    width: 100%;
+    width: 90%;
+    margin: 0px auto;
 }
 
 .jcarousel ul {
@@ -239,6 +240,32 @@ body{font-family: 'fontello'}
     height: auto !important;
 }
 
+/** Carousel vertical **/
+
+.jcarousel.vertical {
+    overflow: hidden;
+    width: 60px;
+    margin: 0px auto;
+    height: 300px;
+    border: 1px solid #ccc;
+}
+
+.jcarousel.vertical ul {
+    height: 400px;
+    width: 60px !important;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0px;
+}
+
+.jcarousel.vertical img {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+}
+
 /** Carousel Controls **/
 
 .jcarousel-control-prev,
@@ -249,25 +276,37 @@ body{font-family: 'fontello'}
     width: 30px;
     height: 30px;
     text-align: center;
-    background: #4E443C;
-    color: #fff;
+    color: rgba(99, 107, 99, 0.07);
     text-decoration: none;
-    text-shadow: 0 0 1px #000;
-    font: 24px/27px Arial, sans-serif;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.37);
+    font: 40px/27px Arial, sans-serif;
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
     border-radius: 30px;
-    -webkit-box-shadow: 0 0 4px #F0EFE7;
-    -moz-box-shadow: 0 0 4px #F0EFE7;
-    box-shadow: 0 0 4px #F0EFE7;
 }
 
 .jcarousel-control-prev {
-    left: 15px;
+    left: 0px;
 }
 
 .jcarousel-control-next {
-    right: 15px;
+    right: 0px;
+}
+
+
+.jcarousel-control-prev.up {
+    right: 3px;
+    bottom: -25px;
+    width: 60px;
+    top: auto;
+    transform:rotate(-90deg);
+}
+
+.jcarousel-control-next.down {
+    right: 3px;
+    top: -10px;
+    width: 60px;
+    transform:rotate(-90deg);
 }
 
 /** Carousel Pagination **/
@@ -314,13 +353,24 @@ body{font-family: 'fontello'}
     box-shadow: 0 0 2px #F0EFE7;
 }
 
-.jcarousel .jcarousel-items li { width: 90px; height: 90px; padding: 10px; }
+.jcarousel .jcarousel-items li { width: 90px !important; height: 75px; padding: 10px; }
 .jcarousel .jcarousel-items li:nth-child(2n) { background-color: #eaeff3; }
 .jcarousel .jcarousel-items li a { text-align: center; }
 .jcarousel .jcarousel-items li a figure { opacity: 1; }
-.jcarousel .jcarousel-items li a figure img { margin: auto; }
+.jcarousel .jcarousel-items li a figure img { margin: auto; width: 41px; border-radius: 50%}
 .jcarousel .jcarousel-items li a h6 { color: #9fa69f; font-family: 'fontello'}
 
+
+
+
+.jcarousel.vertical li {
+    width: 60px !important;
+    float: left;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.jcarousel.vertical .jcarousel-items li{border: 0px;}
 
 /** Mobile **/
 @media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
