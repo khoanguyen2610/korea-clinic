@@ -11,7 +11,7 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.about_us' | translate}}</h6>
 						<div class="text_column content_element">
-							<div *ngIf="options.home_about_us" class="wrapper" style="text-align: center" [innerHTML]="options.home_about_us['value']">
+							<div *ngIf="options.home_about_us" class="wrapper" style="text-align: center" [innerHTML]="options.home_about_us['value'] | safeHtml">
 							</div>
 						</div>
 						<div class="sc_empty_space em_height_3">
@@ -21,7 +21,7 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.working_hours' | translate}}</h6>
 						<div class="text_column content_element">
-							<div *ngIf="options.working_hour" class="wrapper" style="text-align: center" [innerHTML]="options.working_hour['value']">
+							<div *ngIf="options.working_hour" class="wrapper" style="text-align: center" [innerHTML]="options.working_hour['value'] | safeHtml">
 
 							</div>
 						</div>
@@ -32,7 +32,7 @@
 					<div class="column-1_3 sc_column_item">
 						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.contact' | translate}}</h6>
 						<div class="text_column content_element">
-							<div *ngIf="options.home_contact" class="wrapper" style="text-align: center" [innerHTML]="options.home_contact['value']">
+							<div *ngIf="options.home_contact" class="wrapper" style="text-align: center" [innerHTML]="options.home_contact['value'] | safeHtml">
 							</div>
 						</div>
 						<div class="sc_empty_space em_height_3">

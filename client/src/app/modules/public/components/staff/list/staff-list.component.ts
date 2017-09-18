@@ -130,6 +130,6 @@ export class StaffListComponent implements OnInit {
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
 		this.querySubscription.unsubscribe();
-		this.translateSubscription.unsubscribe();
+		// this.translateSubscription.unsubscribe();
 	}
 }

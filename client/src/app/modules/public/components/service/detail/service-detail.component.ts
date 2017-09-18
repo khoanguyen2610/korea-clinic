@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
+import { Subscription } from 'rxjs/Rx';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ServiceService, ServiceCategoryService } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
@@ -34,7 +34,7 @@ export class ServiceDetailComponent implements OnInit {
 		private _ServiceService: ServiceService,
 		private _ServiceCategoryService: ServiceCategoryService,
 		private _Configuration: Configuration,
-		private _LocalStorageService: LocalStorageService
+		private _LocalStorageService: LocalStorageService,
 	) {
 		this.language_code = String(_LocalStorageService.get('language_code'));
 
