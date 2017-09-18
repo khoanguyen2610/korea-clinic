@@ -9,6 +9,33 @@
                     <div class="sc_team sc_team_style_team-3 aligncenter" id="sc_team_630">
                         <h6 class="sc_item_title sc_team_subtitle sc_item_subtitle">{{ 'PUBLIC.expert' | translate }}</h6>
                         <div class="sc_section_content_wrap">
+                            <div class="jcarousel">
+                                <ul>
+									<li *ngFor="let item of Items; let i=index;">
+									    <div class="sc_team_item" id="sc_team_630_{{i + 1}}">
+											<div class="sc_team_item_avatar">
+											    <img alt="" [src]="item.image_url">
+											    <div class="sc_team_item_hover">
+											        <a class="sc_team_item_icon" [routerLink]="[ '/' + modules.expert, modules.detail, item.item_key, item.fullname | niceurl]">&nbsp;</a>
+											    </div>
+											</div>
+											<div class="sc_team_item_info">
+											    <h5 class="sc_team_item_title"><a [routerLink]="[ '/' + modules.expert, modules.detail, item.item_key, item.fullname | niceurl]">{{ item.fullname }}</a></h5>
+											    <div class="sc_team_item_position">
+											        {{ item.position }}
+											    </div>
+											</div>
+									    </div>
+									</li>
+                                </ul>
+                            </div>
+
+							<a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+							<a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+							<p class="jcarousel-pagination"></p>
+
+                            <!--
                             <div class="sc_slider sc_slider_swiper swiper-slider-container sc_slider_controls sc_slider_pagination sc_slider_bg" data-interval="5776" id="sc_slider_061">
                                 <div class="slides swiper-wrapper">
                                     <div *ngFor="let item of Items" class="swiper-slide" id="sw_slide" >
@@ -38,6 +65,7 @@
                                 </div>
                                 <div class="sc_slider_pagination_wrap"></div>
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>

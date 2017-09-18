@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ScriptService } from './../../../services';
-import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
+import { Router, ActivatedRoute, UrlSegment, NavigationEnd } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { HttpInterceptorService } from 'ng-http-interceptor';
 import { TranslateService } from 'ng2-translate';
@@ -40,7 +40,6 @@ export class PublicComponent  {
 	modules: any;
 	services: Array<any>;
 	news: Array<any>;
-	apps = ['whatsapp','kakaoTalk','line','skype','facebook','instagram'];
 	page_content_wrap: string = 'page_content_wrap page_paddings_no';
 
 	// template_pic
