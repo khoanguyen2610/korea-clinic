@@ -34,7 +34,7 @@
 												<div class="sc_accordion_item first">
 													<article class="post_item_excerpt post_item post">
 														<div class="post_content clearfix">
-															<div [innerHTML]="Item['content']"></div>
+															<div [innerHTML]="Item['content'] | safeHtml"></div>
 														</div>
 													</article>
 												</div>

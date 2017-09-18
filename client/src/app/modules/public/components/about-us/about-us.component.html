@@ -9,7 +9,7 @@
                                 <div class="columns_wrap">
 
                                     <div class="sc_call_to_action_info">
-                                        <div class="sc_call_to_action_descr sc_item_descr" [innerHTML]="Item.value"></div>
+                                        <div class="sc_call_to_action_descr sc_item_descr" [innerHTML]="Item.value | safeHtml"></div>
                                     </div>
                                 </div>
                             </div>

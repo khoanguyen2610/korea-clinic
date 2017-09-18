@@ -18,7 +18,7 @@
                                 {{ Item.position }}
                             </div>
                             <div class="wrapper">
-                                <div [innerHTML]="Item.content">
+                                <div [innerHTML]="Item.content | safeHtml">
                                 </div>
 
                             </div>

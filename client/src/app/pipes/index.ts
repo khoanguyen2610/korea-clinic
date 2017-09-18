@@ -9,4 +9,4 @@ export * from './htmlentities.pipe';
 export * from './trim.pipe';
 export * from './niceurl.pipe';
 export * from './selectobject.pipe';
-
+export * from './safehtml.pipe';

@@ -46,12 +46,7 @@
                                                                 <!-- <span class="post_icon icon-book-open"></span>
                                                                 {{ Item['title'] }}-->
                                                             </h1>
-                                                            <!-- <div class="post_info">
-                                                                <span class="post_info_item post_info_posted">
-                                                                    <a href="single-post.html" class="post_info_date date updated" [attr.content]="Item['created_at']">{{ Item['created_format_date'] }}</a>
-                                                                </span>
-                                                            </div> -->
-                                                            <div [innerHTML]="Item['content']"></div>
+                                                            <div [innerHTML]="Item['content'] | safeHtml"></div>
                                                         </div>
                                                     </article>
                                                 </div>

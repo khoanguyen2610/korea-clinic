@@ -88,6 +88,15 @@ export class PublicComponent  {
 
 	}
 
+	ngOnInit(){
+		this._Router.events.subscribe((evt) => {
+			if(!(evt instanceof NavigationEnd)){
+				return;
+			}
+			window.scrollTo(0,0);
+		});
+	}
+
 	ngAfterContentChecked() {
     	let routing = this._Router.url;
 		if(this.curRouting != routing){
