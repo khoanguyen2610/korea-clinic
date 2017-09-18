@@ -519,6 +519,7 @@ function jacqueline_ready_actions() {
     //------------------------------------
 
 	// Scroll to top button
+	jQuery('.scroll_to_top').unbind('click');
 	jQuery('.scroll_to_top').on('click', function(e) {
 		"use strict";
 		jQuery('html,body').animate({

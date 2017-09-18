@@ -11,49 +11,49 @@
     <li class="menu-item current-menu-ancestor current-menu-parent menu-item-has-children">
       <a>{{'PUBLIC.about_us' | translate}}</a>
       <ul class="sub-menu">
-        <li class="menu-item current-menu-item">
-          <a [routerLink]="['/' + modules.about_us]" [routerLinkActive]="['active']">White Clinic</a>
+        <li class="menu-item">
+          <a [routerLink]="['/' + modules.about_us]">White Clinic</a>
         </li>
         <li class="menu-item">
-          <a [routerLink]="['/' +  modules.expert]" [routerLinkActive]="['active']">{{'PUBLIC.expert' | translate}}</a>
+          <a [routerLink]="['/' +  modules.expert]">{{'PUBLIC.expert' | translate}}</a>
         </li>
         <li class="menu-item">
-          <a [routerLink]="[ '/' + modules.equipment]" [routerLinkActive]="['active']">{{'PUBLIC.equipment' | translate}}</a>
+          <a [routerLink]="[ '/' + modules.equipment]">{{'PUBLIC.equipment' | translate}}</a>
         </li>
         <li class="menu-item">
-          <a [routerLink]="[ '/' + modules.gallery]" [routerLinkActive]="['active']">{{'PUBLIC.gallery' | translate}}</a>
+          <a [routerLink]="[ '/' + modules.gallery]">{{'PUBLIC.gallery' | translate}}</a>
         </li>
       </ul>
     </li>
     <li class="menu-item menu-item-has-children">
-      <a [routerLink]="[ '/' + modules.service]" [routerLinkActive]="['active']">{{'PUBLIC.service' | translate}}</a>
+      <a [routerLink]="[ '/' + modules.service]">{{'PUBLIC.service' | translate}}</a>
       <ul class="sub-menu">
         <li  class="menu-item menu-item-has-children" *ngFor="let sCategory of serviceCategories">
           <a [routerLink]="[ '/' + modules.service, sCategory.item_key, sCategory.title | niceurl]">{{ sCategory.title }}</a>
           <ul class="sub-menu" *ngIf="sCategory['list_services'].length">
             <li class="menu-item" *ngFor="let s of sCategory['list_services']">
-              <a [routerLink]="[ '/' + modules.service,  modules.detail, s.item_key, s.title | niceurl ]" [routerLinkActive]="['active']">{{ s.title }}</a>
+              <a [routerLink]="[ '/' + modules.service,  modules.detail, s.item_key, s.title | niceurl ]">{{ s.title }}</a>
             </li>
           </ul>
         </li>
         <li class="menu-item">
-          <a [routerLink]="[ '/' + modules.faq]" [routerLinkActive]="['active']">{{'PUBLIC.faq' | translate}}</a>
+          <a [routerLink]="[ '/' + modules.faq]">{{'PUBLIC.faq' | translate}}</a>
         </li>
       </ul>
     </li>
     <li class="menu-item menu-item-has-children">
-      <a [routerLink]="[ '/' + modules.news]" [routerLinkActive]="['active']">{{'PUBLIC.news' | translate}}</a>
+      <a [routerLink]="[ '/' + modules.news]">{{'PUBLIC.news' | translate}}</a>
       <ul class="sub-menu">
         <li  class="menu-item" *ngFor="let nCategory of newsCategories">
-          <a [routerLink]="[ '/' + modules.news, nCategory.item_key, nCategory.title | niceurl]" [routerLinkActive]="['active']">{{ nCategory.title }}</a>
+          <a [routerLink]="[ '/' + modules.news, nCategory.item_key, nCategory.title | niceurl]">{{ nCategory.title }}</a>
         </li>
       </ul>
     </li>
     <li class="menu-item">
-      <a [routerLink]="[ '/' + modules.service, modules.before_after]" [routerLinkActive]="['active']">{{'PUBLIC.before_after' | translate}}</a>
+      <a [routerLink]="[ '/' + modules.service, modules.before_after]">{{'PUBLIC.before_after' | translate}}</a>
     </li>
     <li class="menu-item">
-      <a [routerLink]="[ '/' + modules.contact]" [routerLinkActive]="['active']">{{'PUBLIC.contact' | translate}}</a>
+      <a [routerLink]="[ '/' + modules.contact]">{{'PUBLIC.contact' | translate}}</a>
     </li>
   </ul>
 </nav>

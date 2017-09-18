@@ -610,9 +610,10 @@ body table.booked-calendar .booked-appt-list .timeslot .timeslot-people button {
 	width:585px;
 }
 .home .sc_icon_shape_square {
+	position: fixed;
 	display:block;
-	bottom: auto!important;
-	right: auto;
+	bottom: 60px;
+	right: 10px;
 	margin-top:-25px;
 	margin-bottom:0px;
 	font-size:18px;

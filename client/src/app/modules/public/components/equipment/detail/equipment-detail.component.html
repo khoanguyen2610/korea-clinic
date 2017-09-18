@@ -51,7 +51,7 @@
                                                                     <a href="single-post.html" class="post_info_date date updated" [attr.content]="Item['created_at']">{{ Item['created_format_date'] }}</a>
                                                                 </span>
                                                             </div> -->
-                                                            <div [innerHTML]="Item['content']"></div>
+                                                            <div class="article_content" [innerHTML]="Item['content']"></div>
                                                         </div>
                                                     </article>
                                                 </div>
@@ -104,5 +104,3 @@
         </div>
     </div>
 </div>
-
-

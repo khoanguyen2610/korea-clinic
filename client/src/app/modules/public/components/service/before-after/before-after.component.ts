@@ -17,7 +17,8 @@ export class BeforeAfterComponent implements OnInit {
 	categories: Array<any> = [];
 	language_code: string;
 	module_name: string = 'beforeafter';
-	width: string = '780';
+	width: string = '776';
+	height: string = '380';
 	width_preview = 'width=1280';
 	width_default = 'width=' + this.width;
 
@@ -41,6 +42,7 @@ export class BeforeAfterComponent implements OnInit {
 		});
 
 		params.set('image_resize_width', this.width);
+		params.set('image_resize_height', this.height);
 		this._BeforeAfterService.getListAll(params).subscribe(res => {
 			if(res.status == 'success'){
 

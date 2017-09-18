@@ -2927,7 +2927,7 @@
         right: 1em;
     }
     .scroll_to_top.show {
-        bottom: 1em;
+        bottom: 75px !important;
     }
     .jacqueline_profiler {
         display: none;

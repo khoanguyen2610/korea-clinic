@@ -41,7 +41,8 @@ export class SlideComponent implements OnInit {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('language_code', this.language_code);;
 		params.set('limit', String(this.number_item));
-		params.set('image_resize_width', '1280');
+		params.set('image_resize_width', '1900');
+		params.set('image_resize_height', '750');
 		params.set('item_status', 'active');
 		this._SlideService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
