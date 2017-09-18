@@ -1,0 +1,61 @@
+<div class="container-fluid">
+	<div class="col-xs-12">
+		<div class="div-scroll-warp">
+			<ul>
+				<ng-template ngFor let-app [ngForOf]="apps">
+					<li class="bg-pink" *ngIf="options[app]">
+						<a [href]="(app == 'whatsapp')? 'tel:' +  options[app].value: options[app].value" [ngClass]="'icon-qr-' + app" target="_blank">
+							<figure class="opacity-9"> <img [src]="'./assets/public/images/social/' + app + '.png'" class="icon-wa-img"></figure>
+							<h6>{{ app }}</h6>
+						</a>
+					</li>
+				</ng-template>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<div class="div-bottom-fixed-quick hidden-lg-up">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="jcarousel">
+					<ul class="jcarousel-items">
+						<ng-template ngFor let-app [ngForOf]="apps">
+							<li *ngIf="options[app]">
+							    <a [href]="(app == 'whatsapp')? 'tel:' +  options[app].value: options[app].value" [ngClass]="'icon-qr-' + app" target="_blank">
+							        <figure class="opacity-9"> <img [src]="'./assets/public/images/social/' + app + '.png'" class="icon-wa-img"></figure>
+							        <h6>{{ app }}</h6>
+							    </a>
+							</li>
+						</ng-template>
+					</ul>
+				</div>
+
+				<a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+				<a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+				<p class="jcarousel-pagination"></p>
+
+				<!--<div class="swiper-container-bottom-quick sc_slider_swiper swiper-slider-container sc_slider_nopagination sc_slider_nocontrols" data-interval="9415" data-slides-per-view="6" data-slides-min-width="60">
+					<div class="slides swiper-wrapper">
+						<ng-template ngFor let-app [ngForOf]="apps">
+							<div class="swiper-slide" *ngIf="options[app]">
+							    <a [href]="(app == 'whatsapp')? 'tel:' +  options[app].value: options[app].value" [ngClass]="'icon-qr-' + app" target="_blank">
+							        <figure class="opacity-9"> <img [src]="'./assets/public/images/social/' + app + '.png'" class="icon-wa-img"></figure>
+							        <h6>{{ app }}</h6>
+							    </a>
+							</div>
+						</ng-template>
+					</div>
+					<div class="sc_slider_controls_wrap">
+					    <a class="sc_slider_prev" href="#"></a>
+					    <a class="sc_slider_next" href="#"></a>
+					</div>
+					<div class="sc_slider_pagination_wrap"></div>
+				</div>-->
+			</div>
+		</div>
+	</div>
+</div>
