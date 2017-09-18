@@ -60,39 +60,58 @@ export class StaffListComponent implements OnInit {
 			if(res.status == 'success'){
 
 				// Process Array include many array with 4 elements
-				var items = res.data;
 
-				var next = 0;
-				if (items.length <= this.number_item) {
-					for (let i = 0; i < items.length; i++) {
+				// var next = 0;
+				// if (items.length <= this.number_item) {
+				// 	for (let i = 0; i < items.length; i++) {
 
-						if (next < this.number_item) {
-							if (!next) {
-								var arr_item_four = [];
-							}
-							arr_item_four.push(items[i]);
+				// 		if (next < this.number_item) {
+				// 			if (!next) {
+				// 				var arr_item_four = [];
+				// 			}
+				// 			arr_item_four.push(items[i]);
 
-							next++;
-						}
+				// 			next++;
+				// 		}
+				// 	}
+				// 	this.Items.push(arr_item_four);
+				// } else {
+				// 	for (let i = 0; i < items.length; i++) {
+
+				// 		if (next < this.number_item) {
+				// 			if (!next) {
+				// 				var arr_item_four = [];
+				// 			}
+				// 			arr_item_four.push(items[i]);
+
+				// 			next++;
+				// 		} else {
+				// 			next = 0;
+				// 			this.Items.push(arr_item_four);
+				// 		}
+
+
+				// 	}
+				// }
+
+				let data = res.data;
+				let temp = [];
+
+				let j = 0;
+				let c = res.data.length;
+				for (let i = 0; i < data.length; i++) {
+					if (i && (i % this.number_item == 0)) {
+						this.Items.push(temp);
+						temp = [];
 					}
-					this.Items.push(arr_item_four);
-				} else {
-					for (let i = 0; i < items.length; i++) {
 
-						if (next < this.number_item) {
-							if (!next) {
-								var arr_item_four = [];
-							}
-							arr_item_four.push(items[i]);
+					temp.push(data[i]);
 
-							next++;
-						} else {
-							next = 0;
-							this.Items.push(arr_item_four);
-						}
-
-
+					j = i + 1;
+					if ((c == j) && (j % this.number_item != 0)) {
+						this.Items.push(temp);
 					}
+
 				}
 
 			}
