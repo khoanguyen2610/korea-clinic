@@ -32,6 +32,7 @@ class Controller_ServiceCategory extends \Controller_API {
             $param_img = ['filepath' => isset($image->filepath)? base64_encode(SERVICE_CATEGORY_DIR . $image->filepath): null,
                             'filename' => isset($image->filename)? base64_encode($image->filename): null
                             ];
+			isset($param['image_resize_height']) && !empty($param['image_resize_height']) && $param_img['height'] = $param['image_resize_height'];
 			isset($param['image_resize_width']) && !empty($param['image_resize_width'])	&& $param_img['width'] = $param['image_resize_width'];
 			isset($param['image_resize_square']) && !empty($param['image_resize_square']) && $param_img['square'] = $param['image_resize_square'];
 
