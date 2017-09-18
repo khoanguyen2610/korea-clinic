@@ -30,7 +30,7 @@ import { AuthPermissionGuard, ChangeRouteGuard } from '../../guards';
 import { AuthService, ScriptService } from '../../services';
 
 //===================== Import PIPE =======================
-import { KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim, NiceUrl, SafeHtmlPipe } from '../../pipes';
+import { KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim, NiceUrl, SafeHtmlPipe, SafeUrlPipe } from '../../pipes';
 
 //===================== Import Directive =======================
 import { HelperDirective, EqualValidator, SmallerValidator, ImagePreview } from '../../directives/';
@@ -43,7 +43,7 @@ import { HelperDirective, EqualValidator, SmallerValidator, ImagePreview } from 
 @NgModule({
     declarations: [
         //======================= Import Pipe =======================
-        KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim, NiceUrl, SafeHtmlPipe,
+        KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim, NiceUrl, SafeHtmlPipe, SafeUrlPipe,
         // FileSelectDirective, FileDropDirective,
         EqualValidator, SmallerValidator, HelperDirective, ImagePreview
     ],
@@ -72,7 +72,7 @@ import { HelperDirective, EqualValidator, SmallerValidator, ImagePreview } from 
     ],
     exports: [
         CommonModule,
-        KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim, NiceUrl, SafeHtmlPipe,
+        KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim, NiceUrl, SafeHtmlPipe, SafeUrlPipe,
         // FileSelectDirective, FileDropDirective,
         EqualValidator, SmallerValidator, HelperDirective, ImagePreview,
         HttpInterceptorModule,

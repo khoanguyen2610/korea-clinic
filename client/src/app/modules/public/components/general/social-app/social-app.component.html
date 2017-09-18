@@ -5,7 +5,7 @@
 				<ul class="jcarousel-items">
 					<ng-template ngFor let-app [ngForOf]="apps">
 						<li class="bg-pink" *ngIf="options[app]">
-							<a [href]="(app == 'whatsapp')? 'tel:' +  options[app].value: options[app].value" [ngClass]="'icon-qr-' + app" target="_blank">
+							<a [href]="options[app].value | safeUrl" [ngClass]="'icon-qr-' + app" target="_blank">
 								<figure class="opacity-9"> <img [src]="'./assets/public/images/social/' + app + '.png'" class="icon-wa-img"></figure>
 								<h6>{{ app }}</h6>
 							</a>
@@ -35,7 +35,7 @@
 						</li>
 						<ng-template ngFor let-app [ngForOf]="apps">
 							<li *ngIf="options[app]">
-							    <a [href]="(app == 'whatsapp')? 'tel:' +  options[app].value: options[app].value" [ngClass]="'icon-qr-' + app" target="_blank">
+							    <a [href]="options[app].value | safeUrl" [ngClass]="'icon-qr-' + app" target="_blank">
 							        <figure class="opacity-9"> <img [src]="'./assets/public/images/social/' + app + '.png'" class="icon-wa-img"></figure>
 							        <h6>{{ app }}</h6>
 							    </a>
