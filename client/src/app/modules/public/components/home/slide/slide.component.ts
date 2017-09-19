@@ -6,6 +6,7 @@ import { Configuration } from '../../../../../shared';
 import { SlideService, ScriptService } from '../../../../../services';
 
 declare let jQuery: any;
+declare let window: any;
 declare let initRevSlider: any;
 
 @Component({
@@ -64,6 +65,13 @@ export class SlideComponent implements OnInit {
 
 			}
 		});
+	}
+
+	openUrl(url){
+		if(url && url != 'undefined' && url !='null'){
+			var windowReference = window.open();
+			windowReference.location.href = url;
+		}
 	}
 
 	getModuleNameByLang() {

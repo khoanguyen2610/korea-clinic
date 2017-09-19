@@ -922,7 +922,8 @@
 	}
 	}
 @media (min-width: 480px) and (max-width: 767px) {
-    #cfacebook{ display: none}
+    #cfacebook{ bottom: 75px; box-shadow: 0px 0px 0px; right: 0px;}
+    .home .sc_icon_shape_square{bottom: 120px !important;}
     .body_style_boxed .page_wrap {
         width: 100%;
     }
@@ -3057,7 +3058,8 @@
 }
 @media (max-width: 480px) {
 
-    #cfacebook{ display: none}
+    #cfacebook{ bottom: 75px; box-shadow: 0px 0px 0px; right: 0px;}
+    .home .sc_icon_shape_square{bottom: 120px !important;}
     .slide_partner{height: 100px !important}
     .header_mobile .mask {
         display: none!important;

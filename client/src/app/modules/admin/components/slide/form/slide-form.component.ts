@@ -139,7 +139,7 @@ export class SlideFormComponent implements OnInit {
 
 			formData.append('language_code', Item['language_code']);
 			formData.append('title', Item['title']);
-			formData.append('position', Item['position']);
+			formData.append('url', Item['url']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 			formData.append('order', Item['order']);

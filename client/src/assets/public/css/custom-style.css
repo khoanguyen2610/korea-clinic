@@ -16,6 +16,7 @@ body{font-family: 'fontello'}
     box-sizing: border-box;
     width: 100%;
 }
+.rev_slider li.tp-revslider-slidesli{ cursor: pointer}
 
 #cfacebook {
   position: fixed;
