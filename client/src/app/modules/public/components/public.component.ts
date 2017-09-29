@@ -9,6 +9,7 @@ import { Configuration } from './../../../shared';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 import { OptionsService, ServiceService, ServiceCategoryService, NewsCategoryService } from './../../../services';
+import { FacebookService, InitParams } from 'ngx-facebook';
 
 declare var jQuery: any;
 declare var JACQUELINE_STORAGE: any;
@@ -24,7 +25,7 @@ declare var document: any;
 @Component({
 	selector: 'app-public-root',
 	templateUrl: './public.component.html',
-	providers: [OptionsService, ServiceCategoryService, NewsCategoryService]
+	providers: [OptionsService, ServiceCategoryService, NewsCategoryService, FacebookService ]
 })
 
 export class PublicComponent  {
@@ -32,6 +33,7 @@ export class PublicComponent  {
 
 	curRouting?: string;
 	template:string;
+	language_code:string;
 	template_home: Array<any> = ['', 'home', 'trang-chu'];
 	module_name: string;
 	activeRoute: boolean = false;
@@ -54,7 +56,23 @@ export class PublicComponent  {
 		private _OptionsService: OptionsService,
 		private _NewsCategoryService: NewsCategoryService,
 		private _ServiceCategoryService: ServiceCategoryService,
+		private _FacebookService: FacebookService
 	) {
+		this.language_code = String(_LocalStorageService.get('language_code'));
+		//Load FB Library
+		switch (this.language_code) {
+			case "en":
+				var fb_sdk = 'fb-sdk-en';
+				break;
+
+			default:
+				var fb_sdk = 'fb-sdk-vi';
+				break;
+		}
+		this._ScriptService.load(fb_sdk).then(data => {
+
+		}).catch(error => console.log(error));
+
 		JACQUELINE_STORAGE['theme_init_counter'] = 0;
 
 		_HttpInterceptorService.request().addInterceptor((data, method) => {
@@ -139,8 +157,29 @@ export class PublicComponent  {
 
 			this.setMetaData();
 
+
+			let initParams: InitParams = {
+		      	appId: '1997839190484571',
+		      	xfbml: true,
+		      	version: 'v2.10'
+		    };
+
+		    this._FacebookService.init(initParams);
+
+
+		    this.initSocialShare();
 		}
     }
+
+   	initSocialShare(){
+   		setTimeout(() => {
+			jQuery("#social_share").jsSocials({
+			    shares: ["twitter", "facebook", "googleplus", "linkedin", "pinterest"]
+			});
+		}, 200);
+	}
+
+
 
 	setMetaData(){
 		var metas = this._Configuration.metas;

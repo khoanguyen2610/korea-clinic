@@ -8,7 +8,7 @@ import { Configuration } from '../../../../../shared';
 
 
 declare let initMeta: any;
-// declare let moment: any;
+declare let document: any;
 
 @Component({
 	selector: 'app-public-staff-detail',
@@ -23,6 +23,7 @@ export class StaffDetailComponent implements OnInit {
 	_params: any;
 	controller: string = 'nhan-vien';
 	language_code: string;
+	currentUrl: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -30,6 +31,8 @@ export class StaffDetailComponent implements OnInit {
 		private _LocalStorageService: LocalStorageService,
 		private _Configuration: Configuration
 	) {
+		//set Url
+	    this.currentUrl = document.URL;
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
 		);

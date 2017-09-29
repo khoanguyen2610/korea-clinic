@@ -7,7 +7,7 @@ import { ServiceService, ServiceCategoryService } from '../../../../../services'
 import { Configuration } from '../../../../../shared';
 
 declare let initMeta: any;
-// declare let moment: any;
+declare let document: any;
 
 @Component({
 	selector: 'app-public-service-detail',
@@ -27,6 +27,7 @@ export class ServiceDetailComponent implements OnInit {
 	action_before_after: string = 'truoc-sau';
 	curRouting: string;
 	language_code: string;
+	currentUrl: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -36,6 +37,8 @@ export class ServiceDetailComponent implements OnInit {
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService,
 	) {
+		//set Url
+	    this.currentUrl = document.URL;
 		this.language_code = String(_LocalStorageService.get('language_code'));
 
 		this.subscription = _ActivatedRoute.params.subscribe(

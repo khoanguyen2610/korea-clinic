@@ -9,7 +9,7 @@ import { Configuration } from '../../../../../shared';
 import * as moment from 'moment';
 
 declare let initMeta: any;
-// declare let moment: any;
+declare let document: any;
 
 @Component({
 	selector: 'app-public-equipment-detail',
@@ -26,6 +26,7 @@ export class EquipmentDetailComponent implements OnInit {
 	Item: Array<any> = [];
 	controller: string = 'trang-thiet-bi';
 	language_code: string;
+	currentUrl: string;
 	news_format_date: string = this._Configuration.news_format_date;
 
 	constructor(
@@ -35,6 +36,9 @@ export class EquipmentDetailComponent implements OnInit {
 		private _LocalStorageService: LocalStorageService,
 		private _TranslateService: TranslateService
 	) {
+		//set Url
+	    this.currentUrl = document.URL;
+
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
 		);

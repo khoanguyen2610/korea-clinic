@@ -7,6 +7,7 @@ body{font-family: 'fontello'}
 .article_content h5 {
     text-transform: inherit !important;
 }
+.article_content img{ height: auto !important; }
 .custom_rule{color:inherit;}
 
 .button, .content_element, ul.thumbnails-fluid>li{font-size: 13px}
@@ -18,6 +19,7 @@ body{font-family: 'fontello'}
 }
 .rev_slider li.tp-revslider-slidesli{ cursor: pointer}
 
+#social_share a{color: #fff !important;}
 #cfacebook {
   position: fixed;
   bottom: 0px;
@@ -377,6 +379,7 @@ body{font-family: 'fontello'}
 @media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
   .div-scroll-warp{ display: none; z-index: -1; }
   .hidden-lg-up { display: block; }
+  .top_panel_image{height: auto}
 }
 
 /** Tablet **/
