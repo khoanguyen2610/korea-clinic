@@ -1,6 +1,6 @@
 <?php
 class Vision_Mail {
-    static $_email = 'system_info@vision-net.co.jp';
+    static $_email = 'whiteclinic93vvt@gmail.com';
 
 
     /*============================================
@@ -9,7 +9,7 @@ class Vision_Mail {
     public static function mailContact($arrParam, $options = null){
         $mail = \Email::forge();
         $mail->from(self::$_email, self::$_email);
-        $mail->to('k_nguyen@vision-net.co.jp');
+        $mail->to('whiteclinic93@gmail.com');
         $mail->subject('Thông tin liên hệ');
 
 
