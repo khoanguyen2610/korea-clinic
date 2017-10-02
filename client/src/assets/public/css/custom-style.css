@@ -305,12 +305,12 @@ body{font-family: 'fontello'}
     overflow: hidden;
     width: 220px;
     margin: 0px auto;
-    height: 480px;
+    max-height: 480px;
     border: 1px solid #ccc;
 }
 
 .jcarousel-vertical-lg ul {
-    height: 400px;
+    max-height: 480px;
     width: 220px !important;
     position: relative;
     list-style: none;
@@ -438,11 +438,11 @@ body{font-family: 'fontello'}
 .jcarousel .jcarousel-items li a figure img{ margin: auto; width: 41px; border-radius: 50%; }
 .jcarousel .jcarousel-items li a h6 { color: #9fa69f; font-family: 'fontello'}
 
-.jcarousel-vertical-lg .jcarousel-items li { width: 220px !important; height: 120px; padding: 10px; }
+.jcarousel-vertical-lg .jcarousel-items li { width: 220px !important; height: 120px; padding: 10px; background: rgba(255,255,255,0.79) !important;}
 .jcarousel-vertical-lg .jcarousel-items li:nth-child(2n) { background-color: #eaeff3; }
 .jcarousel-vertical-lg .jcarousel-items li a { text-align: center; }
 .jcarousel-vertical-lg .jcarousel-items li a figure { opacity: 1; }
-.jcarousel-vertical-lg .jcarousel-items li a figure img{ margin: auto; width: 140px; }
+.jcarousel-vertical-lg .jcarousel-items li a figure img{ margin: auto; width: 100%; }
 
 .jcarousel.vertical li {
     width: 60px !important;
