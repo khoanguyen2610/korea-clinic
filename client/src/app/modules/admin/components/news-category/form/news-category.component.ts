@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
-import { NewsCategoryFormContentComponent } from './content/news-category-form-content.component';
 import { NewsCategory } from '../../../../../models';
 import { AuthService, NewsCategoryService, GeneralService } from '../../../../../services';
 import { ToastrService } from 'ngx-toastr';
