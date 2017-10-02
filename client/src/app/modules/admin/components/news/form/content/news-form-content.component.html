@@ -36,6 +36,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.feature_slide' | translate }} </label>
+		<div class="col-md-10">
+			<div class="md-radio-inline">
+				<label class="mt-radio">
+					<input type="radio" name="feature_slide_flag" value="0" [(ngModel)]="Item.feature_slide_flag" /> {{ 'ADMIN.no' | translate }}
+					<span></span>
+				</label>
+				<label class="mt-radio">
+					<input type="radio" name="feature_slide_flag" value="1" [(ngModel)]="Item.feature_slide_flag" /> {{ 'ADMIN.yes' | translate }}
+					<span></span>
+				</label>
+			</div>
+		</div>
+	</div>
 	<!--<div class="form-group">
 		<label class="control-label col-md-2">{{ 'ADMIN.description' | translate }}</label>
 		<div class="col-md-10">

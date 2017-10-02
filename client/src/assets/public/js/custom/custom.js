@@ -219,7 +219,7 @@ function initRevSlider() {
 				jsFileLocation: "//jacqueline.themerex.net/wp-content/plugins/revslider/public/assets/js/",
 				sliderLayout: "auto",
 				dottedOverlay: "none",
-				delay: 9000,
+				delay: 2000,
 				navigation: {
 					keyboardNavigation: "off",
 					keyboard_direction: "horizontal",

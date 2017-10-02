@@ -60,6 +60,25 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label col-md-2">{{ 'ADMIN.feature_slide' | translate }} </label>
+									<div class="col-md-8">
+										<div class="md-radio-inline">
+											<label class="mt-radio">
+												<input type="radio" name="feature_slide_flag" value="0" [(ngModel)]="filter.feature_slide_flag" /> {{ 'ADMIN.no' | translate }}
+												<span></span>
+											</label>
+											<label class="mt-radio">
+												<input type="radio" name="feature_slide_flag" value="1" [(ngModel)]="filter.feature_slide_flag" /> {{ 'ADMIN.yes' | translate }}
+												<span></span>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="form-actions">
 						<div class="row">
@@ -87,6 +106,7 @@
 							<th>{{ 'ADMIN.image' | translate }}</th>
 							<th>{{ 'ADMIN.title' | translate }}</th>
 							<th>{{ 'ADMIN.feature' | translate }}</th>
+							<th>{{ 'ADMIN.feature_slide' | translate }}</th>
 							<th>{{ 'ADMIN.language' | translate }}</th>
 							<th>{{ 'ADMIN.order' | translate }}</th>
 							<th>Actions</th>
