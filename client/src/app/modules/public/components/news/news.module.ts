@@ -3,7 +3,6 @@ import { Routing } from './news.routing';
 import { CoreModule } from "../../../../shared/modules/core.module";
 
 import { NewsDetailComponent, NewsListComponent } from './';
-
 @NgModule({
     declarations: [
 		NewsDetailComponent, NewsListComponent

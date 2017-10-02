@@ -4,7 +4,8 @@
     "invalid_date": "Please enter a valid date.",
     "invalid_email": "Vui lòng nhập địa chỉ email.",
     "min_length": "Please enter at least :param:1 characters.",
-    "max_length": "Please enter no more than :param:1 characters."
+    "max_length": "Please enter no more than :param:1 characters.",
+    "invalid_equal_password": "Re-password không trùng với password"
   },
   "ADMIN": {
     "about_us": "About Us",
@@ -134,7 +135,7 @@
     "detail": "Chi tiết",
     "news_and_events": "Tin Tức & Sự Kiện",
     "read_more": "Xem thêm",
-    "connect_with_us": "Kết nối với chúng tôi",
+    "connect_with_us": "Chat với chúng tôi",
     "enter_your_name": "Nhập tên của bạn",
     "enter_your_email": "Nhập email của bạn",
     "enter_your_subject": "Tiêu đề",

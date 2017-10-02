@@ -15,6 +15,8 @@ export const ScriptStore: Scripts[] = [
 
    {name: 'backstretch', src: '../../assets/admin/global/plugins/backstretch/jquery.backstretch.min.js'},
    {name: 'login-4', src: '../../assets/admin/pages/scripts/login-4.js'},
+   {name: 'fb-sdk-en', src: 'https://connect.facebook.net/en_US/sdk.js'},
+   {name: 'fb-sdk-vi', src: 'https://connect.facebook.net/vi_VN/sdk.js'},
 
    // {name: 'theme_init', src: '../../assets/public/js/custom/theme.init.js'},
    // {name: 'theme_shortcodes', src: '../../assets/public/js/custom/theme.shortcodes.js'}

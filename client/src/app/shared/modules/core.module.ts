@@ -34,7 +34,7 @@ import { KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, N
 
 //===================== Import Directive =======================
 import { HelperDirective, EqualValidator, SmallerValidator, ImagePreview } from '../../directives/';
-
+import { FBCommentsComponent } from 'ngx-facebook';
 
 
 
@@ -42,6 +42,7 @@ import { HelperDirective, EqualValidator, SmallerValidator, ImagePreview } from 
 
 @NgModule({
     declarations: [
+        FBCommentsComponent,
         //======================= Import Pipe =======================
         KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim, NiceUrl, SafeHtmlPipe, SafeUrlPipe,
         // FileSelectDirective, FileDropDirective,
@@ -71,6 +72,7 @@ import { HelperDirective, EqualValidator, SmallerValidator, ImagePreview } from 
 
     ],
     exports: [
+        FBCommentsComponent,
         CommonModule,
         KeysPipe, FormatDate, FormatDateTime, TruncatePipe, LabelPipe, Br2nl, Nl2br, HTMLEntities, SelectObject, Trim, NiceUrl, SafeHtmlPipe, SafeUrlPipe,
         // FileSelectDirective, FileDropDirective,

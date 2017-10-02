@@ -71,6 +71,9 @@ class Controller_System_General extends \Controller_API {
             $image->resizeToHeight((float)$param['height']);
         }
 
+		$image->cutFromCenter((float)$param['width'], (float)$param['height']);
+
+
         //=================== Scale Image ====================
         if(isset($param['scale'])){
             $image->scale((float)$param['scale']);

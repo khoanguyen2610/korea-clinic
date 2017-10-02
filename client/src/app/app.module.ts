@@ -10,6 +10,7 @@ import { DndModule } from 'ng2-dnd';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { FacebookModule } from 'ng2-facebook-sdk';
 
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-translate';
 
@@ -36,6 +37,7 @@ export function createTranslateLoader(_Http: Http) {
         DndModule.forRoot(),
         ToastrModule.forRoot(),
         CoreModule.forRoot(),
+        FacebookModule.forRoot(),
         Routing
     ],
     bootstrap: [AppComponent]

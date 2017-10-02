@@ -34,7 +34,7 @@ class Vision_Image {
         if ($image_type == IMAGETYPE_JPEG) {
             imagejpeg($this->image,$filename,$compression);
         } elseif ($image_type == IMAGETYPE_GIF) {
-            imagegif($this->image,$filename);         
+            imagegif($this->image,$filename);
         } elseif ($image_type == IMAGETYPE_PNG) {
             imagepng($this->image,$filename);
         }
@@ -50,7 +50,7 @@ class Vision_Image {
             imagejpeg($this->image, null, $quality);
         } elseif ($image_type == IMAGETYPE_GIF) {
             header("Content-type: image/gif");
-            imagegif($this->image);         
+            imagegif($this->image);
         } elseif ($image_type == IMAGETYPE_PNG) {
             header("Content-type: image/png");
             imagepng($this->image);
@@ -82,7 +82,7 @@ class Vision_Image {
 
         if ($this->getWidth() > $this->getHeight()) {
             $this->resizeToHeight($size);
-            
+
             imagecolortransparent($new_image, imagecolorallocate($new_image, 0, 0, 0));
             imagealphablending($new_image, false);
             imagesavealpha($new_image, true);
@@ -90,7 +90,7 @@ class Vision_Image {
 
         } else {
             $this->resizeToWidth($size);
-            
+
             imagecolortransparent($new_image, imagecolorallocate($new_image, 0, 0, 0));
             imagealphablending($new_image, false);
             imagesavealpha($new_image, true);
@@ -100,26 +100,26 @@ class Vision_Image {
 
         $this->image = $new_image;
     }
-   
+
     public function scale($scale) {
         $width = $this->getWidth() * $scale/100;
-        $height = $this->getHeight() * $scale/100; 
+        $height = $this->getHeight() * $scale/100;
         $this->resize($width,$height);
     }
-   
+
     public function resize($width,$height) {
         $new_image = imagecreatetruecolor($width, $height);
-        
+
         imagecolortransparent($new_image, imagecolorallocate($new_image, 0, 0, 0));
         imagealphablending($new_image, false);
         imagesavealpha($new_image, true);
-        
+
         imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
-        $this->image = $new_image;   
+        $this->image = $new_image;
     }
 
     public function cut($x, $y, $width, $height) {
-        $new_image = imagecreatetruecolor($width, $height); 
+        $new_image = imagecreatetruecolor($width, $height);
 
         imagecolortransparent($new_image, imagecolorallocate($new_image, 0, 0, 0));
         imagealphablending($new_image, false);
@@ -132,7 +132,7 @@ class Vision_Image {
 
     public function maxarea($width, $height = null) {
         $height = $height ? $height : $width;
-        
+
         if ($this->getWidth() > $width) {
             $this->resizeToWidth($width);
         }
@@ -140,10 +140,10 @@ class Vision_Image {
             $this->resizeToheight($height);
         }
     }
-    
+
     public function minarea($width, $height = null) {
         $height = $height ? $height : $width;
-        
+
         if ($this->getWidth() < $width) {
             $this->resizeToWidth($width);
         }
@@ -153,35 +153,35 @@ class Vision_Image {
     }
 
     public function cutFromCenter($width, $height) {
-        
+
         if ($width < $this->getWidth() && $width > $height) {
             $this->resizeToWidth($width);
         }
         if ($height < $this->getHeight() && $width < $height) {
             $this->resizeToHeight($height);
         }
-        
+
         $x = ($this->getWidth() / 2) - ($width / 2);
         $y = ($this->getHeight() / 2) - ($height / 2);
-        
+
         return $this->cut($x, $y, $width, $height);
     }
 
     public function maxareafill($width, $height, $red = 0, $green = 0, $blue = 0) {
         $this->maxarea($width, $height);
-        $new_image = imagecreatetruecolor($width, $height); 
+        $new_image = imagecreatetruecolor($width, $height);
         $color_fill = imagecolorallocate($new_image, $red, $green, $blue);
-        imagefill($new_image, 0, 0, $color_fill);        
-        imagecopyresampled( $new_image, 
-                            $this->image, 
-                            floor(($width - $this->getWidth())/2), 
-                            floor(($height-$this->getHeight())/2), 
-                            0, 0, 
-                            $this->getWidth(), 
-                            $this->getHeight(), 
-                            $this->getWidth(), 
+        imagefill($new_image, 0, 0, $color_fill);
+        imagecopyresampled( $new_image,
+                            $this->image,
+                            floor(($width - $this->getWidth())/2),
+                            floor(($height-$this->getHeight())/2),
+                            0, 0,
+                            $this->getWidth(),
+                            $this->getHeight(),
+                            $this->getWidth(),
                             $this->getHeight()
-                        ); 
+                        );
         $this->image = $new_image;
     }
 }

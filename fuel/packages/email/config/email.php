@@ -91,8 +91,10 @@ return array(
 		'smtp'	=> array(
 			'host'		=> 'ssl://smtp.gmail.com',
 			'port'		=> 465,
-			'username'	=> 'system_info@vision-net.co.jp',
-			'password'	=> 'jinji_10020',                              
+			// 'username'	=> 'system_info@vision-net.co.jp',
+			// 'password'	=> 'jinji_10020',
+			'username'	=> 'whiteclinic93vvt@gmail.com',
+			'password'	=> 'koreaclinic',
 			'timeout'	=> 30,
 		),
 

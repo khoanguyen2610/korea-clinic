@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
@@ -8,6 +8,7 @@ import { Configuration } from '../../../../../shared';
 import * as moment from 'moment';
 
 declare let initMeta: any;
+declare let document: any;
 
 @Component({
 	selector: 'app-public-news-detail',
@@ -18,7 +19,7 @@ declare let initMeta: any;
 export class NewsDetailComponent implements OnInit {
 	private subscription: Subscription;
 
-	_params: any
+	_params: any;
 	categories: Array<any> = [];
 	Item: Array<any> = [];
 	controller: string = 'tin-tuc';
@@ -26,6 +27,7 @@ export class NewsDetailComponent implements OnInit {
 	action_before_after: string = 'truoc-sau';
 	language_code: string;
 	news_format_date: string = this._Configuration.news_format_date;
+	currentUrl: string;
 
 	constructor(
 		private _ActivatedRoute: ActivatedRoute,
@@ -34,6 +36,10 @@ export class NewsDetailComponent implements OnInit {
 		private _Configuration: Configuration,
 		private _LocalStorageService: LocalStorageService
 	) {
+		//set Url
+	    this.currentUrl = document.URL;
+
+
 		this.subscription = _ActivatedRoute.params.subscribe(
 			(param: any) => this._params = param
 		);
