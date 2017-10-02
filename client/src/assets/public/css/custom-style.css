@@ -180,14 +180,17 @@ body{font-family: 'fontello'}
 .div-scroll-warp-right ul {
   padding:7px 5px 7px 5px; width:60px; border:1px solid #b6bdc6; background-color:rgba(255,255,255,0.79); list-style: none;
 }
+
 .div-scroll-warp ul li.bg-pink,
 .div-scroll-warp-right ul li.bg-pink {
   padding:7px 0 7px 0; background:none; border-bottom:1px dashed #b6bdc6;
 }
+
 .div-scroll-warp ul li.bg-pinks,
 .div-scroll-warp-right ul li.bg-pinks {
   padding:7px 0 7px 0; background:none;
 }
+
 .div-scroll-warp ul li a, .div-scroll-warp-right ul li a { color: #9fa69f; }
 .div-scroll-warp ul li a:hover, .div-scroll-warp-right ul li a:hover { text-decoration:none; }
 .div-scroll-warp ul li:last-child, .div-scroll-warp-right ul li:last-child { border-bottom: none; }
