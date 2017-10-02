@@ -68,18 +68,16 @@
 										<!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
 										<router-outlet></router-outlet>
 
-										<!-- Footer -->
-										<app-public-general-footer [options]="options"></app-public-general-footer>
-										<!-- Footer -->
-									</section>
-								</article>
-							</div>
-						</div>
-					</div>
-				</ng-template>
-			</ng-template>
-
-
+                                        <!-- Footer -->
+                                        <app-public-general-footer [options]="options" *ngIf="curRouting != '/lien-he' && curRouting != '/contact'"></app-public-general-footer>
+                                        <!-- Footer -->
+                                    </section>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-template>
 
 		</div>
 	</div>

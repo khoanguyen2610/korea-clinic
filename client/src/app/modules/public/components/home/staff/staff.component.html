@@ -8,7 +8,7 @@
                 <div class="sc_team_wrap" id="sc_team_630_wrap">
                     <div class="sc_team sc_team_style_team-3 aligncenter" id="sc_team_630">
                         <h6 class="sc_item_title sc_team_subtitle sc_item_subtitle">{{ 'PUBLIC.expert' | translate }}</h6>
-                        <div class="sc_section_content_wrap">
+                        <div class="sc_section_content_wrap" style="position: relative">
                             <div class="jcarousel jcarousel-staff">
                                 <ul>
 									<li *ngFor="let item of Items; let i=index;">
@@ -32,40 +32,6 @@
 
 							<a href="#" class="jcarousel-control-prev jcarousel-staff-control-prev">&lsaquo;</a>
 							<a href="#" class="jcarousel-control-next jcarousel-staff-control-next">&rsaquo;</a>
-
-							<p class="jcarousel-pagination"></p>
-
-                            <!--
-                            <div class="sc_slider sc_slider_swiper swiper-slider-container sc_slider_controls sc_slider_pagination sc_slider_bg" data-interval="5776" id="sc_slider_061">
-                                <div class="slides swiper-wrapper">
-                                    <div *ngFor="let item of Items" class="swiper-slide" id="sw_slide" >
-                                        <div class="sc_columns columns_wrap">
-                                            <div *ngFor="let i of item; let k=index" class="column-1_4 column_padding_bottom" >
-                                                <div class="sc_team_item" id="sc_team_630_{{ k+ 1}}">
-                                                    <div class="sc_team_item_avatar">
-                                                        <img alt="" [src]="i.image_url">
-                                                        <div class="sc_team_item_hover">
-                                                            <a class="sc_team_item_icon" [routerLink]="[ '/' + modules.expert, modules.detail, i.item_key, i.fullname | niceurl]">&nbsp;</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="sc_team_item_info">
-                                                        <h5 class="sc_team_item_title"><a [routerLink]="[ '/' + modules.expert, modules.detail, i.item_key, i.fullname | niceurl]">{{ i.fullname }}</a></h5>
-                                                        <div class="sc_team_item_position">
-                                                            {{ i.position }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sc_slider_controls_wrap">
-                                    <a class="sc_slider_prev sc_slider_home" href="#"></a> <a class="sc_slider_next sc_slider_home" href="#"></a>
-                                </div>
-                                <div class="sc_slider_pagination_wrap"></div>
-                            </div>
-                            -->
                         </div>
                     </div>
                 </div>

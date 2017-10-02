@@ -26,6 +26,7 @@ export class ContactComponent implements OnInit {
 	is_validated = false;
 	language_code: string;
 	address: Array<any> = [];
+	options: Array<any> = [];
 
 	constructor(
 		private _ToastrService: ToastrService,
@@ -39,6 +40,7 @@ export class ContactComponent implements OnInit {
 
 	ngOnInit() {
 		this.getDetailData();
+		this.getListOption();
 	}
 
 	getAction(){
@@ -46,7 +48,6 @@ export class ContactComponent implements OnInit {
 	}
 
 	getDetailData() {
-
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('key', 'address');
 		params.set('language_code', this.language_code);
@@ -56,6 +57,21 @@ export class ContactComponent implements OnInit {
 			}
 		});
 	}
+
+	getListOption() {
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('language_code', this._Configuration.language_code);
+		params.set('item_status', 'active');
+
+		this._OptionsService.getListAll(params).subscribe(res => {
+			if (res.status == 'success') {
+				let items = res.data;
+				items.forEach(item => {
+					this.options[item.key] = item;
+				});
+			}
+		});
+    }
 
 
 	onSubmit(form: NgForm){

@@ -1,0 +1,19 @@
+<div id="fb-root"></div>
+<div id="cfacebook">
+    <a class="chat_fb" href="javascript:void(0)" onclick="return:false;">
+        <i class="fa fa-facebook-square"></i> {{'PUBLIC.connect_with_us' | translate}}
+    </a>
+    <div class="fchat" *ngIf="options.facebook">
+        <div class="fb-page"
+            data-adapt-container-width="true"
+            data-height="400"
+            data-hide-cover="false"
+            [attr.data-href]="options.facebook['value']"
+            data-show-facepile="true"
+            data-show-posts="false"
+            data-small-header="false"
+            data-tabs="messages"
+            data-width="200">
+        </div>
+    </div>
+</div>
