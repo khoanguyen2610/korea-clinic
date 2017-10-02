@@ -46,7 +46,8 @@ class Model_News extends \Orm\Model {
 		if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
 		if(isset($params['news_category_id']) && !empty($params['news_category_id']) && $params['news_category_id'] != 'all') $query->where('SM.news_category_id', '=', $params['news_category_id']);
 		if(isset($params['news_category_title']) && !empty($params['news_category_title'])) $query->where('NC.title', 'like', '%' . $params['news_category_title'] . '%');
-        if(isset($params['feature_flag']) && !empty($params['feature_flag'])) $query->where('SM.feature_flag', '=', $params['feature_flag']);
+        if(isset($params['feature_flag']) && !is_null($params['feature_flag'])) $query->where('SM.feature_flag', '=', $params['feature_flag']);
+		if(isset($params['feature_slide_flag']) && !is_null($params['feature_slide_flag'])) $query->where('SM.feature_slide_flag', '=', $params['feature_slide_flag']);
         if(isset($params['limit']) && !empty($params['limit'])) $query->limit($params['limit']);
 
         $result = $query->as_object()->execute()->as_array();
@@ -80,7 +81,8 @@ class Model_News extends \Orm\Model {
 			if(isset($params['language_code']) && !empty($params['language_code']) && $params['language_code'] != 'all') $query->where('SM.language_code', '=', $params['language_code']);
 			if(isset($params['news_category_id']) && !empty($params['news_category_id']) && $params['news_category_id'] != 'all') $query->where('SM.news_category_id', '=', $params['news_category_id']);
 			if(isset($params['news_category_title']) && !empty($params['news_category_title'])) $query->where('NC.title', 'like', '%' . $params['news_category_title'] . '%');
-	        if(isset($params['feature_flag']) && !empty($params['feature_flag'])) $query->where('SM.feature_flag', '=', $params['feature_flag']);
+	        if(isset($params['feature_flag']) && !is_null($params['feature_flag'])) $query->where('SM.feature_flag', '=', $params['feature_flag']);
+	        if(isset($params['feature_slide_flag']) && !is_null($params['feature_slide_flag'])) $query->where('SM.feature_slide_flag', '=', $params['feature_slide_flag']);
 
             $result = Vision_Db::datatable_query($query, $columns, $params, $options);
         }

@@ -1,7 +1,47 @@
-<div class="sc_empty_space em_height_5">
-    <span class="sc_empty_space_inner"></span>
-</div>
 <div class="contactus">
+    <div class="sc_row row">
+    	<div class="column sc_column_container sc_col-sm-12">
+    		<div class="sc_column-inner">
+    			<div class="wrapper">
+    				<div class="columns_wrap sc_columns columns_nofluid sc_columns_count_3">
+    					<div class="column-1_3 sc_column_item">
+    						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.about_us' | translate}}</h6>
+    						<div class="text_column content_element">
+    							<div *ngIf="options.home_about_us" class="wrapper" style="text-align: center" [innerHTML]="options.home_about_us['value'] | safeHtml">
+    							</div>
+    						</div>
+    						<div class="sc_empty_space em_height_3">
+    							<span class="sc_empty_space_inner"></span>
+    						</div>
+    					</div>
+    					<div class="column-1_3 sc_column_item">
+    						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.working_hours' | translate}}</h6>
+    						<div class="text_column content_element">
+    							<div *ngIf="options.working_hour" class="wrapper" style="text-align: center" [innerHTML]="options.working_hour['value'] | safeHtml">
+
+    							</div>
+    						</div>
+    						<div class="sc_empty_space em_height_3">
+    							<span class="sc_empty_space_inner"></span>
+    						</div>
+    					</div>
+    					<div class="column-1_3 sc_column_item">
+    						<h6 class="sc_section_subtitle sc_item_subtitle sc_title_small">{{'PUBLIC.contact' | translate}}</h6>
+    						<div class="text_column content_element">
+    							<div *ngIf="options.home_contact" class="wrapper" style="text-align: center" [innerHTML]="options.home_contact['value'] | safeHtml">
+    							</div>
+    						</div>
+    						<div class="sc_empty_space em_height_3">
+    							<span class="sc_empty_space_inner"></span>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+
 	<div class="sc_row row sc_row-fluid">
 	    <div class="column sc_column_container sc_col-sm-12">
 	        <div class="sc_column-inner ">
@@ -22,6 +62,7 @@
 	        </div>
 	    </div>
 	</div>
+
 	<div class="sc_row row sc_row-fluid">
 	    <div class="column sc_column_container sc_col-sm-12">
 	        <div class="sc_column-inner ">
@@ -77,5 +118,52 @@
 	            </div>
 	        </div>
 	    </div>
+	</div>
+</div>
+
+
+<div class="sc_row-full-width"></div>
+<div class="sc_row row">
+	<div class="column sc_column_container sc_col-sm-12">
+		<div class="sc_column-inner">
+			<div class="wrapper">
+				<a class="sc_icon icon-up sc_icon_shape_square aligncenter scroll_to_top show" href="#"></a>
+				<div class="sc_line sc_line_position_center_center sc_line_style_solid"></div>
+				<div class="sc_socials sc_socials_type_icons sc_socials_shape_square sc_socials_size_small cu_block_3">
+					<div class="sc_socials_item">
+						<a *ngIf="options.twitter" class="social_icons social_twitter" [href]="options.twitter['value']" target="_blank">
+							<span class="icon-ico-twitter">
+								<img src="/assets/public/images/icon/icon-twitter.png" />
+							</span>
+						</a>
+					</div>
+					<div class="sc_socials_item">
+						<a *ngIf="options.google_plus" class="social_icons social_gplus" [href]="options.google_plus['value']" target="_blank">
+							<span class="icon-ico-google-plus">
+								<img src="/assets/public/images/icon/icon-google-plus.png" />
+							</span>
+						</a>
+					</div>
+					<div class="sc_socials_item">
+						<a *ngIf="options.facebook" class="social_icons social_facebook" [href]="options.facebook['value']" target="_blank">
+							<span class="icon-ico-facebook">
+								<img src="/assets/public/images/icon/icon-facebook.png" />
+							</span>
+						</a>
+					</div>
+					<div class="sc_socials_item">
+						<a *ngIf="options.instagram" class="social_icons social_instagramm" [href]="options.instagram['value']" target="_blank">
+							<span class="icon-ico-instagram">
+								<img src="/assets/public/images/icon/icon-instagram.png" />
+							</span>
+						</a>
+					</div>
+				</div>
+				<p class="cu_text_c"><a href="#">White Clinic</a> &#169; 2017 All Rights Reserved <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></p>
+				<div class="sc_empty_space em_height_4-2">
+					<span class="sc_empty_space_inner"></span>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

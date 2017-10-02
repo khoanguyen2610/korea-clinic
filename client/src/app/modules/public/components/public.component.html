@@ -69,7 +69,7 @@
                                         <router-outlet></router-outlet>
 
                                         <!-- Footer -->
-                                        <app-public-general-footer [options]="options"></app-public-general-footer>
+                                        <app-public-general-footer [options]="options" *ngIf="curRouting != '/lien-he' && curRouting != '/contact'"></app-public-general-footer>
                                         <!-- Footer -->
                                     </section>
                                 </article>

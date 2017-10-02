@@ -11,72 +11,44 @@
                         <div class="sc_services_descr sc_item_descr">
                             {{ 'PUBLIC.service_description' | translate }}
                         </div>
-                        <div class="sc_columns columns_wrap">
-                            <div *ngFor="let item of Items" class="column-1_3 column_padding_bottom">
-                                <div class="sc_services_item" id="sc_services_809_1">
-                                    <div class="sc_services_item_featured post_featured">
-                                        <div class="post_thumb"  data-title="{{item.description}}">
-                                            <a class="hover_icon hover_icon_link" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" ><img alt="" [src]="item.image_url"></a>
+                        <div class="sc_columns columns_wrap" style="position: relative">
+                            <div class="jcarousel jcarousel-service">
+                                <ul>
+									<li *ngFor="let item of Items; let i=index;">
+                                        <div class="column_padding_bottom">
+                                            <div class="sc_services_item" id="sc_services_809_1">
+                                                <div class="sc_services_item_featured post_featured">
+                                                    <div class="post_thumb"  data-title="{{item.description}}">
+                                                        <a class="hover_icon hover_icon_link" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" ><img alt="" [src]="item.image_url"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="sc_services_item_content">
+                                                    <div class="sc_services_item_category">
+                                                        <a style="font-size: 24px" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" rel="tag">{{ item.title }}</a>
+                                                    </div>
+                                                    <div class="sc_services_item_description">
+                                                        <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" >
+                                                        <div>
+                                                            <span class="first">{{ 'PUBLIC.detail' | translate }}</span> <span class="second">{{ 'PUBLIC.detail' | translate }}</span>
+                                                        </div></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="sc_services_item_content">
-                                        <div class="sc_services_item_category">
-                                            <a style="font-size: 24px" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" rel="tag">{{ item.title }}</a>
-                                        </div>
-                                        <div class="sc_services_item_description">
-                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" >
-                                            <div>
-                                                <span class="first">{{ 'PUBLIC.detail' | translate }}</span> <span class="second">{{ 'PUBLIC.detail' | translate }}</span>
-                                            </div></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </li>
+                                </ul>
                             </div>
-                            <!-- <div class="column-1_3 column_padding_bottom">
-                                <div class="sc_services_item" id="sc_services_809_2">
-                                    <div class="sc_services_item_featured post_featured">
-                                        <div class="post_thumb" data-image="images/2-2.jpg" data-title="Gift Cards Available">
-                                            <a class="hover_icon hover_icon_link" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" ><img alt="" src="./assets/public/images/2-2-358x393.jpg"></a>
-                                        </div>
-                                    </div>
-                                    <div class="sc_services_item_content">
-                                        <div class="sc_services_item_category">
-                                            <a [routerLink]="[ '/' + modules.service, sCategory.item_key, sCategory.title | niceurl]" rel="tag">{{ 'PUBLIC.dentistry' | translate }}</a>
-                                        </div>
-                                        <div class="sc_services_item_description">
-                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" >
-                                            <div>
-                                                <span class="first">{{ 'PUBLIC.detail' | translate }}</span> <span class="second">{{ 'PUBLIC.detail' | translate }}</span>
-                                            </div></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column-1_3 column_padding_bottom">
-                                <div class="sc_services_item" id="sc_services_809_3">
-                                    <div class="sc_services_item_featured post_featured">
-                                        <div class="post_thumb" data-image="images/1-2.jpg" data-title="Online Appointment">
-                                            <a class="hover_icon hover_icon_link" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" ><img alt="" src="./assets/public/images/1-2-358x393.jpg"></a>
-                                        </div>
-                                    </div>
-                                    <div class="sc_services_item_content">
-                                        <div class="sc_services_item_category">
-                                            <a [routerLink]="[ '/' + modules.service, sCategory.item_key, sCategory.title | niceurl]" rel="tag">{{ 'PUBLIC.cosmetic_surgery' | translate }}</a>
-                                        </div>
-                                        <div class="sc_services_item_description">
-                                            <a class="sc_services_item_readmore sc_button sc_button_style_filled sc_button_size_medium" [routerLink]="[ '/' + modules.service, item.item_key, item.title | niceurl]" >
-                                            <div>
-                                                <span class="first">{{ 'PUBLIC.detail' | translate }}</span> <span class="second">{{ 'PUBLIC.detail' | translate }}</span>
-                                            </div></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
+                            <a href="#" class="jcarousel-control-prev jcarousel-service-control-prev" *ngIf="total_item > 3">&lsaquo;</a>
+							<a href="#" class="jcarousel-control-next jcarousel-service-control-next" *ngIf="total_item > 3">&rsaquo;</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="sc_empty_space em_height_2">
+        <span class="sc_empty_space_inner"></span>
     </div>
 </div>
 <div class="sc_row-full-width"></div>

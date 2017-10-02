@@ -6,7 +6,7 @@ import { Configuration } from '../../../../../shared';
 import { ServiceCategoryService } from '../../../../../services';
 
 
-declare let $: any;
+declare let jQuery: any;
 declare let moment: any;
 
 @Component({
@@ -20,6 +20,7 @@ export class ServiceComponent implements OnInit {
 	Items: Array<any> = [];
 	controller: string = 'dich-vu';
 	language_code: string;
+	total_item: number = 0;
 
 	constructor(
 		private _ServiceCategoryService: ServiceCategoryService,
@@ -45,8 +46,47 @@ export class ServiceComponent implements OnInit {
 
 			if(res.status == 'success'){
 				this.Items = res.data;
+				this.total_item = res.total;
+
+				setTimeout(() => {
+					this.loadCarousel();
+				}, 200);
 			}
 		});
+	}
+
+	loadCarousel(){
+		var jcarousel = jQuery('.jcarousel-service');
+
+		jcarousel
+			.on('jcarousel:reload jcarousel:create', function () {
+				var carousel = jQuery(this),
+					width = carousel.innerWidth();
+				if (width >= 600) {
+					width = width / 3;
+				} else if (width >= 350) {
+					width = width / 3;
+				}
+				carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
+			})
+			.jcarousel({
+				wrap: 'circular',
+				vertical: false
+			});
+
+		jcarousel.jcarouselAutoscroll({
+			interval: 2000
+		});
+
+		jQuery('.jcarousel-service-control-next')
+			.jcarouselControl({
+				target: '-=1'
+			});
+
+		jQuery('.jcarousel-service-control-prev')
+			.jcarouselControl({
+				target: '+=1'
+			});
 	}
 
 

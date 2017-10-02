@@ -1667,7 +1667,6 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 }
 .top_panel_top_socials {
     float: right;
-    margin-top: 0.728em;
     margin-left: 1.5em;
 }
 .top_panel_top_socials .sc_socials {
@@ -1676,7 +1675,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
     margin-top: 2px;
 }
 .top_panel_top_socials .label {
-    line-height: 2em;
+    line-height: 36px;
     display: inline-block;
     vertical-align: top;
     margin-right: 10px;

@@ -237,6 +237,8 @@ body{font-family: 'fontello'}
     box-sizing: border-box;
 }
 
+.jcarousel-service li{width: 360px; border-width: 0px}
+
 .jcarousel img {
     display: block;
     max-width: 100%;
