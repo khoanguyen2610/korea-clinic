@@ -118,7 +118,6 @@ export class PublicComponent  {
 	ngAfterContentChecked() {
     	let routing = this._Router.url;
 		if(this.curRouting != routing){
-
 			this.curRouting = routing;
 			var str = routing.substring(1);
 

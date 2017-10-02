@@ -100,5 +100,5 @@
 <app-public-social-app [options]="options"></app-public-social-app>
 <!-- End Carousel Left -->
 <!-- Headline - Carousel Right -->
-<app-public-headline [modules]="modules" [options]="options"></app-public-headline>
+<app-public-headline *ngIf="template == 'slide'" [modules]="modules" [options]="options"></app-public-headline>
 <!-- End Carousel Right -->

@@ -1,0 +1,23 @@
+<div class="container-fluid" *ngIf="Items">
+	<div class="col-xs-12">
+		<div class="div-scroll-warp-right">
+			<div class="jcarousel-vertical-lg">
+				<ul class="jcarousel-items">
+					<ng-template ngFor let-item [ngForOf]="Items">
+						<li class="bg-pink">
+							<a [routerLink]="[ '/' + modules.news, modules.detail, item.item_key, item.title | niceurl]">
+								<figure class="opacity-9">
+									<img [src]="item.image_url" class="icon-wa-img">
+								</figure>
+								<h6></h6>
+							</a>
+						</li>
+					</ng-template>
+				</ul>
+			</div>
+
+			<a href="#" class="jcarousel-control-prev up-lg jcarousel-headline-control-prev">&lsaquo;</a>
+			<a href="#" class="jcarousel-control-next down-lg jcarousel-headline-control-next">&rsaquo;</a>
+		</div>
+	</div>
+</div>
