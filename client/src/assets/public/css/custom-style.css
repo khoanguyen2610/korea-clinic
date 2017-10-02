@@ -176,6 +176,10 @@ body{font-family: 'fontello'}
 .div-scroll-warp ul li a h6{text-align:center; line-height:0.8rem; font-size: 11px; margin:4px  0 0 0; }
 .div-scroll-warp ul li:last-child{ border-bottom: none; }
 
+/* JCarousel Large */
+.div-scroll-warp .jcarousel-vartical-lg ul li a figure.opacity-9 { width:91px !important; height:41px;  margin:0 auto; text-decoration:none; }
+.div-scroll-warp .jcarousel-vartical-lg ul li.bg-pinks a figure.opacity-9{ width:91px !important; height:41px;  margin:0 auto; text-decoration:none; }
+
 .swiper-container-bottom-quick { height: auto; box-shadow: 2px 0px 2px 1px #ccc; }
 
 .swiper-container-bottom-quick {
@@ -263,11 +267,31 @@ body{font-family: 'fontello'}
     border: 0px;
 }
 
+.jcarousel-vertical-lg {
+    overflow: hidden;
+    width: 120px;
+    margin: 0px auto;
+    height: 300px;
+    border: 1px solid #ccc;
+}
+
+.jcarousel-vertical-lg ul {
+    height: 400px;
+    width: 120px !important;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0px;
+}
+
+.jcarousel-vertical-lg img,
 .jcarousel.vertical img {
     display: block;
     max-width: 100%;
     height: auto !important;
 }
+
 
 /** Carousel Controls **/
 
@@ -360,11 +384,11 @@ body{font-family: 'fontello'}
 .jcarousel .jcarousel-items li:nth-child(2n) { background-color: #eaeff3; }
 .jcarousel .jcarousel-items li a { text-align: center; }
 .jcarousel .jcarousel-items li a figure { opacity: 1; }
-.jcarousel .jcarousel-items li a figure img { margin: auto; width: 41px; border-radius: 50%}
+.jcarousel .jcarousel-items li a figure img{ margin: auto; width: 41px; border-radius: 50%; }
 .jcarousel .jcarousel-items li a h6 { color: #9fa69f; font-family: 'fontello'}
 
-
-
+.jcarousel-vertical-lg .jcarousel-items li { width: 120px !important; height: 75px; padding: 10px; }
+.jcarousel-vertical-lg .jcarousel-items li a figure img{ margin: auto; width: 91px; }
 
 .jcarousel.vertical li {
     width: 60px !important;
@@ -374,6 +398,10 @@ body{font-family: 'fontello'}
     box-sizing: border-box;
 }
 .jcarousel.vertical .jcarousel-items li{border: 0px;}
+
+.scroll-right{
+    right: 15px;
+}
 
 /** Mobile **/
 @media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {

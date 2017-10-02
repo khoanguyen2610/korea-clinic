@@ -1,101 +1,106 @@
 <div class="home page body_filled article_style_stretch scheme_original preloader top_panel_above sidebar_hide sidebar_outer_hide sc_responsive"  [class.no_slider]="template == 'default'">
-    <div class="body_wrap">
-        <div class="page_wrap">
-            <div class="top_panel_fixed_wrap"></div>
-            <!-- Header -->
-            <app-public-general-header [modules]="modules" [serviceCategories]="services" [newsCategories]="news" [options]="options"></app-public-general-header>
-            <!-- Header -->
+	<div class="body_wrap">
+		<div class="page_wrap">
+			<div class="top_panel_fixed_wrap"></div>
+			<!-- Header -->
+			<app-public-general-header [modules]="modules" [serviceCategories]="services" [newsCategories]="news" [options]="options"></app-public-general-header>
+			<!-- Header -->
 
-            <!-- Header Mobile -->
-            <app-public-general-header-mobile [modules]="modules" [serviceCategories]="services" [newsCategories]="news" [options]="options"></app-public-general-header-mobile>
-            <!-- Header Mobile -->
+			<!-- Header Mobile -->
+			<app-public-general-header-mobile [modules]="modules" [serviceCategories]="services" [newsCategories]="news" [options]="options"></app-public-general-header-mobile>
+			<!-- Header Mobile -->
 
-            <div *ngIf="template == 'blog';else noblog">
-                <!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
-                <router-outlet></router-outlet>
-
-
-                <footer class="footer_wrap widget_area scheme_original">
-                    <div class="widget_area_inner">
-                        <div class="content_wrap">
-                            <!-- Footer -->
-                            <app-public-general-footer [options]="options"></app-public-general-footer>
-                            <!-- Footer -->
-                        </div>
-                    </div>
-                </footer>
-            </div>
-            <ng-template #noblog>
-                <div *ngIf="template == 'slide';else noslide">
-                    <!-- Home Main Slide -->
-                    <app-public-home-slide></app-public-home-slide>
-                    <!-- Home Main Slide -->
+			<div *ngIf="template == 'blog';else noblog">
+				<!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
+				<router-outlet></router-outlet>
 
 
-                    <div class="page_content_wrap" style="padding: 0">
-                        <div class="content_wrap">
-                            <div class="content">
-                                <article class="post_item post_item_single page">
-                                    <section class="post_content">
-                                        <!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
-                                        <router-outlet></router-outlet>
-
-                                        <!-- Footer -->
-                                        <app-public-general-footer [options]="options"></app-public-general-footer>
-                                        <!-- Footer -->
-                                    </section>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <ng-template #noslide>
-                    <!-- Background Header -->
-                    <section class="top_panel_image">
-                        <div class="top_panel_image_hover"></div>
-                        <div class="top_panel_image_header">
-                            <h1 class="top_panel_image_title">{{ module_name }}</h1>
-                        </div>
-                    </section>
-                    <!-- Background Header -->
+				<footer class="footer_wrap widget_area scheme_original">
+					<div class="widget_area_inner">
+						<div class="content_wrap">
+							<!-- Footer -->
+							<app-public-general-footer [options]="options"></app-public-general-footer>
+							<!-- Footer -->
+						</div>
+					</div>
+				</footer>
+			</div>
+			<ng-template #noblog>
+				<div *ngIf="template == 'slide';else noslide">
+					<!-- Home Main Slide -->
+					<app-public-home-slide></app-public-home-slide>
+					<!-- Home Main Slide -->
 
 
-                    <div class="page_content_wrap" style="padding-bottom: 0">
-                        <div class="content_wrap">
-                            <div class="content">
-                                <article class="post_item post_item_single page">
-                                    <section class="post_content">
-                                        <!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
-                                        <router-outlet></router-outlet>
+					<div class="page_content_wrap" style="padding: 0">
+						<div class="content_wrap">
+							<div class="content">
+								<article class="post_item post_item_single page">
+									<section class="post_content">
+										<!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
+										<router-outlet></router-outlet>
 
-                                        <!-- Footer -->
-                                        <app-public-general-footer [options]="options"></app-public-general-footer>
-                                        <!-- Footer -->
-                                    </section>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </ng-template>
+										<!-- Footer -->
+										<app-public-general-footer [options]="options"></app-public-general-footer>
+										<!-- Footer -->
+									</section>
+								</article>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ng-template #noslide>
+					<!-- Background Header -->
+					<section class="top_panel_image">
+						<div class="top_panel_image_hover"></div>
+						<div class="top_panel_image_header">
+							<h1 class="top_panel_image_title">{{ module_name }}</h1>
+						</div>
+					</section>
+					<!-- Background Header -->
+
+
+					<div class="page_content_wrap" style="padding-bottom: 0">
+						<div class="content_wrap">
+							<div class="content">
+								<article class="post_item post_item_single page">
+									<section class="post_content">
+										<!-- <router-outlet (activate)=onActivate($event)></router-outlet> -->
+										<router-outlet></router-outlet>
+
+										<!-- Footer -->
+										<app-public-general-footer [options]="options"></app-public-general-footer>
+										<!-- Footer -->
+									</section>
+								</article>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</ng-template>
 
 
 
-        </div>
-    </div>
-     <!-- Chat - Connect With Us -->
-    <app-public-general-chat [options]="options"></app-public-general-chat>
-    <!-- Chat - Connect With Us -->
+		</div>
+	</div>
+	<!-- Chat - Connect With Us -->
+	<app-public-general-chat [options]="options"></app-public-general-chat>
+	<!-- Chat - Connect With Us -->
 </div>
 
 <div class="interceptor loading">
-    <div class='loader'></div>
-    <!-- <div class="sk-folding-cube">
-        <div class="sk-cube1 sk-cube"></div>
-        <div class="sk-cube2 sk-cube"></div>
-        <div class="sk-cube4 sk-cube"></div>
-        <div class="sk-cube3 sk-cube"></div>
-    </div> -->
+	<div class='loader'></div>
+	<!-- <div class="sk-folding-cube">
+		<div class="sk-cube1 sk-cube"></div>
+		<div class="sk-cube2 sk-cube"></div>
+		<div class="sk-cube4 sk-cube"></div>
+		<div class="sk-cube3 sk-cube"></div>
+	</div> -->
 </div>
 
+<!-- Social App - Carousel Left -->
 <app-public-social-app [options]="options"></app-public-social-app>
+<!-- End Carousel Left -->
+<!-- Headline - Carousel Right -->
+<app-public-headline [modules]="modules" [options]="options"></app-public-headline>
+<!-- End Carousel Right -->
