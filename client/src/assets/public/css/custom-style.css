@@ -172,6 +172,7 @@ body{font-family: 'fontello'}
 
 .div-scroll-warp-right {
   right: 15px;
+  top: 180px;
 }
 
 
@@ -302,15 +303,15 @@ body{font-family: 'fontello'}
 
 .jcarousel-vertical-lg {
     overflow: hidden;
-    width: 160px;
+    width: 220px;
     margin: 0px auto;
-    height: 300px;
+    height: 480px;
     border: 1px solid #ccc;
 }
 
 .jcarousel-vertical-lg ul {
     height: 400px;
-    width: 160px !important;
+    width: 220px !important;
     position: relative;
     list-style: none;
     margin: 0;
@@ -371,15 +372,16 @@ body{font-family: 'fontello'}
 
 
 .jcarousel-control-prev.up-lg {
-    right: 55px;
+    right: 85px;
+    left: inherit;
     bottom: -25px;
-    width: 155px;
+    width: 60px;
     top: auto;
     transform:rotate(-90deg);
 }
 
 .jcarousel-control-next.down-lg {
-    right: 55px;
+    right: 85px;
     top: -10px;
     width: 60px;
     transform:rotate(-90deg);
@@ -436,7 +438,7 @@ body{font-family: 'fontello'}
 .jcarousel .jcarousel-items li a figure img{ margin: auto; width: 41px; border-radius: 50%; }
 .jcarousel .jcarousel-items li a h6 { color: #9fa69f; font-family: 'fontello'}
 
-.jcarousel-vertical-lg .jcarousel-items li { width: 160px !important; height: 120px; padding: 10px; }
+.jcarousel-vertical-lg .jcarousel-items li { width: 220px !important; height: 120px; padding: 10px; }
 .jcarousel-vertical-lg .jcarousel-items li:nth-child(2n) { background-color: #eaeff3; }
 .jcarousel-vertical-lg .jcarousel-items li a { text-align: center; }
 .jcarousel-vertical-lg .jcarousel-items li a figure { opacity: 1; }
