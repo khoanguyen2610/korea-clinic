@@ -30,7 +30,9 @@
 					<!-- Home Main Slide -->
 					<app-public-home-slide></app-public-home-slide>
 					<!-- Home Main Slide -->
-
+					<!-- Headline Scroll -->
+					<app-public-headline [modules]="modules" [options]="options"></app-public-headline>
+					<!-- Headline Scroll -->
 
 					<div class="page_content_wrap" style="padding: 0">
 						<div class="content_wrap">
@@ -99,6 +101,3 @@
 <!-- Social App - Carousel Left -->
 <app-public-social-app [options]="options"></app-public-social-app>
 <!-- End Carousel Left -->
-<!-- Headline - Carousel Right -->
-<app-public-headline *ngIf="template == 'slide'" [modules]="modules" [options]="options"></app-public-headline>
-<!-- End Carousel Right -->

@@ -16,8 +16,27 @@
 				</ul>
 			</div>
 
-			<a href="#" class="jcarousel-control-prev up-lg jcarousel-headline-control-prev">&lsaquo;</a>
-			<a href="#" class="jcarousel-control-next down-lg jcarousel-headline-control-next">&rsaquo;</a>
+			<a href="#" class="jcarousel-control-prev up-lg jcarousel-headline-control-prev" *ngIf="total_number > 3">&lsaquo;</a>
+			<a href="#" class="jcarousel-control-next down-lg jcarousel-headline-control-next" *ngIf="total_number > 3">&rsaquo;</a>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid hidden-lg-up" *ngIf="Items">
+	<div class="col-xs-12">
+		<div class="jcarousel jcarousel-headline">
+			<ul class="jcarousel-items">
+				<ng-template ngFor let-item [ngForOf]="Items">
+					<li class="bg-pink">
+						<a [routerLink]="[ '/' + modules.news, modules.detail, item.item_key, item.title | niceurl]">
+							<figure class="opacity-9">
+								<img [src]="item.image_url" class="headline-img">
+							</figure>
+							<h6></h6>
+						</a>
+					</li>
+				</ng-template>
+			</ul>
 		</div>
 	</div>
 </div>

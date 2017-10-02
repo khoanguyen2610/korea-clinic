@@ -19,6 +19,7 @@ export class HeadlineComponent implements OnInit {
 	Items: Array<any> = [];
 	controller: string = 'tin-tuc';
 	language_code: string;
+	total_number: number = 0;
 
 	constructor(
 		private _NewsService: NewsService,
@@ -43,6 +44,7 @@ export class HeadlineComponent implements OnInit {
 		this._NewsService.getListAll(params).subscribe(res => {
 			if (res.status == 'success') {
 				this.Items = res.data;
+				this.total_number = res.total;
 				setTimeout(() => {
 					this.loadCarousel();
 				})
@@ -52,6 +54,8 @@ export class HeadlineComponent implements OnInit {
 
 	loadCarousel(){
 		var jcarousel = jQuery('.jcarousel-vertical-lg');
+		var jcarousel_headline = jQuery('.jcarousel-headline');
+
 		jcarousel
 			.on('jcarousel:reload jcarousel:create', function () {
 				var carousel = jQuery(this),
@@ -70,7 +74,28 @@ export class HeadlineComponent implements OnInit {
 				vertical: true
 			});
 
+		jcarousel_headline
+			.on('jcarousel:reload jcarousel:create', function () {
+				var carousel = jQuery(this),
+					width = carousel.innerWidth();
+
+				if (width >= 600) {
+					width = width / 4;
+				} else if (width >= 350) {
+					width = width / 3;
+				}
+
+				carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
+			})
+			.jcarousel({
+				wrap: 'circular',
+			});
+
 		jcarousel.jcarouselAutoscroll({
+			interval: 2000
+		});
+
+		jcarousel_headline.jcarouselAutoscroll({
 			interval: 2000
 		});
 
