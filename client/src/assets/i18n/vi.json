@@ -53,6 +53,7 @@
     "parent_category": "Parent Category",
     "url": "Url",
     "feature": "Feature",
+    "feature_slide": "Feature Slide",
     "drag_and_drop_files": "Drag and drop files",
     "choose_file": "Choose file",
     "before_after": "Before After",

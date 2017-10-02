@@ -140,6 +140,7 @@ export class NewsFormComponent implements OnInit {
 			formData.append('title', Item['title']);
 			formData.append('news_category_id', Item['news_category_id']);
 			formData.append('feature_flag', Item['feature_flag']);
+			formData.append('feature_slide_flag', Item['feature_slide_flag']);
 			formData.append('content', Item['content']);
 			formData.append('description', Item['description']);
 			formData.append('order', Item['order']);

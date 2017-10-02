@@ -94,7 +94,7 @@ export class NewsListComponent implements OnInit {
 			pageLength: Configuration.DtbPageLength,
 			lengthChange: false,
 			searching: false,
-			order: [[ 5, 'asc' ]],
+			order: [[ 6, 'asc' ]],
 			ajax: {
 				'url': _list_data_URL,
 				'type': 'GET',
@@ -110,6 +110,7 @@ export class NewsListComponent implements OnInit {
 				{ 'data' : 'image_url' },
 				{ 'data' : 'title' },
 				{ 'data' : 'feature_flag' },
+				{ 'data' : 'feature_slide_flag' },
 				{ 'data' : 'language_name' },
 				{ 'data' : 'order' },
 				{ 'data' : null },
@@ -131,7 +132,7 @@ export class NewsListComponent implements OnInit {
 				},
 				{
 					render: function (data, type, full) {
-						var	html = (data)?'Yes':'No';
+						var	html = (data == 1)?'Yes':'No';
 						return html;
 					},
 					bSortable: false,
@@ -139,8 +140,17 @@ export class NewsListComponent implements OnInit {
 					targets: [3]
 				},
 				{
+					render: function (data, type, full) {
+						var	html = (data == 1)?'Yes':'No';
+						return html;
+					},
+					bSortable: false,
 					className: 'text-center',
-					targets: [4,5]
+					targets: [4]
+				},
+				{
+					className: 'text-center',
+					targets: [5,6]
 				},
 				{
 					render: function (data, type, full) {
@@ -152,7 +162,7 @@ export class NewsListComponent implements OnInit {
 					data: null,
 					bSortable: false,
 					className: 'text-center',
-					targets: [6]
+					targets: [7]
 				},
 			]
 		});

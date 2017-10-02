@@ -81,50 +81,36 @@ export class StaffComponent implements OnInit {
 	}
 
 	loadCarousel(){
-		var jcarousel = jQuery('.jcarousel');
+		var jcarousel = jQuery('.jcarousel-staff');
 
 		jcarousel
 			.on('jcarousel:reload jcarousel:create', function () {
 				var carousel = jQuery(this),
 					width = carousel.innerWidth();
-
 				if (width >= 600) {
 					width = width / 4;
 				} else if (width >= 350) {
 					width = width / 3;
 				}
-
 				carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
 			})
 			.jcarousel({
-				wrap: 'circular'
+				wrap: 'circular',
+				vertical: false
 			});
 
-		jQuery('.jcarousel-control-prev')
+		jcarousel.jcarouselAutoscroll({
+			interval: 2000
+		});
+
+		jQuery('.jcarousel-staff-control-next')
 			.jcarouselControl({
 				target: '-=1'
 			});
 
-		jQuery('.jcarousel-control-next')
+		jQuery('.jcarousel-staff-control-prev')
 			.jcarouselControl({
 				target: '+=1'
-			});
-
-		jQuery('.jcarousel-pagination')
-			.on('jcarouselpagination:active', 'a', function() {
-				jQuery(this).addClass('active');
-			})
-			.on('jcarouselpagination:inactive', 'a', function() {
-				jQuery(this).removeClass('active');
-			})
-			.on('click', function(e) {
-			    e.preventDefault();
-			})
-			.jcarouselPagination({
-				perPage: 1,
-				item: function(page) {
-					return '<a href="#' + page + '">' + page + '</a>';
-				}
 			});
 	}
 

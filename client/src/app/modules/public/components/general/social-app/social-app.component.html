@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="col-xs-12">
 		<div class="div-scroll-warp">
-			<div class="jcarousel vertical">
+			<div class="jcarousel vertical jcarousel-vertical">
 				<ul class="jcarousel-items">
 					<ng-template ngFor let-app [ngForOf]="apps">
 						<li class="bg-pink" *ngIf="options[app]">
@@ -14,8 +14,8 @@
 				</ul>
 			</div>
 
-			<a href="#" class="jcarousel-control-prev up">&lsaquo;</a>
-			<a href="#" class="jcarousel-control-next down">&rsaquo;</a>
+			<a href="#" class="jcarousel-control-prev up jcarousel-vertical-control-prev">&lsaquo;</a>
+			<a href="#" class="jcarousel-control-next down jcarousel-vertical-control-next">&rsaquo;</a>
 		</div>
 	</div>
 </div>
@@ -25,7 +25,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="jcarousel">
+				<div class="jcarousel social jcarousel-social">
 					<ul class="jcarousel-items">
 						<li *ngIf="options.phone">
 							<a [href]="'tel:' +  options?.phone['value']" class="'icon-qr-phone">
@@ -44,8 +44,8 @@
 					</ul>
 				</div>
 
-				<a href="#" class="jcarousel-control-prev">&lsaquo;</a>
-				<a href="#" class="jcarousel-control-next">&rsaquo;</a>
+				<a href="#" class="jcarousel-control-prev social jcarousel-social-control-prev">&lsaquo;</a>
+				<a href="#" class="jcarousel-control-next social jcarousel-social-control-prev">&rsaquo;</a>
 
 
 				<!--<div class="swiper-container-bottom-quick sc_slider_swiper swiper-slider-container sc_slider_nopagination sc_slider_nocontrols" data-interval="9415" data-slides-per-view="6" data-slides-min-width="60">

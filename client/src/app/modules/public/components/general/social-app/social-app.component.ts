@@ -18,9 +18,9 @@ export class SocialAppComponent implements OnInit {
 	}
 
 	loadCarousel(){
-		var jcarousel = jQuery('.jcarousel');
-		var jcarousel_vertical = jQuery('.jcarousel-vertical');
-
+		var jcarousel = jQuery('.jcarousel-vertical');
+		var jcarousel_social = jQuery('.jcarousel-social');
+		//
 		jcarousel
 			.on('jcarousel:reload jcarousel:create', function () {
 				var carousel = jQuery(this),
@@ -35,39 +35,44 @@ export class SocialAppComponent implements OnInit {
 				carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
 			})
 			.jcarousel({
-				wrap: 'circular'
+				wrap: 'circular',
+				vertical: true
 			});
+		jcarousel_social
+			.on('jcarousel:reload jcarousel:create', function () {
+				var carousel = jQuery(this),
+					width = carousel.innerWidth();
 
-		jcarousel_vertical.jcarousel({
-			 vertical: true
-		});
+				if (width >= 600) {
+					width = width / 4;
+				} else if (width >= 350) {
+					width = width / 3;
+				}
 
-
-		jQuery('.jcarousel-control-prev.vertical')
+				carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
+			})
+			.jcarousel({
+				wrap: 'circular',
+			});
+		jQuery('.jcarousel-vertical-control-prev')
 			.jcarouselControl({
 				target: '-=1'
 			});
 
-		jQuery('.jcarousel-control-next.vertical')
+		jQuery('.jcarousel-vertical-control-next')
 			.jcarouselControl({
 				target: '+=1'
 			});
 
-		jQuery('.jcarousel-pagination')
-			.on('jcarouselpagination:active', 'a', function() {
-				jQuery(this).addClass('active');
-			})
-			.on('jcarouselpagination:inactive', 'a', function() {
-				jQuery(this).removeClass('active');
-			})
-			.on('click', function(e) {
-			    e.preventDefault();
-			})
-			.jcarouselPagination({
-				perPage: 1,
-				item: function(page) {
-					return '<a href="#' + page + '">' + page + '</a>';
-				}
+
+		jQuery('.jcarousel-social-control-next')
+			.jcarouselControl({
+				target: '-=1'
+			});
+
+		jQuery('.jcarousel-social-control-prev')
+			.jcarouselControl({
+				target: '+=1'
 			});
 	}
 
