@@ -110,27 +110,51 @@ export class NewsFormComponent implements OnInit {
 		this.Items.forEach(Item => {
 			let formData: FormData = new FormData();
 
+			//append field image
 			let uploader = Item['image'];
-				var current_image = [];
-				if (!(uploader instanceof Object) && typeof uploader != 'undefined') {
-					current_image = JSON.parse(Item['image']);
-				}
+			var current_image = [];
+			if (!(uploader instanceof Object) && typeof uploader != 'undefined') {
+				current_image = JSON.parse(Item['image']);
+			}
 
-				if (uploader instanceof Object && uploader.queue.length) {
-					for (let key in uploader.queue) {
-						var upload = uploader.queue[key]._file;
-						//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
-						var objUpload = new Blob([upload]);
+			if (uploader instanceof Object && uploader.queue.length) {
+				for (let key in uploader.queue) {
+					var upload = uploader.queue[key]._file;
+					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+					var objUpload = new Blob([upload]);
 
-						if (upload['id']) {
-						} else {
-							formData.append("image[]", objUpload, upload.name);
-						}
-						current_image.push(upload);
+					if (upload['id']) {
+					} else {
+						formData.append("image[]", objUpload, upload.name);
 					}
+					current_image.push(upload);
 				}
-				// current_image for check to remove existing image
-				formData.append("current_image", JSON.stringify(current_image));
+			}
+			// current_image for check to remove existing image
+			formData.append("current_image", JSON.stringify(current_image));
+
+			//append field image_title
+			let uploader_title = Item['image_title'];
+			var current_image = [];
+			if (!(uploader_title instanceof Object) && typeof uploader_title != 'undefined') {
+				current_image = JSON.parse(Item['image_title']);
+			}
+
+			if (uploader_title instanceof Object && uploader_title.queue.length) {
+				for (let key in uploader_title.queue) {
+					var upload = uploader_title.queue[key]._file;
+					//Khoa Nguyen - 2017-03-13 - fix issue when attach file on firefox
+					var objUpload = new Blob([upload]);
+
+					if (upload['id']) {
+					} else {
+						formData.append("image_title[]", objUpload, upload.name);
+					}
+					current_image.push(upload);
+				}
+			}
+			// current_image for check to remove existing image
+			formData.append("current_image_title", JSON.stringify(current_image));
 
 			if(this._params.method == 'create'){
 				formData.append('item_key', this.item_key);
@@ -177,10 +201,18 @@ export class NewsFormComponent implements OnInit {
 	onSetImage(obj){
 		switch(this.language_code){
 			case 'vi':
-				this.Item_vi.image = obj;
+				if(obj.fieldname == 'image'){
+					this.Item_vi.image = obj.uploader;
+				}else{
+					this.Item_vi.image_title = obj.uploader;
+				}
 				break;
 			case 'en':
-				this.Item_en.image = obj;
+				if(obj.fieldname == 'image'){
+					this.Item_en.image = obj.uploader;
+				}else{
+					this.Item_en.image_title = obj.uploader;
+				}
 				break;
 		}
 	}
@@ -191,12 +223,14 @@ export class NewsFormComponent implements OnInit {
 				this.Item_vi = new News();
 				this.Item_vi.language_code = lang;
 				this.Item_vi.image = new FileUploader({});
+				this.Item_vi.image_title = new FileUploader({});
 				break;
 
 			case 'en':
 				this.Item_en = new News();
 				this.Item_en.language_code = lang;
 				this.Item_en.image = new FileUploader({});
+				this.Item_en.image_title = new FileUploader({});
 				break;
 		}
 	}

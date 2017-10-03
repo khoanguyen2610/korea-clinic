@@ -28,6 +28,7 @@
     "content": "Content",
     "category": "Category",
     "image": "Image",
+    "image_title": "Image Title",
     "fullname": "Fullname",
     "position": "Position",
     "create": "Create",

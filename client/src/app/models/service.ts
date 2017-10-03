@@ -8,6 +8,7 @@ export class Service {
 	public description: string = '';
 	public content: string = '';
 	public image: any;
+	public image_title: any;
 	public meta_title: string;
 	public meta_description: string;
 	public meta_keyword: string;

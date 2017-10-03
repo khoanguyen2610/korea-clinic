@@ -9,6 +9,7 @@ export class News {
 	public content: string = '';
 	public feature: number = 0;
 	public image: any;
+	public image_title: any;
 	public date: any;
 	public meta_title: string;
 	public meta_description: string;
