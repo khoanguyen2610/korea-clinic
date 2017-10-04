@@ -21,27 +21,6 @@
 			<input type="number" name="order" [(ngModel)]="Item.order" class="form-control" min="0" [ngStyle]="{ 'width': '10%' }">
 		</div>
 	</div>
-	<!--<div class="form-group">
-		<label class="control-label col-md-2">{{ 'ADMIN.description' | translate }}</label>
-		<div class="col-md-10">
-			<ckeditor name="description"
-				[(ngModel)]="Item.description"
-				[config]= "{
-					toolbarGroups : [
-						{ name: 'clipboard', groups: ['cut', 'copy', 'paster', 'undo', 'redo'] },
-						{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
-						{ name: 'document', groups: [ 'mode', 'document', 'doctools'] },
-						{ name: 'tools', groups: [ 'Maximize' ] },
-						'/',
-						{ name: 'basicstyles', groups: ['basicstyles'] },
-						{ name: 'styles' },
-						{ name: 'links' },
-						{ name: 'insert' }
-					]}"
-				debounce="200">
-			</ckeditor>
-		</div>
-	</div>-->
 	<div class="form-group">
 		<label class="control-label col-md-2">{{ 'ADMIN.content' | translate }}</label>
 		<div class="col-md-10">
@@ -88,10 +67,43 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="control-label col-md-2">{{ 'ADMIN.image_title' | translate }}</label>
+		<div class="col-md-10">
+			<div class="uploader-files">
+				<div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event, 'image_title')" [uploader]="uploader_title" class="my-drop-zone">
+					<div class="no-file" *ngIf="!uploader_title.queue.length">
+						<span>{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
+						<span></span>
+						<!-- drag & drop file example-->
+					</div>
+					<ul class="uploader-files-in clearfix">
+						<li *ngFor="let item of uploader_title.queue; let i = index" class="file-item text-center" >
+							<div class="item">
+								<a style="height: 200px">
+									<img *ngIf="item?.edited" [src]="item?.src"  alt="" width="200" height="auto">
+									<img *ngIf="!item?.edited" imgPreview [image]="item?._file" class="media-object" />
+								</a>
+
+								<div class="file-actions clearfix">
+									<a class="file-delete" (click)="onRemoveFile(i, item?._file?.id, 'image_title')"><i class="fa fa-trash-o"></i></a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="uploader">
+				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader_title" (change)="onValidateFormFileType('image_title')"/>
+				<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
+				<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
 		<label class="control-label col-md-2">{{ 'ADMIN.image' | translate }}</label>
 		<div class="col-md-10">
 			<div class="uploader-files">
-				<div ng2FileDrop  [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" multiple class="my-drop-zone">
+				<div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event, 'image')" [uploader]="uploader" class="my-drop-zone">
 					<div class="no-file" *ngIf="!uploader.queue.length">
 						<span>{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
 						<span></span>
@@ -104,9 +116,9 @@
 									<img *ngIf="item?.edited" [src]="item?.src"  alt="" width="200" height="auto">
 									<img *ngIf="!item?.edited" imgPreview [image]="item?._file" class="media-object" />
 								</a>
-								<!-- <p>{{ item?.file?.name }}</p> -->
+
 								<div class="file-actions clearfix">
-								    <a class="file-delete" (click)="onRemoveFile(i, item?._file?.id)"><i class="fa fa-trash-o"></i></a>
+									<a class="file-delete" (click)="onRemoveFile(i, item?._file?.id, 'image')"><i class="fa fa-trash-o"></i></a>
 								</div>
 							</div>
 						</li>
@@ -114,9 +126,9 @@
 				</div>
 			</div>
 			<div class="uploader">
-				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType()"/>
+				<input type="file" ng2FileSelect class="form-control" [uploader]="uploader" (change)="onValidateFormFileType('image')"/>
 				<span class="filename">{{ 'ADMIN.drag_and_drop_files' | translate }}</span>
-							<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
+				<span class="btn btn-uploader">{{ 'ADMIN.choose_file' | translate }}</span>
 			</div>
 		</div>
 	</div>

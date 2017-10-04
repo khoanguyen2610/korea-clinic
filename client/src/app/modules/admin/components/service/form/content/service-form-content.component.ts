@@ -29,7 +29,10 @@ export class ServiceFormContentComponent implements OnInit {
 	_params: any;
 	files_type = [];
 	files_upload:number = 2;
+
 	public uploader: FileUploader = new FileUploader({});
+	public uploader_title: FileUploader = new FileUploader({});
+
 	public hasBaseDropZoneOver: boolean = false;
 	public hasAnotherDropZoneOver: boolean = false;
 
@@ -65,57 +68,91 @@ export class ServiceFormContentComponent implements OnInit {
 
 	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
 		if(this.Item.image){
-			this.onGetImage();
+			this.onGetImage('image');
+		}
+		if(this.Item.image_title){
+			this.onGetImage('image_title');
 		}
 	}
 
-	onGetImage(){
-		this.uploader = new FileUploader({});
-		if(this.Item.image instanceof Object){
-			this.uploader = this.Item.image;
-		}else{
-			let image = JSON.parse(this.Item.image);
+	onGetImage(fieldname: string) {
+		let uploader = new FileUploader({});
+		if (this.Item[fieldname] instanceof Object) {
+			uploader = this.Item[fieldname];
+		} else {
+			let image = JSON.parse(this.Item[fieldname]);
 			let filename = image.filename;
-				let filepath = image.filepath;
-				var file_type = '';
+			let filepath = image.filepath;
+			var file_type = '';
 			if (filename) {
 				file_type = filename.split('.');
 			}
+
 			let image_url = '';
 			if (filename) {
-				image_url = this.Item['image_url'];
+				let field_image_url = 'image_url';
+				if(fieldname == 'image_title'){
+					field_image_url = 'image_title_url';
+				}
+				image_url = this.Item[field_image_url];
 			}
 
-			let item: any = { file: { name: filename, filename: filename, filepath: filepath, type: file_type[1], is_download: true }, src: image_url, _file: { id: 1, name: filename, filename: filename, filepath: filepath, type: file_type[1], is_keeping: true }, edited: true };
-			this.uploader.queue.push(item);
+			let item: any = {
+				file: { name: filename, filename: filename, filepath: filepath, type: file_type[1], is_download: true },
+				src: image_url,
+				_file: { id: 1, name: filename, filename: filename, filepath: filepath, type: file_type[1], is_keeping: true },
+				edited: true
+			};
+
+			uploader.queue.push(item);
+		}
+
+		if(fieldname == 'image'){
+			this.uploader = uploader;
+		}else{
+			this.uploader_title = uploader;
 		}
 	}
 
 	/*==============================================
 	 * Remove file on stack
 	 *==============================================*/
-	onRemoveFile(index, file_id) {
-		if (this.uploader.queue.length) {
-			this.uploader.queue.splice(index, 1);
-			this.fileOutput.emit(this.uploader);
+	onRemoveFile(index, file_id, fieldname: string) {
+		if(fieldname == 'image'){
+			if (this.uploader.queue.length) {
+				this.uploader.queue.splice(index, 1);
+				this.fileOutput.emit({ uploader: this.uploader, fieldname: fieldname });
+			}
+		}else{
+			if (this.uploader_title.queue.length) {
+				this.uploader_title.queue.splice(index, 1);
+				this.fileOutput.emit({ uploader: this.uploader_title, fieldname: fieldname });
+			}
 		}
 	}
 
 	/*====================================
 	 * Validate Form File Type
 	 *====================================*/
-	onValidateFormFileType() {
-		var last = this.uploader.queue.length - 1;
-		this.uploader.queue = [this.uploader.queue[last]];
-		this.uploader['error_limit_files'] = false;
+	onValidateFormFileType(fieldname: string) {
+		let c_uploader = new FileUploader({});
+		if(fieldname == 'image'){
+			c_uploader = this.uploader;
+		}else{
+			c_uploader = this.uploader_title;
+		}
+
+		var last = c_uploader.queue.length - 1;
+		c_uploader.queue = [c_uploader.queue[last]];
+		c_uploader['error_limit_files'] = false;
 		setTimeout(() => {
-			let after_upload_files = +this.uploader.queue.length; // after drag upload files
+			let after_upload_files = +c_uploader.queue.length; // after drag upload files
 			if (after_upload_files <= this._Configuration.limit_files) {
 				if (after_upload_files != this.files_upload) {
 					let uploader = [];
-					for (let key in this.uploader.queue) {
+					for (let key in c_uploader.queue) {
 						var checked = false;
-						var ext = this.uploader.queue[key]._file.name.split('.').pop();
+						var ext = c_uploader.queue[key]._file.name.split('.').pop();
 						ext = ext.toLowerCase();
 
 						for (let k in this.files_type) {
@@ -127,30 +164,38 @@ export class ServiceFormContentComponent implements OnInit {
 						}
 
 						if (!checked) {
-							var msgInvalidFileType = this.uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
+							var msgInvalidFileType = c_uploader.queue[key]._file.type + ' is an invalid file format. Only ' + this.files_type.join() + ' file formats are supported.';
 							this._ToastrService.error(msgInvalidFileType);
 							checked = false;
 						}
 
-						if (this.uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
-							var msgSizeTooLarge = 'File ' + this.uploader.queue[key]._file.name + ' (' + Math.round(this.uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
+						if (c_uploader.queue[key]._file.size > this._Configuration.limit_file_size) {
+							var msgSizeTooLarge = 'File ' + c_uploader.queue[key]._file.name + ' (' + Math.round(c_uploader.queue[key]._file.size / (1024 * 1024)) + 'MB) has exceed the uploadable maximum capacity of ' + this._Configuration.limit_file_size / (1024 * 1024) + 'MB';
 							this._ToastrService.error(msgSizeTooLarge);
 							checked = false;
 						}
 
 						if (!checked) {
 							// this.uploader.queue.splice(+key, 1);
-							this.uploader.queue[key].isError = true;
+							c_uploader.queue[key].isError = true;
 						} else {
-							this.uploader.queue[key]._file['is_keeping'] = true;
-							uploader.push(this.uploader.queue[key]);
+							c_uploader.queue[key]._file['is_keeping'] = true;
+							uploader.push(c_uploader.queue[key]);
 						}
 
 
 					}
-					this.uploader.queue = uploader;
-					this.files_upload = this.uploader.queue.length;
-					this.fileOutput.emit(this.uploader);
+
+					if(fieldname == 'image'){
+						this.uploader.queue = uploader;
+						this.files_upload = this.uploader.queue.length;
+						this.fileOutput.emit({ uploader: this.uploader, fieldname: fieldname });
+					}else{
+						this.uploader_title.queue = uploader;
+						this.files_upload = this.uploader_title.queue.length;
+						this.fileOutput.emit({ uploader: this.uploader_title, fieldname: fieldname });
+					}
+
 				}
 			}
 
@@ -161,8 +206,8 @@ export class ServiceFormContentComponent implements OnInit {
 		this.hasBaseDropZoneOver = e;
 	}
 
-	public fileOverAnother(e: any): void {
-		this.onValidateFormFileType();
+	public fileOverAnother(e: any, fieldname: string): void {
+		this.onValidateFormFileType(fieldname);
 		this.hasAnotherDropZoneOver = e;
 	}
 
