@@ -147,7 +147,7 @@ export class NewsFormContentComponent implements OnInit {
 		setTimeout(() => {
 			let after_upload_files = +c_uploader.queue.length; // after drag upload files
 			if (after_upload_files <= this._Configuration.limit_files) {
-				if (after_upload_files != this.files_upload) {
+				if (after_upload_files != (this.files_upload*2)) {
 					let uploader = [];
 					for (let key in c_uploader.queue) {
 						var checked = false;
@@ -181,7 +181,6 @@ export class NewsFormContentComponent implements OnInit {
 							c_uploader.queue[key]._file['is_keeping'] = true;
 							uploader.push(c_uploader.queue[key]);
 						}
-
 
 					}
 
