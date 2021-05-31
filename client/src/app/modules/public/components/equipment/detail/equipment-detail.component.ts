@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { URLSearchParams } from '@angular/http';
 import { TranslateService } from 'ng2-translate';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { EquipmentService  } from '../../../../../services';
 import { Configuration } from '../../../../../shared';
-import * as moment from 'moment';
 
 declare let initMeta: any;
 declare let document: any;
@@ -48,14 +47,11 @@ export class EquipmentDetailComponent implements OnInit {
 		this._TranslateService.get('MODULE').subscribe((res: string) => {
 			this.modules = res;
 		});
-
-
 	}
 
 	ngOnInit() {
 		this.getDetail();
 		this.getListAll();
-
 	}
 
 	getAction(){
@@ -69,10 +65,8 @@ export class EquipmentDetailComponent implements OnInit {
 		params.set('image_resize_width', '1440');
 		this._EquipmentService.getByID(null, params).subscribe(res => {
 			if (res.status == 'success') {
-				let item = res.data;
-				this.Item = item;
-
-				var metas = this._Configuration.metas;
+				this.Item = res.data;
+				let { metas } = this._Configuration;
 				metas.forEach(meta => {
 					this._Configuration[meta] = this.Item[meta];
 					//set meta data
